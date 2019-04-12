@@ -1,0 +1,25 @@
+# Math
+
+## Arithmatic
+
+- Add (`+`)
+- Subtract (`-`)
+- Divide (`/`)
+- Multiply (`*`)
+- Power (`^`)
+
+## General Math
+
+- abs - Absolute value.
+- ceiling - Round up.
+- floor - Round down.
+- round - Round up if >= 0.5, down otherwise.
+- mod - Modulo division.
+- exp - The number `e` raised to a power.
+- log - Calculate the logarithm of a vector of numbers.
+
+## Trigonometric Functions
+
+- <a href="/#/docs/math/sin.mec">math/sin</a> - Compute the sine of a vector of angles.
+- <a href="/#/docs/math/cos.mec">math/cos</a> - Compute the cosine a vector of angles.
+- <a href="/#/docs/math/tan.mec">math/tan</a> - Compute the tangent a vector of angles.

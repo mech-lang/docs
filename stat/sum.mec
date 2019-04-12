@@ -1,0 +1,15 @@
+# stat/sum
+
+## Syntax
+
+  y = stat/sum(column: x)
+
+## Arguments
+
+- column - a column vector of number values to be summed.
+
+## Description
+
+## Examples
+
+## See Also

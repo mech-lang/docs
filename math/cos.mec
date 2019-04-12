@@ -1,0 +1,36 @@
+# math/cos
+
+## Syntax
+
+  y = math/cos(radians: angle)
+  y = math/cos(degrees: angle)
+
+## Arguments
+
+- radians - a vector of angles in radians
+- degrees - a vector of angles in degrees
+
+## Description
+
+Calculates the cosine of one or more angles in a vector. Operates element-wise on the input. Accepts vectors of numbers only. Angles can be expressed in units of radians or degrees.
+
+## Examples
+
+Calculate cosine of an angle in degrees
+
+  block/view = math/cos(degrees: 180)
+
+Calculate cosine of an angle in radians
+
+  angle = 180 * 3.141519 / 180
+  block/view = math/cos(radians: angle)
+
+
+## Used In
+
+- <a href="/#/examples/clock.mec">clock.mec</a>
+- <a href="/#/examples/robot-drawing.mec">robot-drawing.mec</a>
+
+## See Also
+
+- <a href="/#/docs/math/sin.mec">math/sin</a>
