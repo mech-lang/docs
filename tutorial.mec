@@ -1,4 +1,4 @@
-# Mech Tutorial for Programmers
+# Mech Quickstart Tutorial
 
 Welcome to the Mech programming language. This tutorial is intended for developers who are familiar with imperative programming languages like C, Javascript, or Python. Mech follows a different paradigm, known as dataflow, so we will point out the differences and similarities between the familiar and unfamiliar throught this tutorial.
 
@@ -19,20 +19,26 @@ This code creates a table called `students`, which is global in scope as denoted
 
 Mech programs are composed of "blocks" of code like the one above. A block is indented from normal text with (at least) two spaces, and continues until the next non-indented paragraph. Each block of code can do three things:
 
-- Select zero or more columns from the global table store.
-- Apply transformations to the selected columns in the local block scope.
-- Write new or transformed columns to the global table store.
+- Select zero or more tables or slices of tables from the global table store.
+- Apply transformations to the selected tables in the local block scope.
+- Write zero or more transformed tables or slices of tables to the global table store.
 
 For example, we we can find use the previously defined student table to calculate their average GPA:
 
-  count = stat/sum(column: (#students.gpa * 0 + 1))
+  class-size = stat/sum(column: (#students.gpa * 0 + 1))
   sum-gpa = stat/sum(column: #students.gpa)
-  block/view = sum-gpa / count
+  #average-gpa = sum-gpa / class-size
 
-This block counts the number of students, sums their GPA, and then computes the average GPA. Within a block, expressions are computed in the order they are written, as with the imperative model. But blocks themselves execute in an order determined by the data on which they depend. For example, let's say we change the GPA of Lisa with the set operator `:=`, which updates a value after it's been defined already:
+This block counts the number of students, sums their GPA, and then computes the average GPA, which is [[#average-gpa]].
 
+## Reacting to Changes in Data
+
+Within a block, expressions are computed in the order they are written, as with the imperative model. But blocks themselves execute in an order determined by the data on which they depend. Let's say we change the GPA of Lisa with the set operator `:=`, which updates a value after it's been defined already:
+
+```mech:pending
   #students.gpa{3} := 2.8
+```
 
 Since th GPA changed, every block that depends on this GPA will update as well. This is the essence of a dataflow language; although we cannot specify control flow as in an imperative language, we can specify the data, and this in turn causes execution to happen as defined by the data dependencies of blocks.
 
-## Reacting to Changes in Data
+Up Next: <a href="/#/docs/help.mec">Getting Help</a>

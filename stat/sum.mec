@@ -10,6 +10,18 @@
 
 ## Description
 
+Computes the sum the number elements of a column vector.
+
 ## Examples
+
+Sum the integers between 1 and 10
+
+  range = 1:10
+  block/view = stat/sum(column: range)
+
+Count the number elements in a column
+
+  range = 1:10
+  block/view = stat/sum(column: (range * 0 + 1))
 
 ## See Also

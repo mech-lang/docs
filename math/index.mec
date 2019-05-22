@@ -1,5 +1,34 @@
 # Math
 
+Math with scalars
+
+  block/view = 1 + 2
+
+Mech identifiers can contain `-` and `/` characters, which means math operators aside from negation must have spaces around them. The convention is that variables use kabab case (e.g. `my-var`) while tables use `/` to indicate scopes (e.g. `module/table`)
+
+  first-value = 1
+  second-value = 2
+  block/view = first-value - second-value
+
+Math with scalar and vector
+
+  x = [1 2 3]
+  block/view = x + 1
+
+Math with vectors is applied element-wise
+
+  x = [1 2 3]
+  y = [4 5 6]
+  block/view = x + y
+
+Element-wise operations apply to 2D tables as well
+
+  x = [1 2 3
+       4 5 6]
+  y = [7 8 9
+       6 5 4]
+  block/view = x + y
+
 ## Arithmatic
 
 - Add (`+`)
@@ -13,7 +42,7 @@
 - abs - Absolute value.
 - ceiling - Round up.
 - floor - Round down.
-- round - Round up if >= 0.5, down otherwise.
+- round - Round up if `>=` .5, down otherwise.
 - mod - Modulo division.
 - exp - The number `e` raised to a power.
 - log - Calculate the logarithm of a vector of numbers.

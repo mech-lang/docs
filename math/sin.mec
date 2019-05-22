@@ -30,6 +30,12 @@ If the input is a column the sine function is applied to each element. In the ou
   angles = [0; 90; 270]
   block/view = math/sin(degrees: angles)
 
+Plot a graph of sine
+
+  x = 0:360
+  y = math/sin(degrees: x) * 50 + 60
+  block/view = [type: "scatter" x: [x] y: [y]]
+
 ## Used In
 
 - <a href="/#/examples/clock.mec">clock.mec</a>
