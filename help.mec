@@ -1,0 +1,21 @@
+# Getting Help
+
+If you have any questions or get stuck while you are learning Mech, there are several ways to get help.
+
+First, make sure you've looked at the following resources:
+
+- Read the quick start guide. It contains everything you'll need to build your first Mech program.
+- Read the syntax reference. It summarizes the syntax of Mech on a single page.
+
+If you're still stuck, you can get in touch with the community and developers through these channels:
+
+- Send a message to the <a href="https://groups.google.com/forum/#!forum/mechtalk">mailing list</a>. We generally respond to messages within a day.
+- Send a tweet to <a href="https://twitter.com/MechLang">@MechLang</a>.
+- Submit an issue to our <a href="https://github.com/mech-lang/mech">GitHub repository</a>.
+
+Hare are some more resources to help you learn Mech:
+
+- Browse our growing catalog of <a href="https://github.com/mech-lang/examples">example applications</a> for something similar to what you're doing.
+- Read our <a href="http://mech-lang.org/blog/">development blog</a> to learn more about what goes on behind the scenes.
+
+Up Next: <a href="/#/docs/programs/model.mec">Programming Model</a>
