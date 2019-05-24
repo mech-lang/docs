@@ -1,0 +1,35 @@
+# Installation
+
+If you want to install Mech on your computer you can download a binary pre-compiled for your system, or you can build Mech from source. As always, you can use Mech online at <a href="try.mech-lang.org">try.mech-lang.org</a>
+
+## Download a Binary
+
+You can download the latest release from our GitHub repository.
+
+- Linux - <a href="https://github.com/mech-lang/mech/releases/download/v0.0.1/mech_0.0.1_linux_x86_64.7z">binary (1.28 MB)</a>
+- Windows - <a href="https://github.com/mech-lang/mech/releases/download/v0.0.1/mech_0.0.1_windows_x86_64.7z">binary (793 KB)</a>
+- MacOS - Coming in v0.0.2
+
+## Build From Source
+
+You can find the source code for Mech at our <a href="https://github.com/mech-lang/mech">GitHub repository</a>. Before you can build the project, you will first need to install <a href="https://www.rust-lang.org/learn/get-started">Rust</a> and <a href="https://nodejs.org/">NodeJS</a> for your platform.
+
+Then, clone the Mech repository and follow these build instructions:
+
+```
+> git clone https://gitlab.com/mech-lang/mech
+> cd mech
+> git submodule update --init --recursive
+> cd notebook
+> npm install
+> cd..
+> cargo build --bin mech --release
+```
+
+Alternatively, you can use Rust's Cargo build system to build Mech. Note: This method will not build the Mech Notebook, which runs on Node.
+
+```
+> cargo install -g mech
+```
+
+Up Next: <a href="/#/docs/running.mec">Running Mech</a>
