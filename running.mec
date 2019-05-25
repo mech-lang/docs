@@ -1,0 +1,48 @@
+# Running Mech
+
+If you have Rust and Cargo installed, you can download and install the Mech REPL with
+
+```
+> cargo install mech
+```
+
+Then start the REPL by invoking the command "mech" in a console. This will drop you into a prompt (pictured above). Right now you can load a program from disk, inspect the core and runtime, and perform calculations. Type "help" in the REPL to see a full list of commands, or run the REPL with the -h flag to see a full list of supported options.
+
+## Flags
+
+```
+serve
+s
+```
+
+Starts a Mech HTTP and websocket server (false)
+
+```
+port
+p
+```
+
+Sets the port for the Mech server (3012)
+
+```
+http-port
+t
+```
+
+Sets the port for the HTTP server (8081)
+
+```
+address
+a
+```
+
+Sets the address of the server (127.0.0.1)
+
+```
+persist
+r
+```
+
+The path for the file to load from and persist changes (current working directory)
+
+Up Next: <a href="/#/docs/tutorial.mec">Tutorial</a>
