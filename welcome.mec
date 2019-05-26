@@ -1,0 +1,14 @@
+# Welcome to Mech
+
+Hello and welcome to the documentation for Mech, a programming language for developing data-driven, reactive systems like animations, games, and robots. Meach is a dataflow language with a focus on making composing, transforming, and distributing data easy. This means that instead of specifying state transitions and the flow of control (as in imperative languages), in Mech you specify data dependencies and transformations. The job of a Mech programmer is to select sources of data, mold those data into new shapes, and then do something useful with them -- whether that be to produce a visualization, drive an external device, or run a simulation. 
+
+Some key features of Mech that set it apart from other languages are:
+
+- Mech is a dataflow language, meaning that instead of using control flow statments (e.g. if-then, loops, etc.) to manage state transitions, Mech programmers define data dependencies and transformations.
+- Mech is reactive, meaning that as new data arrives at a Mech program, computed values are updated and propagated automatically. If you've used a spreadsheet, you're familiar with this idea.
+- Mech supports live programming. The write-compile-run development loop is minimized in Mech to the point where you can edit your program while it's running, and see edits immediately. There is no "compiletime" vs. "runtime" distinction in Mech.
+- A short development cycle means that errors are surfaced as they occur. In Mech we can point directly to the code that caused an error.
+- Mech has a builtin database. Every change to a Mech program is recordecd as a transaction on the database. This allows you to rewind and playback the execution of a program. This opens up interesting avenues for debugging and exploration, including the ability to rewind a program, fork its timeline, and test different possibilities for each timeline. Think of it as super-charged A/B testing.
+- Mech programs are compatible with markup languages like Markdown or HTML. In fact, all of the documentation contained for the language is written in Mech. This allows Mech code to be embedded in documents. For example: [[123 + 456]]
+
+Up Next: <a href="/#/docs/install.mec">Installation</a>
