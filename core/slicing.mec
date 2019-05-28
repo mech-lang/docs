@@ -1,0 +1,56 @@
+# Indexing and Slicing
+
+Tables are 1-indexed, meaning the first element of the table is at index 1 (not 0).
+
+In the coming indexing examples, we're going to use the following table:
+
+  #matrix = [|x y z|
+              1 2 3
+              4 5 6
+              7 8 9]
+
+## Subscript Indexing
+
+Tables are indexed with the index operator `{}`. For example, we can get the 3rd element of a matrix:
+
+  block/view = #matrix{1,3}
+
+When we have two indices in the index operator, the first indicates the row, while the second indicates the column. The following selects the the 2nd row, 3rd column:
+
+  block/view = #matrix{2,3}
+
+## Dot-Notation Indexing
+
+Select a named column
+
+  block/view = #matrix.x
+
+Select a specific row of a named column
+
+  block/view = #matrix.x{2}
+
+## Selecting Ranges
+
+The `:` operator is used to select a range of elements. We can select every row of a given column:
+
+  block/view = #matrix{:,3}
+
+Or we can select every column of a given row:
+
+  block/view = #matrix{3,:}
+
+We can 
+
+Slice a range of columns
+
+block/view = #matrix{1,2:3}
+
+## Indexing Nested Tables
+
+Access the value of a nested table by chaining `{}` operators
+
+block/view = #nested-table{2}{1}
+
+## Computed Indexes
+
+Up Next: <a href="/#/docs/core/expressions.mec">Expressions</a>
