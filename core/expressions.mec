@@ -8,25 +8,30 @@ Expressions work as long as the inputs are the same dimension, or both of the in
 
 Math expressions are the built-in arithmatic operators (add `+`, subtract `-`, multiply `*`, divide `/`, and exponentiate `^`), as well as functions in the math and stat libraries. The simplest mathematical expression is with two scalars as input:
 
-  block/view = 1 + 2
+  x = 1 + 2
+  --
+  x
 
 We can also add two scalar variables:
 
   x = 1
   y = 2
-  block/view = x + y
+  --
+  x + y
 
 Things get a little more interesting when we add two vectors:
 
   x = [1 2 3]
   y = [4 5 6]
-  block/view = x + y
+  --
+  x + y
 
 Now we can see that the add operator is defined to work element-wise on the input. This works for column vectors:
 
   x = [1; 2; 3]
   y = [4; 5; 6]
-  block/view = x + y
+  --
+  x + y
 
 And matrices as well:
 
@@ -34,7 +39,8 @@ And matrices as well:
        4 5 6]
   y = [7  8  9
        10 11 12]
-  block/view = x * y
+  --
+  x * y
 
 Note that multiplying two matricies with the multiply operator does not perform matrix multiplication, but element-wise multiplication.
 
@@ -42,7 +48,8 @@ We can also multiply a vector by a scalar:
   
   x = 5
   y = [7 8 9]
-  block/view = x * y
+  --
+  x * y
  
 ## Inequality Expressions
 
@@ -50,20 +57,21 @@ Inequality expressions work with the inequality operators (greater than `>`, gre
 
   x = [1 2 3]
   y = [3 2 1]
-  block/view = x > y
+  --
+  x > y
 
 ## Logic Expressions
 
 Logic expressions work with the logic operators (and `&`, along with or `|`). The input for a logic expression is a Boolean vectore, and the output is a Boolean vector as well.
 
   x = [1 2 3]
-  block/view = x < 3 & x > 1
+  --
+  x < 3 & x > 1
 
 We can do or operations as well
 
-
   x = [1 2 3]
-  block/view = x < 2 | x > 2
-
+  --
+  x < 2 | x > 2
 
 Up Next: <a href="/#/docs/core/temporal.mec">Temporal Operators</a>
