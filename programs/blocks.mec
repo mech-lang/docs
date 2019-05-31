@@ -1,0 +1,79 @@
+# Blocks
+
+A block is the fundamental unit of code in a Mech program. Blocks look like this:
+
+  x = 1
+  y = 2
+  #z = x + y
+
+Each statment in a block is indented with two spaces from the margin. The block starts at the first indented line and continues until the next unindented paragraph. Blocks can do four things:
+
+- Create new data
+- Select data in the global scope and bring it into the block's scope
+- Transform data within the scope of the block
+- Write data to the global scope
+
+We'll talk more about what that global scope is in the <a href="/#/docs/programs/database.mec">database section</a>, but for now the important idea is that blocks are self contained. You can bring data into the block, and any transformations on that data apply only within the scope of the block unless explicitly stated.
+
+Considering the block above, it creates two block-scoped variables, `x` and `y`. These variables are assigned the values `1` and `2` respectively, and they are added together in the variable `z`. The `#` preceeding `z` indicates that the variable is globally scoped, meaning we can access it from outside of the block e.g. the value is [[#z]].
+
+Because `#z` is in the global scope, we can select it in another block and perform computations using it:
+
+  block/view = #z * 7
+
+## Blocks are Composable
+
+Mech programs are made up of any number of blocks, which are compoased into a coherent program by virtue of their data dependencies and productions. We can demonstrate composition with the following three blocks:
+
+  #a = 1
+
+then
+
+  #b = 2
+
+and finally
+
+  #c = #a + #b
+
+A block performs its defined transformations/computations only when all of the dependent data are defined. These three blocks compose to define a data flow graph where the first two blocks create tables `#a` and `#b`, and the final block uses these tables to produce a third dependent table `#c`. The converse is true as well; a block will not run if any of its dependent data are missing. For example, consider the following block:
+
+  #x = #z + #y
+
+This block will never produce a value for `#x` because the table `#y` is never defined in this document, (the table `#z` is defined in the previous section). But even though this block will never produce output, any other blocks whose data dependencies are satisfied will execute their defined data transformations independently. This also has implications for errors; if a block contains syntax errors, the functionality of that block alone is disabled while the rest of the program continues to run unaffected.
+
+## Blocks are Orderless
+
+The order in which you write blocks has no effect on the underlying computation. Mech figures out the correct ordering of blocks using the data on which they depend. For example, we can write a block that depends on the table `#first`:
+
+  #second = #first * 10
+
+And then we can actually assign a value to `#first`
+
+  #first = 123
+
+Despite the fact we used `#first` before we assigned it a value, we can see the result [[#second]].
+
+The orderlessness of blocks means you are free to write a Mech program however you see fit. Your program is never constrained by an arbitrary block order imposed by a compiler. This freedom opens up new possibilities for exploratory and expository programming, which we address more completely in <a href="/#/docs/programs/eploration.mec">a later section</a>.
+
+## Blocks are Reactive
+
+Blocks automatically update their results as the data on which they depend change. Consider a timer that updates once every second. We can write a computation that updates on every tick of the timer, and we can observe the result of the block updates:
+
+  x = #tick * 2
+  #twice-time = x
+  block/view = x
+
+This reactivity applies to the entire block graph, meaning a block that depends on data that depends on the timer will also update at the rate of the timer. We can observe this if we select `#twice-time` and use it in a calculation:
+
+  quad-time = #twice-time * 2
+  block/view = quad-time
+
+## Appendix
+
+Create a timer
+  #time/timer = [period: 1000 ticks: 0 hours: 0 minutes: 0 seconds: 0]
+
+Alias the tick
+  #tick = #time/timer.ticks
+
+Up Next: <a href="/#/docs/programs/database.mec">Database</a>
