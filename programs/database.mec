@@ -1,0 +1,29 @@
+# Database
+
+Mech is tightly integrated with a built-in database that stores global tables. Having a database at the core of the language has several important benefits for tooling and program design. 
+
+First, every change to the global table store is recorded as a `Change` in a `Transaction`. By saving this information, we unlock two important features:
+
+- First, by replaying the transactions in order, we can always recover the current state, or a previous state of the application.
+- Second, by replaying the transactions in reverse order, we can arrive at a previous state of the program. 
+
+## Debugging and Error Handling
+
+These features open up a host of possibilities in terms of language tooling. For example, we can recover the state of a running program after an OS crash (Mech programs themselves should never crash) by replaying the transaction log in order. Or we can pause the execution of a running program and replay the transaction log in reverse order to arrive at a previous state of the program. This form of debugging is useful for when a bug is transient i.e. it only exists for an instant and then resolves itself. When such a bug is noticed, you can pause the program and step back to the point where the execution diverged from expectations. You can then inspect the state of any table as it existed at that time, and arrive at a reason for the divergent behavior.
+
+- Integrity constraints
+- Checkpoints
+
+## Testing Alternatives
+
+A database isn't only useful for debugging after-the-fact; it can also be used as a development tool while writing a program. For example, if you would like to test how your program performs using several alternative implimentations of a block, you can "fork" your program's timeline, where each timeline recieves 
+
+## Distribution
+
+
+## Collaboration
+
+- Sharing and collaboration programs
+
+
+Up Next: <a href="/#/docs/programs/exposition.mec">Exploratory and Expository Programming</a>
