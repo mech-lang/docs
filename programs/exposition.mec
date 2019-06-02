@@ -1,0 +1,9 @@
+# Exploratory and Expository Programming
+
+Mech is especially well suited for exploratory and expository porgramming modes. Exploratory programming is the practice of using a programming language to explore a design or solution space. Expository programming is the practice of using a programming language to explain a topic. These two modes of programming are in contrast to applications or systems programming, where the goal is to build an application or a system. Most languages to date have been specifically built for applications and systems programming, but Mech is designed with exploratory and expository programming in mind. In this section, we'll look at how the features of Mech are especially well suited for these programming modes.
+
+## Exploratory Programming
+
+## Expository Programming
+
+Up Next: <a href="/#/docs/core/slicing.mec">Indexing and Slicing</a>
