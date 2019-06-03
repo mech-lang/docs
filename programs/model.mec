@@ -1,0 +1,15 @@
+# Programming Model
+
+Mech is best suited for systems that rely on streams of asynchronous input from a variety of sources. For example, a turn-based game (like tic-tac-toe for example) is driven by a stream of input from one or more controllers representing the players. Each time a player interacts with the game, Mech updates the game state. 
+
+A real-time game (like pong for example) is additionally driven by a timer. Players move paddles on the screen, to deflect a ball, whose position Mech updates on every tick of the game clock. 
+
+Or take a robot for example, which depends on streams of sensor input from devices like cameras or accelerometers. These data are transformed by Mech to estimate the robot's position and velocity, which are then used to issue commands to the robot's actuators. 
+
+In each of these examples, Mech performs computations only in the presence of data. Data arrives at the system, Mech reacts to its arrival by executing computations and updating state, and then the system awaits the arrival of new data to continue. This is the lifecycle of a Mech program.
+
+## Program Structure
+
+Mech programs are made up of "Tables" of data and "Blocks" of code. You build a Mech program by specifying your data in tables, and you perform computation on them through a series of code blocks. Blocks are orderless and data-driven.
+
+Up Next: <a href="/#/docs/programs/tables.mec">Tables</a>
