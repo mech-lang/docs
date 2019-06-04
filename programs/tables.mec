@@ -1,0 +1,51 @@
+# Tables
+
+Tables are the primary datastructure in Mech. Everything from a scalar to a vector to a matrix is stored in a table, and all operations have one or more tables as an input, and one or more tables as output.
+
+Tables are a collection of cells arranged in a 2D grid of rows and columns. Each cell can hold a `Value`, which can have one of the following data types:
+
+- Number - e.g. `1` or `12.7`
+- String - e.g. `Hello World`
+- Bool - `true` or `false`
+- Table Reference - allows for nesting tables
+- Empty - represented by one or more underscores: `_` or `_____` are both valid
+
+## Scalars, Vectors, and Matrices
+
+Let's see how tables are used. We can create a table with a single cell. This is often refered to as a scalar table.
+
+  value = 1
+  name = "Alan Turing"
+
+Create an array also known as a vector.
+
+  vector = [1 2 3]
+
+Create a column array. These can be called vectors as well.
+
+  column = [1; 2; 3]
+
+Create a 2D table, also known as a matrix.
+
+  two-by-three = [1 2 3
+                  4 5 6]
+
+## Named Columns and Rows
+
+By default, table rows and columns are referenced by their index. However, we can optionally add an index alias to a column to 
+
+  with-columns = [|name   age height|
+                   "Yan"  20  100
+                   "Seth" 23  102]
+
+Create an inline table. This syntax is used when you want to create a table with only a single row.
+
+  inline-table = [name: "Yan" age: 20 height: 100]
+
+## Nested Tables
+
+Create a nested table
+
+  nested-table = [type: "div" parameters: [width: 100 height: 50]]
+
+Up Next: <a href="/#/docs/programs/blocks.mec">Blocks</a>
