@@ -12,3 +12,9 @@ Some key features of Mech that set it apart from other languages are:
 - Mech programs are compatible with markup languages like Markdown or HTML. In fact, all of the documentation contained for the language is written in Mech. This allows Mech code to be embedded in documents. For example: [[123 + 456]]
 
 Up Next: <a href="/#/docs/install.mec">Installation</a>
+
+  #state?
+    1 => 2
+    2 => 3
+    3 => 1
+    _ => 1
