@@ -25,8 +25,8 @@ Mech programs are composed of "blocks" of code like the one above. A block is in
 
 For example, we we can find use the previously defined student table to calculate their average GPA:
 
-  class-size = stat/sum(column: (#students.gpa * 0 + 1))
-  sum-gpa = stat/sum(column: #students.gpa)
+  class-size = stats/sum(column: (#students.gpa * 0 + 1))
+  sum-gpa = stats/sum(column: #students.gpa)
   #average-gpa = sum-gpa / class-size
 
 This block counts the number of students, sums their GPA, and then computes the average GPA, which is [[#average-gpa]].
