@@ -1,8 +1,8 @@
-# stat/sum
+# stats/sum
 
 ## Syntax
 
-  y = stat/sum(column: x)
+  y = stats/sum(column: x)
 
 ## Arguments
 
@@ -17,11 +17,11 @@ Computes the sum the number elements of a column vector.
 Sum the integers between 1 and 10
 
   range = 1:10
-  block/view = stat/sum(column: range)
+  block/view = stats/sum(column: range)
 
 Count the number elements in a column
 
   range = 1:10
-  block/view = stat/sum(column: (range * 0 + 1))
+  block/view = stats/sum(column: (range * 0 + 1))
 
 ## See Also
