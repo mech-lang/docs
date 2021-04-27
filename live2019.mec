@@ -183,7 +183,7 @@ The current Mech release is v0.0.2-alpha, and is available in source and binary 
 
 - Expanding the standard library. Currently only a handful of functions are implemented
 - Handling errors. Currently only a few errors are caught and raised to the attention the user. The rest go unnoticed.
-- Making distribution more robust and flexible. Currently programs can communicate in a server-client relationship. For example, the pong game can be decomposed into a <a href="https://raw.githubusercontent.com/mech-lang/examples/master/pong-server.mec">server</a> that controls the logic behind updating the ball, and a <a href="https://raw.githubusercontent.com/mech-lang/examples/master/pong-client.mec">client</a> that listens for the ball position and renders it to the screen.
+- Making distribution more robust and flexible. Currently programs can communicate in a server-client relationship. For example, the pong game can be decomposed into a <a href="https://raw.githubusercontent.com/mech-lang/examples/main/pong-server.mec">server</a> that controls the logic behind updating the ball, and a <a href="https://raw.githubusercontent.com/mech-lang/examples/main/pong-client.mec">client</a> that listens for the ball position and renders it to the screen.
 - Writing documentation
 - Creating tools to support program development, like a REPL, a database explorer
 - Writing example programs, including control of various robots and even an <a href="https://gitlab.com/cmontella/hivemind">operating system</a>.
