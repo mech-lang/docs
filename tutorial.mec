@@ -15,7 +15,7 @@ Let's define a table representing a group of students
                 "Yang"   19  "Physics"   3.2
                 "Lisa"   19  "Comp Sci"  3.9]
 
-This code creates a table called `students`, which is global in scope as denoted by the hashtag `#`. The table has three columns (`name`, `age`, and `gpa`) and three rows. Number values don't distinguish between integer and floating point representations, which can be mixed freely.
+This code creates a table called `students`, which is global in scope as denoted by the hashtag `#`. The table has four columns (`name`, `age`, `major`, and `gpa`) and three rows. Number values don't distinguish between integer and floating point representations, which can be mixed freely.
 
 Mech programs are composed of "blocks" of code like the one above. A block is indented from normal text with (at least) two spaces, and continues until the next non-indented paragraph. Each block of code can do three things:
 
