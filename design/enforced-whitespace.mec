@@ -28,7 +28,7 @@ Here are the benefits as I see them:
 
 - We can allow dashes (-) in identifiers, which unlocks kebab-case for Mech. Kebab case is objectively (😉) the best case because it only requires one keystroke, whereas underscores (snake-case) and capitalization (camel-case) require two keystrokes. But because most languages strip out whitespace before parsing, they cannot differentiate between subtraction and kebab-case generally, so kebab-case is usually only found in Lisps and other PN and RPN.
 
-- We can allow slashes (/) in identifiers, which unlock the ability to write namespaces like URLs ore file system paths. This is a natural choice for namespaces, and unifies the concept of functions and tables in Mech.
+- We can allow slashes (/) in identifiers, which unlock the ability to write namespaces like URLs ore file system paths. This is a natural choice for namespaces, and unifies the concept of functions and tables in Mech. Other languages use underscores or :: to scope namespaces, both of which require more keystrokes.
 
 - This has the same effect as Python does in making code more readable through the parser. I think that spaces around operators are easier to read in general, and I write code this way no matter what langauge I'm using. A lot of other people do as well.
 
