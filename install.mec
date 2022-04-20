@@ -12,24 +12,20 @@ You can download the latest release (v0.0.4-alpha) from our GitHub repository.
 
 ## Build From Source
 
-You can find the source code for Mech at our <a href="https://github.com/mech-lang/mech">GitHub repository</a>. Before you can build the project, you will first need to install <a href="https://www.rust-lang.org/learn/get-started">Rust</a> and <a href="https://nodejs.org/">NodeJS</a> for your platform.
+You can find the source code for Mech at our <a href="https://github.com/mech-lang/mech">GitHub repository</a>. Before you can build the project, you will first need to install <a href="https://www.rust-lang.org/learn/get-started">Rust</a> for your platform. You'll need to a recent version from the Rust nightly release channel.
 
-Then, clone the Mech repository and follow these build instructions:
+Then, clone and build the Mech repository with these instructions:
 
 ```
-> git clone https://gitlab.com/mech-lang/mech
-> cd mech
-> git submodule update --init --recursive
-> cd notebook
-> npm install
-> cd..
-> cargo build --bin mech --release
+git clone https://gitlab.com/mech-lang/mech --recurse-submodules
+cd mech
+cargo build --bin mech --release
 ```
 
 Alternatively, you can use Rust's Cargo build system to build Mech. Note: This method will not build the Mech Notebook, which runs on Node.
 
 ```
-> cargo install -g mech
+cargo install -g mech
 ```
 
 Up Next: <a href="/#/docs/running.mec">Running Mech</a>
