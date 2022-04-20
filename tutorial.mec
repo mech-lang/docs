@@ -23,7 +23,7 @@ Mech programs are composed of "blocks" of code like the one above. A block is in
 - Apply transformations to the selected tables in the local block scope.
 - Write zero or more transformed tables or slices of tables to the global table store.
 
-For example, we we can find use the previously defined student table to calculate their average GPA:
+For example, we can use the previously defined student table to calculate the average GPA of each student:
 
   class-size = stats/sum(column: (#students.gpa * 0 + 1))
   sum-gpa = stats/sum(column: #students.gpa)
