@@ -23,7 +23,7 @@ Mech programs are composed of "blocks" of code like the one above. A block is in
 - Apply transformations to the selected tables in the local block scope.
 - Write zero or more transformed tables or slices of tables to the global table store.
 
-For example, we can use the previously defined student table to calculate the average GPA of each student:
+For example, we can use the previously defined student table to calculate the average GPA of all the students:
 
   class-size = stats/sum(column: (#students.gpa * 0 + 1))
   sum-gpa = stats/sum(column: #students.gpa)
@@ -33,12 +33,12 @@ This block counts the number of students, sums their GPA, and then computes the 
 
 ## Reacting to Changes in Data
 
-Within a block, expressions are computed in the order they are written, as with the imperative model. But blocks themselves execute in an order determined by the data on which they depend. Let's say we change the GPA of Lisa with the set operator `:=`, which updates a value after it's been defined already:
+Within a block, expressions are evaluated in the order they are defined, as with the imperative model. But blocks themselves execute in an order determined by the data on which they depend. Let's say we change the GPA of Lisa with the set operator `:=`, which updates a value after it's been defined already. The following block is inactive as indicated by the yellow border. Click into this block and press `ctrl` + `enter` to activate it:
 
 ```mech:pending
   #students.gpa{3} := 2.8
 ```
 
-Since th GPA changed, every block that depends on this GPA will update as well. This is the essence of a dataflow language; although we cannot specify control flow as in an imperative language, we can specify the data, and this in turn causes execution to happen as defined by the data dependencies of blocks.
+Since the GPA changed, every block that depends on this GPA will update accordinly. This is the essence of a dataflow language; although we cannot specify control flow as in an imperative language, we can specify the data, and this in turn causes execution to happen as defined by the data dependencies of blocks.
 
-Up Next: <a href="/#/docs/help.mec">Getting Help</a>
+Up Next: <a href="/#/docs/help.mec">Seeking Help</a>
