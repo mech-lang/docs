@@ -2,6 +2,7 @@ Design Document 1 - Semantic Whitespace
 ========================================
 
 1. Space Around Operators
+--------------------------
 
 A. Background
 
@@ -52,9 +53,9 @@ variable-one = math/sin(angle: (4 `math/subtract` 1) `math/divide` 3)
 
 b. Not enforcing spaces
 
-Another option is to just not do this. Do things the usual way by strip the language of whitespace from the start, and designing the grammar so that it's still unambiguous. I don't want to do this for a number of reasons.
+Another option is to just not do this. Do things the usual way by stripping the language of whitespace from the start, and designing the grammar so that it's still unambiguous. I don't want to do this for a number of reasons.
 
-- First, I need the whitespace anyway for tables. Tables have to be easy to write, and I don't want to have to put commas in them. Therefore, I need to keep all of hte whitespace white parsing tables, so I can't just strip it all out beforehand. And I can't strip it out selectively before parsing it because that would require parsing it to figure out where to keep it and where to remove it. So I have to just parse it with the whitespace in there.
+- First, I need the whitespace anyway for tables. Tables have to be easy to write, and I don't want to have to put commas in them. Therefore, I need to keep all of the whitespace while parsing tables, so I can't just strip it all out beforehand. And I can't strip it out selectively before parsing it because that would require parsing it to figure out where to keep it and where to remove it. So I have to just parse it with the whitespace in there.
 
 - Second, the benefits are just too good to pass up. It makes some people upset because they are used to not having enforced spaces around operators in any mainstream language really. But in return we get kebab case which is good enough on its own, but we also get better looking code and slashes in table and function identifiers.
 
@@ -64,7 +65,7 @@ There are some downsides though to Mech's approach which means that it might be 
 
 baz = foo-bar
 
-Which would be parsed not as an error but as assignment of the table foo-bar to baz. The error would be that foo-bar is not an available table. This one is easy to spot, but if we have more subtraction like so:
+Which would be parsed not as an error but as assignment of the table foo-bar to baz. The error would be that foo-bar is not an available table. This one is easy to spot, but if we have more subtraction like so:67
 
 baz = foo-bar-baz-quux
 
@@ -75,3 +76,6 @@ baz = foo-bar-baz - quux
 baz = foo - bar - baz - quux
 
 We would essentially have to check them all if we want to steer the user the right way.
+
+2. Indent for Async Blocks
+---------------------------
