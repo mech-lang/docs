@@ -1,6 +1,11 @@
-# Mech - A Programming Language for Data Driven, Reactive Systems
+Mech - A Programming Language for Data Driven, Reactive Systems
+================================================================
+
 <p class="abstract">Abstract - Mech is a programming language and environment for developing data-driven, reactive systems like animations, games, IoT and robots. Mech is being developed to facilitate a nonprofit outreach program that teaches computational thinking to youths ages ten through twenty; and also for the administration of a course in programming language design taught to university-level sophomores and juniors. Mech is a dataflow language, where programmers define data dependencies between blocks of code and transformations on tables of data. Mech is best suited for systems that rely on streams of asynchronous input from a variety of sources, such as a game where a stream of button presses define player actions, or a robot that maintains balance through a stream of gyroscopic readings. As these data streams change, Mech programs update the relevant computations and propagate changes automatically. The dynamic, reactive nature of Mech makes it suitable as a live-programming environment, where the write-compile-run development loop is minimized to the point where the programmer can edit their program as it is running. In this paper I introduce the design and implementation of the Mech platform through a series of live examples. This paper is written in a Markdown dialect called "Mechdown", which extends the Markdown language with Mech-specific macros and allows Mech code to be embedded and executed within the document itself. We will demonstrate a simple clock, an interactive pong game, as well as discuss several other applications of the language.</p>
-## 1. Introduction
+
+1. Introduction
+----------------
+
 The first programming language I learned was QBasic. I remember within a few days of learning it I had written my first game, a text-based choose-your-own adventure game a la <a href="https://en.wikipedia.org/wiki/Zork">Zork</a>. My friends and I would create and share these games back and forth, picking up new tricks along the way by transcribing source code from programming magazines into our QBasic editors. As a child new to programming, I was thrilled to be able to create games which, at least to me, rivaled state-of-the-art commercial software. It was empowering. I bring up this anecdote because now as an educator of programming languages and techniques, I don't recognize the same empowerment in my students, who are typically university freshmen through juniors. 
 
 Last year I asked a group of 60 freshmen engineering students enrolled in a class on Javascript game development about their background in programming, their intended major, and why they were interested in programming. Over 90 percent of the students had prior experience programming in high school, with a majority reporting they had learned Java formally as part of their AP Computer Science curriculum. Interestingly, only a few students reported that their Java knowledge prepared them for Javascript game development. Through their answers, it was clear to me that students were excited to learn computer science and programming, but most were doing so for practical reasons their motivations seemed to be rooted in external forces pushing and pulling them rather, than internal desires and passions. Very few students seemed to be interested in programming as a path to satisfy their own curiosity and ambitions.
@@ -11,7 +16,8 @@ I believe that is because the devices he uses, his smartphones, tablets, and gam
 
 The rest of this papers is organized as follows. Section 2 provides an overview of the Mech programming language and programming platform. We then demonstrate various features of the platform through three examples: an analog clock in Section 3, and a bouncing ball game in Section 4. In Section 5 we review related work, and finally in Section 6 we draw conclusions and map out the future of the Mech programming language. You can navigate to any section using the table of contents on the left.
 
-## 2. Language Overview
+2. Language Overview
+---------------------
 
 Mech is a dataflow language, where programmers define data dependencies between blocks of code and transformations on tables of data. The language itself contains no control flow structures like if-then statements or loops to manage state transitions. Instead, Mech programmers define data dependencies and transformations. As data from external sources arrives at a Mech program, computed values are updated and propagated automatically, the way a spreadsheet reactively adjusts to changes of a cell. This makes Mech an ideal environment for live programming, where the write-compile-run development loop is minimized to the point where the program can be edited while it is running, and results are reflected immediately without reloading the program from scratch. This short development cycle affords the programmer great freedom to experiment, as they are encouraged by seeing the immediate result of their work. 
 
@@ -27,7 +33,8 @@ In each of these examples, Mech performs computations only in the presence of da
 
 In the coming sections, I will demonstrate various features of the Mech language and platform using a couple example programs. The code will be live, and the results will be rendered within the document. Feel free to edit the code and execute it with `ctrl + enter`. But be warned this is still an alpha-quality project, so deviating from the beaten path can produce uncertain results. If you end up breaking the document, re-loading the page will reset it. 
 
-## 3. Analog Clock
+3. Analog Clock
+----------------
 
 The "Hello World" for reactive languages in certainly an analog clock. This example demonstrates a complete Mech program starting from a data source (in this case a ticking clock), to transforming the ticks into angles, to finally displaying a visualization of the angles in the form of a clock face with hour, minute, and second hands. We'll start our clock by defining a table named `#time/timer` with the fields period, tick, hours, minutes, and seconds. 
 
@@ -106,7 +113,8 @@ And we draw it to the screen:
 
 Actually the drawing is accomplished in the appendix, where we define the ID for the HTML div to which the drawing attaches. If you inspect the source of this document, you'll notice the above HTML div has the ID "clock root". This root can be defined within the Mech program or it can be a root defined elsewhere in another language; if the root exists in the DOM, we can attach a running Mech program. 
 
-## 4. Bouncing Ball Game
+4. Bouncing Ball Game
+----------------------
 
 In this section we use a new example program to motivate some additional features of the language. The program we will build is a one player pong-like game. We define a `#ball` with fields x and y indicating position; and fields vx and vy indicating its speed.  
 
@@ -171,13 +179,15 @@ In the same way we attached the clock program to an arbitrary root, we attach th
 
 This game demonstrates several important features of the language. First, it shows how we can render arbitrary HTML elements along side an HTML canvas, and use those to control the canvas itself. It also demonstrates we can attach as many Mech programs to a web page. Finally it demonstrates handling input streams from a variety of sources -- the ball position is updated by the timer stream, while the paddle position is updated by the slider control stream. It's straightforward to add and handle more streams like a mouse click stream or a keyboard input stream.
 
-## 5. Related Work
+5. Related Work
+----------------
 
 I first came up with the idea for Mech when I stumbled upon a book detailing the <a href="https://en.wikipedia.org/wiki/Lucid_(programming_language)">Lucid dataflow language</a> by Wadge and Ashcroft. At the time I was building a robot aircraft running on MATLAB, and I appreciated how the dataflow programming paradigm seemed like a better fit for my application than MATLAB's semantics. I started with a goal of creating a dataflow MATLAB language, but have since broadened my influences to include <a href="https://en.wikipedia.org/wiki/Datalog">Datalog</a>, which had the idea of programming using database queries; <a href="https://en.wikipedia.org/wiki/Smalltalk">Smalltalk</a>, which introduced the idea of a fully editable programming environment; <a href="https://en.wikipedia.org/wiki/Lustre_(programming_language)">Lustre</a>, which used streams of data for synchronous programming; and Excel, which is the most used programming language in the world thanks to its simple interface and programming model.
 
 The <a href="http://lighttable.com">Light Table editor</a> and the subsequent but now defunct language project <a href="http://witheve.com">Eve</a> are major influences on the design of the core language architecture. Eve had a goal of becoming a language for non-programmers to make applications they would otherwise make in Excel, whereas Mech aims to be a language for students to learn how to interact with sensors, timers, and other devices that represent physical quantitities like time and space.
 
-## 6. Conclusions
+6. Conclusions
+---------------
 
 The current Mech release is v0.0.2-alpha, and is available in source and binary form on <a href="https://github.com/mech-lang/mech">GitHub</a>, and can be tested online at <a href="http://docs.mech-lang.org">http://docs.mech-lang.org</a>. The current version implements the breadth of the features discussed in this paper, but the implementation is buggy and incomplete (hence the alpha designation). Current work is focused on:
 
@@ -188,7 +198,8 @@ The current Mech release is v0.0.2-alpha, and is available in source and binary 
 - Creating tools to support program development, like a REPL, a database explorer
 - Writing example programs, including control of various robots and even an <a href="https://gitlab.com/cmontella/hivemind">operating system</a>.
 
-## Appendix
+Appendix
+---------
 
   #app/main = [|root         direction contains|
                 "clock root" "column"  [#clock/canvas]

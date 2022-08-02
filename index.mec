@@ -1,6 +1,8 @@
-# Documentation
+Documentation
+==============
 
-## Introduction
+1. Introduction
+----------------
 
 - <a href="/#/docs/welcome.mec">Welcome</a>
 - <a href="/#/docs/install.mec">Installing Mech</a>
@@ -8,7 +10,8 @@
 - <a href="/#/docs/tutorial.mec">Tutorial</a>
 - <a href="/#/docs/help.mec">Getting Help</a>
 
-## Mech Programs
+2. Mech Programs
+-----------------
 
 - <a href="/#/docs/programs/model.mec">Programming Model</a>
 - <a href="/#/docs/programs/tables.mec">Tables</a>
@@ -16,7 +19,8 @@
 - <a href="/#/docs/programs/database.mec">Database</a>
 - <a href="/#/docs/programs/Exposition.mec">Exploratory and Expository Programming</a>
 
-## Core Language
+3. Core Language
+-----------------
 
 - <a href="/#/docs/core/slicing.mec">Indexing and Slicing</a>
 - <a href="/#/docs/core/expressions.mec">Expressions</a>
@@ -24,7 +28,8 @@
 - State Machines
 - Distribution
 
-## Editor
+4. Editor
+----------
 
 - Text Editor and Drawing Area
 - Database Explorer
@@ -32,21 +37,24 @@
 - Block Views
 - Table Inspector
 
-## Standard Library
+5. Standard Machines
+---------------------
 
 - <a href="/#/docs/app/index.mec">App</a> - components for front-end application development.
 - <a href="/#/docs/math/index.mec">Math</a> - functions for arithmatic, trigonometric, logarithms, etc.
 - <a href="/#/docs/stat/index.mec">Stat</a> - functions for statistics computations.
 - <a href="/#/docs/time/index.mec">Time</a> - functions and machines for interacting with dates and times.
 
-## Example Programs
+6. Example Programs
+--------------------
 
 - <a href="/#/examples/bouncing-balls.mec">bouncing-balls.mec</a> - a bouncing ball demonstration
 - <a href="/#/examples/breakout.mec">breakout.mec</a> - the start of the game breakout. It's not all the way there yet
 - <a href="/#/examples/clock.mec">clock.mec</a> - an analog clock
 - <a href="/#/examples/robot-drawing.mec">robot-drawing.mec</a> - a drawing of a robot arm that you can control with sliders
 
-## Appendix
+7. Appendix
+------------
 
 - Grammar
 - Common Mark and Mechdown extensions
