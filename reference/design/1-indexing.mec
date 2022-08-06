@@ -1,0 +1,35 @@
+1-Based Indexing
+=================
+
+When designing a programming language, one of the earliest decisions that needs to be made is: how should the first element of an array be indexed? Most langauges fall in one of two camps: 1-based indexing or 0-based indexing. A few programming languages allow arbitrary indexes, which we will discuss here as well. Below are some examples of programming languages that fall into all three categories:
+
+A. 1-based indexing:
+
+- APL
+- Cobol
+- Excel
+- Fortran
+- Julia
+- Lua
+- Mathematica
+- Matlab
+- R
+- Smalltalk
+
+Note: Lua and Julia are among the languages that allow for arbitrary indexing, but 1 is the default first index.
+
+B. 0-based indexing:
+
+- C
+- C++
+- Go
+- Java
+- Javascript
+- OCaml
+- PHP
+- Python
+- Rust
+
+
+
+
