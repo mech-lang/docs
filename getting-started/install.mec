@@ -6,11 +6,12 @@ To install Mech on your system, you can download a binary pre-compiled for your 
 1. Download a Binary
 ---------------------
 
-You can download the latest release (v0.0.4-alpha) from our GitHub repository.
+You can download the latest release (v0.1.0-beta) from the following links:
 
-- Linux - <a href="https://github.com/mech-lang/mech/releases/download/v0.0.4/mech_0.0.4_linux_x86_64.7z">binary (2.52 MB)</a>
-- Windows - <a href="https://github.com/mech-lang/mech/releases/download/v0.0.4/mech_0.0.4_windows_x86_64.7z">binary (1.57 MB)</a>
-- MacOS - <a href="https://github.com/mech-lang/mech/releases/download/v0.0.4/mech_0.0.4_windows_x86_64.7z">binary (1.74 MB)</a>
+- Windows - <a href="https://github.com/mech-lang/mech/releases/download/v0.1.0/mech_0.1.0_windows_x86_64.7z">binary (1.57 MB)</a>
+- MacOS (x86-64) - <a href="https://github.com/mech-lang/mech/releases/download/v0.1.0/mech_0.1.0_macos_x86_64.7z">binary (1.74 MB)</a>
+- MacOS (aarch64 ) - <a href="https://github.com/mech-lang/mech/releases/download/v0.1.0/mech_0.1.0_macos_aarch64.7z">binary (1.74 MB)</a>
+- Linux - <a href="https://github.com/mech-lang/mech/releases/download/v0.1.0/mech_0.1.0_linux_x86_64.7z">binary (2.52 MB)</a>
 
 2. Build From Source
 ---------------------
