@@ -11,13 +11,13 @@ Statements
 
 - Update `x := y`  
 
-3. Split and Join
-------------------
+3. Split and Flatten
+---------------------
 
 Sometimes it's necessary to split a vector into a vector-of-vectors, or to join a vector-of-vectors into a flattened vector. Mech supports the following statemetns for this purpose:
 
 - Split `x >- y`
-- Join `x -< y`
+- Flatten `x -< y`
 
 For example, we can split the following vector x into a vector-of-vectors y:
 
@@ -26,7 +26,7 @@ For example, we can split the following vector x into a vector-of-vectors y:
   --
   y
 
-The result is that `y = [[1];[2];[3]]` We can join this vector-of-vectors into a flattened vector as such:
+The result is that `y = [[1];[2];[3]]` We can flatten this vector-of-vectors into a linear vector as such:
 
   y = [[1];[2];[3]]
   x -< y
@@ -49,4 +49,4 @@ This creates a table of data equivalent to the following table, which would be u
   --
   x
 
-The join statement is used here to reconstruct the original vector of strings.  
+The flatten statement is used here to reconstruct the original vector of strings.  
