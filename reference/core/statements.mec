@@ -1,0 +1,52 @@
+Statements
+===========
+
+1. Define
+----------
+
+- Define `x = y`
+
+2. Update
+----------
+
+- Update `x := y`  
+
+3. Split and Flatten
+---------------------
+
+Sometimes it's necessary to split a vector into a vector-of-vectors, or to join a vector-of-vectors into a flattened vector. Mech supports the following statemetns for this purpose:
+
+- Split `x >- y`
+- Flatten `x -< y`
+
+For example, we can split the following vector x into a vector-of-vectors y:
+
+  x = [1; 2; 3; 4]
+  y >- x
+  --
+  y
+
+The result is that `y = [[1];[2];[3]]` We can flatten this vector-of-vectors into a linear vector as such:
+
+  y = [[1];[2];[3]]
+  x -< y
+  --
+  x
+
+The main utility of this is it allows us to nest a column of data into some other table. For example:
+
+  x >- ["Hello"; "World"]
+  div = [type: "div" contents: x]
+  -- 
+  div
+
+This creates a table of data equivalent to the following table, which would be used by the HTML machine to render two divs with some text:
+
+  div = [|type  contents|
+          "div" ["Hello"]
+          "div" ["World"]]
+  x -< div.contents
+  --
+  x
+
+The flatten statement is used here to reconstruct the original vector of strings.  

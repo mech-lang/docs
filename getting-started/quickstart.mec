@@ -1,10 +1,12 @@
-# Mech Quickstart Tutorial
+Mech Quickstart Tutorial
+=========================
 
-Welcome to the Mech programming language. This tutorial is intended for developers who are familiar with imperative programming languages like C, Javascript, or Python. Mech follows a different paradigm, known as dataflow, so we will point out the differences and similarities between the familiar and unfamiliar throught this tutorial.
+Welcome to the Mech programming language. This tutorial is intended for developers who are familiar with imperative programming languages like C, Javascript, or Python. Mech follows a different paradigm, known as dataflow, so we will point out the differences and similarities between the familiar and unfamiliar throughout this tutorial.
 
-This tutorial will assume you've downloaded and installed Mech using the instructions found on the <a href="https://github.com/mech-lang/mech">main repository</a>.
+This tutorial will assume you've downloaded and installed Mech using the instructions found in the documentation.
 
-## Introduction to Mech
+1 .Introduction to Mech
+------------------------
 
 Mech programs are built out of tables and blocks. A `Table` is a two-dimensional grid of cells, and is the one and only data structure in Mech. Inside each cell of a table we can put a `Value` that can be either a `Number`, `String`, `Boolean`, or another `Table`. 
 
@@ -23,7 +25,7 @@ Mech programs are composed of "blocks" of code like the one above. A block is in
 - Apply transformations to the selected tables in the local block scope.
 - Write zero or more transformed tables or slices of tables to the global table store.
 
-For example, we we can find use the previously defined student table to calculate their average GPA:
+For example, we can use the previously defined student table to calculate the average GPA of all the students:
 
   class-size = stats/sum(column: (#students.gpa * 0 + 1))
   sum-gpa = stats/sum(column: #students.gpa)
@@ -31,14 +33,13 @@ For example, we we can find use the previously defined student table to calculat
 
 This block counts the number of students, sums their GPA, and then computes the average GPA, which is [[#average-gpa]].
 
-## Reacting to Changes in Data
+2. Reacting to Changes in Data
+-------------------------------
 
-Within a block, expressions are computed in the order they are written, as with the imperative model. But blocks themselves execute in an order determined by the data on which they depend. Let's say we change the GPA of Lisa with the set operator `:=`, which updates a value after it's been defined already:
+Within a block, expressions are evaluated in the order they are defined, as with the imperative model. But blocks themselves execute in an order determined by the data on which they depend. Let's say we change the GPA of Lisa with the set operator `:=`, which updates a value after it's been defined already. The following block is inactive as indicated by the yellow border. Click into this block and press `ctrl` + `enter` to activate it:
 
 ```mech:pending
   #students.gpa{3} := 2.8
 ```
 
-Since th GPA changed, every block that depends on this GPA will update as well. This is the essence of a dataflow language; although we cannot specify control flow as in an imperative language, we can specify the data, and this in turn causes execution to happen as defined by the data dependencies of blocks.
-
-Up Next: <a href="/#/docs/help.mec">Getting Help</a>
+Since the GPA changed, every block that depends on this GPA will update accordinly. This is the essence of a dataflow language; although we cannot specify control flow as in an imperative language, we can specify the data, and this in turn causes execution to happen as defined by the data dependencies of blocks.

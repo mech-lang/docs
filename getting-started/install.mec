@@ -1,0 +1,33 @@
+Installation
+=============
+
+To install Mech on your system, you can download a binary pre-compiled for your operating system and architecture, or you can build Mech from source. As always, you can use Mech online at <a href="try.mech-lang.org">try.mech-lang.org</a>
+
+1. Download a Binary
+---------------------
+
+You can download the latest release (v0.1.0-beta) from the following links:
+
+- Windows - <a href="https://github.com/mech-lang/mech/releases/download/v0.1.0/mech_0.1.0_windows_x86_64.7z">binary (1.57 MB)</a>
+- MacOS (x86-64) - <a href="https://github.com/mech-lang/mech/releases/download/v0.1.0/mech_0.1.0_macos_x86_64.7z">binary (1.74 MB)</a>
+- MacOS (aarch64 ) - <a href="https://github.com/mech-lang/mech/releases/download/v0.1.0/mech_0.1.0_macos_aarch64.7z">binary (1.74 MB)</a>
+- Linux - <a href="https://github.com/mech-lang/mech/releases/download/v0.1.0/mech_0.1.0_linux_x86_64.7z">binary (2.52 MB)</a>
+
+2. Build From Source
+---------------------
+
+You can find the source code for Mech at our <a href="https://github.com/mech-lang/mech">GitHub repository</a>. Before you can build the project, you will first need to install <a href="https://www.rust-lang.org/learn/get-started">Rust</a> for your platform. You'll need to a recent version from the Rust nightly release channel.
+
+Then, clone and build the Mech repository with these instructions:
+
+```
+git clone https://gitlab.com/mech-lang/mech --recurse-submodules
+cd mech
+cargo build --bin mech --release
+```
+
+Alternatively, you can use Rust's Cargo build system to build Mech.
+
+```
+cargo install -g mech
+```

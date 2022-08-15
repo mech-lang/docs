@@ -1,0 +1,81 @@
+Design Document 1 - Semantic Whitespace
+========================================
+
+1. Space Around Operators
+--------------------------
+
+A. Background
+
+Mech operators are required to have whitespace around them. Most langauges don't have this restriction, and in fact many parsers work by stripping out whitespace before the tokenization phase, so that the entire language must be whitespace agnostic. The reason for this is that whitespace can crop up all over the place in your grammar, so instead of supporting it throughout, it's easier to just ellide it and make the language unanbiguous sans whitespace. Since newline characters are considered whitespace, this usually necessitates line terminators like semicolons.
+
+A few languages notably do not strip whitespace by default. Python is probably the most famous. It uses whitespace to indicate scope instead of curly braces, which effectively enforces good code layout.
+
+Matlab as well allows programmers to specify 2D matrices in a natural way: using two dimensions. Mech follows the same syntax, e.g.
+
+x = [1 2
+     3 4]
+
+Now, just because you can do away with line terminators doesn't mean you shouldn't. In fact, Matlab allows you to write code without line terminators; adding them in suppresses output.
+
+B. Rationale for Enforcing Spaces around Operators in Mech
+
+In the case if Mech, we do not strip whitespace out of the source code before parsing it. If you go into the parser, you'll find places where we handle variable amounts of whitespace, which complicates the parser significantly. But we've got it to the point where it's working, so now that the work is done we can reap the benefits. 
+
+Why enforce spaces around operators?
+
+variable-one = math/sin(angle: (4 - 1) / 3)
+
+Here are the benefits as I see them:
+
+- We can allow dashes (-) in identifiers, which unlocks kebab-case for Mech. Kebab case is objectively (😉) the best case because it only requires one keystroke, whereas underscores (snake-case) and capitalization (camel-case) require two keystrokes. But because most languages strip out whitespace before parsing, they cannot differentiate between subtraction and kebab-case generally, so kebab-case is usually only found in Lisps and other PN and RPN.
+
+- We can allow slashes (/) in identifiers, which unlock the ability to write namespaces like URLs ore file system paths. This is a natural choice for namespaces, and unifies the concept of functions and tables in Mech. Other languages use underscores or :: to scope namespaces, both of which require more keystrokes.
+
+- This has the same effect as Python does in making code more readable through the parser. I think that spaces around operators are easier to read in general, and I write code this way no matter what langauge I'm using. A lot of other people do as well.
+
+C. Alternatives Considered
+
+a. Code Fences
+
+One option instead of enforcing spaces is to enforce fences around operators. E.g.
+
+variable-one = math/sin(angle: (4`-`1)`/`3)
+
+This could potentially be an option, because then it would allow for custom infix functions:
+
+variable-one = math/sin(angle: (4`math/subtract`1)`math/divide`3)
+
+This could actually still be adopted in addition to enforced spaces around operators. These choices are not mutuallt exclusive.
+
+I like to still have enforced spaces because it means the most common mathematical operators won't need fences. Enforced spaces also have the benefit of making code fences more readable:
+
+variable-one = math/sin(angle: (4 `math/subtract` 1) `math/divide` 3)
+
+b. Not enforcing spaces
+
+Another option is to just not do this. Do things the usual way by stripping the language of whitespace from the start, and designing the grammar so that it's still unambiguous. I don't want to do this for a number of reasons.
+
+- First, I need the whitespace anyway for tables. Tables have to be easy to write, and I don't want to have to put commas in them. Therefore, I need to keep all of the whitespace while parsing tables, so I can't just strip it all out beforehand. And I can't strip it out selectively before parsing it because that would require parsing it to figure out where to keep it and where to remove it. So I have to just parse it with the whitespace in there.
+
+- Second, the benefits are just too good to pass up. It makes some people upset because they are used to not having enforced spaces around operators in any mainstream language really. But in return we get kebab case which is good enough on its own, but we also get better looking code and slashes in table and function identifiers.
+
+- Third, one of the best reasons for doing things the other way is writing the parser is much more difficult, but the parser is written now, so that is a moot point.
+
+There are some downsides though to Mech's approach which means that it might be easy to write code for which a relevent error message is difficult to generate. For example, if we have two tables foo and bar, and we want to subtract them, we could writ this:
+
+baz = foo-bar
+
+Which would be parsed not as an error but as assignment of the table foo-bar to baz. The error would be that foo-bar is not an available table. This one is easy to spot, but if we have more subtraction like so:67
+
+baz = foo-bar-baz-quux
+
+Then this could be any number of expressions:
+
+baz = foo-bar - baz-quux
+baz = foo-bar-baz - quux
+baz = foo - bar - baz - quux
+
+We would essentially have to check them all if we want to steer the user the right way.
+
+2. Indent for Async Blocks
+---------------------------
