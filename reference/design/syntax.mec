@@ -27,11 +27,11 @@ D. Explores the syntax design space
 
 One commonality between all languages is that they all only have so many standard brackets to work with, which places a constraint on the design space. These grouping symbols are: `(), {}, [], <>, , ||`. More operators are available in extended character sets, but these are the only ones available on most keyboards, so Mech has chosen to limit itself to strictly these. Mech uses these grouping symbols as follows:
 
-- [] - square brackets - define a table
-- {} - curly braces - subscript/index/slice a table
-- () - parentheses - function input arguments, also used to group expressions
-- <> - angle brackets - specify a column kind
-- || - pipes - define a table header
+- `[]` - square brackets - define a table
+- `{}` - curly braces - subscript/index/slice a table
+- `()` - parentheses - function input arguments, also used to lift the precedence of expression evaluation.
+- `<>` - angle brackets - specify a column kind
+- `||` - pipes - define a table header
 
 
 

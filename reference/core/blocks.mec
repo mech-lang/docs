@@ -78,7 +78,7 @@ This reactivity applies to the entire block graph, meaning a block that depends 
 ============
 
 Create a timer
-  #time/timer += [period: 1000<s>]
+  #time/timer += [period: 1<s>]
 
 Alias the tick
   #tick = #time/timer.ticks

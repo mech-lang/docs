@@ -50,3 +50,6 @@ This creates a table of data equivalent to the following table, which would be u
   x
 
 The flatten statement is used here to reconstruct the original vector of strings.  
+
+4. Temporal Statements
+-----------------------

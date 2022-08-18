@@ -77,9 +77,9 @@ Note that multiplying two matricies with the multiply operator does not perform 
 Mech supports the following inequality operators:
 
 - Greater than `>`
-- Greater than or equal to `>=`
+- Greater than or equal to `>=`, `≥`
 - Less than `<`
-- Less than or equal to `<=`
+- Less than or equal to `<=`, `≤`
 - Equal to `==`
 - Not equal to `!=`, `¬=`, `≠`
 
@@ -111,3 +111,6 @@ We can do or operations as well
   x = [1 2 3]
   --
   x < 2 | x > 2
+
+5. Functions
+-------------
