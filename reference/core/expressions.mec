@@ -81,7 +81,7 @@ Mech supports the following inequality operators:
 - Less than `<`
 - Less than or equal to `<=`
 - Equal to `==`
-- Not equal to `!=`, `¬=`
+- Not equal to `!=`, `¬=`, `≠`
 
 The output of an inequality expression is of kind `bool`. The kind of the operands must be numeric (u8-u128, i8-i128, f32, f64). Like the math expressions, inequality expressions are broadcast element-wise to the operands:
 
