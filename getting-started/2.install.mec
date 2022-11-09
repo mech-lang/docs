@@ -1,5 +1,5 @@
-Installation
-=============
+2. Installation
+================
 
 To install Mech on your system, you can download a binary pre-compiled for your operating system and architecture, or you can build Mech from source. As always, you can use Mech online at <a href="try.mech-lang.org">try.mech-lang.org</a>
 
@@ -8,10 +8,10 @@ To install Mech on your system, you can download a binary pre-compiled for your 
 
 You can download the latest release (v0.1.0-beta) from the following links:
 
-- Windows - <a href="https://github.com/mech-lang/mech/releases/download/v0.1.0/mech_0.1.0_windows_x86_64.7z">binary (1.57 MB)</a>
+- Windows (x86-64) - <a href="https://github.com/mech-lang/mech/releases/download/v0.1.0/mech_0.1.0_windows_x86_64.7z">binary (1.57 MB)</a>
 - MacOS (x86-64) - <a href="https://github.com/mech-lang/mech/releases/download/v0.1.0/mech_0.1.0_macos_x86_64.7z">binary (1.74 MB)</a>
 - MacOS (aarch64 ) - <a href="https://github.com/mech-lang/mech/releases/download/v0.1.0/mech_0.1.0_macos_aarch64.7z">binary (1.74 MB)</a>
-- Linux - <a href="https://github.com/mech-lang/mech/releases/download/v0.1.0/mech_0.1.0_linux_x86_64.7z">binary (2.52 MB)</a>
+- Linux (x86-64) - <a href="https://github.com/mech-lang/mech/releases/download/v0.1.0/mech_0.1.0_linux_x86_64.7z">binary (2.52 MB)</a>
 
 2. Build From Source
 ---------------------

@@ -1,5 +1,5 @@
-Mech Quickstart Tutorial
-=========================
+4. Mech Quickstart Tutorial
+============================
 
 Welcome to the Mech programming language. This tutorial is intended for developers who are familiar with imperative programming languages like C, Javascript, or Python. Mech follows a different paradigm, known as dataflow, so we will point out the differences and similarities between the familiar and unfamiliar throughout this tutorial.
 

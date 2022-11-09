@@ -1,5 +1,5 @@
-Welcome to Mech
-================
+1. Welcome to Mech
+===================
 
 Hello and welcome to the documentation for Mech, a programming language for developing data-driven, reactive systems like animations, games, and robots. Meach is a dataflow language with a focus on making composing, transforming, and distributing data easy. This means that instead of specifying state transitions and the flow of control (as in imperative languages), in Mech you specify data dependencies and transformations. The job of a Mech programmer is to select sources of data, mold those data into new shapes, and then do something useful with them -- whether that be to produce a visualization, drive an external device, or run a simulation. 
 
