@@ -19,7 +19,7 @@ These features open up a host of possibilities in terms of language tooling. For
 2. Testing Alternatives
 ------------------------
 
-A database isn't only useful for debugging after-the-fact; it can also be used as a development tool while writing a program. For example, if you would like to test how your program performs using several alternative implimentations of a block, you can "fork" your program's timeline, where each timeline recieves 
+A database isn't only useful for debugging after-the-fact; it can also be used as a development tool while writing a program. For example, if you would like to test how your program performs using several alternative implementations of a block, you can "fork" your program's timeline, where each timeline receives 
 
 3. Distribution
 ----------------
