@@ -1,11 +1,11 @@
 1. Welcome to Mech
 ===================
 
-Hello and welcome to the documentation for Mech, a programming language for developing data-driven, reactive systems like animations, games, and robots. Meach is a dataflow language with a focus on making composing, transforming, and distributing data easy. This means that instead of specifying state transitions and the flow of control (as in imperative languages), in Mech you specify data dependencies and transformations. The job of a Mech programmer is to select sources of data, mold those data into new shapes, and then do something useful with them -- whether that be to produce a visualization, drive an external device, or run a simulation. 
+Hello and welcome to the documentation for Mech, a programming language for developing data-driven, reactive systems like animations, games, and robots. Mech is a dataflow language with a focus on making composing, transforming, and distributing data easy. This means that instead of specifying state transitions and the flow of control (as in imperative languages), in Mech you specify data dependencies and transformations. The job of a Mech programmer is to select sources of data, mold those data into new shapes, and then do something useful with them -- whether that be to produce a visualization, drive an external device, or run a simulation. 
 
 Some key features of Mech that set it apart from other languages are:
 
-- Mech is a dataflow language – Instead of using control flow statments (e.g. if-then, loops, etc.) to manage state transitions, Mech programmers define data dependencies and declarative transformations over those data.
+- Mech is a dataflow language – Instead of using control flow statements (e.g. if-then, loops, etc.) to manage state transitions, Mech programmers define data dependencies and declarative transformations over those data.
 
 - Mech is reactive – As new data arrive at a Mech program, computed values are updated and propagated through the program automatically. If you've used a spreadsheet, you're familiar with this idea.
 
@@ -13,8 +13,8 @@ Some key features of Mech that set it apart from other languages are:
 
 - Mech is distributed – Programs are defined as a network of nodes that communicate via messages. This is the dominant paradigm in mid-level general robotics programming, and this concept is built into the ambient semantics of the Mech language. The Mech runtime automatically figures out the topology of a program's compute network based on data dependencies, or a programmer can specify one manually within the language itself.
 
-- Mech is asynchronous – Because the entire language is distributed, all library calls are asynchronous. That means opening a file or sending a network request is nonblocking by default; a Mech program that makes an aynchronous request to a network server will continue running and working on other tasks while it waits for the response, and then will react to it as soon as a it arrives. This behavior is built into the natural semantics of the language, and requries no special asynchronous runtime to achieve.
+- Mech is asynchronous – Because the entire language is distributed, all library calls are asynchronous. That means opening a file or sending a network request is nonblocking by default; a Mech program that makes an asynchronous request to a network server will continue running and working on other tasks while it waits for the response, and then will react to it as soon as a it arrives. This behavior is built into the natural semantics of the language, and requires no special asynchronous runtime to achieve.
 
-- Mech supports live programming – the write-compile-run development loop is minimized in Mech to the point where you can edit your program while it's running, and see edits immediately. There is no "compiletime" vs. "runtime" distinction in Mech. A short development cycle means that errors are surfaced as they occur. In Mech we can point directly to the code that caused an error.
+- Mech supports live programming – the write-compile-run development loop is minimized in Mech to the point where you can edit your program while it's running, and see edits immediately. There is no "compile time" vs. "runtime" distinction in Mech. A short development cycle means that errors are surfaced as they occur. In Mech we can point directly to the code that caused an error.
 
-- Mech is a database – Every change to a Mech program is recordecd as a transaction that mutate's the program's internal state. This allows programmers to record, rewind, and playback the execution of any Mech program at a granular level, which opens up interesting avenues for debugging and exploration.
+- Mech is a database – Every change to a Mech program is recorded as a transaction that mutates the program's internal state. This allows programmers to record, rewind, and playback the execution of any Mech program at a granular level, which opens interesting avenues for debugging and exploration.
