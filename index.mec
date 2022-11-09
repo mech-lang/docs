@@ -1,26 +1,34 @@
-Mech Documentation
-===================
+Mech Programming Language Documentation
+=========================================
 
-1. Getting Started
--------------------
+Chapter I. Getting Started
+----------------------------
 
-- Welcome
-- Installation
-- Running
-- Quick Start
-- Help
+1. Welcome
+2. Installation
+3. Running
+4. Quick Start
+5. Help
 
-2. Platform Reference
-----------------------
+Chapter II. Platform Reference
+--------------------------------
 
-- Syntax
-- Ecosystem
-- Architecture
-- Design
 
-3. User Guides
----------------
+1. Architecture
+2. Syntax
+3. Programming Model
+4. Ecosystem
 
-- Tutorials
-- How-Tos
-- Mech for X-programmers
+Chapter III. User Guides
+--------------------------
+
+1. Tutorials
+2. How-Tos
+3. Mech for X
+4. Example Programs
+
+Appendices
+------------
+
+A. Grammar
+B. Design Documents
