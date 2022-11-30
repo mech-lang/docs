@@ -1,15 +1,15 @@
 1. Welcome to Mech
 ===================
 
-Hello and welcome to the documentation for Mech, a programming language for developing data-driven, reactive systems like animations, games, and robots. Mech is a dataflow language with a focus on making composing, transforming, and distributing data easy. This means that instead of specifying state transitions and the flow of control (as in imperative languages), in Mech you specify data dependencies and transformations. The job of a Mech programmer is to select sources of data, mold those data into new shapes, and then do something useful with them -- whether that be to produce a visualization, drive an external device, or run a simulation. 
+Hello and welcome to the documentation for Mech, a programming language for developing data-driven, reactive systems like robots, games, and interfaces. Mech is a dataflow language with a focus on composing, transforming, and distributing data.
 
 Some key features of Mech that set it apart from other languages are:
 
-- Mech is a dataflow language – Instead of using control flow statements (e.g. if-then, loops, etc.) to manage state transitions, Mech programmers define data dependencies and declarative transformations over those data.
+- Mech is a declarative dataflow language – Instead of using control flow statements (e.g. if-then, while loops, etc.) to manage state transitions, Mech programmers define data dependencies and declarative transformations over those data.
 
-- Mech is reactive – As new data arrive at a Mech program, computed values are updated and propagated through the program automatically. If you've used a spreadsheet, you're familiar with this idea.
+- Mech is reactive – As new data arrive at a Mech program, the program's state is updated automatically until a steady state is reached.
 
-- Mech is parallel – The ubiquitous programming metaphor in Mech is that everything is a table, much like in Matlab. Functions and arithmetic, logic, and comparison operators in Mech are defined to work on tabular data element-wise, so most computations are parallelizable by default. 
+- Mech is concurrent – The ubiquitous programming metaphor in Mech is that everything is a table. Functions and arithmetic, logic, and comparison operators in Mech are defined to work on tabular data element-wise, so most computations are parallelizable by default. 
 
 - Mech is distributed – Programs are defined as a network of nodes that communicate via messages. This is the dominant paradigm in mid-level general robotics programming, and this concept is built into the ambient semantics of the Mech language. The Mech runtime automatically figures out the topology of a program's compute network based on data dependencies, or a programmer can specify one manually within the language itself.
 

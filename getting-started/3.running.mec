@@ -1,14 +1,23 @@
 3. Running Mech
-================
+=================
+
+There are multiple ways to run Mech code using the `mech` commandline tool.
 
 1. The Mech REPL
------------------
+------------------
 
-2. Interpreter
----------------
+Start an interactive Mech REPL by invoking the `mech` commandline tool without any arguments. From this REPL you can write Mech code blocks and send them to a Core running in the background. For more information about using the REPL, see this documention(TODO).
 
-3. Building an Executable
---------------------------
+2. Building a Mech Project
+----------------------------
+
+The Mech compiler is available behind the `mech build` command. With this, you can compile raw Mech source code (extension `.mec`) into a Block file (extension `.bloc`), which contains compiled and serialized Mech blocks.
+
+3. Interpreter
+----------------
+
+The Mech interpreter is available behind the `mech run` command. With this, you can run `.mec` and `.bloc` files.
 
 4. Launching a Server
-----------------------
+-----------------------
+
