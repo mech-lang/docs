@@ -5,7 +5,7 @@ Welcome to the Mech programming language. This tutorial is intended for develope
 
 This tutorial will assume you've downloaded and installed Mech using the instructions found in the documentation.
 
-1 .Introduction to Mech
+A .Introduction to Mech
 ------------------------
 
 Mech programs are built out of tables and blocks. A `Table` is a two-dimensional grid of cells, and is the one and only data structure in Mech. Inside each cell of a table we can put a `Value` that can be either a `Number`, `String`, `Boolean`, or another `Table`. 
@@ -33,7 +33,7 @@ For example, we can use the previously defined student table to calculate the av
 
 This block counts the number of students, sums their GPA, and then computes the average GPA, which is [[#average-gpa]].
 
-2. Reacting to Changes in Data
+B. Reacting to Changes in Data
 -------------------------------
 
 Within a block, expressions are evaluated in the order they are defined, as with the imperative model. But blocks themselves execute in an order determined by the data on which they depend. Let's say we change the GPA of Lisa with the set operator `:=`, which updates a value after it's been defined already. The following block is inactive as indicated by the yellow border. Click into this block and press `ctrl` + `enter` to activate it:
