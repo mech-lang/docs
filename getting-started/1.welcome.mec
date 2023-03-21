@@ -1,7 +1,18 @@
 1. Welcome to Mech
 ===================
 
-Hello and welcome to the documentation for Mech, a programming language for developing data-driven, reactive systems like robots, games, and interfaces. Mech is a dataflow language with a focus on composing, transforming, and distributing data.
+Mech is a modern programming language designed for robotics and automation. It is a dataflow language, meaning that computations occur in the presence of data and the system is idle without it. Mech is reactive, meaning all computations are kept up-to-date as dependent data changes. This makes it ideal for developing robotic systems, where data is constantly being generated and used to control the system.
+
+Mech follows the principle of "everything is a table," where functions and operators are broadcast over the elements of a table, allowing for easy parallelization. It also supports physical units in its syntax and automatic differentiation for gradient-based optimization in machine learning. Mech compiles to native executables and has a language server protocol implementation, making it easy to integrate with popular editors and IDEs. Mech also supports live coding and literate programming. With its unique features and focus on robotics and automation, Mech offers a fresh and powerful approach to programming.
+
+A Quick Example
+-----------------
+
+To get a quick feel for the language, here is a program written in Mech:
+
+
+Key Features
+--------------
 
 Some key features of Mech that set it apart from other languages are:
 
@@ -18,3 +29,19 @@ Some key features of Mech that set it apart from other languages are:
 - Mech supports live programming – the write-compile-run development loop is minimized in Mech to the point where you can edit your program while it's running, and see edits immediately. There is no "compile time" vs. "runtime" distinction in Mech. A short development cycle means that errors are surfaced as they occur. In Mech we can point directly to the code that caused an error.
 
 - Mech is a database – Every change to a Mech program is recorded as a transaction that mutates the program's internal state. This allows programmers to record, rewind, and playback the execution of any Mech program at a granular level, which opens interesting avenues for debugging and exploration.
+
+Applications
+-------------
+
+Mech is a versatile language with a wide range of applications, including:
+
+- Robotics and Automation: Mech is particularly well-suited for robotics and automation applications, due to its support for reactive programming, physical units in syntax, and distributed computing.
+
+- Scientific Computing: Mech's support for physical units and automatic differentiation make it well-suited for scientific computing applications, such as physics simulations and machine learning.
+
+- Control Systems: The dataflow nature of Mech makes it well-suited for control systems, such as those used in industrial automation and process control.
+
+- Real-Time Systems: Mech's support for asynchronicity and time travel debugging make it well-suited for real-time systems, such as those used in avionics and automotive applications.
+
+- Web Applications: Mech's ability to compile to WebAssembly makes it well-suited for web applications, particularly those that require high performance computation.
+
