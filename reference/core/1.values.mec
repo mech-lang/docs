@@ -1,0 +1,81 @@
+1. Values
+===========
+
+Mech has a variety of data types that can be used in its programs. Here are some of the basic data types in Mech:
+
+- *Numbers*: Mech has support for integer and floating-point numbers, which can be used in mathematical operations.
+- *Strings*: Mech has support for strings, which can be used for text manipulation and output.
+- *Booleans*: Mech supports the Boolean data type, which can be used in logical operations such as and, or, and not.
+
+Mech's data types are designed to work together seamlessly, making it easy to create complex data structures and manipulate them using Mech's powerful broadcast operations. Whether you're working with numbers, tables, strings, or physical units, Mech's data types make it easy to create powerful and expressive programs.
+
+Number Literals
+-----------------
+
+Mech supports a variety of number literal formats:
+
+- Decimal integers: `10<u64>`, `-42<i32>`
+- Hexadecimal integers: `0xff<u8>`, `0xdeadbeef<u32>`
+- Octal integers: `0o77<u8>`, `0o777<i16>`
+- Binary integers: `0b1010<u8>`, `0b111111111010101<i16>`
+- Floating point numbers: `3.14<f32>`, `-1.23e-4<f64>`
+- Scientific notation: `6.02e23<f32>`, `1.602e-19<f64>`
+- Complex numbers: `2.5+2i`, `-1.2e-3+4.7i`
+
+📝 Note: decimal numbers without a type specifier are represented using `f32`. To define an integer, a kind annotation must be included.
+
+(1) Quantitites
+
+Numbers with Physical Units:
+
+  5<m> -- 5.0 meters
+  10.0<kg> -- 10.0 kilograms
+  -2.3<m/s^2> -- -2.3 meters per second squared
+
+In addition to these basic number literals, Mech supports a variety of ways to perform arithmetic operations and conversions between different physical units. For example, you can add two numbers with physical units together, and Mech will automatically handle the unit conversions for you:
+
+  d1 = 5<m>
+  d2 = 10<ft>
+  total-distance = d1 + d2  -- result: 8.0484 meters
+
+Mech also supports a variety of math functions, such as sin, cos, tan, sqrt, and more, which can be used with any of the above number literals or expressions.
+
+(2) Number Representations
+
+(3) Conversions between number Representations
+
+String Literals
+----------------
+
+Strings are a fundamental data type in Mech, used for representing sequences of characters. Mech supports both single and double quotes for delimiting strings, and strings can be multiline. The backslash (\) can be used to escape special characters in strings.
+
+Here are some examples of Mech string literals:
+
+  "hello, world!"   // a simple string
+  'hello, world!'   // another simple string, using single quotes
+  "multi\nline\nstring"   // a multiline string with line breaks
+  'This string contains a single quote (\')'  // using the backslash to escape a single quote
+  "Unicode: \u{1F600}"  // a
+
+Boolean Literals
+-----------------
+
+In Mech, boolean values are represented by the keywords true and false, or the Unicode characters ✓ and ✗, respectively. These literals are used to represent a logical value, with true representing true or on, and false representing false or off.
+
+Example usage:
+
+  active = true
+  has-permission = ✓
+  valid? = false
+  enabled? = ✗
+
+📝 Note: boolean literals are case-sensitive and must be written in lowercase.
+
+In addition to literals, boolean values can also be the result of boolean expressions or logical operations. Common boolean operators include and, or, and not. For example:
+
+  x = 5
+  y = 10
+  greater? = x > y            -- false
+  both = (x > 0) & (y > 0)    -- true
+  either = (x > 0) | (y < 0)  -- true
+  is-not = !(x > y)           -- true
