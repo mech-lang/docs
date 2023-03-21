@@ -1,0 +1,43 @@
+Identifiers
+============
+
+Identifiers in Mech are used to name tables, functions, machines, and other elements in Mech programs. They follow specific rules to ensure they can be parsed correctly by Mech.
+
+Rules for Mech Identifiers
+----------------------------
+
+- Identifiers must begin with an alphabetic character or equivalent unicode character.
+
+- They cannot begin with a number or an underscore.
+
+- Identifiers can contain letters, numbers, hyphens, and slashes. No other characters are allowed.
+
+- Spaces are not allowed in identifiers; kebab case (where a dash is used between words) is the preferred naming convention for identifiers. 
+
+Some examples of valid identifiers:
+
+  speed
+  time
+  object-position
+  diameter-in-cm
+  math/sin
+
+Examples of invalid Mech Identifiers
+
+  1speed
+  _time
+  object position
+  color%
+
+In general, it is recommended to keep identifiers simple, clear, and meaningful. Using kebab case can make identifiers more readable and easier to understand, especially for longer names.
+
+Unicode Ecoding
+-----------------
+
+Mech supports Unicode character encodings. Here are some examples of valid Mech identifiers containing Unicode:
+
+  λxx   -- an identifier which contains a Greek character
+  日本語 -- an identifier in Japanese characters
+  💻    -- an identifier that is just a computer emoji
+  ∑i    -- an identifier for a summation with a sigma symbol
+
