@@ -1,0 +1,137 @@
+Tables
+=======
+
+Tables are the primary data structure in Mech. Everything from a scalar to a vector to a matrix is stored in a table, and all expressions have one or more tables as an input, and exactly one table as output.
+
+Tables are a collection of cells arranged in a 2D grid of rows and columns. Each cell can hold a `Value`, which are described in Section 1.
+
+1. Scalars, Vectors, and Matrices
+----------------------------------
+
+Scalars, vectors, and matrices are all table types in Mech.
+
+- A scalar table is a table with a single cell.
+
+  value = 1
+  name = "Alan Turing"
+
+- Vectors are created by enclosing a list of values in square brackets. A column vector can be created using a semicolon to separate the values.
+
+  vector = [1 2 3]
+  column-vector = [1; 2; 3]
+
+Matrices are tables with two or more rows and two or more columns.
+
+  matrix = [1 2 3
+            4 5 6]
+
+2. Inline Tables
+-----------------
+
+
+3. Table Headers
+------------------
+
+By default, table rows and columns are referenced by their index. However, we can optionally add an index alias to a column to make them more readable.
+
+  with-columns = [|name   age height|
+                   "Yan"  20  100
+                   "Seth" 23  102]
+
+Create an inline table. This syntax is used when you want to create a table with only a single row.
+
+  inline-table = [name: "Yan" age: 20 height: 100]
+
+3. Nested Tables
+-----------------
+
+Tables can be nested to create more complex data structures. A nested table is a table that has a reference to another table as one of its values.
+
+  nested_table = [type: "div" parameters: [width: 100 height: 50]]
+
+Indexing Tables
+
+Mech provides a flexible and expressive syntax for indexing tables. You can use row and column indices or aliases to select subsets of data from a table.
+
+my_table[2, 3] ; selects the cell in the second row and third column of my_table
+my_table[:, 1] ; selects all cells in the first column of my_table
+my_table[1] ; selects the first row of my_table
+my_table[:name, :] ; selects all cells in the column named "name" of my_table  
+
+Swizzling Tables
+Swizzling allows you to select a subset of columns and rows from a table to create a new table.
+
+my_table[:name, :age] ; selects all cells in the "name" and "age" columns of my_table and creates a new table with only those columns.
+
+Scalar Tables
+A scalar table is a table with a single cell. Scalars are useful for representing constant values in your code.
+
+pi = 3.1415926535<f32>
+
+Typed Columns
+Mech tables support typed columns. When you define a table, you can specify the type of each column. This allows Mech to perform type checking and function dispatch, improving the safety and robustness of your code.
+
+my_table = [|x: f32 y: f32|
+1.0 2.0
+3.0 4.0]
+
+Heterogeneous Typed Columns
+
+Corey Montella
+continue
+Indexing Tables
+Mech provides different ways to index into a table, which allows you to access specific rows, columns, or cells of the table.
+
+The most common way to index a table is by using square brackets []. You can use this notation to access a specific row or column of a table by its index. For example, to access the first row of a table, you can do:
+
+table = [|1 2 3|
+|4 5 6|
+|7 8 9|]
+
+row1 = table[0] # this will return the first row [1, 2, 3]
+
+You can also access a specific cell of the table by using two indices separated by a comma:
+
+cell = table[1,2] # this will return the value 6
+
+Another way to access a specific column of a table is by using a vertical bar followed by the name of the column:
+
+column1 = table|0 # this will return the first column [1, 4, 7]
+
+You can also use named indices to access rows and columns of a table. For example:
+
+table = [|name age|
+|John 30 |
+|Jane 25 |
+|Bob 40 |]
+
+row = table["Jane"] # this will return the row with name "Jane"
+age = table|"age" # this will return the column with name "age"
+
+Swizzling
+
+Mech supports swizzling, which allows you to rearrange the columns of a table into a different order. You can use this to easily create new tables that have a different structure than the original table. For example:
+
+table = [|name age|
+|John 30 |
+|Jane 25 |
+|Bob 40 |]
+
+new_table = table[|age name|] # this will create a new table with columns in the order age, name
+
+Operations on Tables
+Mech provides a rich set of operators and functions to perform operations on tables, such as arithmetic operations, aggregation functions, and more. Some examples include:
+
+Addition: table1 + table2 adds two tables element-wise
+Multiplication: table1 * table2 multiplies two tables element-wise
+Aggregation: sum(table) computes the sum of all elements in a table
+Asynchronous Programming with Tables
+One of the key features of Mech is its ability to support asynchronous programming through the use of tables. You can define a table as a timer or a sensor, and then use it to trigger actions in your program. For example:
+
+#timer += [period: 1000<ms>]
+~ #timer.ticks
+print("One second has passed")
+
+In this example, we define a timer as a table with a specific period of 1000 milliseconds. Then, we use the ~ operator to create an asynchronous block that waits for the timer to tick and then prints a message to the console. This allows us to create programs that react to external events in a powerful and flexible way.
+
+Overall, tables are a fundamental and powerful feature of the Mech language, providing a flexible and expressive way to work with data in a variety of contexts.
