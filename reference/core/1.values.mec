@@ -51,11 +51,11 @@ Strings are a fundamental data type in Mech, used for representing sequences of 
 
 Here are some examples of Mech string literals:
 
-  "hello, world!"   // a simple string
-  'hello, world!'   // another simple string, using single quotes
-  "multi\nline\nstring"   // a multiline string with line breaks
-  'This string contains a single quote (\')'  // using the backslash to escape a single quote
-  "Unicode: \u{1F600}"  // a
+  "hello, world!"      -- a simple string
+  "multi
+  line
+  string"              -- a multiline string with line breaks
+  "🤖💡⚙️🌍✨💚🚀"   -- a code with emojis
 
 Boolean Literals
 -----------------
