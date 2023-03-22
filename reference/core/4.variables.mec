@@ -1,0 +1,42 @@
+Variables
+==========
+
+Every variable in Mech is a table. Variables are assigned to an identifier with the `=` operator. Variables are block-scoped, unless they are prepended with a `#`, which makes them globally scoped and accessible from any context, although access (read/write) can be restricted using capabilities.
+
+For example, we can assign a scalar value to a variable named x:
+
+  x = 10
+
+We can also assign a table to a variable:
+
+  my-table = [1 2 3; 4 5 6]
+
+Global Variables
+------------------
+
+To make a variable globally accessible, we can prepend the identifier with a `#` symbol. For example:
+
+  #global-var = 20
+
+The variable `#global-var` is globally scoped and can be accessed from anywhere in the program, whereas `my-table` is only accessible from within the its own scope. For example, this will result in an error:
+
+   #x = my-table + #global-var
+
+Here's an example of defining local and global variables in a block, and using them both to define a new global variable:
+
+  #π = 3.14
+  r = 5
+  #area = #π * r ^ 2
+
+In this example, `#π` is a globally scoped variable that holds the value of π, and `r` and `#area` are local variables. The expression `#π * r ^ 2` calculates the area of a circle with radius `r`.
+
+Kind Annotations
+------------------
+
+Vriables in Mech can also be annotated with a kind:
+
+  #num<u64> = 1234
+  #str<string> = "Hello, world!"
+  #bool<bool> = true
+
+In this example, the variables `num`, `str`, and `bool` are annotated with their respective kinds. However, the only one that is strictly necessary here is the `u64` annotation; the `string` and `bool` annotations will be inferred from the assigned datatype. The `u64` annotation is necessary because the inferred datatype of the number literal `1234` is `f32`.
