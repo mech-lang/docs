@@ -1,0 +1,269 @@
+Operators
+===========
+
+Mech has a wide range of built-in operators that can be used to manipulate data. Operators are surrounded by white space on both sides. This whitespace-sensitive syntax is not only more readable, but it also helps Mech avoid the ambiguity that can arise in languages that use special characters as part of their identifiers.
+
+📝 Note: The reason for this decision is that it allows allows for non-alphabetic use of special characters such as `-` and `/` in identifiers while still supporting infix mathematical operators. Therefore, Kebab case is the preferred identifier format in Mech.
+
+In Mech, operators are broadcast over tables, which means that they can perform element-wise operations on entire tables without needing to use loops or other constructs. For broadcast operations to work, the tables involved must have the compatible kinds and dimensions.
+
+Here is an example of a broadcast operation with a vector and a scalar:
+
+  vec = [1 2 3]
+  result = vec + 2
+
+The result of this operation is a new vector `[3 4 5]`, where each element of vec has been incremented by `2`.
+
+Now consider an example with a matrix and a vector:
+
+  mat = [1 2
+         3 4]
+  vec = [5 6]
+  result = mat + vec
+
+In this case, the vector vec is broadcast across the rows of the matrix mat, resulting in a new matrix with the same dimensions as `mat`, where each row of mat is added to `vec`.
+
+Arithmetic Operators
+---------------------
+
+The arithmetic operators in Mech are:
+
+- `math/add` (`+`)
+- `math/subtract` (`-`)
+- `math/multiply` (`*`)
+- `math/divide (`/`)
+- `math/mod` (`%`)
+- `math/exp` (`^`)
+
+When applied to tables, these operators are broadcast over the table elements. This means that if two tables have the compatible size and type, they can be added or multiplied element-wise, resulting in a new table of the same size and type. If the tables have incompatible sizes or types, a compile time error will be produced.
+
+Here's an example of broadcasting addition over two tables:
+
+  table1 = [1 2 3
+            4 5 6]
+  table2 = [10 20 30
+            40 50 60]
+  result = table1 + table2
+
+In this example, the addition operator is applied to two tables of the same size and type, resulting in a new table with the same size and type. `Result` will be `[11 22 33; 44 55 66]`.
+
+Here's an example complex math statement using multiple artihmetic operators in Mech:
+
+  result = ((a + b) / (c - d)) * (e % f) ^ g
+
+In this example, we're taking the sum of `a` and `b`, then dividing it by the difference of `c` and `d`. We're then multiplying that result by the remainder of `e` divided by `f`, raised to the power of `g`. All of these operators are broadcast, so the calculation will be performed element-wise if the inputs are tables.
+
+Comparison Operators
+----------------------
+
+Mech supports a number of built-in comparison operators. These operators allow you to compare two values and return a boolean value representing the result of the comparison. The following comparison operators are supported:
+
+- `compare/equal` (`==`)
+- `compare/not-equal` (`!=` or `¬=`)
+- `compare/less-than` (`<`)
+- `compare/less-than-equal` (`<=` or `≤`)
+- `compare/greater-than` (`>`)
+- `compare/greater-than-equal` (`>=` or `≥`)
+
+All of these operators can be used with the numeric data types in Mech. Strings and Boolean data types are compatible with equality and inequality operators only. 
+
+When used with tables, the operators perform element-wise comparisons, and the result is a table of the same dimensions as the input tables, with each element containing a boolean value representing the result of the comparison for the corresponding elements.
+
+📝 Note: the equality operator `==` is not the same as the assignment operator `=`, which is used to assign values to variables. 
+
+📝 Note: The inequality operator `!=` can be written as `¬=` in Mech. The use of the negation symbol `¬` is optional, but can make code more readable. Likewise, `≥` and `≤` unicode characters are supported as operators.
+
+Here are some examples of how the comparison operators can be used in Mech:
+
+Comparison of numbers:
+  10 > 5    -- true
+  10 ≤ 5    -- false
+  10 == 10  -- true
+
+Comparison of strings:
+  "hello" != "world"  -- false
+  "hello" == "world"  -- true
+
+Comparison of vectors
+  [1 2 3] == [1 2 3]  -- [true, true, true]
+  [1 2 3] ¬= [3 2 1]  -- [true, false, true]
+
+For the Mech documentation, write a summary of the built-in comparison operators in Mech, which are:
+
+Logic Operators
+-----------------
+
+Mech has four built-in logic operators:
+
+- logic/and (`&`)
+- logic/or (`|`)
+- logic/not (`!` or `¬`)
+- logic/xor (`xor`, `⊕`, or `⊻`)
+
+These operators work with boolean data types and produce a boolean result.
+
+The AND operator (`&`) returns true if both operands are true, and false otherwise.
+
+  true & true   -- true
+  true & false  -- false
+  false & false -- false
+
+The OR operator (`|`) returns true if at least one operand is true, and false otherwise.
+
+  true | true   -- true
+  ✓ | ✗         -- true
+  false | false -- false
+
+The NOT operator (`!` and `¬`) returns the logical opposite of the operand. If the operand is `true`, not returns `false`, and vice versa.
+
+  !true  -- false
+  ¬✗     -- true
+
+Xor Operator
+The XOR operator (`xor`, `⊕`, or `⊻`) returns `true` if exactly one of the operands is true, and `false` otherwise.
+
+  true xor true   -- false
+  true ⊕ false  -- true
+  false ⊻ false -- false
+
+These operators can be combined with parentheses to create complex boolean expressions.
+
+  (true | false) & !(false & true) -- true
+  ✓ ⊻ (✗ & ✓) | ¬(✗ | ✓)          -- false
+
+Bitwise Operators
+-------------------
+
+- bitwise/and (`&`)
+- bitwise/or (`|`)
+- bitwise/xor (`^`)
+- bitwise/not (`!`, or `¬`)
+
+Mech also supports bitwise operators, which work on the binary representations of values.
+
+Bitwise And Operator (`&`)
+
+The bitwise AND operator (`&`) takes two values and returns a value where each bit is set to 1 only if both input values have a corresponding bit set to 1.
+
+  15<u8> & 9<u8>    -- 9
+  0b1100 & 0b1001   -- 0b1000
+
+Bitwise Or Operator (`|`)
+
+The bitwise OR operator (`|`) takes two values and returns a value where each bit is set to 1 if either input value has a corresponding bit set to 1.
+
+  15<u8> | 9<u8>   -- 15
+  0b1100 | 0b1001  -- 0b1101
+
+Bitwise Xor Operator (`^`)
+
+The bitwise XOR operator (`^`) takes two values and returns a value where each bit is set to 1 if only one of the input values has a corresponding bit set to 1.
+
+  15<u8> ^ 9<u8>   -- 6
+  0b1100 ^ 0b1001  -- 0b0101
+
+Bitwise Not Operator (`!` or `¬`)
+
+The bitwise NOT operator (! or ¬) takes a single value and returns a value where each bit is inverted (0s become 1s and 1s become 0s).
+
+  !15<i8>  -- -16
+  ¬0b1100  -- 0b0011
+
+📝 Note: that bitwise operators are overloaded. The appropriate function will be selected at compile time based on the operands. `&` with boolean operands will dispatch the `logic/and`, whereas `&` with number operands will dispatch the `bitwise/and`.
+
+Appendix
+----------
+
+(1) Appendix A - Summay of Mech Operators
+
+(a) Arithmetic Operators:
+
+- `math/add` (`+`)
+- `math/subtract` (`-`)
+- `math/multiply` (`*`)
+- `math/divide (`/`)
+- `math/mod` (`%`)
+- `math/exp` (`^`)
+
+Examples:
+
+  a = 3
+  b = 4
+  c = a + b  // 7
+  d = a * b  // 12
+  e = a > b  // false
+
+(b) Comparison Operators:
+
+- `compare/equal` (`==`)
+- `compare/not-equal` (`!=` or `¬=`)
+- `compare/less-than` (`<`)
+- `compare/less-than-equal` (`<=` or `≤`)
+- `compare/greater-than` (`>`)
+- `compare/greater-than-equal` (`>=` or `≥`)
+
+Examples:
+
+  a = 3
+  b = 4
+  c = a == b  // false
+  d = a != b  // true
+  e = a < b   // true
+
+(c) Logical Operators:
+
+- logic/and (`&`)
+- logic/or (`|`)
+- logic/not (`!` or `¬`)
+- logic/xor (`xor`, `⊕`, or `⊻`)
+
+Examples:
+
+  a = true
+  b = false
+  c = a & b    -- false
+  d = a | b    -- true
+  e = !a       -- false
+  f = a xor b  -- true
+
+(d) Bitwise Operators:
+
+- bitwise/and (`&`)
+- bitwise/or (`|`)
+- bitwise/xor (`^`)
+- bitwise/not (`!`, or `¬`)
+
+Examples:
+
+  a = 5      -- 0b101
+  b = 3      -- 0b011
+  c = a & b  -- 0b001 (0d1)
+  d = a | b  -- 0b111 (0d7)
+  e = !a     -- 0b010 (0d2)
+
+(2) Appendix B - Operator Precedence
+
+Operator precedence determines the order in which operators are evaluated in an expression. In Mech, operators are evaluated according to the following precedence (from highest to lowest):
+
+1. Parentheses `()`
+2. `math/exp` (`^`)
+3. `math/multiply` (`*`) and `math/divide` (`/`) and `math/modulo` (`%`)
+4. `math/add` (`+`) and `math/subtract` (`-`)
+5. Comparison Operators, e.g. (`>`, `>=`, `==`, `<=`, `<`)
+6. `bitwise/not` (`!`, or `¬`)
+7. `bisewise/and` (`&`) and `bitewise/or` (`|`)
+8. `logical/and` (`&`) and logic/or (`|`)
+
+It is important to use parentheses to group operations in the desired order of evaluation. For example:
+
+  2 * (3 + 4)   -- evaluates to 14
+  (2 * 3) + 4   -- evaluates to 10
+
+If parentheses are not used, the order of evaluation may not be what is intended:
+
+  2 * 3 + 4     -- evaluates to 10, not 14
+
+It's also important to note that operators with the same precedence are evaluated from left to right. For example:
+
+  2 * 3 / 4     -- evaluates to 1.5
+  2 + 3 - 4     -- evaluates to 1
