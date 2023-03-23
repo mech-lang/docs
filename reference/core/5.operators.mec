@@ -53,6 +53,54 @@ Here's an example complex math statement using multiple artihmetic operators in 
 
 In this example, we're taking the sum of `a` and `b`, then dividing it by the difference of `c` and `d`. We're then multiplying that result by the remainder of `e` divided by `f`, raised to the power of `g`. All of these operators are broadcast, so the calculation will be performed element-wise if the inputs are tables.
 
+Matrix Operators
+------------------
+
+The builtin matrix operators in Mech are:
+
+- `matrix/multiply` (`**`)
+- `matrix/left-divide` (`\\`)
+- `matrix/right-divide` (`*`)
+- `matrix/transpose (`/`)
+
+📝 Note: You can find additional matrix functions in the `matrix` machine.
+
+(1) Matrix Multiplication Operator (`**`)
+
+The matrix multiplication operator `**` performs matrix multiplication between two matrices. The matrices must have compatible dimensions for matrix multiplication to be possible *i.e.* the number of columns of the first matrix must be equal to the number of rows of the second matrix.
+
+Here's an example of matrix multiplication between two matrices:
+
+  a = [1 2 4; 5 7 8]
+  b = [9 8; 6 5; 3 2]
+  c = a ** b              -- [33, 26; 111, 91]
+
+(2) Matrix Transpose Operator (`'`)
+
+The transpose operator `'` can be used to transpose a matrix or a vector. To transpose a matrix, simply append the transpose operator to the matrix or variable.
+
+  [1; 2; 3]'              -- Transpose a col vector to a row vector: [1 2 3]
+  [1 2 3]'                -- Transpose a row vector to col vector: [1; 2; 3]
+  [1 2 3; 4 5 6; 7 8 9]'  -- Transpose a matrix to: [1 4 7; 2 5 8; 3 6 9]
+
+📝 Note: This operator only works with matricies of uniform kind. Otherwise, values of a different kind would end up in the same column, which is not supported.
+
+(3) Matrix Divide Operator (`/`)
+
+The matrix divide operator `/` can be used to solve linear systems of equations. Specifically, given a system of linear equations `Ax = b`, we can solve for `x` using matrix division as follows:
+
+  A = [2 3; 4 5]
+  b = [5 6]
+  x = A / b               -- [0.4590; 0.8197]
+
+(4) Matrix Left Divide Operator (`\`)
+
+The matrix left divide operator `\` can also be used to solve linear systems of equations. Specifically, given a system of linear equations `xA = b`, we can solve for `x` using matrix left division as follows:
+
+  A = [2 3; 4 5]
+  b = [5; 6]
+  x = b \ A               -- [0.5574 0.7377]
+
 Comparison Operators
 ----------------------
 
@@ -76,9 +124,9 @@ When used with tables, the operators perform element-wise comparisons, and the r
 Here are some examples of how the comparison operators can be used in Mech:
 
 Comparison of numbers:
-  10 > 5    -- true
-  10 ≤ 5    -- false
-  10 == 10  -- true
+  10 > 5              -- true
+  10 ≤ 5              -- false
+  10 == 10            -- true
 
 Comparison of strings:
   "hello" != "world"  -- false
@@ -116,15 +164,15 @@ The OR operator (`|`) returns true if at least one operand is true, and false ot
 
 The NOT operator (`!` and `¬`) returns the logical opposite of the operand. If the operand is `true`, not returns `false`, and vice versa.
 
-  !true  -- false
-  ¬✗     -- true
+  !true          -- false
+  ¬✗             -- true
 
 Xor Operator
 The XOR operator (`xor`, `⊕`, or `⊻`) returns `true` if exactly one of the operands is true, and `false` otherwise.
 
   true xor true   -- false
-  true ⊕ false  -- true
-  false ⊻ false -- false
+  true ⊕ false    -- true
+  false ⊻ false   -- false
 
 These operators can be combined with parentheses to create complex boolean expressions.
 
@@ -145,8 +193,8 @@ Bitwise And Operator (`&`)
 
 The bitwise AND operator (`&`) takes two values and returns a value where each bit is set to 1 only if both input values have a corresponding bit set to 1.
 
-  15<u8> & 9<u8>    -- 9
-  0b1100 & 0b1001   -- 0b1000
+  15<u8> & 9<u8>   -- 9
+  0b1100 & 0b1001  -- 0b1000
 
 Bitwise Or Operator (`|`)
 
@@ -166,8 +214,8 @@ Bitwise Not Operator (`!` or `¬`)
 
 The bitwise NOT operator (! or ¬) takes a single value and returns a value where each bit is inverted (0s become 1s and 1s become 0s).
 
-  !15<i8>  -- -16
-  ¬0b1100  -- 0b0011
+  !15<i8>          -- -16
+  ¬0b1100          -- 0b0011
 
 📝 Note: that bitwise operators are overloaded. The appropriate function will be selected at compile time based on the operands. `&` with boolean operands will dispatch the `logic/and`, whereas `&` with number operands will dispatch the `bitwise/and`.
 
@@ -189,9 +237,9 @@ Examples:
 
   a = 3
   b = 4
-  c = a + b  // 7
-  d = a * b  // 12
-  e = a > b  // false
+  c = a + b     -- 7
+  d = a * b     -- 12
+  e = a > b     -- false
 
 (b) Comparison Operators:
 
@@ -206,9 +254,9 @@ Examples:
 
   a = 3
   b = 4
-  c = a == b  // false
-  d = a != b  // true
-  e = a < b   // true
+  c = a == b    -- false
+  d = a != b    -- true
+  e = a < b     -- true
 
 (c) Logical Operators:
 
@@ -221,10 +269,10 @@ Examples:
 
   a = true
   b = false
-  c = a & b    -- false
-  d = a | b    -- true
-  e = !a       -- false
-  f = a xor b  -- true
+  c = a & b     -- false
+  d = a | b     -- true
+  e = !a        -- false
+  f = a xor b   -- true
 
 (d) Bitwise Operators:
 
@@ -235,11 +283,11 @@ Examples:
 
 Examples:
 
-  a = 5      -- 0b101
-  b = 3      -- 0b011
-  c = a & b  -- 0b001 (0d1)
-  d = a | b  -- 0b111 (0d7)
-  e = !a     -- 0b010 (0d2)
+  a = 5         -- 0b101
+  b = 3         -- 0b011
+  c = a & b     -- 0b001 (0d1)
+  d = a | b     -- 0b111 (0d7)
+  e = !a        -- 0b010 (0d2)
 
 (2) Appendix B - Operator Precedence
 
