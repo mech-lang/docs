@@ -1,0 +1,94 @@
+Blocks
+=======
+
+Blocks are the fundamental unit of code in the Mech programming language. Blocks look like this:
+
+  x = 1
+  y = 2
+  #z = x + y
+
+A block is a self-contained piece of code that performs some defined computation, whether it be defining new data, transforming existing data, or writing data to the global scope.
+
+Each statment in a block is indented with two spaces from the margin. The block starts at the first indented line and continues until the next unindented paragraph. Blocks can do four things:
+
+- Create new data
+- Select data in the global scope and bring it into the block's scope
+- Transform data within the scope of the block
+- Write data to the global scope
+
+Considering the block above, it creates two block-scoped variables, `x` and `y`. These variables are assigned the values `1` and `2` respectively, and they are added together in the variable `z`. The `#` preceeding `z` indicates that the variable is globally scoped, meaning we can access it from other scopes.
+
+One of the key features of blocks is their ability to compose with other blocks. Blocks are designed to be orderless, meaning the order in which they are written has no effect on the underlying computation. Mech figures out the correct ordering of blocks using the data on which they depend. This allows for great flexibility in programming and makes it easier to experiment and explore different data relationships.
+
+For example, consider the following two blocks:
+
+  #a = #z * 2
+
+Here, because `#z` is defined earlier as a global table, it can be used to calculate the value `#a`.
+
+1. Blocks are Composable
+-------------------------
+
+Blocks in Mech are composable units of code. They can depend on other blocks and be depended upon by other blocks. The data flow between blocks is determined by their data dependencies and productions.
+
+#b = #a * 2
+
+Here, the block defines a new table `#b` as twice the value of table `#a`. When `#a` is updated, this block is automatically re-executed to update the value of `#b`.
+
+Blocks can also produce data that other blocks depend on. For example:
+
+#c = #b * 3
+
+Here, the first block computes #b as twice the value of `#a`. The second block depends on `#b` and multiplies it by 3 to produce `#c`. When `#a` is updated, both blocks are re-executed to update the values of `#b` and `#c` accordingly.
+
+Blocks can be composed in any order. When a block is executed, it first checks to see if all of its dependencies have been computed. If not, it waits until they are. Once all dependencies are available, the block computes its data and writes the results to the database.
+
+Blocks can also be composed into larger programs, with many blocks working together to compute complex data flows. These programs can be modular, with blocks reused in different contexts to perform similar computations. The result is a flexible, adaptable way to build and maintain complex data pipelines.
+
+2. Blocks are Orderless
+------------------------
+
+The order in which you write blocks has no effect on the underlying computation. Mech figures out the correct ordering of blocks using the data on which they depend. For example, we can write a block that depends on the table `#first`:
+
+  #second = #first * 10
+
+And then we can actually assign a value to `#first`
+
+  #first = 123
+
+Despite the fact we used `#first` before we assigned it a value, we can see the result [[#second]].
+
+The orderlessness of blocks means you are free to write a Mech program however you see fit. Your program is never constrained by an arbitrary block order imposed by a compiler. This freedom opens up new possibilities for exploratory and expository programming, which we address more completely in <a href="/#/docs/programs/eploration.mec">a later section</a>.
+
+3. Blocks are Reactive
+-----------------------
+
+Blocks automatically update their results as the data on which they depend change. Consider a timer that updates once every second. We can write a computation that updates on every tick of the timer, and we can observe the result of the block updates:
+
+  x = #tick * 2
+  #twice-time = x
+  --
+  #twice-time
+
+This reactivity applies to the entire block graph, meaning a block that depends on data that depends on the timer will also update at the rate of the timer. We can observe this if we select `#twice-time` and use it in a calculation:
+
+  quad-time = #twice-time * 2
+  --
+  quad-time
+
+A block performs its defined transformations/computations only when all of the dependent data are defined. These three blocks compose to define a data flow graph where the first two blocks create tables `#a` and `#b`, and the final block uses these tables to produce a third dependent table `#c`. The converse is true as well; a block will not run if any of its dependent data are missing. For example, consider the following block:
+
+  #x = #z + #y
+
+This block will never produce a value for `#x` because the table `#y` is never defined in this document, (the table `#z` is defined in the previous section). But even though this block will never produce output, any other blocks whose data dependencies are satisfied will execute their defined data transformations independently. This also has implications for errors; if a block contains syntax errors, the functionality of that block alone is disabled while the rest of the program continues to run unaffected.
+
+Reactivity makes it easy to build dynamic and responsive applications in Mech. It allows you to focus on defining your computations without worrying about the details of how they will be updated as data changes.
+
+4. Appendix
+-------------
+
+Create a timer
+  #time/timer += [period: 1<s>]
+
+Alias the tick
+  #tick = #time/timer.ticks

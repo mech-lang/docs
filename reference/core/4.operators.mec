@@ -150,25 +150,32 @@ Mech has four built-in logic operators:
 
 These operators work with boolean data types and produce a boolean result.
 
-The AND operator (`&`) returns true if both operands are true, and false otherwise.
+(1) The AND operator (`&`) 
+
+Returns true if both operands are true, and false otherwise.
 
   true & true   -- true
   true & false  -- false
   false & false -- false
 
-The OR operator (`|`) returns true if at least one operand is true, and false otherwise.
+(2) The OR operator (`|`) 
+
+Returns true if at least one operand is true, and false otherwise.
 
   true | true   -- true
   ✓ | ✗         -- true
   false | false -- false
 
-The NOT operator (`!` and `¬`) returns the logical opposite of the operand. If the operand is `true`, not returns `false`, and vice versa.
+(3) The NOT operator (`!` and `¬`) 
+
+Returns the logical opposite of the operand. If the operand is `true`, not returns `false`, and vice versa.
 
   !true          -- false
   ¬✗             -- true
 
-Xor Operator
-The XOR operator (`xor`, `⊕`, or `⊻`) returns `true` if exactly one of the operands is true, and `false` otherwise.
+(4) The XOR operator (`xor`, `⊕`, or `⊻`) 
+
+Returns `true` if exactly one of the operands is true, and `false` otherwise.
 
   true xor true   -- false
   true ⊕ false    -- true
@@ -189,28 +196,28 @@ Bitwise Operators
 
 Mech also supports bitwise operators, which work on the binary representations of values.
 
-Bitwise And Operator (`&`)
+(1) Bitwise And Operator (`&`)
 
 The bitwise AND operator (`&`) takes two values and returns a value where each bit is set to 1 only if both input values have a corresponding bit set to 1.
 
   15<u8> & 9<u8>   -- 9
   0b1100 & 0b1001  -- 0b1000
 
-Bitwise Or Operator (`|`)
+(2) Bitwise Or Operator (`|`)
 
 The bitwise OR operator (`|`) takes two values and returns a value where each bit is set to 1 if either input value has a corresponding bit set to 1.
 
   15<u8> | 9<u8>   -- 15
   0b1100 | 0b1001  -- 0b1101
 
-Bitwise Xor Operator (`^`)
+(3) Bitwise Xor Operator (`^`)
 
 The bitwise XOR operator (`^`) takes two values and returns a value where each bit is set to 1 if only one of the input values has a corresponding bit set to 1.
 
   15<u8> ^ 9<u8>   -- 6
   0b1100 ^ 0b1001  -- 0b0101
 
-Bitwise Not Operator (`!` or `¬`)
+(4) Bitwise Not Operator (`!` or `¬`)
 
 The bitwise NOT operator (! or ¬) takes a single value and returns a value where each bit is inverted (0s become 1s and 1s become 0s).
 
@@ -289,29 +296,48 @@ Examples:
   d = a | b     -- 0b111 (0d7)
   e = !a        -- 0b010 (0d2)
 
+(e) Matrix Operators:
+
+- `matrix/multiply` (`**`)
+- `matrix/left-divide` (`\`)
+- `matrix/right-divide` (`/`)
+- `matrix/transpose` (`'`)
+
+Examples:
+
+  a = [1 2 4; 5 7 8]
+  b = [9 8; 6 5; 3 2]
+  c = a ** b            -- [33, 26; 111, 91]
+  d = a / b             -- solves Ax = b for x
+  e = b \ a             -- solves xA = b for x
+  f = a'                -- transpose of matrix a
+
 (2) Appendix B - Operator Precedence
 
 Operator precedence determines the order in which operators are evaluated in an expression. In Mech, operators are evaluated according to the following precedence (from highest to lowest):
 
-1. Parentheses `()`
-2. `math/exp` (`^`)
-3. `math/multiply` (`*`) and `math/divide` (`/`) and `math/modulo` (`%`)
-4. `math/add` (`+`) and `math/subtract` (`-`)
-5. Comparison Operators, e.g. (`>`, `>=`, `==`, `<=`, `<`)
-6. `bitwise/not` (`!`, or `¬`)
-7. `bisewise/and` (`&`) and `bitewise/or` (`|`)
-8. `logical/and` (`&`) and logic/or (`|`)
+1. Parentheses (`()`)
+2. `matrix/transpose` (`'`)
+3. `math/exp` (`^`)
+4. `matrix/multiply` (`**`)
+5. `matrix/left-divide` (`\`) and `matrix/right-divide` (`/`)
+6. `math/multiply` (`*`) and `math/divide` (`/`) and `math/modulo` (`%`)
+7. `math/add` (`+`) and `math/subtract` (`-`)
+8. Comparison Operators, e.g. (`>`, `>=`, `==`, `<=`, `<`)
+9. `bitwise/not` (`!`, or `¬`)
+10 `bisewise/and` (`&`) and `bitewise/or` (`|`)
+11. `logical/and` (`&`) and `logic/or` (`|`)
 
 It is important to use parentheses to group operations in the desired order of evaluation. For example:
 
-  2 * (3 + 4)   -- evaluates to 14
-  (2 * 3) + 4   -- evaluates to 10
+  2 * (3 + 4) -- evaluates to 14
+  (2 * 3) + 4 -- evaluates to 10
 
 If parentheses are not used, the order of evaluation may not be what is intended:
 
-  2 * 3 + 4     -- evaluates to 10, not 14
+  2 * 3 + 4   -- evaluates to 10, not 14
 
 It's also important to note that operators with the same precedence are evaluated from left to right. For example:
 
-  2 * 3 / 4     -- evaluates to 1.5
-  2 + 3 - 4     -- evaluates to 1
+  2 * 3 / 4   -- evaluates to 1.5
+  2 + 3 - 4   -- evaluates to 1

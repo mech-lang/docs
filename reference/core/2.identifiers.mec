@@ -29,15 +29,16 @@ Examples of invalid Mech Identifiers
   object position
   color%
 
-In general, it is recommended to keep identifiers simple, clear, and meaningful. Using kebab case can make identifiers more readable and easier to understand, especially for longer names.
+In general, it is recommended to keep identifiers simple, clear, and meaningful. Using kebab case can make identifiers more readable and easier to type.
+
+Slashes `/` are conventionally used in Mech to indicate a namespace. For example, math related functions are grouped in the math namespace 
 
 Unicode Ecoding
 -----------------
 
-Mech supports Unicode character encodings. Here are some examples of valid Mech identifiers containing Unicode:
+Mech supports Unicode UTF-8 character encodings. Here are some examples of valid Mech identifiers containing Unicode:
 
   λxx   -- an identifier which contains a Greek character
   日本語 -- an identifier in Japanese characters
   💻    -- an identifier that is just a computer emoji
   ∑i    -- an identifier for a summation with a sigma symbol
-

@@ -1,0 +1,85 @@
+-- Byte Code format
+
+-- test-file = test* | coment* ;
+-- 
+-- test = insert-node | insert-head | insert-tail | remove-node
+--          | remove-head | remove-tail | assert-node | assert-head
+--          | assert-tail | assert-size | end-of-test | assert-contains;
+-- 
+-- insert-node = "N", index, ",", value ;
+-- insert-head = "H", value ;
+-- insert-tail = "T", value ;
+-- 
+-- remove-node = "E", index ;
+-- remove-head = "D", ;
+-- remove-tail = "C", ;
+-- 
+-- assert-node = "Q", index, ",",  value ;
+-- assert-head = "A", value ;
+-- assert-tail = "Z", value;
+-- assert-size = "S", size ;
+-- assert-contains = "W", value ;
+-- 
+-- end-of-test = "X";
+-- 
+-- index = digit+;
+-- value = "-"? digit+;
+-- size = digit+;
+-- digit = "0" | "1" | ... | "9";
+-- comment = "--", ?anycharacter?;
+
+-- For example:
+
+-- Add a node to an empty linked list
+-- Inserts a node with a value of 5 as the head and verifies that the head, tail, and size of the linked list are all correct.
+H5A5Z5S1X
+
+-- This bytecode string should be interpreted as follows:
+
+-- H 5     -- insert 5 as the head node
+-- A 5     -- assert that the head node has a value of 5
+-- Z 5     -- assert that the tail node has a value of 5
+-- S 1     -- assert that the size of the linked list is 1
+-- X       -- end of test
+
+-- In this test, the H operation is used to insert a new node with a value of 5 as the head of the linked list. The A operation is then used to assert that the head node has a value of 5, and the Z operation is used to assert that the tail node also has a value of 5 (since there is only one node in the list). Finally, the S operation is used to assert that the size of the linked list is 1. The test ends with the X operation.
+
+-- BEGIN TESTS ------------------------------------------------------
+
+-- Add a node to the head of a non-empty linked list
+-- Inserts a node with a value of 5 as the head, then inserts a node with a value of 10 as the new head and verifies that the head, tail, and size of the linked list are all correct.
+H5A5Z5S1N0,10A10Z5S2X
+
+-- Add a node to the tail of a non-empty linked list
+-- Inserts a node with a value of 10 as the tail and verifies that the head, tail, and size of the linked list are all correct.
+H5T10A5Q0,5A5Z10S2X
+
+-- Removes the head node from a linked list with multiple nodes:
+-- Inserts three nodes with values of 5, 10, and 15 as the head, removes the head node with a value of 5, and verifies that the head, tail, and size of the linked list are all correct.
+H5H10H15DA10T15S2X
+
+-- Removes the tail node from a linked list with multiple nodes:
+-- Inserts three nodes with values of 5, 10, and 15 as the head, removes the tail node with a value of 15, and verifies that the head, tail, and size of the linked list are all correct.
+H5H10H15CA5T10S2X
+
+
+-- Removes a node from the middle of a linked list with multiple nodes:
+-- Inserts three nodes with values of 5, 10, and 15 as the head, removes the node with a value of 10, and verifies that the head, tail, and size of the linked list are all correct.
+H5H10H15E1A5Z15S2X
+
+-- getting the value of the head node in a linked list:
+-- Inserts two nodes with values of 5 and 10 as the head, gets the value of the head node, and verifies that the head, tail, and size of the linked list are all correct.
+H5H10A5S1X
+
+
+-- Getting the value of the tail node in a linked list:
+-- Inserts two nodes with values of 5 and 10 as the head, gets the value of the tail node, and verifies that the head, tail, and size of the linked list are all correct.
+H5H10Z10A5S2X
+
+-- Check if a node with a given value exists in a linked list:
+-- Inserts three nodes with values of 5, 10, and 15 as the head, checks if a node with a value of 10 exists, and verifies the head, tail, and size of the linked list are all correct.
+H5H10H15W10S3X
+
+-- Remove the last node in a linked list:
+-- Inserts a node with a value of 5 as the head and removes it, verifying that the head, tail, and size of the linked list are all correct. This edge case tests what happens when the linked list becomes empty after removing the last node.
+H5H10CZ10S1X

@@ -39,4 +39,8 @@ Vriables in Mech can also be annotated with a kind:
   #str<string> = "Hello, world!"
   #bool<bool> = true
 
-In this example, the variables `num`, `str`, and `bool` are annotated with their respective kinds. However, the only one that is strictly necessary here is the `u64` annotation; the `string` and `bool` annotations will be inferred from the assigned datatype. The `u64` annotation is necessary because the inferred datatype of the number literal `1234` is `f32`.
+In this example, the variables `num`, `str`, and `bool` are annotated with their respective kinds. Although, the only one that is strictly necessary here is the `u64` annotation; the `string` and `bool` annotations will be inferred from the assigned datatype. The `u64` annotation is necessary because the inferred datatype of the number literal `1234` is `f32`.
+
+📝 Note: variables with a kind annotation must be a compatible literal. For example, if we annotate a variable with `u64`, we cannot assign a string to it.
+
+  num<u64> = "1234"  -- Error: type mismatch
