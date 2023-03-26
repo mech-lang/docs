@@ -45,3 +45,23 @@ Mech is a versatile language with a wide range of applications, including:
 
 - Web Applications: Mech's ability to compile to WebAssembly makes it well-suited for web applications, particularly those that require high performance computation.
 
+Documentation Features
+------------------------
+
+This documentation has several notable features:
+
+- 📝 Note: Provides supplementary information or clarification on a specific aspect of the language or its usage.
+
+- ⚠️ Warning: Alerts the reader to potential issues, misunderstandings, or errors that may arise while using the Mech language or following the documentation.
+
+- 💥 Important: Highlights crucial concepts, features, or guidelines in the Mech documentation that the reader must pay close attention to for successful implementation.
+
+- 💡 Tips: Offers helpful suggestions, shortcuts, or best practices for using the Mech language more effectively or efficiently based on the documentation.
+
+- 🤔 Consider: Presents alternative approaches, viewpoints, or ideas related to the Mech language or its usage for the reader to think about while going through the documentation.
+
+- 📚 Resources: Provides a list of supplementary materials, such as articles, books, or websites, related to the Mech language to enhance the reader's understanding and learning experience.
+
+- ⚙️ Implementation Detail: Explains specific aspects or intricacies of the Mech language, its features, or its usage, helping the reader gain a deeper insight into how it works within the context of the documentation.
+
+- 🧪 Experiment: Indicates experimental features or ideas in the Mech language.
