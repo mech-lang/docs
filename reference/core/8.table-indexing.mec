@@ -12,11 +12,20 @@ For the indexing examples in this section, consider the following table:
         7 8 9]
 
 Table Indexing
-----------------------
+----------------
 
-(1) Vector Indexing
+(1) Linear Indexing
 
-(2) Table Indexing
+Linear indexing access table elements using a single index. This method of indexing treats the table as a single, flat sequence of elements, with elements ordered by row and then by column.
+
+  #t{1}   -- 1
+  #t{5}   -- 5
+  #t{10}  -- Error: Index is 10 but the table as 9 elements.
+
+
+⚠️ Warning: When using linear indexing, it is important to ensure that the index is within the bounds of the table. Accessing an element with an out-of-bounds linear index will result in a compile time error.
+
+(2) Row-column Indexing
 
 Tables are indexed by rows first, then column. We can get the value of first element from the third column:
 
@@ -26,51 +35,62 @@ We can also get the value of the third element of the second column:
 
   #m{3,2}  -- 8
 
-(3) Nested Indexing
+🤔 Consider: Linear indexing can be convenient for iterating through all elements of a table, but may be less intuitive when working with tables that have meaningful row and column structures. Choose the appropriate form of indexing for the task at hand, and consider using row-column indexing when it results in clearer code.
+
+(3) Indexing Nested Tables
 
 The index operator also works for nested tables. For example, let's say we have a table of nested tables:
 
-  #nested = [[1 2 3], [4 5 6], [7 8 9]]
+  #nested = [[1 2 3], [4 5 [6, 7; 8 9]], [|x y z| 10 11 12; 14 15 16]]
 
 We can access the value of the second element of the first nested table like this:
 
-  #nested{1}{2}  -- returns 2
-  #nested{2}{2}  -- returns 5
-  #nested{3}{1}  -- returns 7
+  #nested{1}{2}    -- 2
+  #nested{2}{2}    -- 5
+  #nested{3}{1}    -- 10
+
+You can chain as many indexing operations as needed to index to a table of arbitrary depth.
+
+  #nested{2}{3}{2} -- 7
+
+You can alo mix different modes of indexing in the same indexing expression:
+
+  #nested{3}.y{2}  -- 15
 
 (4) Dynamic Indexing
 
-Indexing with variables instead of literals.
+Talk about how tables can be indexed with variables as well. Only integers and boolean are supported as indices.
 
-2. Dot-Notation Indexing
--------------------------
+Show an example of indexing with variables instead of literals.
 
-Dot-notation indexing provides a concise way to select columns or rows by name from a table. For example, given the following table:
+5. Logical Indexing
+--------------------
 
-  #students = [|name      age  grade|
-                "Alice"   16   90              
-                "Bob"     17   85              
-                "Charlie" 15   95]
+Logical indexing is a powerful feature of Mech that allows you to use a logical vector or matrix to index into a table. It returns a table containing only those elements that are true at the corresponding position in the logical index vector or matrix.
 
-We can select the age column using dot-notation indexing like this:
+To use logical indexing, you can simply pass a logical expression as the index within the curly braces `{}`. The expression can either be a scalar or a vector with the same number of elements as the table being indexed.
 
-  #students.age     -- [16; 17; 15]
-  
-We can also use dot-notation indexing to select a single element of a table. For example:
+Here's an example of how to use logical indexing to filter a table:
 
-  #students.age{2}  -- 17
+  table = [|x y|
+            1 2           
+            3 4           
+            2 6           
+            7 8]
+  ix = table.x >= 3
+  #filtered-table  = table{ix,:}
 
-(2) Chaining Dot-notation
+In this example, we first define a table called `table` with two columns and four rows. We then create a logical index vector `ix` by evaluating the expression `table.x > 3`, which returns `[false, false, true, true]`.
 
-We can even chain dot-notation indexing to access subfields of nested tables. For example, given the following table:
+Finally, we use `ix` to select only those rows of `table` where the value of x is greater than 3. The resulting table, `filtered_table`, would be:
 
-  #books = [|title      author                           price|
-             "Book 1"   [first: "Alice" last: "Lee"]     10.00
-             "Book 2"   [first: "Bob" last: "Smith"]     8.99
-             "Book 3"   [first: "Charlie" last: "Chan"]  12.50]
-We can select the last name of the author of the second book like this:
+  [|x y|
+    3 4
+    7 8]
 
-  #books.author{2}.last   -- "Smith"
+Note that the size of the logical index vector must match the size of the table being indexed. Otherwise, you will get a runtime error.
+
+
 
 3. Slicing Ranges
 ------------------
@@ -113,41 +133,39 @@ In this example, we're trying to create a slice of `vector` that includes elemen
 If `#start` is 4 or 5, for example, then `end` would be 6 or 7, respectively, which is beyond the bounds of `vector`. This would result in an "index out of range" error at runtime.
 
 
+Dot Indexing
+--------------
 
-4. Indexing Nested Tables
---------------------------
+Dot-notation indexing provides a concise way to select columns or rows by name from a table. For example, given the following table:
 
+  #students = [|name      age  grade|
+                "Alice"   16   90              
+                "Bob"     17   85              
+                "Charlie" 15   95]
 
+We can select the age column using dot-notation indexing like this:
 
-5. Logical Indexing
---------------------
+  #students.age     -- [16; 17; 15]
+  
+We can also use dot-notation indexing to select a single element of a table. For example:
 
-Logical indexing is a powerful feature of Mech that allows you to use a logical vector or matrix to index into a table. It returns a table containing only those elements that are true at the corresponding position in the logical index vector or matrix.
+  #students.age{2}  -- 17
 
-To use logical indexing, you can simply pass a logical expression as the index within the curly braces `{}`. The expression can either be a scalar or a vector with the same number of elements as the table being indexed.
+⚠️ Warning: If you try to use a column name that doesn't exist in the table, Mech will raise an error.
 
-Here's an example of how to use logical indexing to filter a table:
+(2) Chaining Dot-notation
 
-  table = [|x y|
-            1 2           
-            3 4           
-            2 6           
-            7 8]
-  ix = table.x >= 3
-  #filtered-table  = table{ix,:}
+We can even chain dot-notation indexing to access subfields of nested tables. For example, given the following table:
 
-In this example, we first define a table called `table` with two columns and four rows. We then create a logical index vector `ix` by evaluating the expression `table.x > 3`, which returns `[false, false, true, true]`.
+  #books = [|title      author                           price|
+             "Book 1"   [first: "Alice" last: "Lee"]     10.00
+             "Book 2"   [first: "Bob" last: "Smith"]     8.99
+             "Book 3"   [first: "Charlie" last: "Chan"]  12.50]
+We can select the last name of the author of the second book like this:
 
-Finally, we use `ix` to select only those rows of `table` where the value of x is greater than 3. The resulting table, `filtered_table`, would be:
+  #books.author{2}.last   -- "Smith"
 
-  [|x y|
-    3 4
-    7 8]
-
-Note that the size of the logical index vector must match the size of the table being indexed. Otherwise, you will get a runtime error.
-
-6. Swizzling 
---------------------
+(3) Swizzling 
 
 Swizzling is a powerful feature that allows you to select columns from a table in a specific order, or even multiple times. It's useful when you want to rearrange a table's columns, or when you want to select a subset of columns in a specific order.
 
@@ -163,4 +181,5 @@ You can also use swizzling to select a column multiple times. For example, the f
 
 When you use swizzling to select a subset of columns, the resulting table will have the same number of rows as the original table, but only the selected columns will be included. If you use swizzling to select columns in a specific order, the resulting table will have the same number of rows as the original table, but the columns will be rearranged according to the order specified in the swizzle expression.
 
-📝 Note: If you try to use a column name that doesn't exist in the table, Mech will raise an error.
+
+
