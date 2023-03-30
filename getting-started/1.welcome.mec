@@ -1,7 +1,7 @@
 1. Welcome to Mech
 ===================
 
-Mech is a modern programming language designed for robotics and automation. It is a dataflow language, meaning that computations occur in the presence of data and the system is idle without it. Mech is reactive, meaning all computations are kept up-to-date as dependent data changes. This makes it ideal for developing robotic systems, where data is constantly being generated and used to control the system.
+Mech is a modern programming language designed for robotics and automation. It is a dataflow language, meaning that computations occur in the presence of data, and the system is idle without it. Mech is reactive, so all computations are kept up-to-date as dependent data changes. This makes it ideal for developing robotic systems, where data is constantly being generated and used to control the system.
 
 Mech follows the principle of "everything is a table," where functions and operators are broadcast over the elements of a table, allowing for easy parallelization. It also supports physical units in its syntax and automatic differentiation for gradient-based optimization in machine learning. Mech compiles to native executables and has a language server protocol implementation, making it easy to integrate with popular editors and IDEs. Mech also supports live coding and literate programming. With its unique features and focus on robotics and automation, Mech offers a fresh and powerful approach to programming.
 
@@ -16,19 +16,19 @@ Key Features
 
 Some key features of Mech that set it apart from other languages are:
 
-- Mech is a declarative dataflow language – Instead of using control flow statements (e.g. if-then, while loops, etc.) to manage state transitions, Mech programmers define data dependencies and declarative transformations over those data.
+- Declarative Dataflow Language: Instead of using control flow statements (e.g. if-then, while loops, etc.) to manage state transitions, Mech programmers define data dependencies and declarative transformations over those data.
 
-- Mech is reactive – As new data arrive at a Mech program, the program's state is updated automatically until a steady state is reached.
+- Reactive: As new data arrive at a Mech program, the program's state is updated automatically until a steady state is reached.
 
-- Mech is concurrent – The ubiquitous programming metaphor in Mech is that everything is a table. Functions and arithmetic, logic, and comparison operators in Mech are defined to work on tabular data element-wise, so most computations are parallelizable by default. 
+- Concurrent: Functions and arithmetic, logic, and comparison operators in Mech are defined to work on tabular data element-wise, so most computations are parallelizable by default.
 
-- Mech is distributed – Programs are defined as a network of nodes that communicate via messages. This is the dominant paradigm in mid-level general robotics programming, and this concept is built into the ambient semantics of the Mech language. The Mech runtime automatically figures out the topology of a program's compute network based on data dependencies, or a programmer can specify one manually within the language itself.
+- Distributed: Programs are defined as a network of nodes that communicate via messages, allowing for distributed computing.
 
-- Mech is asynchronous – Because the entire language is distributed, all library calls are asynchronous. That means opening a file or sending a network request is nonblocking by default; a Mech program that makes an asynchronous request to a network server will continue running and working on other tasks while it waits for the response, and then will react to it as soon as a it arrives. This behavior is built into the natural semantics of the language, and requires no special asynchronous runtime to achieve.
+- Asynchronous: All library calls are asynchronous, meaning that opening a file or sending a network request is nonblocking by default.
 
-- Mech supports live programming – the write-compile-run development loop is minimized in Mech to the point where you can edit your program while it's running, and see edits immediately. There is no "compile time" vs. "runtime" distinction in Mech. A short development cycle means that errors are surfaced as they occur. In Mech we can point directly to the code that caused an error.
+- Live and Literate Programming: Allows for editing your program in a literate programming environment, while it's running. Changes propogate without resetting program state.
 
-- Mech is a database – Every change to a Mech program is recorded as a transaction that mutates the program's internal state. This allows programmers to record, rewind, and playback the execution of any Mech program at a granular level, which opens interesting avenues for debugging and exploration.
+- Builtin Database: Every change to a Mech program is recorded as a transaction that mutates the program's internal state, allowing for granular debugging and exploration.
 
 Applications
 -------------
@@ -50,18 +50,18 @@ Documentation Features
 
 This documentation has several notable features:
 
-- 📝 Note: Provides supplementary information or clarification on a specific aspect of the language or its usage.
+- 📝 Note: Provides supplementary information or clarification.
 
-- ⚠️ Warning: Alerts the reader to potential issues, misunderstandings, or errors that may arise while using the Mech language or following the documentation.
+- ⚠️ Warning: Alerts the reader to potential issues or errors.
 
-- 💥 Important: Highlights crucial concepts, features, or guidelines in the Mech documentation that the reader must pay close attention to for successful implementation.
+- 💥 Important: Highlights crucial concepts or guidelines.
 
-- 💡 Tips: Offers helpful suggestions, shortcuts, or best practices for using the Mech language more effectively or efficiently based on the documentation.
+- 💡 Tips: Offers helpful suggestions or best practices.
 
-- 🤔 Consider: Presents alternative approaches, viewpoints, or ideas related to the Mech language or its usage for the reader to think about while going through the documentation.
+- 🤔 Consider: Presents alternative approaches or ideas.
 
-- 📚 Resources: Provides a list of supplementary materials, such as articles, books, or websites, related to the Mech language to enhance the reader's understanding and learning experience.
+- 📚 Resources: Provides a list of supplementary materials.
 
-- ⚙️ Implementation Detail: Explains specific aspects or intricacies of the Mech language, its features, or its usage, helping the reader gain a deeper insight into how it works within the context of the documentation.
+- ⚙️ Implementation Detail: Explains specific aspects or intricacies of the Mech language, its features, or its usage in practice.
 
-- 🧪 Experiment: Indicates experimental features or ideas in the Mech language.
+- 🧪 Experiment: Indicates experimental features or ideas.
