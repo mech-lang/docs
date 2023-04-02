@@ -35,15 +35,17 @@ Applications
 
 Mech is a versatile language with a wide range of applications, including:
 
-- Robotics and Automation: Mech is particularly well-suited for robotics and automation applications, due to its support for reactive programming, physical units in syntax, and distributed computing.
+- 🤖 Robotics and Automation: Mech is particularly well-suited for robotics and automation applications, due to its support for reactive programming, physical units in syntax, and distributed computing.
 
-- Scientific Computing: Mech's support for physical units and automatic differentiation make it well-suited for scientific computing applications, such as physics simulations and machine learning.
+- 🎮 Games:  Mech's reactive programming model and ability to handle complex data structures make it well-suited for game development, particularly for implementing physics engines and game AI.
 
-- Control Systems: The dataflow nature of Mech makes it well-suited for control systems, such as those used in industrial automation and process control.
+- 🔬 Scientific Computing: Mech's support for physical units and automatic differentiation make it well-suited for scientific computing applications, such as physics simulations and machine learning.
 
-- Real-Time Systems: Mech's support for asynchronicity and time travel debugging make it well-suited for real-time systems, such as those used in avionics and automotive applications.
+- 🎛️ Control Systems: The dataflow nature of Mech makes it well-suited for control systems, such as those used in industrial automation and process control.
 
-- Web Applications: Mech's ability to compile to WebAssembly makes it well-suited for web applications, particularly those that require high performance computation.
+- ⏰ Real-Time Systems: Mech's support for asynchronicity and time travel debugging make it well-suited for real-time systems, such as those used in avionics and automotive applications.
+
+- 🕸️ Web Applications: Mech's ability to compile to WebAssembly makes it well-suited for web applications, particularly those that require high performance computation.
 
 Documentation Features
 ------------------------
