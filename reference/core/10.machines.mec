@@ -1,2 +1,71 @@
 Machines
 =========
+
+Modularity system in mech.
+
+Features
+----------
+
+Usage
+-------
+
+Discovering and Dowloading
+----------------------------
+
+(1) Repository
+
+(2) Registry
+
+(3) 
+
+Creating
+----------
+
+(1) Machine structure
+
+(2) Mech-native 
+
+(3) Foreign Function Interface (FFI)
+
+(a) Protocols and Interfaces
+
+
+
+(b) Rust
+
+
+```rust
+pub trait MechFunction {
+  fn solve(&self);
+  fn to_string(&self) -> String;
+}
+```
+
+
+```rust
+pub trait MechFunctionCompiler {
+  fn compile(&self, 
+    block: &mut Block, 
+    arguments: &Vec<Argument>, 
+    out: &Out) -> std::result::Result<(),MechError>;
+}
+```
+
+```rust
+pub trait Machine {
+  fn name(&self) -> String;
+  fn id(&self) -> u64;
+  fn on_change(&mut self, table: &Table) -> Result<(), MechError>;
+}
+```
+
+(c) Javascript
+
+
+Talk about how to access mech through WebAssembly
+
+
+
+
+Standard Machine 
+------------------
