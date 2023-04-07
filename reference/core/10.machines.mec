@@ -12,11 +12,9 @@ Usage
 Discovering and Dowloading
 ----------------------------
 
-(1) Repository
+(1) Importing
 
-(2) Registry
-
-(3) 
+(2) Machine Registry
 
 Creating
 ----------
@@ -29,10 +27,9 @@ Creating
 
 (a) Protocols and Interfaces
 
-
-
 (b) Rust
 
+Mech functions
 
 ```rust
 pub trait MechFunction {
@@ -40,7 +37,6 @@ pub trait MechFunction {
   fn to_string(&self) -> String;
 }
 ```
-
 
 ```rust
 pub trait MechFunctionCompiler {
@@ -50,6 +46,8 @@ pub trait MechFunctionCompiler {
     out: &Out) -> std::result::Result<(),MechError>;
 }
 ```
+
+Mech async machines
 
 ```rust
 pub trait Machine {
@@ -69,3 +67,40 @@ Talk about how to access mech through WebAssembly
 
 Standard Machine 
 ------------------
+
+// Math
+math/add
+math/subtract
+math/multiply
+math/divide
+math/exp
+math/negate
+math/add-update
+math/subtract-update
+math/multiply-update
+math/divide-update
+
+// Logic
+logic/not
+logic/and
+logic/or
+logic/xor
+
+// Compare
+compare/greater-than
+compare/greater-than-equal
+compare/less-than-equal
+compare/less
+compare/equal
+compare/not-equal
+
+// Table
+table/append
+table/range
+table/spint
+table/flatten
+table/define
+table/set
+table/horizontal-concatenate
+table/vertical-concatenate
+table/size
