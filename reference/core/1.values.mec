@@ -54,7 +54,7 @@ In addition to these basic number literals, Mech supports a variety of ways to p
   d2 = 10<ft>
   total-distance = d1 + d2   -- 8.0484 meters
 
-📝 Note: currently, quantities are stored as `f32` by default.
+⚙️ Implementation Detail: currently, quantities are stored as `f32` by default.
 
 (3) Number Representations
 
