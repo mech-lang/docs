@@ -3,6 +3,9 @@
 
 The Mech REPL (Read-Eval-Print Loop) provides an interactive environment to write, test, and debug Mech code. This document outlines various commands and options available in the Mech REPL.
 
+Usage
+-------
+
 Commands
 ----------
 
@@ -222,7 +225,3 @@ Removes the machines folder, which is used to store Mech's intermediate files an
 ```
 mech clean
 ```
-
-REPL Usage
-------------
-
