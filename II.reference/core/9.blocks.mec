@@ -31,13 +31,13 @@ Here, because `#z` is defined earlier as a global table, it can be used to calcu
 
 Blocks in Mech are composable units of code. They can depend on other blocks and be depended upon by other blocks. The data flow between blocks is determined by their data dependencies and productions.
 
-#b = #a * 2
+  #b = #a * 2
 
 Here, the block defines a new table `#b` as twice the value of table `#a`. When `#a` is updated, this block is automatically re-executed to update the value of `#b`.
 
 Blocks can also produce data that other blocks depend on. For example:
 
-#c = #b * 3
+  #c = #b * 3
 
 Here, the first block computes #b as twice the value of `#a`. The second block depends on `#b` and multiplies it by 3 to produce `#c`. When `#a` is updated, both blocks are re-executed to update the values of `#b` and `#c` accordingly.
 
@@ -67,14 +67,11 @@ Blocks automatically update their results as the data on which they depend chang
 
   x = #tick * 2
   #twice-time = x
-  --
-  #twice-time
 
 This reactivity applies to the entire block graph, meaning a block that depends on data that depends on the timer will also update at the rate of the timer. We can observe this if we select `#twice-time` and use it in a calculation:
 
   quad-time = #twice-time * 2
-  --
-  quad-time
+
 
 A block performs its defined transformations/computations only when all of the dependent data are defined. These three blocks compose to define a data flow graph where the first two blocks create tables `#a` and `#b`, and the final block uses these tables to produce a third dependent table `#c`. The converse is true as well; a block will not run if any of its dependent data are missing. For example, consider the following block:
 
