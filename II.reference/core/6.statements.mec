@@ -101,3 +101,29 @@ The resulting vector all_students will contain the names of all students who att
 
 4. Temporal Statements
 -----------------------
+
+Temporal statements in Mech are essential for expressing relationships and dependencies between variables that evolve over time. They play a crucial role in handling time-sensitive data and developing applications requiring real-time processing, such as robotics and control systems. Mech offers three primary temporal statements to facilitate these requirements:
+
+(1) Whenever `~`
+
+The "whenever" statement in Mech is used to specify a condition that, when met, triggers an associated block of code. This allows the programmer to define actions that should be executed in response to certain events or changes in the program state. The syntax for the "whenever" statement is as follows:
+
+(2) Until `~|`
+
+The "until" statement in Mech is used to repeatedly execute a block of code as long as a specified condition remains unmet. Once the condition is satisfied, the loop terminates. The syntax for the "until" statement is:
+
+(3) As soon as `|~`
+
+The "as soon as" statement in Mech enables the execution of a block of code as soon as a specified condition is met. Unlike the "whenever" statement, which continuously monitors a condition, the "as soon as" statement is triggered only once when the condition becomes true.
+
+(4) Followed By (~>)
+
+The "followed by" statement in Mech, denoted by (~>), is a temporal operator that allows developers to specify that one event should be executed immediately after the completion of another event. This operator is particularly useful for creating sequences of actions that must occur in a specific order, while still allowing for asynchronous processing.
+
+In this example, the action y will be executed immediately after the completion of action x. The "followed by" operator ensures that the sequence of actions is maintained while still allowing for other asynchronous operations to occur in parallel.
+
+(5) Async define (<~)
+
+The "async define" statement in Mech, represented by (<~), is a temporal operator used for defining variables asynchronously. It allows developers to initiate an asynchronous operation and assign the result to a variable once the operation is complete. This operator is helpful in situations where a variable's value depends on a time-consuming operation, such as fetching data from an external source or performing a complex computation.
+
+In this example, the action y represents an asynchronous operation, and the variable x will be assigned the result of this operation once it completes. The "async define" operator enables Mech programs to efficiently handle asynchronous tasks without blocking the execution of other parts of the program.
