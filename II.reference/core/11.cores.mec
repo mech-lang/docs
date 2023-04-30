@@ -1,0 +1,4 @@
+Cores
+=======
+
+Mech cores are encapsulated computational engines which host a number of blocks and tables. They allocate their own memory arena, in which the database is stored, and they can attach any number of asynchronous functions and machines to support the needed computations. Cores can connect to other cores via a core network implemented on top of UDP sockets, as well as websockets for integration with the browser. This allows a user to create a distributed program where cores can send and recieve data from other cores. Mech's capability permission system allows the user to manage and protect network resources.

@@ -6,6 +6,11 @@ Modularity system in mech.
 Features
 ----------
 
+Provides functions, async functions, and data tables
+
+Downloaded automatically, don't have to import or configure. But you can specify dependencies and their versions if needed. functions can be compiled from other languages (e.g. Rust), or they can be native Mech.
+
+
 Usage
 -------
 
@@ -13,6 +18,8 @@ Discovering and Dowloading
 ----------------------------
 
 (1) Importing
+
+Just use a function or table provided in the machine, mech will resolve the depenencies automatically if it can be found in the MEch machine repository. Otherwise it can be added manually to a folder.
 
 (2) Machine Registry
 
