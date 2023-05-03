@@ -1,42 +1,46 @@
 Machines
-=========
+==========
 
-Modularity system in mech.
+Machines form the modularity system in Mech, providing reusable components such as functions, asynchronous functions, and data tables.
 
 Features
 ----------
 
-Provides functions, async functions, and data tables
-
-Downloaded automatically, don't have to import or configure. But you can specify dependencies and their versions if needed. functions can be compiled from other languages (e.g. Rust), or they can be native Mech.
-
+- Functions, asynchronous functions, and data tables.
+- Automatic download and resolution of dependencies.
+- Compile functions from other languages (e.g., Rust) or use native Mech functions.
+- No need for explicit import or configuration, but specifying dependencies and their versions is supported.
 
 Usage
 -------
 
-Discovering and Dowloading
-----------------------------
-
 (1) Importing
 
-Just use a function or table provided in the machine, mech will resolve the depenencies automatically if it can be found in the MEch machine repository. Otherwise it can be added manually to a folder.
+To use a function or table provided in a Machine, reference it in your code. Mech will automatically resolve the dependencies if it can find the Machine in the Mech Machine Repository. If not, you can manually add the Machine to a the `machines` folder of your program workspace.
 
 (2) Machine Registry
 
-Creating
-----------
+Mech maintains a registry of available Machines for easy discovery and management. The registry is currently hosted <a href="https://gitlab.com/mech-lang/machines/mech/-/raw/v0.1-beta/src/registry.mec">here</a>, and you are free to use a custom registry in place or in addition to the official registery. 
 
-(1) Machine structure
+Creating Machines
+-------------------
 
-(2) Mech-native 
+(1) Machine Structure
+
+A Machine can contain cores, blocks, functions (both synchronous and asynchronous), data tables, and binary assets (media, AI models, etc.) that can be imported into Mech programs.
+
+(2) Mech-native
+
+Machines can include native Mech functions, which are written in Mech and can be used directly in the language. See the Functions section of the documentation for more information.
 
 (3) Foreign Function Interface (FFI)
 
-(a) Protocols and Interfaces
+Machines can also include functions written in other languages (e.g., Rust, JavaScript) that are compiled into Mech-compatible form. 
 
-(b) Rust
+(a) Rust
 
-Mech functions
+Rust functions can be made Mech-compatible by implementing the `MechFunction` and `MechFunctionCompiler` traits, or the Machine trait.
+
 
 ```rust
 pub trait MechFunction {
@@ -54,60 +58,22 @@ pub trait MechFunctionCompiler {
 }
 ```
 
-Mech async machines
+Asynchronous Machines can implement the `AsynchMechFunction` trait.
 
 ```rust
-pub trait Machine {
+pub trait AsynchMechFunction {
   fn name(&self) -> String;
   fn id(&self) -> u64;
   fn on_change(&mut self, table: &Table) -> Result<(), MechError>;
 }
 ```
 
-(c) Javascript
+The resulting Rust code can be compiled into a dynamic library for use in Mech programs. See the following machines for examples:
+
+- set (example of a machine that provides synchronous functions)
+- timer (example of a machine that provides asynchronous functions)
 
 
-Talk about how to access mech through WebAssembly
+(c) JavaScript
 
-
-
-
-Standard Machine 
-------------------
-
-// Math
-math/add
-math/subtract
-math/multiply
-math/divide
-math/exp
-math/negate
-math/add-update
-math/subtract-update
-math/multiply-update
-math/divide-update
-
-// Logic
-logic/not
-logic/and
-logic/or
-logic/xor
-
-// Compare
-compare/greater-than
-compare/greater-than-equal
-compare/less-than-equal
-compare/less
-compare/equal
-compare/not-equal
-
-// Table
-table/append
-table/range
-table/spint
-table/flatten
-table/define
-table/set
-table/horizontal-concatenate
-table/vertical-concatenate
-table/size
+Functions written in JavaScript can also be integrated into Mech through WebAssembly.
