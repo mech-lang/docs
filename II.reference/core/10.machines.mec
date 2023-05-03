@@ -77,3 +77,8 @@ The resulting Rust code can be compiled into a dynamic library for use in Mech p
 (c) JavaScript
 
 Functions written in JavaScript can also be integrated into Mech through WebAssembly.
+
+Capabilities
+--------------
+
+Mech includes a capability permissions system that allows programmers to control access to certain resources within Machines. This security measure ensures that only authorized Machines can access sensitive resources, such as the file system, network, and more. In order to access these restricted resources, a Machine must possess a signed capability token with the required permissions, which is supplied to it at initialization by the Mech runtime.
