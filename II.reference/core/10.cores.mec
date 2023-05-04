@@ -1,4 +1,72 @@
 Cores
 =======
 
-Mech cores are encapsulated computational engines which host a number of blocks and tables. They allocate their own memory arena, in which the database is stored, and they can attach any number of asynchronous functions and machines to support the needed computations. Cores can connect to other cores via a core network implemented on top of UDP sockets, as well as websockets for integration with the browser. This allows a user to create a distributed program where cores can send and recieve data from other cores. Mech's capability permission system allows the user to manage and protect network resources.
+Mech cores are responsible for executing computations and managing dataflow within the Mech programming language. Their architecture is modular and distributed. This section introduces Mech cores and their primary components.
+
+Introduction
+------------
+
+Mech cores provide an environment for managing and executing Mech programs. A Mech program typically consists of one or more cores working together. Cores offer an efficient solution for deploying and scaling Mech programs across various environments, such as distributed robot teams, server clusters, or multi-player games.
+
+Components
+----------
+
+Mech cores have two primary components:
+
+(1) Dataflow Engine
+
+The dataflow engine manages the execution of Mech programs by directing the flow of data between blocks and tables. It ensures that computations are performed in the correct sequence and that updates are propagated throughout the system.
+
+(2) Integrated Database
+
+The built-in database within a Mech core stores tables and manages transactions for updates and rewinding. It plays a crucial role in networking, as transactions are transmitted between cores, allowing for seamless communication and collaboration among distributed Mech cores.
+
+Dataflow Engine
+-----------------
+
+The dataflow engine orchestrates computations within a Mech core by managing the flow of data between blocks and tables. It ensures that computations are executed in the correct sequence and updates are propagated through the system.
+
+(1) Dataflow Execution
+
+The dataflow engine manages the flow of data between blocks and tables by:
+
+- Identifying dependencies between blocks and tables, determining the correct execution order.
+
+- Scheduling the execution of blocks, ensuring each block receives the correct input data and produces appropriate output data.
+
+- Automatically propagating updates to dependent blocks and tables, keeping the entire system up-to-date and responsive to changes in the data.
+
+(2) Dataflow Optimization
+
+To ensure efficient execution of Mech programs, the dataflow engine employs various techniques, including:
+
+- Scheduling and prioritizing computations based on their dependencies and input data availability.
+
+- Caching intermediate results in tables to avoid redundant computations, improving overall system performance.
+
+Integrated Database
+---------------------
+
+The integrated database within a Mech core serves several purposes:
+
+1. Storing tables containing intermediate results, state information, and output data.
+
+2. Managing transactions for updates and rewinding.
+
+3. Facilitating communication among distributed Mech cores.
+
+(1) Tables and Transactions
+
+The integrated database stores tables that hold data used by blocks in a Mech program. These tables can store data consumed or produced by other blocks or cores. The database manages transactions for updates and rewinding, ensuring system consistency.
+
+Transactions in the database record changes to tables, allowing for granular debugging and exploration. By managing transactions, the integrated database enables Mech cores to handle updates efficiently and maintain a consistent state.
+
+(2) Networking
+
+The integrated database facilitates communication among distributed Mech cores. Transactions can be sent between cores, allowing them to share data and synchronize their state. This enables Mech programs to be deployed across various environments.
+
+(3) Dataflow Dependencies
+
+Mech cores expose the tables they consume and produce, creating dataflow dependencies between cores that are automatically established. The integrated database manages these dependencies, ensuring correct data propagation and maintaining overall Mech program state consistency.
+
+(4) Capabilities
