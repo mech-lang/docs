@@ -3,12 +3,10 @@
 
 Mech has a variety of data types that can be used in its programs. Here are some of the basic data types in Mech:
 
-- *Numbers*: Mech has support for integer and floating-point numbers, which can be used in mathematical operations.
-- *Strings*: Mech has support for strings, which can be used for text manipulation and output.
-- *Booleans*: Mech supports the Boolean data type, which can be used in logical operations such as and, or, and not.
-- *Tables*: Mech supports the Table data type, which can be used to create vectors, matricies, structs, and other complex datatypes.
-
-Mech's data types are designed to make it easy to create complex data structures and manipulate them using a set of operators and indexing primitives.
+- *Numbers*: integer and floating-point numbers, as well as complex numbers.
+- *Strings*: used for text.
+- *Booleans*: used in logical operations, and logical indexing.
+- *Tables*: vectors, matricies, structs, and other complex datatypes.
 
 Number Literals
 -----------------

@@ -10,9 +10,11 @@ Rules for Mech Identifiers
 
 - They cannot begin with a number or an underscore.
 
-- Identifiers can contain letters, numbers, hyphens, and slashes. No other characters are allowed.
+- Identifiers can contain letters, numbers, hyphens, and slashes, and question marks. No other symbols are allowed.
 
 - Spaces are not allowed in identifiers; kebab case (where a dash is used between words) is the preferred naming convention for identifiers. 
+
+- Identifiers can contain Unicode characters.
 
 Some examples of valid identifiers:
 
@@ -31,7 +33,7 @@ Examples of invalid Mech Identifiers
 
 In general, it is recommended to keep identifiers simple, clear, and meaningful. Using kebab case can make identifiers more readable and easier to type.
 
-Slashes `/` are conventionally used in Mech to indicate a namespace. For example, math related functions are grouped in the math namespace 
+Slashes `/` are conventionally used in Mech to indicate a namespace. For example, math related functions are grouped in the math namespace, e.g. `math/sin`, `math/log`, etc.
 
 Unicode Ecoding
 -----------------
@@ -41,4 +43,3 @@ Mech supports Unicode UTF-8 character encodings. Here are some examples of valid
   λxx   -- an identifier which contains a Greek character
   日本語 -- an identifier in Japanese characters
   💻    -- an identifier that is just a computer emoji
-  ∑i    -- an identifier for a summation with a sigma symbol
