@@ -1,7 +1,7 @@
 Variables
 ==========
 
-Every variable in Mech is a table. Variables are assigned to an identifier with the `=` operator. Variables are block-scoped, unless they are prepended with a `#`, which makes them globally scoped and accessible from any context, although access (read/write) can be restricted using capabilities.
+Every variable in Mech is a table. Variables are assigned to an identifier with the `=` operator. Variables are block-scoped, unless they are prepended with a `#`, which makes them globally scoped and accessible from any context, although access (read/write) to particular tables can be restricted using capabilities.
 
 For example, we can assign a scalar value to a variable named x:
 
