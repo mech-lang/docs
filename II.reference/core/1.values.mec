@@ -1,12 +1,12 @@
 1. Values
 ===========
 
-Mech has a variety of data types that can be used in its programs. Here are some of the basic data types in Mech:
+Here are the basic data types in Mech:
 
 - *Numbers*: integer and floating-point numbers, as well as complex numbers.
 - *Strings*: used for text.
 - *Booleans*: used in logical operations, and logical indexing.
-- *Tables*: vectors, matricies, structs, and other complex datatypes.
+- *Tables*: used for vectors, matricies, tensors, structs, and other complex datatypes.
 
 Number Literals
 -----------------
@@ -21,17 +21,18 @@ Mech supports a variety of number literal formats:
 - Scientific notation: `6.02e23`, `1.602E-19`
 - Complex numbers: `2.5+2i`, `-1.2e-3+4.7i`
 
-📝 Note: decimal numbers without a type specifier are represented using `f32`. An annotation can be appened to the literal to specify an alternative kind.
+📝 Note: decimal numbers without a kind specifier are assigned the `f32` kind by default. An annotation can be appened to the literal to specify an alternative kind.
 
 (1) Quantitites
 
-Quantities are numbers with physical units. Here are a few that Mech supports:
+A Quantity is a number with a physical unit for a kind. Here are a few that Mech supports:
 
   5<m>        -- 5.0 meters
   10.0<kg>    -- 10.0 kilograms
   -2.3<m/s^2> -- -2.3 meters per second squared
 
 Arithmetic operations with quantities
+  
   d1 = 5<m>
   d2 = 10<ft>
   total-distance = d1 + d2     -- 8.0484 meters

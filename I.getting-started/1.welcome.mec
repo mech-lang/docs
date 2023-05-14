@@ -28,7 +28,7 @@ Some key features of Mech that set it apart from other languages are:
 
 - Live and Literate Programming: Allows for editing your program in a literate programming environment, while it's running. Changes propogate without resetting program state.
 
-- Builtin Database: Every change to a Mech program is recorded as a transaction that mutates the program's internal state, allowing for granular debugging and exploration.
+- Integrated Database: Every change to a Mech program is recorded as a transaction that mutates the program's internal state, allowing for granular debugging and exploration.
 
 Applications
 -------------
