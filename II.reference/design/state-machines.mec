@@ -1,25 +1,62 @@
 State Machines
 ================
 
-Elements:
+Concepts
+----------
 
-- initial
-- states
-- transitions
-- effects
+State machines concsist of the following elements:
 
-Features:
+- state variables - what variable or variablesa are part of the state machine. These are global variables.
+- initial state - state variables will either be inititalized before hand, or will assume the value of the firt matched state
+- states - All possible states of the state machine variables.
+- transitions - the conditions by which the state machine changes to new states
+- effects - changes in variables that are not part of the state machine
 
-- Ecapsulated
-- Extensible
-- consider all cases
-- generalization of match statements and if statements
+
+
+Uses for state machines
+-------------------------
+
+If statements
+
+#x ? 1 => 2
+     3 => 4
+
+Create streams
+
+#x = [1 2 3 4]
+
+#x-stream ? #x{1} => #x{2} => ...
+
+
+
+
+
+
+
+
+
+
+- How to accept inputs that controls flow?
+  - stream based input
+
+- Several fat arrows that follow
+
+Grammar Exploration
+--------------------
+
+#x = [1 0 0] => [1 0 0] => [0 1 0] => [0 0 1] => [1 0 0]
+
+identifier, [" = ", expression], " ? ", {data, [" => "]}, [.]
+
+
+
+
 
 Followed By:
 
-#x ? 1 => #x + 1.
-     
-
+#x ? 1 => #x + 1
+   
 This means x starts with 1, and then the value is matched against a wildcard pattern.
 
 A state machine for two traffic lights and two walk signs
@@ -27,6 +64,10 @@ A state machine for two traffic lights and two walk signs
 Define a color type with three variants.
 
 <color> = `Green | `Red | `Yellow
+
+Define a signal type with three variants.
+
+<signal> = `Walk | `Wait | `Stop
 
 Match the state variables against various possible states, define transitions between states.
 
@@ -73,7 +114,8 @@ Normalized
 Emojified
 ------------
 
-<color> = `🟢 | `🔴 | `🟡
+<color>  = `🟢 | `🔴 | `🟡
+<signal> = `🚶‍♀ | `✋ | `🛑
 
 (#🚦/north<color>, #🚦/east<color>) ?
 
@@ -99,15 +141,9 @@ Linearized Emojified
 ----------------------
 
 (#🚦/north<color>, #🚦/east<color>) ?
-  (`🟡, `🔴) => 6<s> => (`🔴,`🔴) => 2<s> => (`🔴, `🟢) => #crosswalk/north? => (`🔴, `🟡)
-  (`🔴, `🟡) => 6<s> => (`🔴,`🔴) => 2<s> => (`🟢, `🔴) => #crosswalk/east?  => (`🟡, `🔴)
+  (`🟡, `🔴) => 6<s> => (`🔴,`🔴) => 2<s> => (`🔴, `🟢) => 30<s> => (`🔴, `🟡)
+  (`🔴, `🟡) => 6<s> => (`🔴,`🔴) => (#crosswalk/north?,#crosswalk/north?) => (`🟢, `🔴) => 30<s> => (`🟡, `🔴)
 
 #crosswalk/north ? `🚶‍♀️ => 20<s> => `✋ => 10<s> => `🛑.
 #crosswalk/east ? `🚶‍♀️ => 20<s> => `✋ => 10<s> => `🛑.
 
-Grammar Exploration
---------------------
-
-#x ? [1 0 0] => [0 1 0] => [0 0 1] => [1 0 0] .
-
-identifier, [" = ", expression], " ? ", {data, [" => "]}, [.]
