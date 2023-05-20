@@ -23,7 +23,7 @@ You can download the latest release (v0.1.0-beta) from the following links:
 (2) Build From Source
 ---------------------
 
-You can find the source code for Mech at our <a href="https://github.com/mech-lang/mech">GitHub repository</a>. Before you can build the project, you will first need to install <a href="https://www.rust-lang.org/learn/get-started">Rust</a> for your platform. You'll need to a recent version from the Rust nightly release channel (currently nightly-2022-08-25).
+You can find the source code for Mech at our <a href="https://github.com/mech-lang/mech">GitHub repository</a>. Before you can build the project, you will first need to install <a href="https://www.rust-lang.org/learn/get-started">Rust</a> for your platform. You'll need to a recent version from the Rust nightly release channel (currently nightly-2023-05-19).
 
 Then, clone and build the Mech repository with these instructions:
 
