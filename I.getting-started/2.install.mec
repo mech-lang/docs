@@ -1,17 +1,17 @@
-2. Installation and Setup Instructions
+2. Installation and Configuration
 ========================================
 
 To install Mech on your system, you can download a binary pre-compiled for your operating system and architecture, or you can build Mech from source. As always, you can use Mech online at <a href="try.mech-lang.org">try.mech-lang.org</a>
 
-System Requirements
-----------------------
+1. System Requirements
+------------------------
 
-List the minimum and recommended hardware and software requirements for running Mech effectively on various platforms.
+TODO: List the minimum and recommended hardware and software requirements for running Mech effectively on various platforms.
 
-Installing
-------------
+2. Installation
+-----------------
 
-(1) Download a Binary
+(a) Download a Binary
 
 You can download the latest release (v0.1.0-beta) from the following links:
 
@@ -20,10 +20,11 @@ You can download the latest release (v0.1.0-beta) from the following links:
 - MacOS (aarch64 ) - <a href="https://github.com/mech-lang/mech/releases/download/v0.1.0/mech_0.1.0_macos_aarch64.7z">binary (1.74 MB)</a>
 - Linux (x86-64) - <a href="https://github.com/mech-lang/mech/releases/download/v0.1.0/mech_0.1.0_linux_x86_64.7z">binary (2.52 MB)</a>
 
-(2) Build From Source
----------------------
+(b) Build From Source
 
-You can find the source code for Mech at our <a href="https://github.com/mech-lang/mech">GitHub repository</a>. Before you can build the project, you will first need to install <a href="https://www.rust-lang.org/learn/get-started">Rust</a> for your platform. You'll need to a recent version from the Rust nightly release channel (currently nightly-2023-05-19).
+You can find the source code for Mech at our <a href="https://github.com/mech-lang/mech">GitHub repository</a>. 
+
+Before you can build the project, you will first need to install <a href="https://www.rust-lang.org/learn/get-started">Rust</a> for your platform. You'll need to a recent version from the Rust nightly release channel (currently nightly-2023-05-19).
 
 Then, clone and build the Mech repository with these instructions:
 
@@ -39,19 +40,17 @@ Alternatively, you can use Rust's Cargo build system to build Mech.
 cargo install -g mech
 ```
 
-💡 Tip: Make sure to keep your Rust toolchain and Mech installation up-to-date for the latest features and improvements.
-
-Updating
-----------
-
-Provide instructions on how to update an existing Mech installation, either by downloading the latest binaries or updating the source code and rebuilding.
-
-Troubleshooting
------------------
-
-Offer solutions to common installation issues or errors, such as dependency conflicts or platform-specific problems.
-
-Configuring 
+3. Updating
 -------------
 
-Explain how to configure Mech after installation, including setting up environment variables or customizing settings.
+TODO: Provide instructions on how to update an existing Mech installation, either by downloading the latest binaries or updating the source code and rebuilding.
+
+4. Troubleshooting
+---------------------
+
+TODO: Offer solutions to common installation issues or errors, such as dependency conflicts or platform-specific problems.
+
+5. Configuring 
+-----------------
+
+TODO: Explain how to configure Mech after installation, including setting up environment variables or customizing settings.

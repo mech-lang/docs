@@ -33,5 +33,20 @@ One commonality between all languages is that they all only have so many standar
 - `<>` - angle brackets - specify a column kind
 - `||` - pipes - define a table header
 
+Other topics:
+
+Unicode support
+identifiers and operators
+sets versus collections and grouping syntax
+Whitespace sensitivity in some places
+Support of box drawing characters
+left to right flow versus right to left
+top to bottom flow
+mechdown
+syntax exposition - how do you introduce the syntax to a learner
+scaling from script to full program
+lack of keywords
+easy parsing
+avoiding deep nesting
 
 

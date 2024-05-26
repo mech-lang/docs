@@ -1,40 +1,59 @@
 3. Running Mech
-=================
+===============================================================================
 
-The Mech REPL (Read-Eval-Print Loop) provides an interactive environment to write, test, and debug Mech code. This document outlines various commands and options available in the Mech REPL.
-
-Usage
--------
-
-Commands
-----------
+The Mech REPL (Read-Eval-Print Loop) provides an interactive environment to 
+write, test, and debug Mech code. This document outlines various commands and 
+options available in the Mech REPL.
 
 (1) `run` Subcommand
+-------------------------------------------------------------------------------
 
-The run subcommand executes a target folder or `*.mec` file containing Mech code. You can use this command to run Mech programs or start a Mech REPL.
+The run subcommand executes a target folder or `*.mec` file containing Mech 
+code. You can use this command to run Mech programs or start a Mech REPL.
 
 ```
-mech run [OPTIONS] <mech_run_file_paths>...
+mech run [OPTIONS] <run_file_paths>...
 ```
 
-(a) Options
+(a) Options -------------------------------------------------------------------
 
-- `-r`, `--repl`: Start a Mech REPL for interactive development and debugging.
-- `-t`, `--timings`: Displays transaction frequency in Hz to help analyze program performance.
-- `-d`, `--debug`: Print debug information. Can be specified multiple times for increased verbosity.
-- `-o`, `--out`: Specify output table(s) to display during the program's execution.
-- `-i`, `--inargs`: Provide input arguments to the Mech program.
-- `-a`, `--address ADDRESS`: Set the address of the core socket (default: 127.0.0.1).
-- `-p`, `--port PORT`: Set the port of the core socket (defaults to an OS-assigned port).
-- `-m`, `--maestro MAESTRO`: Set the address of the maestro core (default: 127.0.0.1:3235).
-- `-w`, `--websocket WEBSOCKET`: Set the address of the maestro websocket (default: 127.0.0.1:3236).
-- `-g`, `--registry REGISTRY`: Specify the location of the Mech machine registry.
+- `-r`, `--repl`: 
+  Start a Mech REPL for interactive development and debugging.
 
-(b) Arguments
+- `-t`, `--timings`: 
+  Print transaction frequency in Hz
 
-<mech_run_file_paths>: The files and folders containing Mech code to execute. This argument is required and can be specified multiple times.
+- `-d`, `--debug`: 
+  Print debug information.
 
-(c) Examples
+- `-o`, `--out`: 
+  Specify output table(s) to display during the program's execution.
+
+- `-i`, `--inargs`: 
+  Provide input arguments to the Mech program.
+
+- `-a`, `--address ADDRESS`: 
+  Set the address of the core socket (default: 127.0.0.1).
+
+- `-p`, `--port PORT`: 
+  Set the port of the core socket (default: an OS-assigned port).
+
+- `-m`, `--maestro MAESTRO`: 
+  Set the address of the maestro core (default: 127.0.0.1:3235).
+
+- `-w`, `--websocket WEBSOCKET`: 
+  Set the address of the maestro websocket (default: 127.0.0.1:3236).
+
+- `-g`, `--registry REGISTRY`: 
+  Specify the location of the Mech machine registry.
+
+
+(b) Arguments -----------------------------------------------------------------
+
+- <run_file_paths>: The files and folders containing Mech code to execute. 
+  This argument is required and can be specified multiple times.
+
+(c) Examples ------------------------------------------------------------------
 
 To run a single Mech file:
 
@@ -73,19 +92,28 @@ mech run -i key1=value1 -i key2=value2 example.mec
 ```
 
 (2) `build` Subcommand
+-------------------------------------------------------------------------------
 
-The build subcommand allows you to compile a Mech source file or an entire folder containing Mech files into a `.blx` file, which can be loaded into a Mech runtime or compiled into an executable.
+The build subcommand allows you to compile a Mech source file or an entire 
+folder containing Mech files into a `.blx` file, which can be loaded into a 
+Mech runtime or compiled into an executable.
 
 ```
-mech build [OPTIONS] [file_paths]
+mech build [OPTIONS] <build_file_paths> ...
 ```
 
-(a) Options
+(a) Options -------------------------------------------------------------------
 
-- `-o`, `--output OUTPUTNAME`: Specify the output file name for the resulting `.blx` file. If not provided, the output file will have the same name as the input file with a `.blx` extension.
-- `file_paths`: One or more Mech source files (`*.mec`) or folders containing Mech files to build. This is a required argument.
+- `-o`, `--output OUTPUTNAME`: Specify the output file name for the resulting 
+  `.blx` file. If not provided, the output file will have the same name as the 
+  input file with a `.blx` extension.
 
-(b) Example
+(b) Arguments -----------------------------------------------------------------
+
+- <build_file_paths>: The files and folders containing Mech code to execute. 
+  This argument is required and can be specified multiple times.
+
+(c) Example -------------------------------------------------------------------
 
 To build a single Mech source file into a .blx file with a custom output name:
 
@@ -99,27 +127,33 @@ To build an entire folder of Mech files into a .blx file:
 mech build my_mech_project/
 ```
 
-(1) `serve` Subcommand
+(3) `serve` Subcommand
+-------------------------------------------------------------------------------
 
-The serve subcommand starts a Mech HTTP and websocket server, allowing you to interact with your Mech programs through a web browser.
+The serve subcommand starts a Mech HTTP and websocket server, allowing you to 
+interact with your Mech programs through a web browser.
 
 ```
 mech serve [OPTIONS] <mech_serve_file_paths> ...
 ```
 
-(a) Options
+(a) Options -------------------------------------------------------------------
 
-- `-p`, `--port PORT`: Set the port for the Mech server. The default value is `8081`.
-- `-a`, `--address ADDRESS`: Set the address of the Mech server. The default value is `127.0.0.1` (localhost).
-- `-r`, `--persist PERSIST`: Specify the path for the file to load from and persist changes. By default, it uses the current working directory.
+- `-p`, `--port PORT`: Set the port for Mech server. Default value is `8081`.
+- `-a`, `--address ADDRESS`: Set the address of the Mech server. The default 
+  value is `127.0.0.1` (localhost).
+- `-r`, `--persist PERSIST`: Specify the path for the file to load from and 
+  persist changes. By default, it uses the current working directory.
 
-(b) Arguments
+(b) Arguments -----------------------------------------------------------------
 
-- `mech_serve_file_paths`: Optional argument to specify the source `.mec` and `.blx` files to be served by the Mech server.
+- `mech_serve_file_paths`: Optional argument to specify the source `.mec` and 
+  `.blx` files to be served by the Mech server.
 
-(c) Example
+(c) Example -------------------------------------------------------------------
 
-To start a Mech server on the default address and port, serving a specific Mech file:
+To start a Mech server on the default address and port, serving a specific Mech
+file:
 
 ```
 mech serve my_program.mec
@@ -131,21 +165,24 @@ To start a Mech server on a custom address and port:
 mech serve -a 192.168.1.100 -p 9000
 ```
 
-(2) test
+(4) `test` Subcommand
+-------------------------------------------------------------------------------
 
-The test subcommand runs tests in a target folder or a specific *.mec file, helping you ensure that your Mech programs are functioning as expected.
+The test subcommand runs tests in a target folder or a specific *.mec file, 
+helping you ensure that your Mech programs are functioning as expected.
 
 ```
 mech test [OPTIONS] <mech_test_file_paths>...
 ```
-(a) Options
+(a) Options -------------------------------------------------------------------
 
 
-(b) Arguments
+(b) Arguments -----------------------------------------------------------------
 
-- `<mech_test_file_paths>`: Required argument to specify the files and folders containing the tests to run. This option accepts multiple file paths.
+- `<mech_test_file_paths>`: Required argument to specify the files and folders 
+containing the tests to run. This option accepts multiple file paths.
 
-(c) Examples
+(c) Examples ------------------------------------------------------------------
 
 To run tests on a specific Mech file:
 
@@ -159,22 +196,27 @@ To run tests on multiple files and/or folders:
 mech test tests/
 ```
 
-(1) format Subcommand
+(5) format Subcommand
+-------------------------------------------------------------------------------
 
-The format subcommand reformats Mech source code according to a prescribed style. This helps maintain consistent code formatting across your project, making it easier to read and understand.
+The format subcommand reformats Mech source code according to a prescribed 
+style. This helps maintain consistent code formatting across your project, 
+making it easier to read and understand.
 
 mech format [OPTIONS] <mech_format_file_paths>...
 
-(a) Options
+(a) Options -------------------------------------------------------------------
 
-- `-o`, `--output OUTPUTNAME`: Specify an output file name or directory. If not provided, the original files will be overwritten.
+- `-o`, `--output OUTPUTNAME`: Specify an output file name or directory. If not 
+   provided, the original files will be overwritten.
 - `-h`, `--html`: Format the output with HTML.
 
-(b) Arguments
+(b) Arguments -----------------------------------------------------------------
 
-- `<mech_format_file_paths>`: The files and folders containing Mech source code to be formatted.
+- `<mech_format_file_paths>`: The files and folders containing Mech source code 
+  to be formatted.
 
-(c) Examples
+(c) Examples ------------------------------------------------------------------
 
 To format a single Mech source file and overwrite the original file:
 
@@ -194,17 +236,23 @@ To format a Mech source file and output it as an HTML file:
 mech format -h main.mec
 ```
 
-(2) langserver Subcommand
+(6) langserver Subcommand
+-------------------------------------------------------------------------------
 
-Starts a local Mech Language Server, which provides language support features like code completion, diagnostics, and document formatting for text editors and IDEs that support the Language Server Protocol (LSP).
+Starts a local Mech Language Server, which provides language support features 
+like code completion, diagnostics, and document formatting for text editors and 
+IDEs that support the Language Server Protocol (LSP).
 
 ```
 mech langserver [OPTIONS]
 ```
 
-(a) Options
+(a) Options -------------------------------------------------------------------
 
-- `-p`, `--port PORT`: Sets the port for the Mech Language Server to listen on. The default port is `4041`.
+- `-p`, `--port PORT`: Sets the port for the Mech Language Server to listen on. 
+  The default port is `4041`.
+
+(b) Examples ------------------------------------------------------------------
 
 To start the Mech Language Server on the default port (`4041`):
 
@@ -218,9 +266,12 @@ To start the Mech Language Server on a custom port (*e.g.*, `4000`):
 mech langserver --port 4000
 ```
 
-(3) `clean` subcommand.
+(7) `clean` subcommand
+-------------------------------------------------------------------------------
 
-Removes the machines folder, which is used to store Mech's intermediate files and compiled machine code. This can help you recover memory and delete old files.
+Removes the machines folder, which is used to store Mech's intermediate files 
+and compiled machine code. This can help you recover memory and delete old 
+files.
 
 ```
 mech clean
