@@ -93,7 +93,6 @@ comes in two variants:
 - Collections 
     `[]`: vectors, matrices 
     `()`: tuples
-- Sets 
     `{}`: sets, maps, records, and tables
 
 - Unsized set of unsigned 8-bit integers: <{u8}>
@@ -233,11 +232,11 @@ x := [1 2 3]
 -------------------------------------------------------------------------------
 
 
-- Collection: ordered elements, duplicates allowed
+- Ordered elements, duplicates allowed
     - (a) Vector (row/column)
     - (b) Matrix (N-D)
     - (c) Tuple
-- Set: unordered elements, not duplicates
+- Unordered elements, no duplicates
     - (d) Record
     - (e) Table
     - (f) Set
@@ -315,7 +314,7 @@ Kind:
 A set of heterogeneously typed fields and their associated data.
 
 - Simple:   { x: 1 y: "a", z: [1 2 3] }
-- Typed:    { x<u8>: 1, y<string>: "a", z<[u8]:3x1>: [1;2;3] }
+- Typed:    { x<u8>: 1, y<string>: "a", z<[u8]:3,1>: [1;2;3] }
 - Nested:   { a: {b: 1, c: "hi"}, b: [1;2;3] }
 - Multiline
 
@@ -333,7 +332,7 @@ A set of heterogeneously typed fields and their associated data.
 
 Kind:
 
-<{<u8>,<string>}:1,2>
+<{u8,string}:1,2>
 
 
 (e) Table ---------------------------------------------------------------------
@@ -360,25 +359,25 @@ The `_` kind indicates column elements can be hetergeneous.
 Elements do not have to be fully filled in:
 
 { x<u8>  y<string> z<[u8]:3> |
-   _      "a"       [1 2 3] 
+   _      "a"       [1;2;3] 
    4      "b"          _    
-   7       _        [7 8 9]  }
+   7       _        [7;8;9]  }
 
 Tables can be fancy too:
 
 ╭──────────────────────────────╮
 │ x<u8>   y<string>  z<[u8]:3> │
 ├───────┬──────────┬───────────┤
-│   _   │   "a"    │  [1 2 3]  │
+│   _   │   "a"    │  [1;2;3]  │
 ├───────┼──────────┼───────────┤
 │   4   │   "b"    │     _     │
 ├───────┼──────────┼───────────┤
-│   7   │    _     │  [7 8 9]  │
+│   7   │    _     │  [7;8;9]  │
 ╰───────┴──────────┴───────────╯
 
 Kind: 
 
-<{<u8>,<string>,<[u8]:3>}:3,3>
+<{u8,string,[u8]:3}:3,3>
 
 Note: Tables are more flexible and expressive than matricies, but are slower.
 
