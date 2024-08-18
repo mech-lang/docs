@@ -46,22 +46,21 @@ For example, functions in the math machine are prefixed with `math/`:
 - Sine: `math/cos` 
 - Log: `math/log` 
 
-Mech doesn't support underscores in literals -- they mean something else. Kebab 
-case is superior anyway.
+Mech doesn't support underscores in identifiers.
 
 
 2. Kinds 
 -------------------------------------------------------------------------------
 
-Every variable has an associated "kind" or "datatype". They are declared with 
-a kind sigil.
+Every variable has an associated "kind" or "datatype". They are indicated with 
+a kind annotation.
 
-Builtin datatypes:
+Builtin kinds:
 
 - number
     - Unsigned intengers: u8, u16, u32, u64, u128
     - Signed intengers: i8, i16, i32, i64, i128
-    - IEEE 754 Floating Point: f16, f32, f64
+    - IEEE 754 Floating Point: f32, f64
 - string
 - bool
 - atom
@@ -107,7 +106,7 @@ Create a kind that is an alias for `(u8,bool)`:
 
 Define a kind that is a matrix with an unspecified number of rows and 3 columns:
 
-<matrix-3d> = <[u8]:_,3>
+<matrix-3d> := <[u8]:_,3>
 
 This type implies that the matrix can grow in rows, which adds flexibility but 
 impacts performance.
@@ -394,4 +393,4 @@ An unordered collection of unique keys associated with a corresponding value.
 Kind:
 
 - A map of strings to u8s: <{string:u8}>
-- A map of strings tp map of strings to u8: <{string:{string:u8}}>
+- A map of strings to a map of strings to u8: <{string:{string:u8}}>
