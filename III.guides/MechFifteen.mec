@@ -4,14 +4,17 @@ Learn Mech in Fifteen Minutes
 
 Table of Contents:
 
-- 1. Identifiers
-- 2. Kinds 
-- 3. Literals
-- 4. Variables
-- 5. Datastructures
-- 6. Functions (todo)
-- 7. State Machines (todo)
+- 1. Comments
+- 2. Identifiers
+- 3. Kinds 
+- 4. Literals
+- 5. Variables
+- 6. Collections
+- 7. Functions (todo)
+- 8. State Machines (todo)
 
+1. Comments 
+-------------------------------------------------------------------------------
 
 -- Single line comment.
 
@@ -26,7 +29,7 @@ called Mechdown, exemplified by this document.
 Comments are therefore to be used primarily inside of code blocks.
 
 
-1. Identifiers
+2. Identifiers
 -------------------------------------------------------------------------------
 
 Identifiers start with letters or most UTF-8 encoded emoji characters, and 
@@ -49,7 +52,7 @@ For example, functions in the math machine are prefixed with `math/`:
 Mech doesn't support underscores in identifiers.
 
 
-2. Kinds 
+3. Kinds 
 -------------------------------------------------------------------------------
 
 Every variable has an associated "kind" or "datatype". They are indicated with 
@@ -84,13 +87,12 @@ So can identifiers
 
 (b) Collections ---------------------------------------------------------------
 
-Kind specifies data type as well as the size of the data. Multidimensional data 
-comes in two variants:
+Multidimensional data can be expressed with teh foloowing collection data 
+structures representing collections of values:
 
-- Collections 
-    `[]`: vectors, matrices 
-    `()`: tuples
-    `{}`: sets, maps, records, and tables
+`[]`: vectors, matrices
+`()`: tuples
+`{}`: sets, maps, records, and tables
 
 - Unsized set of unsigned 8-bit integers: <{u8}>
 - 1x3 vector of strings: <[string]:3> or <[string]:1,3>
@@ -112,7 +114,7 @@ This type implies that the matrix can grow in rows, which adds flexibility but
 impacts performance.
 
 
-3. Literals
+4. Literals
 -------------------------------------------------------------------------------
 
 Supported literals include:
@@ -133,6 +135,8 @@ Supported literals include:
 - Binary: `0b100110101`
 - Scientific: `123e456` or `123E456`
 - Rational: `1/2` is the rational number 1 over 2, not 1 divided by 2.
+- Imaginary: `1234i`
+- Complex: `12.34+5.67i`
 
 Kind:
 
@@ -141,12 +145,12 @@ numbers e.g.: <u8>, <f32>, <i64> etc.
 
 (b) Strings -------------------------------------------------------------------
 
-Strings support UTF-8 encoding.
+Strings are encoded with UTF-8 and support linebreaks.
 
-    "Hello World"
+"Hello World"
 
-    "Mulitline 
-    Strings"
+"Mulitline 
+Strings"
 
 "characters like \" and \\ are escaped with, \\ e.g. \\\""
 
@@ -168,7 +172,7 @@ Kind:
 (d) Atoms ---------------------------------------------------------------------
 
 Atoms are used as enum variants and unique keys. They are identifiers prefixed 
-with a grave. An atom evaluates to iteself.
+with a grave. An atom evaluates to iteself and its kind is its identifier.
 
 `A
 
@@ -178,8 +182,9 @@ Kind:
 
 (e) Empty ---------------------------------------------------------------------
 
-Empty is a hole, any number of `_` characters; it represents a value that has 
-not been initialized yet, or a collection that is empty.
+Empty is a hole, it represents a value that has not been initialized yet, or a 
+collection that is empty. Empty's expressed as any number of underscore 
+characters:
 
 _
 ___
@@ -189,7 +194,7 @@ Kind:
 <_>
 
 
-4. Variables
+5. Variables
 -------------------------------------------------------------------------------
 
 Any of the afforementioned datatypes or literals can be assigned to a variable 
@@ -199,23 +204,24 @@ Define a variable x with value 123:
 
 x := 123
 
-By default, all numbers are f64 for maximum flexibility.
+By default, all numbers are f64 for maximum flexibility. For performance, you
+can specify a smaller-sized number. For instance, you can create an unsigned 
+8-bit integer:
 
-You can create an unsigned 8-bit integer:
+y<u8> := 123
+z := 123<u8>
 
-x<u8> := 123
-x := 123<u8>
+Semicolons can be used to write multiple statements on one line:
 
-Semicolons can be used if that's your thing:
-
-x := 123; y := 456;
+a := 123; b := 456;
 
 Here are some more examples:
 
-x := [1 2 3]
-x<[i64]:1,3> := [1 2 3]
+c := [1 2 3]                -- a 1x3 row vector of f64 numbers
+d<[i64]:1,3> := [1 2 3]     -- a 1x3 row vector of i64 numbers
 
-5. Datastructures
+
+6. Collections
 -------------------------------------------------------------------------------
 
 - Ordered elements, duplicates allowed
@@ -227,7 +233,6 @@ x<[i64]:1,3> := [1 2 3]
     - (e) Table
     - (f) Set
     - (g) Map
-
 
 (a) Vector --------------------------------------------------------------------
 
@@ -362,7 +367,6 @@ Kind:
 <{u8,string,[u8]:3}:3,3>
 
 Note: Tables are more flexible and expressive than matricies, but are slower.
-
 
 (f) Set -----------------------------------------------------------------------
 
