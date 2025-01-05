@@ -379,7 +379,7 @@ An unordered collection of unique, homogenous elements.
 
 Kind:
 
-<{u8}>
+<{u8}:3>
 
 (g) Map -----------------------------------------------------------------------
 
