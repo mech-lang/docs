@@ -1,0 +1,601 @@
+Mech Language Specification 
+===============================================================================
+
+1. Introduction
+-------------------------------------------------------------------------------
+
+This document specifies the default syntax of the Mech programming system, for developing reactive systems like robots, games, and user interfaces. The language specified herein is one of many possible syntaxes and interfaces for Mech, but it may be thought of as the default texual representation of Mech.
+
+This specification starts by defining the most atomic elements of the language, and then builds up to more complex structures.
+
+
+2. Notation
+-------------------------------------------------------------------------------
+
+The syntax is specified using extended Extended Backus-Naur Form (EBNF):
+
+```
+╭────────┬───────────────────────────────────────────────╮
+│ Symbol │   Semantics                                   │
+├────────┼───────────────────────────────────────────────┤
+│  "abc" │ matches string literal "abc" (terminal)       │
+│  p*    │ matches `p` for 0 or more times (repetition)  │
+│  p+    │ mathces `p` for 1 or more times (repetition)  │
+│  p?    │ mathces `p` for 0 or 1 time (optional)        │
+│ p1, p2 │ matches `p1` followed by `p2` (sequence)      │
+│ p1 | p2│ matches `p1` or `p2` (ordered choice)         │
+│  !!p   │ matches `p`; never consume input (peek)       │
+│  !p    │ doesn't match `p`; never consume input (peek) │
+│ (...)  │ common grouping                               │
+╰────────┴───────────────────────────────────────────────╯
+```
+
+3. Lexical Elements
+-------------------------------------------------------------------------------
+
+(a) Comments
+
+```
+comment-sigil := "--" | "//" ;
+comment-singleline :=  whitespace*, comment-sigil, text+ ;
+comment-multiline := whitespace*, "/*", (!"*/", whitespace* | text)+, "*/" ;
+comment := comment-singleline | comment-multiline ;
+```
+
+Examples:
+
+-- Single line comment.
+// Also a single line comment.
+
+(b) Tokens
+
+```
+alpha = "a".."z" | "A".."Z";
+digt = "0".."9";
+emoji := emoji-grapheme+ ;
+word := alpha+ ;
+digit1 := digit+ ;
+digit0 := digit* ;
+bin-digit := "0" | "1" ;
+hex-digit := digit | "a" .. "f" | "A" .. "F" ;
+oct-digit := "0" .. "7" ;
+number := digit1 ;
+emoji-grapheme := ?emoji-grapheme-literal? ;
+forbidden-emoji := box-drawing | other-forbidden-shapes ;
+emoji := (!forbidden-emoji, emoji-grapheme) ;
+```
+
+(c) Identifiers
+
+```
+identifier := (alpha | emoji), (alpha | digit | symbol | emoji)* ;
+```
+
+Identifiers start with letters or most UTF-8 encoded emoji characters, and can contain alphanumeric, most emojis, /, *, +, -, and ^ characters.
+
+Examples:
+
+  Hello-Word
+  io/stdout
+  Δx^2
+  🤖
+  A*
+
+(d) Operators and punctuation
+
+```
+punctuation := period | exclamation | question | comma | colon | semicolon | quote | apostrophe ;
+symbol := ampersand | bar | at | slash | hashtag | equal | backslash | tilde | plus | dash | asterisk | caret | underscore ;
+grouping-symbol := left-parenthesis | right-parenthesis | left-angle | right-angle | left-brace | right-brace | left-bracket | right-bracket ;
+paragraph-symbol := ampersand | at | slash | backslash | asterisk | caret | hashtag | underscore | equal | tilde | plus | percent ;
+paragraph-starter := (word | number | quote | left-angle | right-angle | left-bracket | right-bracket | period | exclamation | question | comma | colon | semicolon | left-parenthesis | right-parenthesis | emoji)+ ;
+paragraph-element := (!define-operator, text)+ ;
+paragraph := paragraph-starter, paragraph-element* ;
+escaped-char := backslash,  symbol | punctuation ;
+text := alpha | digit | space | tab | escaped-char | punctuation | grouping-symbol | symbol ;
+space-tab := space | tab ;
+list-separator := whitespace*, ",", whitespace* ;
+```
+
+4. Literals
+-------------------------------------------------------------------------------
+
+```
+literal := (number | string | atom | boolean | empty), kind-annotation? ;
+```
+
+(a) Integer Literals
+
+```
+number := number := real-number, "i"? | ("+", real-number, "i")? ;
+integer-literal := digit+;
+decimal-literal := "0d", <digit+> ;
+hexadecimal-literal := "0x", <hex-digit+> ;
+octal-literal := "0o", <oct-digit+> ;
+binary-literal := "0b", <bin-digit+> ;
+```
+
+An integer literal is a sequence of digits representing a whole number. Mech supports decimal, binary, octal, and hexadecimal integer literals, each distinguished by a unique prefix:
+
+- Decimal: A sequence of digits without a prefix (e.g., 42, 123456).
+- Binary: Prefixed with 0b, containing only 0 and 1 (e.g., 0b1010).
+- Octal: Prefixed with 0o, containing digits 0-7 (e.g., 0o755).
+- Hexadecimal: Prefixed with 0x, containing digits 0-9 and a-f or A-F (e.g., 0x1A3F).
+
+Examples:
+
+  42
+  0b1010
+  0o755
+  0x1A3F
+
+(b) Floating Point Literals
+
+```
+scientific-literal :=  (float-literal | integer-literal), ("e" | "E"), plus?, dash?, (float-literal | integer-literal) ;
+rational-literal := integer-literal, slash, integer-literal ;
+float-literal := "."?, digit+, "."?, digit* ;
+```
+
+Examples:
+
+  3.14
+  0.001
+  2.5e10
+
+(b) Strings
+
+```
+string := quote, (!quote, text)*, quote ;
+```
+
+Examples:
+
+  "Hello, World!"
+  "characters like \" and \\ are escaped with, \\ e.g. \\\""
+
+(c) Boolean
+
+```
+boolean := true-literal | false-literal ;
+true-literal := english-true-literal | true-symbol ;
+false-literal := english-false-literal | false-symbol ;
+true-symbol := "✓" ;
+false-symbol := "✗" ;
+english-true-literal := "true" ;
+english-false-literal := "false" ;
+```
+
+Examples:
+
+  true
+  false
+  ✗
+  ✓
+
+(d) Atoms
+
+```
+atom := "`", identifier ;
+```
+
+Examples:
+
+  `A
+  `MyAtom
+  `MyAtom123
+  `🐦
+
+(e) Empty
+
+```
+empty := underscore+ ;
+```
+
+Examples:
+
+  _
+
+(f) Kinds
+
+```
+kind-annotation := left-angle, kind, right-angle ;
+kind := kind-fxn | kind-empty | kind-atom | kind-tuple | kind-scalar | kind-bracket | kind-map | kind-brace ;
+kind-empty := underscore+ ;
+kind-atom := "`", identifier ;
+kind-map := "{", kind, ":", kind, "}" ;
+kind-fxn := "(", list0(list-separator, kind), ")", "=", "(", list0(list-separator, kind), ")" ;
+kind-brace := "{", list1(",", kind), "}", ":"?, list0("," , literal) ;
+kind-bracket := kind-bracket := "[", list1(",",kind), "]", ":"?, list0(",", literal) ;
+kind-tuple = "(", list1(",",kind) ")" ;
+kind-scalar := identifier ;
+```
+
+5. Structures
+-------------------------------------------------------------------------------
+
+```
+structure := empty-set | empty-table | table | matrix | tuple | tuple-struct | record | map | set ;
+```
+
+(a) Matrix
+
+```
+matrix-column := (space | tab)*, expression, ((space | tab)*, ("," | table-separator)?, (space | tab)*) ;
+matrix-row := table-separator?, (space | tab)*, matrix-column+, semicolon?, new-line?, (box-drawing-char+, new-line)? ;
+matrix := matrix-start, (box-drawing-char | whitespace)*, matrix-row*, box-drawing-char*, matrix-end ;
+```
+
+Examples:
+
+[1 2 3
+ 4 5 6
+ 7 8 9]
+
+[1 2 3]
+
+[1
+ 2
+ 3]
+
+(b) Set
+
+```
+set := "{", whitespace*, list0(("," | whitespace+), expression), whitespace*, "}" ;
+empty-set := empty-set := table-start, whitespace*, empty, whitespace*, table-end ;
+```
+
+Examples:
+
+{1, 2, 3}
+
+(c) Map
+
+```
+map := "{", whitespace*, mapping*, whitespace*, "}" ;
+mapping :=  whitespace*, expression, whitespace*, ":", whitespace*, expression, comma?, whitespace* ;
+```
+
+(d) Tuple
+
+```
+tuple := "(", list0(",", expression), ")" ;
+tuple-struct = atom, "(", expression, ")" ;
+```
+
+Examples:
+
+  ()                 
+  (1)                
+  (1,1,3)                
+  (1,(2,3))                
+  (1, true, "Hello")                 
+
+(e) Table
+
+```
+table := table-start, (box-drawing-char | whitespace)*, table-header, (box-drawing-char | whitespace)*, table-row+, box-drawing-char*, whitespace*, table-end ;
+binding := identifier, kind-annotation?, colon, expression, ","? ;
+table-column := table-column := (space | tab)*, expression, ((space | tab)*, ("," | table-separator)?, (space | tab)*) ;
+table-row := table-separator?, (space | tab)*, table-column+, semicolon?, new-line?, (box-drawing-char+, new-line)? ;
+table-header := list1(space-tab+, field), (space | tab)*, (bar| box-vert), whitespace* ;
+field := identifier, kind-annotation? ;
+empty-table := table-start, whitespace*, table-end ;
+```
+
+Examples:
+
+{ x<f32>  y<u8> | 
+  1.2     9 
+  1.3     8     }
+
+(f) Record
+
+```
+record := table-start, whitespace*, binding+, whitespace*, table-end ;
+```
+
+Examples:
+
+  { x: 1 y: "a", z: [1 2 3] }
+  { x<u8>: 1, y<string>: "a", z<[u8]:3,1>: [1;2;3] }
+  { a: {b: 1, c: "hi"}, b: [1;2;3] }
+
+6. Expressions
+-------------------------------------------------------------------------------
+
+```
+expression := range-expression | formula ;
+```
+
+(a) Formula 
+
+```
+parenthetical-term := left-parenthesis, formula, right-parenthesis ;
+negate-factor := "-", factor ;
+not-factor := "not", factor ;
+
+formula := l1, (range-operator, l1)* ;
+add-sub-operator := add | subtract ;
+l1 := l2, (add-sub-operator, l2)* ;
+mul-div-operator := multiply | divide ;
+matrix-operator := matrix-multiply | multiply | divide | matrix-solve ;
+l2 := l3, (mul-div-operator | matrix-operator, l3)* ;
+exponent-operator := exponent ;
+l3 := l4, (exponent-operator, l4)* ;
+logic-operator := and | or | xor ;
+l4 := l5, (logic-operator, l5)* ;
+comparison-operator := not-equal | equal-to | greater-than-equal | greater-than | less-than-equal | less-than ;
+l5 := factor, (comparison-operator, factor)* ;
+
+factor := (parenthetical-term | structure | fsm-pipe | function-call | literal | slice | var), transpose? ;
+```
+
+(a) Arithmetic
+
+```
+add := "+" ;
+subtract := "-" ;
+multiply := "*" ;
+divide := "/" ;
+exponent := "^" ;
+add-sub-operator := add | subtract ;
+mul-div-operator := multiply | divide ;
+exponent-operator := exponent ;
+```
+
+(b) Matrix
+
+```
+matrix-solve := "\" ;
+dot-product := "·" ;
+cross-product := "⨯" ;
+matrix-multiply := "**" ;
+transpose := "'" ;
+matrix-operator := matrix-multiply | matrix-solve | dot-product | cross-product ;
+```
+
+(c) Comparison
+
+```
+not-equal := "!=" | "¬=" | "≠" ;
+equal-to := "==" ;
+greater-than := ">" ;
+less-than := "<" ;
+greater-than-equal := ">=" | "≥" ;
+less-than-equal := "<=" | "≤" ;
+comparison-operator := not-equal | equal-to | greater-than-equal | greater-than | less-than-equal | less-than ;
+```
+
+(d) Logical
+
+```
+or := "|" ;
+and := "&" ;
+not := "!" | "¬" ;
+xor := "xor" | "⊕" | "⊻" ;
+logic-operator = and | or | xor;
+```
+
+(e) Set
+
+```
+union := "∪" ;
+intersection := "∩" ;
+difference := "∖" ;
+complement := "∁" | "'" ;
+subset := "⊆" ;
+superset := "⊇" ;
+proper-subset := "⊊" ;
+proper-superset := "⊋" ;
+element-of := "∈" ;
+not-element-of := "∉" ;
+```
+
+(f) Range
+
+```
+range-inclusive := "..=" ;
+range-exclusive := ".." ;
+range-operator := range-inclusive | range-exclusive ;
+range-expression := expression, range-operator, expression ;
+```
+
+7. Indexing
+-------------------------------------------------------------------------------
+
+```
+subscript := (swizzle-subscript | dot-subscript-int | dot-subscript | bracket-subscript | brace-subscript)+ ; 
+index = identifier, subscript ;
+```
+
+(a) Slicing
+
+```
+bracket-subscript := bracket-subscript := "[", list1(",", select-all | range-subscript | formula-subscript), "]" ;
+brace-subscript := brace-subscript := "{", list1(",", select-all | formula-subscript), "}" ;
+
+formula-subscript := formula ;
+range-subscript := range-expression ;
+select-all := ":" ;
+```
+
+(b) Dot Index
+
+```
+dot-subscript := ".", identifier ;
+dot-subscript-int := ".", integer-literal ;
+```
+
+(c) Swizzle
+
+```
+swizzle-subscript := ".", identifier, "," , list1(",", identifier) ;
+```
+
+7. Statements
+-------------------------------------------------------------------------------
+
+```
+statement := variable-define | variable-assign | enum-define | fsm-declare | kind-define ;
+```
+
+(a) Variable Define
+
+```
+define-operator := ":=" ;
+variable-define := tilde?, var, !assign-operator, define-operator, expression ;
+```
+
+(b) Variable Assign
+
+```
+assign-operator := "=";
+variable-assign := slice-ref, !define-operator, assign-operator, expression ;
+```
+
+(c) Op-Assign
+
+```
+add-assign-operator := "+=";
+sub-assign-operator := "-=";
+mul-assign-operator := "*=";
+div-assign-operator := "/=";
+exp-assign-operator := "^=";
+op-assign-operator := add-assign-operator | sub-assign-operator | mul-assign-operator | div-assign-operator | exp-assign-operator ;
+op-assign := slice-ref, !define-operator, op-assign-operator, expression ;
+```
+
+(c) Enum Define
+
+```
+enum-define := "<", identifier, ">", define-operator, list1(enum-separator, enum-variant);
+enum-variant := grave?, identifier, enum-variant-kind? ;
+enum-variant-kind := "(", kind-annotation, ")" ;
+```
+
+(d) Kind Define
+
+```
+kind-define := "<", identifier, ">", define-operator, kind-annotation ;
+```
+
+8. Functions
+-------------------------------------------------------------------------------
+
+(a) Function Define
+
+```
+function-define := identifier, "(", list0(list-separator function-arg), ")", "=", (function-out-args | function-out-arg), define-operator, list1((whitespace1 | statement-separator), statement), period ;
+function-out-args := "(", list1(list-separator, function-arg),")" ;
+function-out-arg := function-arg ;
+function-arg := identifier, kind-annotation ;
+argument-list := "(", list0(",", call-arg-with-biding | call-arg) ;
+```
+
+(b) Function Call
+
+```
+function-call := identifier, argument-list ;
+call-arg-with-binding := identifier, colon, expression ;
+call-arg := expression ;
+var := identifier, kind-annotation? ;
+```
+
+9. State Machines
+-------------------------------------------------------------------------------
+
+```
+fsm := "#", identifier, argument-list?, kind-annotation? ;
+```
+
+(a) Operators
+
+```
+output-operator := "=>" ;
+transition-operator := "->" ;
+async-transition-operator := "~>" ;
+guard-operator := "|" | "│" | "├" | "└" ;
+```
+
+(a) Specification
+
+```
+fsm-specification := "#", identifier, "(", list0(",", var), ")", output-operator?, kind-annotation?, define-operator, fsm-state-definition+, "." ;
+fsm-tuple-struct := grave, identifier, "(", list1(",", fsm-pattern), ")" ;
+fsm-state-definition := guard-operator, grave, identifier, fsm-state-definition-variables? ;
+fsm-state-definition-variables := "(", list0(list-separator, var), ")" ;
+fsm-pipe := fsm-instance, (fsm-state-transition | fsm-async-transition | fsm-output)* ;
+fsm-declare := fsm, define-operator, fsm-pipe ;
+fsm-instance := "#", identifier, fsm-args? ;
+fsm-args := "(", list0(list-separator, (call-arg-with-binding | call-arg)), ")" ;
+```
+
+(b) Implementation
+
+```
+fsm-implementation := "#", identifier, "(", list0(",", identifier), ")", transition-operator, fsm-pattern, whitespace*, fsm-arm+, "." ;
+fsm-arm := comment*, (fsm-transition | fsm-guard-arm), whitespace* ;
+fsm-guard-arm := comment*, fsm-pattern, fsm-guard+ ;
+fsm-guard := guard-operator, fsm-pattern, (fsm-statement-transition | fsm-state-transition | fsm-output | fsm-async-transition | fsm-block-transition)+ ;
+fsm-transition := comment*, fsm-pattern, (fsm-statement-transition | fsm-state-transition | fsm-output | fsm-async-transition | fsm-block-transition)+ ;
+fsm-state-transition := transition-operator, fsm-pattern ;
+fsm-async-transition := async-transition-operator, fsm-pattern ;
+fsm-statement-transition := transition-operator, statement ;
+fsm-block-transition := transition-operator, left-brace, mech-code+, right-brace ;
+fsm-output := output-operator, fsm-pattern ;
+fsm-pattern := fsm-tuple-struct | wildcard | formula ;
+wildcard := "*" ;
+```
+
+10. Mechdown
+-------------------------------------------------------------------------------
+
+(a) Markdown
+
+```
+title := text+, new-line, equal+, (space|tab)*, whitespace* ;
+subtitle := digit-token+, period, space*, text+, new-line, dash+, (space|tab)*, new-line, (space|tab)*, whitespace* ;
+number-subtitle := (space|tab)*, "(", integer-literal, ")", (space|tab)+, text+, (space|tab)*, whitespace* ;
+alpha-subtitle := (space|tab)*, "(", alpha, ")", (space|tab)+, text+, (space|tab)*, whitespace* ;
+
+paragraph-symbol := ampersand | at | slash | backslash | asterisk | caret | hashtag | underscore | equal | tilde | plus | percent ;
+paragraph-starter := (word | number | quote | left-angle | right-angle | left-bracket | right-bracket | period | exclamation | question | comma | colon | semicolon | left-parenthesis | right-parenthesis | emoji)+ ;
+paragraph-element := (!define-operator, text)+ ;
+paragraph := paragraph-starter, paragraph-element* ;
+
+unordered-list := list-item+, new-line?, whitespace* ;
+list-item := dash, <space+>, <paragraph>, new-line* ;
+code-block := grave, <grave>, <grave>, <new-line>, any, <grave{3}, new-line, whitespace*> ;
+```
+
+(b) Mech Extensions
+
+```
+mech-code := mech-code-alt, ("\n" | ";" | comment) ;
+```
+
+11. Mech Programs
+-------------------------------------------------------------------------------
+
+```
+mech := program | statement ;
+```
+
+(a) Programs
+
+```
+program := title?, body ;
+body := section+ ;
+```
+
+(b) Sections
+
+```
+section-element := mech-code | unordered-list | comment | paragraph | code-block | sub-section;
+sub-section-element := comment | unordered-list | mech-code | paragraph | code-block;
+sub-section := alpha-subtitle, sub-section-element* ;
+section := ul-subtitle?, section-element+ ;
+```
+
+
