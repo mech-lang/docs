@@ -334,71 +334,64 @@ factor := (parenthetical-term | structure | fsm-pipe | function-call | literal |
 (a) Arithmetic
 
 ```
-add := "+" ;
-subtract := "-" ;
-multiply := "*" ;
-divide := "/" ;
-exponent := "^" ;
-add-sub-operator := add | subtract ;
-mul-div-operator := multiply | divide ;
-exponent-operator := exponent ;
++    add               integers, floats, complex values, strings
+-    subtract          integers, floats, complex values
+*    multiply          integers, floats, complex values
+/    divide            integers, floats, complex values
+^    exponent          integers, floats, complex values
+%    remainder         integers
 ```
 
 (b) Matrix
 
 ```
-matrix-solve := "\" ;
-dot-product := "·" ;
-cross-product := "⨯" ;
-matrix-multiply := "**" ;
-transpose := "'" ;
-matrix-operator := matrix-multiply | matrix-solve | dot-product | cross-product ;
+\              solve          
+·              dot product    
+⨯              cross product  
+**             matrix multiply
+'              transpose      
 ```
 
 (c) Comparison
 
 ```
-not-equal := "!=" | "¬=" | "≠" ;
-equal-to := "==" ;
-greater-than := ">" ;
-less-than := "<" ;
-greater-than-equal := ">=" | "≥" ;
-less-than-equal := "<=" | "≤" ;
-comparison-operator := not-equal | equal-to | greater-than-equal | greater-than | less-than-equal | less-than ;
+!= | ¬= | ≠    not equal       
+==             equal                 
+>              greater         
+<              less            
+>= | ≥         greater or equal
+<= | ≤         less or equal   
 ```
 
 (d) Logical
 
 ```
-or := "|" ;
-and := "&" ;
-not := "!" | "¬" ;
-xor := "xor" | "⊕" | "⊻" ;
-logic-operator = and | or | xor;
+|              or
+&              and
+! | ¬          not
+xor | ⊕ | ⊻   exclusive or
 ```
 
 (e) Set
 
 ```
-union := "∪" ;
-intersection := "∩" ;
-difference := "∖" ;
-complement := "∁" | "'" ;
-subset := "⊆" ;
-superset := "⊇" ;
-proper-subset := "⊊" ;
-proper-superset := "⊋" ;
-element-of := "∈" ;
-not-element-of := "∉" ;
+∪       union
+∩       intersection
+∖       difference
+∁ | '   complement
+⊆       subset
+⊇       superset
+⊊       proper subset
+⊋       proper superset
+∈       element of
+∉       not element of
 ```
 
 (f) Range
 
 ```
-range-inclusive := "..=" ;
-range-exclusive := ".." ;
-range-operator := range-inclusive | range-exclusive ;
-range-expression := expression, range-operator, expression ;
+..=     range inclusive
+..      range exclusive
 ```
 
 7. Indexing
@@ -518,7 +511,7 @@ async-transition-operator := "~>" ;
 guard-operator := "|" | "│" | "├" | "└" ;
 ```
 
-(a) Specification
+(b) Specification
 
 ```
 fsm-specification := "#", identifier, "(", list0(",", var), ")", output-operator?, kind-annotation?, define-operator, fsm-state-definition+, "." ;
@@ -531,7 +524,7 @@ fsm-instance := "#", identifier, fsm-args? ;
 fsm-args := "(", list0(list-separator, (call-arg-with-binding | call-arg)), ")" ;
 ```
 
-(b) Implementation
+(c) Implementation
 
 ```
 fsm-implementation := "#", identifier, "(", list0(",", identifier), ")", transition-operator, fsm-pattern, whitespace*, fsm-arm+, "." ;
@@ -597,5 +590,3 @@ sub-section-element := comment | unordered-list | mech-code | paragraph | code-b
 sub-section := alpha-subtitle, sub-section-element* ;
 section := ul-subtitle?, section-element+ ;
 ```
-
-
