@@ -1,0 +1,3434 @@
+
+<html>
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <style>
+      
+                  @import url(https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css);
+
+html {
+    scroll-behavior: smooth;
+}
+
+.mech-program{counter-reset: section}
+.mech-toc{counter-reset: section}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #2F353B;
+    margin: 0;
+    padding: 0;
+    font-size: 12pt;
+}
+
+.mech-root {
+    display: flex;
+    flex-direction: row;
+}
+
+.mech-output {
+    background-color: #171D21;
+    color: #f2ead9;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.mech-toc {
+    background-color: #171D21;
+    color: #f2ead9;
+    overflow-y: auto;
+    margin-right: 20px;
+    padding-right: 15px;
+    width: 250px;
+    padding-left: 10px;
+    position: sticky; 
+    top: 0; 
+    height: 100vh;
+}
+
+.mech-toc::-webkit-scrollbar {
+    width: 8px; /* Adjust width as needed */
+}
+
+.mech-toc::-webkit-scrollbar-track {
+    background: transparent; /* Makes the track invisible */
+}
+
+.mech-toc::-webkit-scrollbar-thumb {
+    background: rgba(128, 128, 128, 0.7); /* Grey with some transparency */
+    border-radius: 10px; /* Rounds the scrollbar */
+}
+
+.mech-toc::-webkit-scrollbar-thumb:hover {
+    background: rgba(128, 128, 128, 0.9); /* Slightly darker on hover */
+}
+
+/* For Firefox */
+.mech-toc {
+    scrollbar-color: rgba(128, 128, 128, 0.7) transparent;
+    scrollbar-width: thin;
+}
+
+.mech-toc h1 {
+    visibility: hidden;
+    font-size: 12pt;
+}
+
+.mech-toc h2 {
+    font-size: 12pt;
+    padding-left: 15px;
+}
+
+.mech-toc h2 a {
+    color: #f2ead9;
+    text-decoration: none;
+}
+
+.mech-toc h2 a:hover {
+    color: #ffd139;
+    text-decoration: none;
+}
+
+.mech-toc h4 {
+    font-size: 12pt;
+    padding-left: 30px;
+    font-weight: normal;
+}
+
+.mech-toc h4 a {
+    color: #f2ead9;
+    text-decoration: none;
+}
+
+.mech-toc h4 a:hover {
+    color: #ee6262;
+    text-decoration: none;
+}
+
+
+.mech-program {
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 690px;
+}
+
+.mech-output {
+    flex-grow: 1;
+}
+
+.mech-matrix {
+    display: inline-flex;
+}
+
+.mech-bracket.end {
+    align-self: flex-end;
+    margin-left: -10px;
+}
+
+.mech-slice-ref {
+    display: inline-flex;
+}
+
+.mech-matrix-column {
+    display: flex;
+    flex-direction: column;
+    padding-right: 10px;
+}
+
+.mech-variable-assign-op {
+    padding-left:  6px;
+    padding-right: 6px;
+    color: #ffd139;
+}
+
+.mech-transition-statement {
+    color: #ffd139;
+}
+
+.mech-transition-output {
+    color: #ffd139;
+}
+
+.mech-fsm-arm-last {
+    color: #ffd139;
+}
+
+.mech-term {
+    display: inline-flex;
+}
+
+.mech-formula-operator {
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+h2{counter-reset: sub-section}
+
+h2:before{
+    counter-increment: section;
+    color: #F3B62D;
+    content: counter(section) " ";
+}
+
+h4:before{
+    counter-increment: sub-section;
+    color: #ee6262;
+    content: counter(section) "." counter(sub-section) " ";
+}
+
+.mech-program .mech-program-title {
+    font-family: 'FiraCodeRegular', monospace;
+    color: #f2ead9;
+    letter-spacing: 2px;
+    font-size: 22pt;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 16px;
+}
+.mech-program .mech-program-title::after {
+    letter-spacing: 0px;
+    content: "==============================================================================";
+    color: #F3B62D; 
+    font-size: 12pt; 
+    display: block;
+    text-align: left; 
+    margin-top: 5px; 
+}
+
+.mech-program h2 a {
+    color: #f2ead9;
+    text-decoration: none;
+}
+
+.mech-program h2 {
+    font-family: 'FiraCodeRegular', monospace;
+    color: #f2ead9;
+    font-size: 16pt;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    margin-top: 50px;
+    margin-left: -50px;
+}
+.mech-program h2::after {
+    content: "------------------------------------------------------------------------------------";
+    letter-spacing: 0px;
+    color: #F3B62D; 
+    font-size: 12pt; 
+    display: block;
+    text-align: left; 
+    margin-top: 5px; 
+}
+
+.mech-program h4 a {
+    color: #f2ead9;
+    text-decoration: none;
+}
+
+.mech-program h4 {
+    font-family: 'FiraCodeRegular', monospace;
+    color: #f2ead9;
+    font-size: 14pt;
+    font-weight: bold;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.mech-variable-mutable {
+    color: #ada594;
+}
+
+.mech-section-element {
+}
+
+.mech-fsm-specification
+
+.mech-fsm-sigil{
+    display: inline-flex;
+}
+
+.mech-code-block {
+    background-color: #171D21;
+    color: #ada594;
+    font-family: 'FiraCodeLight', monospace;
+    font-size: 12pt;
+    line-height: 18px;
+    border-radius: 0px;
+    padding: 30px;
+    border-radius: 10px;
+    overflow-x: auto;
+}
+
+.mech-code-block::-webkit-scrollbar {
+    height: 8px; /* Horizontal scrollbar height */
+}
+
+.mech-code-block::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.mech-code-block::-webkit-scrollbar-thumb {
+    background: rgba(128, 128, 128, 0.7);
+    border-radius: 10px;
+}
+
+.mech-code-block::-webkit-scrollbar-thumb:hover {
+    background: rgba(128, 128, 128, 0.9);
+}
+
+/* Firefox */
+.mech-code-block {
+    scrollbar-color: rgba(128, 128, 128, 0.7) transparent;
+    scrollbar-width: thin;
+}
+
+.mech-code {
+}
+
+.mech-statement {
+}
+
+.mech-variable-define {
+    display: flex;
+}
+
+.mech-fsm-specification-header {
+    display: inline-flex;
+}
+
+.mech-variable-mutable {
+    color: #ffd139;
+}
+
+.mech-var-name {
+    color: #ccbbc2;
+}
+
+.mech-expression {
+}
+
+.mech-literal {
+}
+
+.mech-number {
+    color: #C7DCAE;
+}
+
+.mech-factor {
+    display: inline-flex;
+}
+
+.mech-term {
+}
+
+.mech-inline-code {
+    background-color: #171D21;
+    color: #ada594;
+    font-family: 'FiraCodeLight', monospace;
+    font-size: 12pt;
+    padding: 2px 2px;
+    margin: 0px;
+    margin-left: 2px;
+    margin-right: 7px;
+    border-radius: 5px;
+}
+
+.mech-formula-operator {
+    color: #ffd139;
+}
+
+.mech-op-assign-op {
+    color: #ffd139;
+}
+
+.mech-paragraph {
+    color: #f2ead9;
+    line-height: 25px;
+}
+
+.mech-paragraph a {
+    color: #ee6262;
+    text-decoration: none;
+}
+
+.mech-paragraph a:hover {
+    text-decoration: underline;
+}
+
+.mech-all {
+    color: #ffd139;
+}
+
+.mech-transpose-op {
+    color: #ffd139;
+}
+
+.mech-negate-op {
+    color: #ffd139;
+}
+
+.mech-record {
+    display: flex;
+}
+
+.mech-binding {
+    display: inline-flex;
+}
+
+.mech-function-call {
+    display: inline-flex;
+}
+
+.mech-slice {
+    display: inline-flex;
+}
+
+.mech-subscript {
+    display: inline-flex;
+}
+
+.mech-bracket {
+    display: inline-flex;
+    color: #A157B5
+}
+
+.mech-start-brace {
+    color: #a157b5
+}
+
+.mech-clickable:hover {
+    background-color: #2a2b34;
+    cursor: pointer;
+}
+
+.mech-end-brace {
+    color: #a157b5
+}
+
+.mech-dot {
+    color: #9cc7f3;
+}
+
+.mech-binding-colon-op {
+    padding-right: 6px;
+}
+
+.mech-right-paren {
+    color: #a157b5
+}
+
+.mech-left-paren {
+    color: #a157b5
+}
+
+.mech-binding-name {
+    color: #9cc7f3;
+    padding-left: 6px;
+}
+
+.mech-parenthetical {
+    color: #a157b5;
+}
+
+.mech-function-name {
+    color: #d8a5e4;
+}
+
+.mech-kind-annotation {
+    display: inline-flex;
+}
+
+.mech-kind {
+    color: #ec8e8e;
+    display: inline-flex;
+}
+
+.mech-fsm-define-op {
+    padding-left: 6px;
+}
+
+.mech-fsm-output { 
+    padding-left: 6px;
+    color: #ffd139;
+}
+
+.mech-fsm-input {
+    color: #ccbbc2;
+    display: inline-flex;
+}
+
+.mech-fsm-name {
+    color: #d8a5e4;
+}
+
+.mech-kind-annotation {
+    color: #ee6262;
+}
+
+.mech-kind .mech-literal .mech-number {
+    color: #ec8e8e;
+}
+
+.mech-fsm-state {
+    display: inline-flex;
+}
+
+.mech-fsm-states {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.mech-state-definition {
+    display: inline-flex;
+}
+
+.mech-fsm-arms {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.mech-fsm-arm {
+    display: inline-flex;
+}
+
+.mech-fsm-implementation-header {
+    display: inline-flex;
+}
+
+.mech-tuple-struct {
+    display: inline-flex;
+    color: #ffd139;
+}
+
+.mech-fsm-sigil {
+    color: #ffd139;
+}
+
+.mech-fsm-state {
+    color: #ffd139;
+}
+
+.mech-tuple-struct-patterns {
+    display: inline-flex;
+}
+
+.mech-fsm-define-op {
+    padding-right: 6px;
+    color: #ffd139;
+}
+
+.mech-matrix.empty .end  {
+    margin-left: 0px;
+}
+
+.mech-fsm-implementation {
+    margin-top: 20px;
+}
+
+.mech-fsm-guards {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.mech-fsm-guard-arm {
+    color: #ffd139;
+    display: inline-flex;
+}
+
+.mech-guard-condition {
+    padding-left: 6px;
+}
+
+.mech-transition-output {
+    padding-left: 0px;
+}
+
+.mech-state-variables {
+    display: inline-flex;
+}
+
+.mech-transition-next {
+    padding-left: 0px;
+    color: #ffd139;
+}
+
+.mech-guard-condition {
+    display: inline-flex;
+    margin: 0px;
+}
+
+.mech-pattern-wildcard {
+    display: inline-flex;
+    color: #ee6262;
+}
+
+.mech-tuple-struct {
+    margin-right: 6px;
+}
+
+.mech-state-name {
+    color: #dbc3a5;
+}
+
+.mech-tuple-struct-name {
+    color: #dbc3a5;
+}
+
+.mech-code-block .mech-code:first-child .mech-comment {
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.mech-comment {
+    color: #ef5f90;
+    font-style: italic;
+    padding-top: 20px;
+}
+
+.mech-string {
+    color: #ef5f90;
+}
+
+.mech-unordered-list {
+}
+
+.mech-list-item {
+    line-height: 0px;
+    color: #ef5f90;
+    margin: 0px;
+    padding: 0px;
+}
+
+li p {
+    margin: 0px;
+    padding: 0px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.mech-table {
+}
+
+.mech-table-header {
+    color: #dbc3a5;
+}
+
+.mech-table-rows {
+}
+
+.mech-table-row {
+}
+        
+    </style>
+  </head>
+  <body>
+    <div class="mech-root">
+      <div class="mech-toc">
+        <h1 class="mech-program-title">
+          Mech Language Specification 
+        </h1>
+        <div class="mech-toc-sections">
+          <section class="mech-program-section">
+            <h2 id="36994328039486253" class="mech-program-subtitle">
+              <a href="#24532585919651604">
+                Introduction
+              </a>
+            </h2>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="3641434550465705" class="mech-program-subtitle">
+              <a href="#64840961086673677">
+                Notation
+              </a>
+            </h2>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="2046190110316975" class="mech-program-subtitle">
+              <a href="#56123367594090733">
+                Source Code Representation
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="15488515123597817" class="mech-program-subtitle">
+                  <a href="#6267646157868218">
+                    File Format
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="71153871848144224" class="mech-program-subtitle">
+                  <a href="#28594290095510921">
+                    Literate Programming and Mechdown
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="71858534310066997" class="mech-program-subtitle">
+                  <a href="#34719180229817784">
+                    Whitespace
+                  </a>
+                </h4>
+              </section>
+            </div>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="19079177696538542" class="mech-program-subtitle">
+              <a href="#58393432045966419">
+                Lexical Elements
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="59905203553921169" class="mech-program-subtitle">
+                  <a href="#24537488838193854">
+                    Tokens
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="70801611600718042" class="mech-program-subtitle">
+                  <a href="#9287141900204930">
+                    Identifiers
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="37374590624936251" class="mech-program-subtitle">
+                  <a href="#8963022753421757">
+                    Keywords
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="61346583819792870" class="mech-program-subtitle">
+                  <a href="#2060175734101298">
+                    Operators and Punctuation
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="66827791843789042" class="mech-program-subtitle">
+                  <a href="#46854540920651094">
+                    Comments
+                  </a>
+                </h4>
+              </section>
+            </div>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="70878089536908432" class="mech-program-subtitle">
+              <a href="#13548466691974027">
+                Literals
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="38458632833255417" class="mech-program-subtitle">
+                  <a href="#30012329113757651">
+                    Integers
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="25087415629185131" class="mech-program-subtitle">
+                  <a href="#70295139270730791">
+                    Floats
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="31263199641577927" class="mech-program-subtitle">
+                  <a href="#24974892666436952">
+                    Strings
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="43285224210955225" class="mech-program-subtitle">
+                  <a href="#17422427828280240">
+                    Boolean
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="66803148564223320" class="mech-program-subtitle">
+                  <a href="#42750777693310624">
+                    Atoms
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="1394190913697363" class="mech-program-subtitle">
+                  <a href="#38366745670584623">
+                    Empty
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="27672927409709950" class="mech-program-subtitle">
+                  <a href="#8246677518709720">
+                    Kinds
+                  </a>
+                </h4>
+              </section>
+            </div>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="20169291266754107" class="mech-program-subtitle">
+              <a href="#28769702013302955">
+                Structures
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="32774866323494224" class="mech-program-subtitle">
+                  <a href="#9615151635654986">
+                    Matrix
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="25525042252776942" class="mech-program-subtitle">
+                  <a href="#14644804838715525">
+                    Set
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="68297347317941409" class="mech-program-subtitle">
+                  <a href="#66886079494499391">
+                    Map
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="61569749363447249" class="mech-program-subtitle">
+                  <a href="#45297339292174744">
+                    Tuple
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="44140618079485541" class="mech-program-subtitle">
+                  <a href="#48673187961689229">
+                    Table
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="19856747406775543" class="mech-program-subtitle">
+                  <a href="#7990985436189957">
+                    Record
+                  </a>
+                </h4>
+              </section>
+            </div>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="28395122023194653" class="mech-program-subtitle">
+              <a href="#17615722433656962">
+                Expressions
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="3057864713824973" class="mech-program-subtitle">
+                  <a href="#71500568225100300">
+                    Formula 
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="52032752495097963" class="mech-program-subtitle">
+                  <a href="#69443252458544776">
+                    Arithmetic
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="32774866323494224" class="mech-program-subtitle">
+                  <a href="#9615151635654986">
+                    Matrix
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="43680580247723275" class="mech-program-subtitle">
+                  <a href="#6566005626084704">
+                    Comparison
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="17002654642409632" class="mech-program-subtitle">
+                  <a href="#5930734924315717">
+                    Logical
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="25525042252776942" class="mech-program-subtitle">
+                  <a href="#14644804838715525">
+                    Set
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="13172273264347398" class="mech-program-subtitle">
+                  <a href="#60535861837135520">
+                    Range
+                  </a>
+                </h4>
+              </section>
+            </div>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="26477053682364841" class="mech-program-subtitle">
+              <a href="#23424592651318844">
+                Indexing
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="47669887209407315" class="mech-program-subtitle">
+                  <a href="#70770035521817702">
+                    Slicing
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="27210748475108175" class="mech-program-subtitle">
+                  <a href="#7127186079993695">
+                    Dot Index
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="15729638168728938" class="mech-program-subtitle">
+                  <a href="#41715567564737817">
+                    Swizzle
+                  </a>
+                </h4>
+              </section>
+            </div>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="31266955199904745" class="mech-program-subtitle">
+              <a href="#42210057184409305">
+                Statements
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="46690332865332770" class="mech-program-subtitle">
+                  <a href="#17682643806895169">
+                    Variable Define
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="46066390734155921" class="mech-program-subtitle">
+                  <a href="#46004168174192996">
+                    Variable Assign
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="18719027010455039" class="mech-program-subtitle">
+                  <a href="#66301087657226087">
+                    Op-Assign
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="61021014975380329" class="mech-program-subtitle">
+                  <a href="#43918846925318846">
+                    Enum Define
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="13515115819082434" class="mech-program-subtitle">
+                  <a href="#55850960549636316">
+                    Kind Define
+                  </a>
+                </h4>
+              </section>
+            </div>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="70294957479892157" class="mech-program-subtitle">
+              <a href="#9518895069535147">
+                Functions
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="57378048641043579" class="mech-program-subtitle">
+                  <a href="#55882549029406679">
+                    Function Define
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="60359260318311171" class="mech-program-subtitle">
+                  <a href="#7863497594701243">
+                    Function Call
+                  </a>
+                </h4>
+              </section>
+            </div>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="62573954381288290" class="mech-program-subtitle">
+              <a href="#27482184148317386">
+                State Machines
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="55067390483754777" class="mech-program-subtitle">
+                  <a href="#61658507070099573">
+                    Operators
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="51347561960039465" class="mech-program-subtitle">
+                  <a href="#42873239106270548">
+                    Specification
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="20036260941160947" class="mech-program-subtitle">
+                  <a href="#26283582811565256">
+                    Implementation
+                  </a>
+                </h4>
+              </section>
+            </div>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="23039652014622174" class="mech-program-subtitle">
+              <a href="#58856088105263747">
+                Mechdown
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="59677556537599054" class="mech-program-subtitle">
+                  <a href="#53612727690234225">
+                    Markdown
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="68436838006225724" class="mech-program-subtitle">
+                  <a href="#49127424790395456">
+                    Mech Extensions
+                  </a>
+                </h4>
+              </section>
+            </div>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="50912998999441410" class="mech-program-subtitle">
+              <a href="#39536909611123540">
+                Mech Programs
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="53478128017890021" class="mech-program-subtitle">
+                  <a href="#50415808343066298">
+                    Programs
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="8774181276061856" class="mech-program-subtitle">
+                  <a href="#4500462869366065">
+                    Sections
+                  </a>
+                </h4>
+              </section>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="mech-program">
+        <h1 class="mech-program-title">
+          Mech Language Specification 
+        </h1>
+        <div class="mech-program-body">
+          <section class="mech-program-section">
+            <h2 id="24532585919651604" class="mech-program-subtitle">
+              <a href="#24532585919651604">
+                Introduction
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <p class="mech-paragraph">
+                This document specifies the default syntax of the Mech programming system, for developing reactive systems like robots, games, and user interfaces. The language specified herein is one of many possible syntaxes and interfaces for Mech, but it may be thought of as the default texual representation of Mech.
+              </p>
+            </div>
+            <div class="mech-section-element">
+              <p class="mech-paragraph">
+                This specification starts by defining the most atomic elements of the language, and then builds up to more complex structures.
+              </p>
+            </div>
+            <div class="mech-section-element">
+              <p class="mech-paragraph">
+                This document is for:
+              </p>
+            </div>
+            <div class="mech-section-element">
+              <ul class="mech-unordered-list">
+                <li class="mech-list-item">
+                  <p class="mech-paragraph">
+                    Language designers who want to implement a parser for Mech.
+                  </p>
+                </li>
+                <li class="mech-list-item">
+                  <p class="mech-paragraph">
+                    Tool developers who want to build tools that work with Mech code.
+                  </p>
+                </li>
+                <li class="mech-list-item">
+                  <p class="mech-paragraph">
+                    Developers who want to understand the syntax and structure of Mech programs.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="64840961086673677" class="mech-program-subtitle">
+              <a href="#64840961086673677">
+                Notation
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <p class="mech-paragraph">
+                The grammar is specified using extended Extended Backus-Naur Form (EBNF):
+              </p>
+            </div>
+            <div class="mech-section-element">
+              <pre class="mech-code-block">╭────────┬──────────┬───────────────────────────╮
+│ Symbol │ Meaning  | Semantics                 │
+├────────┼──────────┼───────────────────────────┤
+│  "abc" │ terminal | string literal "abc"      │
+│  p*    │ many 0   | `p` for 0 or more times   │
+│  p+    │ many 1   | `p` for 1 or more times   │
+│  p?    │ optional | `p` for 0 or 1 time       │
+│ p1, p2 │ sequence | `p1` followed by `p2`     │
+│ p1 | p2│ choice   | `p1` or `p2`              │
+│  !!p   │ peek     | `p`; do not consume input │
+│  !p    │ not      | does not match `p`        │
+│ (...)  │ group    │ incrase precedence        │
+╰────────┴──────────┴───────────────────────────╯
+</pre>
+            </div>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="56123367594090733" class="mech-program-subtitle">
+              <a href="#56123367594090733">
+                Source Code Representation
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="6267646157868218" class="mech-program-subtitle">
+                  <a href="#6267646157868218">
+                    File Format
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Mech source code can be stored in files with either the 
+                    <code class="mech-inline-code">
+                      .mec
+                    </code>
+                     or 
+                    <code class="mech-inline-code">
+                      .🤖
+                    </code>
+                     extension. 
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Source code is ecoded with UTF-8, which allows for Unicode support directly in the code. This choice has several benefits:
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <ul class="mech-unordered-list">
+                    <li class="mech-list-item">
+                      <p class="mech-paragraph">
+                        Makes code more accessible to non-English speakers
+                      </p>
+                    </li>
+                    <li class="mech-list-item">
+                      <p class="mech-paragraph">
+                        Enables domain experts to use notation from their fields directly in code
+                      </p>
+                    </li>
+                    <li class="mech-list-item">
+                      <p class="mech-paragraph">
+                        Allows for more expressive and intuitive naming conventions
+                      </p>
+                    </li>
+                    <li class="mech-list-item">
+                      <p class="mech-paragraph">
+                        Supports mathematical notation that closely resembles standard written forms
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="28594290095510921" class="mech-program-subtitle">
+                  <a href="#28594290095510921">
+                    Literate Programming and Mechdown
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Literate programming, introduced by Donald Knuth, presents programs as structured documents where explanations take precedence over code. In Mech, we support this concept through a format called Mechdown, a superset of Markdown with extensions to support embedded Mech syntax. This document is formatted with Mechdown to demonstrate how it is used.
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    For more information, see the 
+                    <a href="#58856088105263747">
+                      Mechdown Section
+                    </a>
+                    .
+                  </p>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="34719180229817784" class="mech-program-subtitle">
+                  <a href="#34719180229817784">
+                    Whitespace
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Whitespace in Mech is used to separate tokens and is generally ignored. This includes spaces, tabs, and newlines. However, whitespace can be significant in certain contexts:
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <ul class="mech-unordered-list">
+                    <li class="mech-list-item">
+                      <p class="mech-paragraph">
+                        In lists, whitespace is used to separate items.
+                      </p>
+                    </li>
+                    <li class="mech-list-item">
+                      <p class="mech-paragraph">
+                        In matrix and table definitions, whitespace deliniates columns and rows.
+                      </p>
+                    </li>
+                    <li class="mech-list-item">
+                      <p class="mech-paragraph">
+                        In formulas, whitespace is required around operators.
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Semicolons and commas are treated as whitespace in most cases. Except in these contexts:
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <ul class="mech-unordered-list">
+                    <li class="mech-list-item">
+                      <p class="mech-paragraph">
+                        Semicolons can be used to separate statements so they can be written inline.
+                      </p>
+                    </li>
+                    <li class="mech-list-item">
+                      <p class="mech-paragraph">
+                        Semicolons can be used in a matrix to separate rows, so they can be written inline.
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    For more information, see the 
+                    <a href="">
+                      Whitespace design document
+                    </a>
+                    .
+                  </p>
+                </div>
+              </section>
+            </div>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="58393432045966419" class="mech-program-subtitle">
+              <a href="#58393432045966419">
+                Lexical Elements
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="24537488838193854" class="mech-program-subtitle">
+                  <a href="#24537488838193854">
+                    Tokens
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Tokens are the smallest units of meaning in Mech. They include letters, digits, punctuation, and special symbols.
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Some Unicode characters are reserved for box drawing, and therefore are excluded from includsion in valid identifiers.
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">alpha = "a".."z" | "A".."Z";
+digt = "0".."9";
+emoji := emoji-grapheme+ ;
+word := alpha+ ;
+digit1 := digit+ ;
+digit0 := digit* ;
+bin-digit := "0" | "1" ;
+hex-digit := digit | "a" .. "f" | "A" .. "F" ;
+oct-digit := "0" .. "7" ;
+number := digit1 ;
+forbidden-emoji := box-drawing | other-forbidden-shapes ;
+emoji := (!forbidden-emoji, emoji-grapheme) ;
+</pre>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="9287141900204930" class="mech-program-subtitle">
+                  <a href="#9287141900204930">
+                    Identifiers
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">identifier := (alpha | emoji), (alpha | digit | symbol | emoji)* ;
+</pre>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Identifiers start with letters or most UTF-8 encoded emoji characters, and can contain alphanumeric, most emojis, /, *, +, -, and ^ characters.
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Examples:
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <div class="mech-code-block">
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-var-name mech-clickable" id="38748104894788680">
+                          Hello-Word
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-var-name mech-clickable" id="5100724901666259">
+                          io/stdout
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-var-name mech-clickable" id="83317820399133">
+                          Δx^2
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-var-name mech-clickable" id="28901174789692">
+                          🤖
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-var-name mech-clickable" id="29301228406530344">
+                          A*
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="8963022753421757" class="mech-program-subtitle">
+                  <a href="#8963022753421757">
+                    Keywords
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    There are only two keywords in Mech:
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">true
+false
+</pre>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Combined with Mech's Unicode support, this allows users to write code in their native language without the need to learn English keywords.
+                  </p>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="2060175734101298" class="mech-program-subtitle">
+                  <a href="#2060175734101298">
+                    Operators and Punctuation
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Punctutation:
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">. ! ? , : ; ' "
+</pre>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Symbols:
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">& | @ / # = \ ~ + - * ^ _
+</pre>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Grouping symbols:
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">( ) < > { } [ ]
+</pre>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Operators:
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">:= = += -= *= /= ^=
++ - * / ^ %
+>- -<
+** · ⨯ \ ' 
+| & xor ⊕ ⊻ ! ¬
+∪ ∩ ∖ ∁ ⊆ ⊇ ⊊ ⊋ ∈ ∉ 
+.. ..=
+!= ¬= ≠ == > < >= ≤ ≥
+=> -> ~>
+| │ ├ └
+</pre>
+                </div>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">punctuation := period | exclamation | question | comma | colon | semicolon | quote | apostrophe ;
+symbol := ampersand | bar | at | slash | hashtag | equal | backslash | tilde | plus | dash | asterisk | caret | underscore ;
+grouping-symbol := left-parenthesis | right-parenthesis | left-angle | right-angle | left-brace | right-brace | left-bracket | right-bracket ;
+paragraph-symbol := ampersand | at | slash | backslash | asterisk | caret | hashtag | underscore | equal | tilde | plus | percent ;
+paragraph-starter := (word | number | quote | left-angle | right-angle | left-bracket | right-bracket | period | exclamation | question | comma | colon | semicolon | left-parenthesis | right-parenthesis | emoji)+ ;
+paragraph-element := (!define-operator, text)+ ;
+paragraph := paragraph-starter, paragraph-element* ;
+escaped-char := backslash,  symbol | punctuation ;
+text := alpha | digit | space | tab | escaped-char | punctuation | grouping-symbol | symbol ;
+space-tab := space | tab ;
+list-separator := whitespace*, ",", whitespace* ;
+</pre>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="46854540920651094" class="mech-program-subtitle">
+                  <a href="#46854540920651094">
+                    Comments
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">comment-sigil := "--" | "//" ;
+comment :=  whitespace*, comment-sigil, text+ ;
+</pre>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Examples:
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <div class="mech-code-block">
+                    <div class="mech-code">
+                      <div class="mech-comment">
+                        --  Single line comment.
+                      </div>
+                    </div>
+                    <div class="mech-code">
+                      <div class="mech-comment">
+                        --  Also a single line comment.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="13548466691974027" class="mech-program-subtitle">
+              <a href="#13548466691974027">
+                Literals
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <pre class="mech-code-block">literal := (number | string | atom | boolean | empty), kind-annotation? ;
+</pre>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="30012329113757651" class="mech-program-subtitle">
+                  <a href="#30012329113757651">
+                    Integers
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">number := number := real-number, "i"? | ("+", real-number, "i")? ;
+integer-literal := digit+;
+decimal-literal := "0d", <digit+> ;
+hexadecimal-literal := "0x", <hex-digit+> ;
+octal-literal := "0o", <oct-digit+> ;
+binary-literal := "0b", <bin-digit+> ;
+</pre>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    An integer literal is a sequence of digits representing a whole number. Mech supports decimal, binary, octal, and hexadecimal integer literals, each distinguished by a unique prefix:
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <ul class="mech-unordered-list">
+                    <li class="mech-list-item">
+                      <p class="mech-paragraph">
+                        Decimal: A sequence of digits without a prefix (e.g., 42, 123456).
+                      </p>
+                    </li>
+                    <li class="mech-list-item">
+                      <p class="mech-paragraph">
+                        Binary: Prefixed with 0b, containing only 0 and 1 (e.g., 0b1010).
+                      </p>
+                    </li>
+                    <li class="mech-list-item">
+                      <p class="mech-paragraph">
+                        Octal: Prefixed with 0o, containing digits 0-7 (e.g., 0o755).
+                      </p>
+                    </li>
+                    <li class="mech-list-item">
+                      <p class="mech-paragraph">
+                        Hexadecimal: Prefixed with 0x, containing digits 0-9 and a-f or A-F (e.g., 0x1A3F).
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Examples:
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <div class="mech-code-block">
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-literal">
+                          <span class="mech-number">
+                            42
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-literal">
+                          <span class="mech-number">
+                            0b1010
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-literal">
+                          <span class="mech-number">
+                            0o755
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-literal">
+                          <span class="mech-number">
+                            0x1A3F
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="70295139270730791" class="mech-program-subtitle">
+                  <a href="#70295139270730791">
+                    Floats
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    A float literal is a sequence of digits with a decimal point, optionally followed by an exponent. Mech supports both standard decimal floats and scientific notation:
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">scientific-literal :=  (float-literal | integer-literal), ("e" | "E"), plus?, dash?, (float-literal | integer-literal) ;
+rational-literal := integer-literal, slash, integer-literal ;
+float-literal := "."?, digit+, "."?, digit* ;
+</pre>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Examples:
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <div class="mech-code-block">
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-literal">
+                          <span class="mech-number">
+                            3.14
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-literal">
+                          <span class="mech-number">
+                            0.001
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-literal">
+                          <span class="mech-number">
+                            2.5e+10.
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="24974892666436952" class="mech-program-subtitle">
+                  <a href="#24974892666436952">
+                    Strings
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">string := quote, (!quote, text)*, quote ;
+</pre>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Examples:
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <div class="mech-code-block">
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-literal">
+                          <span class="mech-string">
+                            "Hello, World!"
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-literal">
+                          <span class="mech-string">
+                            "characters like " and \ are escaped with, \ e.g. \""
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="17422427828280240" class="mech-program-subtitle">
+                  <a href="#17422427828280240">
+                    Boolean
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">boolean := true-literal | false-literal ;
+true-literal := english-true-literal | true-symbol ;
+false-literal := english-false-literal | false-symbol ;
+true-symbol := "✓" ;
+false-symbol := "✗" ;
+english-true-literal := "true" ;
+english-false-literal := "false" ;
+</pre>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Examples:
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <div class="mech-code-block">
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-literal">
+                          true
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-literal">
+                          false
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-literal">
+                          ✗
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-literal">
+                          ✓
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="42750777693310624" class="mech-program-subtitle">
+                  <a href="#42750777693310624">
+                    Atoms
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">atom := "`", identifier ;
+</pre>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Examples:
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <div class="mech-code-block">
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-literal">
+                          <span class="mech-atom">
+                            A
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-literal">
+                          <span class="mech-atom">
+                            MyAtom
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-literal">
+                          <span class="mech-atom">
+                            MyAtom123
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-literal">
+                          <span class="mech-atom">
+                            🐦
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="38366745670584623" class="mech-program-subtitle">
+                  <a href="#38366745670584623">
+                    Empty
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">empty := underscore+ ;
+</pre>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Examples:
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <div class="mech-code-block">
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-literal">
+                          _
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="8246677518709720" class="mech-program-subtitle">
+                  <a href="#8246677518709720">
+                    Kinds
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">kind-annotation := left-angle, kind, right-angle ;
+kind := kind-fxn | kind-empty | kind-atom | kind-tuple | kind-scalar | kind-bracket | kind-map | kind-brace ;
+kind-empty := underscore+ ;
+kind-atom := "`", identifier ;
+kind-map := "{", kind, ":", kind, "}" ;
+kind-fxn := "(", list0(list-separator, kind), ")", "=", "(", list0(list-separator, kind), ")" ;
+kind-brace := "{", list1(",", kind), "}", ":"?, list0("," , literal) ;
+kind-bracket := kind-bracket := "[", list1(",",kind), "]", ":"?, list0(",", literal) ;
+kind-tuple = "(", list1(",",kind) ")" ;
+kind-scalar := identifier ;
+</pre>
+                </div>
+              </section>
+            </div>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="28769702013302955" class="mech-program-subtitle">
+              <a href="#28769702013302955">
+                Structures
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <pre class="mech-code-block">structure := empty-set | empty-table | table | matrix | tuple | tuple-struct | record | map | set ;
+</pre>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="9615151635654986" class="mech-program-subtitle">
+                  <a href="#9615151635654986">
+                    Matrix
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">matrix-column := (space | tab)*, expression, ((space | tab)*, ("," | table-separator)?, (space | tab)*) ;
+matrix-row := table-separator?, (space | tab)*, matrix-column+, semicolon?, new-line?, (box-drawing-char+, new-line)? ;
+matrix := matrix-start, (box-drawing-char | whitespace)*, matrix-row*, box-drawing-char*, matrix-end ;
+</pre>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Examples:
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <div class="mech-code-block">
+                    <div class="mech-code">
+                      <div class="mech-comment">
+                        --  Matrix
+                      </div>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-structure">
+                          <span class="mech-matrix">
+                            <span class="mech-bracket start">
+                              [
+                            </span>
+                            <div class="mech-matrix-column">
+                              <span class="mech-matrix-element">
+                                <span class="mech-expression">
+                                  <span class="mech-literal">
+                                    <span class="mech-number">
+                                      1
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                              <span class="mech-matrix-element">
+                                <span class="mech-expression">
+                                  <span class="mech-literal">
+                                    <span class="mech-number">
+                                      4
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                              <span class="mech-matrix-element">
+                                <span class="mech-expression">
+                                  <span class="mech-literal">
+                                    <span class="mech-number">
+                                      7
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                            </div>
+                            <div class="mech-matrix-column">
+                              <span class="mech-matrix-element">
+                                <span class="mech-expression">
+                                  <span class="mech-literal">
+                                    <span class="mech-number">
+                                      2
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                              <span class="mech-matrix-element">
+                                <span class="mech-expression">
+                                  <span class="mech-literal">
+                                    <span class="mech-number">
+                                      5
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                              <span class="mech-matrix-element">
+                                <span class="mech-expression">
+                                  <span class="mech-literal">
+                                    <span class="mech-number">
+                                      8
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                            </div>
+                            <div class="mech-matrix-column">
+                              <span class="mech-matrix-element">
+                                <span class="mech-expression">
+                                  <span class="mech-literal">
+                                    <span class="mech-number">
+                                      3
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                              <span class="mech-matrix-element">
+                                <span class="mech-expression">
+                                  <span class="mech-literal">
+                                    <span class="mech-number">
+                                      6
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                              <span class="mech-matrix-element">
+                                <span class="mech-expression">
+                                  <span class="mech-literal">
+                                    <span class="mech-number">
+                                      9
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                            </div>
+                            <span class="mech-bracket end">
+                              ]
+                            </span>
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <div class="mech-comment">
+                        --  Row Vector
+                      </div>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-structure">
+                          <span class="mech-matrix">
+                            <span class="mech-bracket start">
+                              [
+                            </span>
+                            <div class="mech-matrix-column">
+                              <span class="mech-matrix-element">
+                                <span class="mech-expression">
+                                  <span class="mech-literal">
+                                    <span class="mech-number">
+                                      1
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                            </div>
+                            <div class="mech-matrix-column">
+                              <span class="mech-matrix-element">
+                                <span class="mech-expression">
+                                  <span class="mech-literal">
+                                    <span class="mech-number">
+                                      2
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                            </div>
+                            <div class="mech-matrix-column">
+                              <span class="mech-matrix-element">
+                                <span class="mech-expression">
+                                  <span class="mech-literal">
+                                    <span class="mech-number">
+                                      3
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                            </div>
+                            <span class="mech-bracket end">
+                              ]
+                            </span>
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <div class="mech-comment">
+                        --  Column Vector
+                      </div>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-structure">
+                          <span class="mech-matrix">
+                            <span class="mech-bracket start">
+                              [
+                            </span>
+                            <div class="mech-matrix-column">
+                              <span class="mech-matrix-element">
+                                <span class="mech-expression">
+                                  <span class="mech-literal">
+                                    <span class="mech-number">
+                                      1
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                              <span class="mech-matrix-element">
+                                <span class="mech-expression">
+                                  <span class="mech-literal">
+                                    <span class="mech-number">
+                                      2
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                              <span class="mech-matrix-element">
+                                <span class="mech-expression">
+                                  <span class="mech-literal">
+                                    <span class="mech-number">
+                                      3
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                            </div>
+                            <span class="mech-bracket end">
+                              ]
+                            </span>
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="14644804838715525" class="mech-program-subtitle">
+                  <a href="#14644804838715525">
+                    Set
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">set := "{", whitespace*, list0(("," | whitespace+), expression), whitespace*, "}" ;
+empty-set := empty-set := table-start, whitespace*, empty, whitespace*, table-end ;
+</pre>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Examples:
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <div class="mech-code-block">
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-structure">
+                          <span class="mech-set">
+                            <span class="mech-start-brace">
+                              {
+                            </span>
+                            <span class="mech-expression">
+                              <span class="mech-literal">
+                                <span class="mech-number">
+                                  1
+                                </span>
+                              </span>
+                            </span>
+                            , 
+                            <span class="mech-expression">
+                              <span class="mech-literal">
+                                <span class="mech-number">
+                                  2
+                                </span>
+                              </span>
+                            </span>
+                            , 
+                            <span class="mech-expression">
+                              <span class="mech-literal">
+                                <span class="mech-number">
+                                  3
+                                </span>
+                              </span>
+                            </span>
+                            <span class="mech-end-brace">
+                              }
+                            </span>
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="66886079494499391" class="mech-program-subtitle">
+                  <a href="#66886079494499391">
+                    Map
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">map := "{", whitespace*, mapping*, whitespace*, "}" ;
+mapping :=  whitespace*, expression, whitespace*, ":", whitespace*, expression, comma?, whitespace* ;
+</pre>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="45297339292174744" class="mech-program-subtitle">
+                  <a href="#45297339292174744">
+                    Tuple
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">tuple := "(", list0(",", expression), ")" ;
+tuple-struct = atom, "(", expression, ")" ;
+</pre>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Examples:
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <div class="mech-code-block">
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-structure">
+                          <span class="mech-tuple">
+                            <span class="mech-start-paren">
+                              (
+                            </span>
+                            )
+                            <span class="mech-end-paren">
+                              )
+                            </span>
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-factor">
+                          <span class="mech-parenthetical">
+                            (
+                            <span class="mech-factor">
+                              <span class="mech-expression">
+                                <span class="mech-literal">
+                                  <span class="mech-number">
+                                    1
+                                  </span>
+                                </span>
+                              </span>
+                            </span>
+                            )
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-structure">
+                          <span class="mech-tuple">
+                            <span class="mech-start-paren">
+                              (
+                            </span>
+                            <span class="mech-expression">
+                              <span class="mech-literal">
+                                <span class="mech-number">
+                                  1
+                                </span>
+                              </span>
+                            </span>
+                            ,
+                            <span class="mech-expression">
+                              <span class="mech-literal">
+                                <span class="mech-number">
+                                  1
+                                </span>
+                              </span>
+                            </span>
+                            ,
+                            <span class="mech-expression">
+                              <span class="mech-literal">
+                                <span class="mech-number">
+                                  3
+                                </span>
+                              </span>
+                            </span>
+                            )
+                            <span class="mech-end-paren">
+                              )
+                            </span>
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-structure">
+                          <span class="mech-tuple">
+                            <span class="mech-start-paren">
+                              (
+                            </span>
+                            <span class="mech-expression">
+                              <span class="mech-literal">
+                                <span class="mech-number">
+                                  1
+                                </span>
+                              </span>
+                            </span>
+                            ,
+                            <span class="mech-expression">
+                              <span class="mech-structure">
+                                <span class="mech-tuple">
+                                  <span class="mech-start-paren">
+                                    (
+                                  </span>
+                                  <span class="mech-expression">
+                                    <span class="mech-literal">
+                                      <span class="mech-number">
+                                        2
+                                      </span>
+                                    </span>
+                                  </span>
+                                  ,
+                                  <span class="mech-expression">
+                                    <span class="mech-literal">
+                                      <span class="mech-number">
+                                        3
+                                      </span>
+                                    </span>
+                                  </span>
+                                  )
+                                  <span class="mech-end-paren">
+                                    )
+                                  </span>
+                                </span>
+                              </span>
+                            </span>
+                            )
+                            <span class="mech-end-paren">
+                              )
+                            </span>
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-structure">
+                          <span class="mech-tuple">
+                            <span class="mech-start-paren">
+                              (
+                            </span>
+                            <span class="mech-expression">
+                              <span class="mech-literal">
+                                <span class="mech-number">
+                                  1
+                                </span>
+                              </span>
+                            </span>
+                            ,
+                            <span class="mech-expression">
+                              <span class="mech-literal">
+                                true
+                              </span>
+                            </span>
+                            ,
+                            <span class="mech-expression">
+                              <span class="mech-literal">
+                                <span class="mech-string">
+                                  "Hello"
+                                </span>
+                              </span>
+                            </span>
+                            )
+                            <span class="mech-end-paren">
+                              )
+                            </span>
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="48673187961689229" class="mech-program-subtitle">
+                  <a href="#48673187961689229">
+                    Table
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">table := table-start, (box-drawing-char | whitespace)*, table-header, (box-drawing-char | whitespace)*, table-row+, box-drawing-char*, whitespace*, table-end ;
+binding := identifier, kind-annotation?, colon, expression, ","? ;
+table-column := table-column := (space | tab)*, expression, ((space | tab)*, ("," | table-separator)?, (space | tab)*) ;
+table-row := table-separator?, (space | tab)*, table-column+, semicolon?, new-line?, (box-drawing-char+, new-line)? ;
+table-header := list1(space-tab+, field), (space | tab)*, (bar| box-vert), whitespace* ;
+field := identifier, kind-annotation? ;
+empty-table := table-start, whitespace*, table-end ;
+</pre>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Examples:
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <div class="mech-code-block">
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-structure">
+                          <table class="mech-table">
+                            <thead class="mech-table-header">
+                              <tr>
+                                <th class="mech-table-field">
+                                  <div class="mech-field">
+                                    <span class="mech-field-name">
+                                      x
+                                    </span>
+                                    <span class="mech-field-colon-op">
+                                      :
+                                    </span>
+                                    <span class="mech-field-kind">
+                                      <span class="mech-kind-annotation">
+                                        <<span class="mech-kind">
+                                          f32
+                                        </span>
+                                        >
+                                      </span>
+                                    </span>
+                                  </div>
+                                </th>
+                                <th class="mech-table-field">
+                                  <div class="mech-field">
+                                    <span class="mech-field-name">
+                                      y
+                                    </span>
+                                    <span class="mech-field-colon-op">
+                                      :
+                                    </span>
+                                    <span class="mech-field-kind">
+                                      <span class="mech-kind-annotation">
+                                        <<span class="mech-kind">
+                                          u8
+                                        </span>
+                                        >
+                                      </span>
+                                    </span>
+                                  </div>
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody class="mech-table-body">
+                              <tr class="mech-table-row">
+                                <td class="mech-table-column">
+                                  <span class="mech-expression">
+                                    <span class="mech-literal">
+                                      <span class="mech-number">
+                                        1.2
+                                      </span>
+                                    </span>
+                                  </span>
+                                </td>
+                                <td class="mech-table-column">
+                                  <span class="mech-expression">
+                                    <span class="mech-literal">
+                                      <span class="mech-number">
+                                        9
+                                      </span>
+                                    </span>
+                                  </span>
+                                </td>
+                              </tr>
+                              <tr class="mech-table-row">
+                                <td class="mech-table-column">
+                                  <span class="mech-expression">
+                                    <span class="mech-literal">
+                                      <span class="mech-number">
+                                        1.3
+                                      </span>
+                                    </span>
+                                  </span>
+                                </td>
+                                <td class="mech-table-column">
+                                  <span class="mech-expression">
+                                    <span class="mech-literal">
+                                      <span class="mech-number">
+                                        8
+                                      </span>
+                                    </span>
+                                  </span>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="7990985436189957" class="mech-program-subtitle">
+                  <a href="#7990985436189957">
+                    Record
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">record := table-start, whitespace*, binding+, whitespace*, table-end ;
+</pre>
+                </div>
+                <div class="mech-section-element">
+                  <p class="mech-paragraph">
+                    Examples:
+                  </p>
+                </div>
+                <div class="mech-section-element">
+                  <div class="mech-code-block">
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-structure">
+                          <span class="mech-record">
+                            <span class="mech-start-brace">
+                              {
+                            </span>
+                            <span class="mech-binding">
+                              <span class="mech-binding-name">
+                                x
+                              </span>
+                              <span class="mech-binding-colon-op">
+                                :
+                              </span>
+                              <span class="mech-binding-value">
+                                <span class="mech-expression">
+                                  <span class="mech-literal">
+                                    <span class="mech-number">
+                                      1
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                            </span>
+                            , 
+                            <span class="mech-binding">
+                              <span class="mech-binding-name">
+                                y
+                              </span>
+                              <span class="mech-binding-colon-op">
+                                :
+                              </span>
+                              <span class="mech-binding-value">
+                                <span class="mech-expression">
+                                  <span class="mech-literal">
+                                    <span class="mech-string">
+                                      "a"
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                            </span>
+                            , 
+                            <span class="mech-binding">
+                              <span class="mech-binding-name">
+                                z
+                              </span>
+                              <span class="mech-binding-colon-op">
+                                :
+                              </span>
+                              <span class="mech-binding-value">
+                                <span class="mech-expression">
+                                  <span class="mech-structure">
+                                    <span class="mech-matrix">
+                                      <span class="mech-bracket start">
+                                        [
+                                      </span>
+                                      <div class="mech-matrix-column">
+                                        <span class="mech-matrix-element">
+                                          <span class="mech-expression">
+                                            <span class="mech-literal">
+                                              <span class="mech-number">
+                                                1
+                                              </span>
+                                            </span>
+                                          </span>
+                                        </span>
+                                      </div>
+                                      <div class="mech-matrix-column">
+                                        <span class="mech-matrix-element">
+                                          <span class="mech-expression">
+                                            <span class="mech-literal">
+                                              <span class="mech-number">
+                                                2
+                                              </span>
+                                            </span>
+                                          </span>
+                                        </span>
+                                      </div>
+                                      <div class="mech-matrix-column">
+                                        <span class="mech-matrix-element">
+                                          <span class="mech-expression">
+                                            <span class="mech-literal">
+                                              <span class="mech-number">
+                                                3
+                                              </span>
+                                            </span>
+                                          </span>
+                                        </span>
+                                      </div>
+                                      <span class="mech-bracket end">
+                                        ]
+                                      </span>
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                            </span>
+                            <span class="mech-end-brace">
+                              }
+                            </span>
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-structure">
+                          <span class="mech-record">
+                            <span class="mech-start-brace">
+                              {
+                            </span>
+                            <span class="mech-binding">
+                              <span class="mech-binding-name">
+                                x
+                              </span>
+                              <span class="mech-binding-colon-op">
+                                :
+                              </span>
+                              <span class="mech-binding-value">
+                                <span class="mech-expression">
+                                  <span class="mech-literal">
+                                    <span class="mech-number">
+                                      1
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                            </span>
+                            , 
+                            <span class="mech-binding">
+                              <span class="mech-binding-name">
+                                y
+                              </span>
+                              <span class="mech-binding-colon-op">
+                                :
+                              </span>
+                              <span class="mech-binding-value">
+                                <span class="mech-expression">
+                                  <span class="mech-literal">
+                                    <span class="mech-string">
+                                      "a"
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                            </span>
+                            , 
+                            <span class="mech-binding">
+                              <span class="mech-binding-name">
+                                z
+                              </span>
+                              <span class="mech-binding-colon-op">
+                                :
+                              </span>
+                              <span class="mech-binding-value">
+                                <span class="mech-expression">
+                                  <span class="mech-structure">
+                                    <span class="mech-matrix">
+                                      <span class="mech-bracket start">
+                                        [
+                                      </span>
+                                      <div class="mech-matrix-column">
+                                        <span class="mech-matrix-element">
+                                          <span class="mech-expression">
+                                            <span class="mech-literal">
+                                              <span class="mech-number">
+                                                1
+                                              </span>
+                                            </span>
+                                          </span>
+                                        </span>
+                                        <span class="mech-matrix-element">
+                                          <span class="mech-expression">
+                                            <span class="mech-literal">
+                                              <span class="mech-number">
+                                                2
+                                              </span>
+                                            </span>
+                                          </span>
+                                        </span>
+                                        <span class="mech-matrix-element">
+                                          <span class="mech-expression">
+                                            <span class="mech-literal">
+                                              <span class="mech-number">
+                                                3
+                                              </span>
+                                            </span>
+                                          </span>
+                                        </span>
+                                      </div>
+                                      <span class="mech-bracket end">
+                                        ]
+                                      </span>
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                            </span>
+                            <span class="mech-end-brace">
+                              }
+                            </span>
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                    <div class="mech-code">
+                      <span class="mech-expression">
+                        <span class="mech-structure">
+                          <span class="mech-record">
+                            <span class="mech-start-brace">
+                              {
+                            </span>
+                            <span class="mech-binding">
+                              <span class="mech-binding-name">
+                                a
+                              </span>
+                              <span class="mech-binding-colon-op">
+                                :
+                              </span>
+                              <span class="mech-binding-value">
+                                <span class="mech-expression">
+                                  <span class="mech-structure">
+                                    <span class="mech-record">
+                                      <span class="mech-start-brace">
+                                        {
+                                      </span>
+                                      <span class="mech-binding">
+                                        <span class="mech-binding-name">
+                                          b
+                                        </span>
+                                        <span class="mech-binding-colon-op">
+                                          :
+                                        </span>
+                                        <span class="mech-binding-value">
+                                          <span class="mech-expression">
+                                            <span class="mech-literal">
+                                              <span class="mech-number">
+                                                1
+                                              </span>
+                                            </span>
+                                          </span>
+                                        </span>
+                                      </span>
+                                      , 
+                                      <span class="mech-binding">
+                                        <span class="mech-binding-name">
+                                          c
+                                        </span>
+                                        <span class="mech-binding-colon-op">
+                                          :
+                                        </span>
+                                        <span class="mech-binding-value">
+                                          <span class="mech-expression">
+                                            <span class="mech-literal">
+                                              <span class="mech-string">
+                                                "hi"
+                                              </span>
+                                            </span>
+                                          </span>
+                                        </span>
+                                      </span>
+                                      <span class="mech-end-brace">
+                                        }
+                                      </span>
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                            </span>
+                            , 
+                            <span class="mech-binding">
+                              <span class="mech-binding-name">
+                                b
+                              </span>
+                              <span class="mech-binding-colon-op">
+                                :
+                              </span>
+                              <span class="mech-binding-value">
+                                <span class="mech-expression">
+                                  <span class="mech-structure">
+                                    <span class="mech-matrix">
+                                      <span class="mech-bracket start">
+                                        [
+                                      </span>
+                                      <div class="mech-matrix-column">
+                                        <span class="mech-matrix-element">
+                                          <span class="mech-expression">
+                                            <span class="mech-literal">
+                                              <span class="mech-number">
+                                                1
+                                              </span>
+                                            </span>
+                                          </span>
+                                        </span>
+                                        <span class="mech-matrix-element">
+                                          <span class="mech-expression">
+                                            <span class="mech-literal">
+                                              <span class="mech-number">
+                                                2
+                                              </span>
+                                            </span>
+                                          </span>
+                                        </span>
+                                        <span class="mech-matrix-element">
+                                          <span class="mech-expression">
+                                            <span class="mech-literal">
+                                              <span class="mech-number">
+                                                3
+                                              </span>
+                                            </span>
+                                          </span>
+                                        </span>
+                                      </div>
+                                      <span class="mech-bracket end">
+                                        ]
+                                      </span>
+                                    </span>
+                                  </span>
+                                </span>
+                              </span>
+                            </span>
+                            <span class="mech-end-brace">
+                              }
+                            </span>
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="17615722433656962" class="mech-program-subtitle">
+              <a href="#17615722433656962">
+                Expressions
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <pre class="mech-code-block">expression := range-expression | formula ;
+</pre>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="71500568225100300" class="mech-program-subtitle">
+                  <a href="#71500568225100300">
+                    Formula 
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">parenthetical-term := left-parenthesis, formula, right-parenthesis ;
+negate-factor := "-", factor ;
+not-factor := "not", factor ;
+
+formula := l1, (range-operator, l1)* ;
+add-sub-operator := add | subtract ;
+l1 := l2, (add-sub-operator, l2)* ;
+mul-div-operator := multiply | divide ;
+matrix-operator := matrix-multiply | multiply | divide | matrix-solve ;
+l2 := l3, (mul-div-operator | matrix-operator, l3)* ;
+exponent-operator := exponent ;
+l3 := l4, (exponent-operator, l4)* ;
+logic-operator := and | or | xor ;
+l4 := l5, (logic-operator, l5)* ;
+comparison-operator := not-equal | equal-to | greater-than-equal | greater-than | less-than-equal | less-than ;
+l5 := factor, (comparison-operator, factor)* ;
+
+factor := (parenthetical-term | structure | fsm-pipe | function-call | literal | slice | var), transpose? ;
+</pre>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="69443252458544776" class="mech-program-subtitle">
+                  <a href="#69443252458544776">
+                    Arithmetic
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">+    add               integers, floats, complex values, strings
+-    subtract          integers, floats, complex values
+*    multiply          integers, floats, complex values
+/    divide            integers, floats, complex values
+^    exponent          integers, floats, complex values
+%    remainder         integers
+</pre>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="9615151635654986" class="mech-program-subtitle">
+                  <a href="#9615151635654986">
+                    Matrix
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">\              solve          
+·              dot product    
+⨯              cross product  
+**             matrix multiply
+'              transpose      
+</pre>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="6566005626084704" class="mech-program-subtitle">
+                  <a href="#6566005626084704">
+                    Comparison
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">!= | ¬= | ≠    not equal       
+==             equal                 
+>              greater         
+<              less            
+>= | ≥         greater or equal
+<= | ≤         less or equal   
+</pre>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="5930734924315717" class="mech-program-subtitle">
+                  <a href="#5930734924315717">
+                    Logical
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">|              or
+&              and
+! | ¬          not
+xor | ⊕ | ⊻   exclusive or
+</pre>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="14644804838715525" class="mech-program-subtitle">
+                  <a href="#14644804838715525">
+                    Set
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">∪       union
+∩       intersection
+∖       difference
+∁ | '   complement
+⊆       subset
+⊇       superset
+⊊       proper subset
+⊋       proper superset
+∈       element of
+∉       not element of
+</pre>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="60535861837135520" class="mech-program-subtitle">
+                  <a href="#60535861837135520">
+                    Range
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">..=     range inclusive
+..      range exclusive
+</pre>
+                </div>
+              </section>
+            </div>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="23424592651318844" class="mech-program-subtitle">
+              <a href="#23424592651318844">
+                Indexing
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <pre class="mech-code-block">subscript := (swizzle-subscript | dot-subscript-int | dot-subscript | bracket-subscript | brace-subscript)+ ; 
+index = identifier, subscript ;
+</pre>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="70770035521817702" class="mech-program-subtitle">
+                  <a href="#70770035521817702">
+                    Slicing
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">bracket-subscript := bracket-subscript := "[", list1(",", select-all | range-subscript | formula-subscript), "]" ;
+brace-subscript := brace-subscript := "{", list1(",", select-all | formula-subscript), "}" ;
+
+formula-subscript := formula ;
+range-subscript := range-expression ;
+select-all := ":" ;
+</pre>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="7127186079993695" class="mech-program-subtitle">
+                  <a href="#7127186079993695">
+                    Dot Index
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">dot-subscript := ".", identifier ;
+dot-subscript-int := ".", integer-literal ;
+</pre>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="41715567564737817" class="mech-program-subtitle">
+                  <a href="#41715567564737817">
+                    Swizzle
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">swizzle-subscript := ".", identifier, "," , list1(",", identifier) ;
+</pre>
+                </div>
+              </section>
+            </div>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="42210057184409305" class="mech-program-subtitle">
+              <a href="#42210057184409305">
+                Statements
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <pre class="mech-code-block">statement := variable-define | variable-assign | enum-define | fsm-declare | kind-define ;
+</pre>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="17682643806895169" class="mech-program-subtitle">
+                  <a href="#17682643806895169">
+                    Variable Define
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">define-operator := ":=" ;
+variable-define := tilde?, var, !assign-operator, define-operator, expression ;
+</pre>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="46004168174192996" class="mech-program-subtitle">
+                  <a href="#46004168174192996">
+                    Variable Assign
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">assign-operator := "=";
+variable-assign := slice-ref, !define-operator, assign-operator, expression ;
+</pre>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="66301087657226087" class="mech-program-subtitle">
+                  <a href="#66301087657226087">
+                    Op-Assign
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">add-assign-operator := "+=";
+sub-assign-operator := "-=";
+mul-assign-operator := "*=";
+div-assign-operator := "/=";
+exp-assign-operator := "^=";
+op-assign-operator := add-assign-operator | sub-assign-operator | mul-assign-operator | div-assign-operator | exp-assign-operator ;
+op-assign := slice-ref, !define-operator, op-assign-operator, expression ;
+</pre>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="43918846925318846" class="mech-program-subtitle">
+                  <a href="#43918846925318846">
+                    Enum Define
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">enum-define := "<", identifier, ">", define-operator, list1(enum-separator, enum-variant);
+enum-variant := grave?, identifier, enum-variant-kind? ;
+enum-variant-kind := "(", kind-annotation, ")" ;
+</pre>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="55850960549636316" class="mech-program-subtitle">
+                  <a href="#55850960549636316">
+                    Kind Define
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">kind-define := "<", identifier, ">", define-operator, kind-annotation ;
+</pre>
+                </div>
+              </section>
+            </div>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="9518895069535147" class="mech-program-subtitle">
+              <a href="#9518895069535147">
+                Functions
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="55882549029406679" class="mech-program-subtitle">
+                  <a href="#55882549029406679">
+                    Function Define
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">function-define := identifier, "(", list0(list-separator function-arg), ")", "=", (function-out-args | function-out-arg), define-operator, list1((whitespace1 | statement-separator), statement), period ;
+function-out-args := "(", list1(list-separator, function-arg),")" ;
+function-out-arg := function-arg ;
+function-arg := identifier, kind-annotation ;
+argument-list := "(", list0(",", call-arg-with-biding | call-arg) ;
+</pre>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="7863497594701243" class="mech-program-subtitle">
+                  <a href="#7863497594701243">
+                    Function Call
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">function-call := identifier, argument-list ;
+call-arg-with-binding := identifier, colon, expression ;
+call-arg := expression ;
+var := identifier, kind-annotation? ;
+</pre>
+                </div>
+              </section>
+            </div>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="27482184148317386" class="mech-program-subtitle">
+              <a href="#27482184148317386">
+                State Machines
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <pre class="mech-code-block">fsm := "#", identifier, argument-list?, kind-annotation? ;
+</pre>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="61658507070099573" class="mech-program-subtitle">
+                  <a href="#61658507070099573">
+                    Operators
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">output-operator := "=>" ;
+transition-operator := "->" ;
+async-transition-operator := "~>" ;
+guard-operator := "|" | "│" | "├" | "└" ;
+</pre>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="42873239106270548" class="mech-program-subtitle">
+                  <a href="#42873239106270548">
+                    Specification
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">fsm-specification := "#", identifier, "(", list0(",", var), ")", output-operator?, kind-annotation?, define-operator, fsm-state-definition+, "." ;
+fsm-tuple-struct := grave, identifier, "(", list1(",", fsm-pattern), ")" ;
+fsm-state-definition := guard-operator, grave, identifier, fsm-state-definition-variables? ;
+fsm-state-definition-variables := "(", list0(list-separator, var), ")" ;
+fsm-pipe := fsm-instance, (fsm-state-transition | fsm-async-transition | fsm-output)* ;
+fsm-declare := fsm, define-operator, fsm-pipe ;
+fsm-instance := "#", identifier, fsm-args? ;
+fsm-args := "(", list0(list-separator, (call-arg-with-binding | call-arg)), ")" ;
+</pre>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="26283582811565256" class="mech-program-subtitle">
+                  <a href="#26283582811565256">
+                    Implementation
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">fsm-implementation := "#", identifier, "(", list0(",", identifier), ")", transition-operator, fsm-pattern, whitespace*, fsm-arm+, "." ;
+fsm-arm := comment*, (fsm-transition | fsm-guard-arm), whitespace* ;
+fsm-guard-arm := comment*, fsm-pattern, fsm-guard+ ;
+fsm-guard := guard-operator, fsm-pattern, (fsm-statement-transition | fsm-state-transition | fsm-output | fsm-async-transition | fsm-block-transition)+ ;
+fsm-transition := comment*, fsm-pattern, (fsm-statement-transition | fsm-state-transition | fsm-output | fsm-async-transition | fsm-block-transition)+ ;
+fsm-state-transition := transition-operator, fsm-pattern ;
+fsm-async-transition := async-transition-operator, fsm-pattern ;
+fsm-statement-transition := transition-operator, statement ;
+fsm-block-transition := transition-operator, left-brace, mech-code+, right-brace ;
+fsm-output := output-operator, fsm-pattern ;
+fsm-pattern := fsm-tuple-struct | wildcard | formula ;
+wildcard := "*" ;
+</pre>
+                </div>
+              </section>
+            </div>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="58856088105263747" class="mech-program-subtitle">
+              <a href="#58856088105263747">
+                Mechdown
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="53612727690234225" class="mech-program-subtitle">
+                  <a href="#53612727690234225">
+                    Markdown
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">title := text+, new-line, equal+, (space|tab)*, whitespace* ;
+subtitle := digit-token+, period, space*, text+, new-line, dash+, (space|tab)*, new-line, (space|tab)*, whitespace* ;
+number-subtitle := (space|tab)*, "(", integer-literal, ")", (space|tab)+, text+, (space|tab)*, whitespace* ;
+alpha-subtitle := (space|tab)*, "(", alpha, ")", (space|tab)+, text+, (space|tab)*, whitespace* ;
+
+paragraph-symbol := ampersand | at | slash | backslash | asterisk | caret | hashtag | underscore | equal | tilde | plus | percent ;
+paragraph-starter := (word | number | quote | left-angle | right-angle | left-bracket | right-bracket | period | exclamation | question | comma | colon | semicolon | left-parenthesis | right-parenthesis | emoji)+ ;
+paragraph-element := (!define-operator, text)+ ;
+paragraph := paragraph-starter, paragraph-element* ;
+
+unordered-list := list-item+, new-line?, whitespace* ;
+list-item := dash, <space+>, <paragraph>, new-line* ;
+code-block := grave, <grave>, <grave>, <new-line>, any, <grave{3}, new-line, whitespace*> ;
+</pre>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="49127424790395456" class="mech-program-subtitle">
+                  <a href="#49127424790395456">
+                    Mech Extensions
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">mech-code := mech-code-alt, ("\n" | ";" | comment) ;
+</pre>
+                </div>
+              </section>
+            </div>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="39536909611123540" class="mech-program-subtitle">
+              <a href="#39536909611123540">
+                Mech Programs
+              </a>
+            </h2>
+            <div class="mech-section-element">
+              <pre class="mech-code-block">mech := program | statement ;
+</pre>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="50415808343066298" class="mech-program-subtitle">
+                  <a href="#50415808343066298">
+                    Programs
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">program := title?, body ;
+body := section+ ;
+</pre>
+                </div>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="4500462869366065" class="mech-program-subtitle">
+                  <a href="#4500462869366065">
+                    Sections
+                  </a>
+                </h4>
+                <div class="mech-section-element">
+                  <pre class="mech-code-block">section-element := mech-code | unordered-list | comment | paragraph | code-block | sub-section;
+sub-section-element := comment | unordered-list | mech-code | paragraph | code-block;
+sub-section := alpha-subtitle, sub-section-element* ;
+section := ul-subtitle?, section-element+ ;
+</pre>
+                </div>
+              </section>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div id = "mech-output">
+      </div>
+    </div>
+    <script type="module">
+      
+      import init, {WasmMech} from '/pkg/mech_wasm.js';
+      let wasm_core;
+      async function run() {
+        await init();
+        var code = `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`;
+        wasm_core = new WasmMech();
+        var xhr = new XMLHttpRequest();
+        var codeUrl = `/code${window.location.pathname}`;
+        xhr.open('GET', codeUrl, true);
+        xhr.onload = function (e) {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              var src = xhr.responseText;
+              wasm_core.run_program(src);
+              wasm_core.init();
+            } else {
+              console.error(xhr.statusText);
+            }
+          }
+        };
+        xhr.onerror = function (e) {
+          console.error("I've been waiting for this error. Look me up in formatter.rs");
+          console.error(xhr.statusText);
+        };
+        xhr.send(null);        
+      }
+      run();
+    
+    </script>
+  </body>
+</html>
