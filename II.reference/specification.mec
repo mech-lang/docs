@@ -21,16 +21,16 @@ The grammar is specified using extended Extended Backus-Naur Form (EBNF):
 
 ```
 ╭────────┬──────────┬───────────────────────────╮
-│ Symbol │ Meaning  | Semantics                 │
+│ Symbol │ Meaning  │ Semantics                 │
 ├────────┼──────────┼───────────────────────────┤
-│  "abc" │ terminal | string literal "abc"      │
-│  p*    │ many 0   | `p` for 0 or more times   │
-│  p+    │ many 1   | `p` for 1 or more times   │
-│  p?    │ optional | `p` for 0 or 1 time       │
-│ p1, p2 │ sequence | `p1` followed by `p2`     │
-│ p1 | p2│ choice   | `p1` or `p2`              │
-│  !!p   │ peek     | `p`; do not consume input │
-│  !p    │ not      | does not match `p`        │
+│  "abc" │ terminal │ string literal "abc"      │
+│  p*    │ many 0   │ `p` for 0 or more times   │
+│  p+    │ many 1   │ `p` for 1 or more times   │
+│  p?    │ optional │ `p` for 0 or 1 time       │
+│ p1, p2 │ sequence │ `p1` followed by `p2`     │
+│ p1 | p2│ choice   │ `p1` or `p2`              │
+│  !!p   │ peek     │ `p`; do not consume input │
+│  !p    │ not      │ does not match `p`        │
 │ (...)  │ group    │ incrase precedence        │
 ╰────────┴──────────┴───────────────────────────╯
 ```
@@ -40,7 +40,7 @@ The grammar is specified using extended Extended Backus-Naur Form (EBNF):
 
 (a) File Format
 
-Mech source code can be stored in files with either the .mec or .🤖 extension. 
+Mech source code can be stored in files with either the `.mec` or `.🤖` extension. 
 
 Source code is ecoded with UTF-8, which allows for Unicode support directly in the code. This choice has several benefits:
 
@@ -100,7 +100,7 @@ emoji := (!forbidden-emoji, emoji-grapheme) ;
 identifier := (alpha | emoji), (alpha | digit | symbol | emoji)* ;
 ```
 
-Identifiers start with letters or most UTF-8 encoded emoji characters, and can contain alphanumeric, most emojis, /, *, +, -, and ^ characters.
+Identifiers start with letters or most UTF-8 encoded emoji characters, and can contain alphanumeric, most emojis, /, \*, +, -, and ^ characters.
 
 Examples:
 
