@@ -102,7 +102,7 @@ identifier := (alpha | emoji), (alpha | digit | symbol | emoji)* ;
 
 Identifiers start with letters or most UTF-8 encoded emoji characters, and can contain alphanumeric, most emojis, /, \*, +, -, and ^ characters.
 
-Examples:
+**Examples:**
 
   Hello-Word
   io/stdout
@@ -153,15 +153,44 @@ Operators:
 ```
 
 ```
-punctuation := period | exclamation | question | comma | colon | semicolon | quote | apostrophe ;
-symbol := ampersand | bar | at | slash | hashtag | equal | backslash | tilde | plus | dash | asterisk | caret | underscore ;
-grouping-symbol := left-parenthesis | right-parenthesis | left-angle | right-angle | left-brace | right-brace | left-bracket | right-bracket ;
-paragraph-symbol := ampersand | at | slash | backslash | asterisk | caret | hashtag | underscore | equal | tilde | plus | percent ;
-paragraph-starter := (word | number | quote | left-angle | right-angle | left-bracket | right-bracket | period | exclamation | question | comma | colon | semicolon | left-parenthesis | right-parenthesis | emoji)+ ;
-paragraph-element := (!define-operator, text)+ ;
-paragraph := paragraph-starter, paragraph-element* ;
+punctuation := period 
+      | exclamation 
+      | question 
+      | comma 
+      | colon 
+      | semicolon 
+      | quote 
+      | apostrophe ;
+symbol := ampersand 
+      | bar 
+      | at 
+      | slash 
+      | hashtag 
+      | equal 
+      | backslash 
+      | tilde 
+      | plus 
+      | dash 
+      | asterisk 
+      | caret 
+      | underscore ;
+grouping-symbol := left-parenthesis 
+      | right-parenthesis 
+      | left-angle 
+      | right-angle 
+      | left-brace 
+      | right-brace 
+      | left-bracket 
+      | right-bracket ;
 escaped-char := backslash,  symbol | punctuation ;
-text := alpha | digit | space | tab | escaped-char | punctuation | grouping-symbol | symbol ;
+text := alpha 
+      | digit 
+      | space 
+      | tab 
+      | escaped-char 
+      | punctuation 
+      | grouping-symbol 
+      | symbol ;
 space-tab := space | tab ;
 list-separator := whitespace*, ",", whitespace* ;
 ```
@@ -170,10 +199,12 @@ list-separator := whitespace*, ",", whitespace* ;
 
 ```
 comment-sigil := "--" | "//" ;
-comment :=  whitespace*, comment-sigil, text+ ;
+comment :=  whitespace*
+      , comment-sigil
+      , text+ ;
 ```
 
-Examples:
+**Examples:**
 
   -- Single line comment.
   // Also a single line comment.
@@ -203,7 +234,7 @@ An integer literal is a sequence of digits representing a whole number. Mech sup
 - Octal: Prefixed with 0o, containing digits 0-7 (e.g., 0o755).
 - Hexadecimal: Prefixed with 0x, containing digits 0-9 and a-f or A-F (e.g., 0x1A3F).
 
-Examples:
+**Examples:**
 
   42
   0b1010
@@ -213,12 +244,21 @@ Examples:
 (b) Floats
 
 ```
-scientific-literal :=  (float-literal | integer-literal), ("e" | "E"), plus?, dash?, (float-literal | integer-literal) ;
-rational-literal := integer-literal, slash, integer-literal ;
-float-literal := "."?, digit+, "."?, digit* ;
+scientific-literal :=  (float-literal | integer-literal)
+      , ("e" | "E")
+      , plus?
+      , dash?
+      , (float-literal | integer-literal) ;
+rational-literal := integer-literal
+      , slash
+      , integer-literal ;
+float-literal := "."?
+      , digit+
+      , "."?
+      , digit* ;
 ```
 
-Examples:
+**Examples:**
 
   3.14
   0.001
@@ -230,7 +270,7 @@ Examples:
 string := quote, (!quote, text)*, quote ;
 ```
 
-Examples:
+**Examples:**
 
   "Hello, World!"
   "characters like \" and \\ are escaped with, \\ e.g. \\\""
@@ -247,7 +287,7 @@ english-true-literal := "true" ;
 english-false-literal := "false" ;
 ```
 
-Examples:
+**Examples:**
 
   true
   false
@@ -260,7 +300,7 @@ Examples:
 atom := "`", identifier ;
 ```
 
-Examples:
+**Examples:**
 
   `A
   `MyAtom
@@ -273,7 +313,7 @@ Examples:
 empty := underscore+ ;
 ```
 
-Examples:
+**Examples:**
 
   _
 
@@ -281,55 +321,155 @@ Examples:
 
 ```
 kind-annotation := left-angle, kind, right-angle ;
-kind := kind-fxn | kind-empty | kind-atom | kind-tuple | kind-scalar | kind-bracket | kind-map | kind-brace ;
+kind := kind-fxn 
+      | kind-empty 
+      | kind-atom 
+      | kind-tuple 
+      | kind-scalar 
+      | kind-bracket 
+      | kind-map 
+      | kind-brace ;
 kind-empty := underscore+ ;
 kind-atom := "`", identifier ;
-kind-map := "{", kind, ":", kind, "}" ;
-kind-fxn := "(", list0(list-separator, kind), ")", "=", "(", list0(list-separator, kind), ")" ;
-kind-brace := "{", list1(",", kind), "}", ":"?, list0("," , literal) ;
-kind-bracket := kind-bracket := "[", list1(",",kind), "]", ":"?, list0(",", literal) ;
-kind-tuple = "(", list1(",",kind) ")" ;
+kind-map := "{"
+      , kind
+      , ":"
+      , kind
+      , "}" ;
+kind-fxn := "("
+      , list0(list-separator, kind)
+      , ")"
+      , "="
+      , "("
+      , list0(list-separator, kind)
+      , ")" ;
+kind-brace := "{"
+      , list1(",", kind)
+      , "}"
+      , ":"?
+      , list0("," , literal) ;
+kind-bracket := "["
+      , list1(",",kind)
+      , "]"
+      , ":"?
+      , list0(",", literal) ;
+kind-tuple = "("
+      , list1(",",kind)
+      , ")" ;
 kind-scalar := identifier ;
 ```
 
-6. Structures
+6. Data Structures
 -------------------------------------------------------------------------------
 
 ```
-structure := empty-set | empty-table | table | matrix | tuple | tuple-struct | record | map | set ;
+structure := empty-set 
+      | empty-table 
+      | table 
+      | matrix 
+      | tuple 
+      | tuple-struct 
+      | record 
+      | map 
+      | set ;
 ```
+
+Data structures in Mech can be broadly classified into two categories: ordered collections that allow duplicated elements, and unordered collections that do now allow duplicated elements.
+
+**Ordered elements, duplicates allowed**
+    - Vector (Nx1)
+    - Row Vector (1xN)
+    - Matrix (N-D)
+    - Tuple
+
+**Unordered elements, no duplicates**
+    - Record
+    - Table
+    - Set
+    - Map
+
+Each data structure has its own semantics, which will be described in this section.
 
 (a) Matrix
 
 ```
-matrix-column := (space | tab)*, expression, ((space | tab)*, ("," | table-separator)?, (space | tab)*) ;
-matrix-row := table-separator?, (space | tab)*, matrix-column+, semicolon?, new-line?, (box-drawing-char+, new-line)? ;
-matrix := matrix-start, (box-drawing-char | whitespace)*, matrix-row*, box-drawing-char*, matrix-end ;
+matrix-column := space-tab* 
+      , expression, 
+      , (space-tab*, ("," | table-separator)?, space-tab*) ;
+matrix-row := table-separator?
+      , space-tab*
+      , matrix-column+
+      , semicolon?
+      , new-line?
+      , (box-drawing-char+, new-line)? ;
+matrix := matrix-start
+      , (box-drawing-char | whitespace)*
+      , matrix-row*
+      , box-drawing-char*
+      , matrix-end ;
 ```
 
-Examples:
+A matrix is a numbered sequence of elements of a single kind, arranged in rows and columns. The number of elements is called the length of the matrix and is never negative. The number of rows and columns is called the shape of the matrix. The shape is always a pair of non-negative integers. 
 
-  -- Matrix
+The shape is part of the matrix's kind; it must evaluate to a non-negative constant representable by a tuple of kind `(index,index)`. The shape of matrix `A` can be discovered using the built-in function `matrix/shape()`. The elements can be addressed by index indices `(1,1)` through `matrix/shape(A)`. 
+
+Matrix kinds are always two-dimensional, so row vectors and column vectors are also represented as matrices with a single row or column, respectively.
+
+**Examples:**
+
+  -- 3x3 Matrix
   [1 2 3
-  4 5 6
-  7 8 9]
+   4 5 6
+   7 8 9]
 
-  -- Row Vector
+  -- 3x2 Matrix
+  [1, 2; 3, 4; 5, 6]
+
+  -- 1x3 Row Vector
   [1 2 3]
 
-  -- Column Vector
+  -- 3x1 Column Vector
   [1
-  2
-  3]
+   2
+   3]
+  
+  -- 4x1 Column Vector
+  [1; 2; 3; 4]
+
+Fancy matrix syntax is supported so that formatted output from the Mech REPL can be used as program source or input.
+
+```
+┏           ┓
+┃ 1   2   3 ┃
+┃ 4   5   6 ┃
+┗           ┛
+```
+
+The elements of a matrix are indexed in the following ways:
+
+- **1D** - by their position in the matrix, starting from 1, in a column-major order starting at the top left corner of the matrix and proceeding down and to the right. The last element of the matrix, called the end of the matrix, is the most bottom right element.
+
+- **2D** - by the row and column index, starting from 1 for each.
+
+Negative indices indicate counting from the end of the matrix. For example, `-1` is the last element, `-2` is the second to last element, and so on.
 
 (b) Set
 
 ```
-set := "{", whitespace*, list0(("," | whitespace+), expression), whitespace*, "}" ;
-empty-set := empty-set := table-start, whitespace*, empty, whitespace*, table-end ;
+set := "{"
+      , whitespace*
+      , list0(("," | whitespace+)
+      , expression)
+      , whitespace*
+      , "}" ;
+empty-set := table-start
+      , whitespace*
+      , empty
+      , whitespace*
+      , table-end ;
 ```
 
-Examples:
+**Examples:**
 
   {1, 2, 3}
 
@@ -347,7 +487,7 @@ tuple := "(", list0(",", expression), ")" ;
 tuple-struct = atom, "(", expression, ")" ;
 ```
 
-Examples:
+**Examples:**
 
   ()                 
   (1)                
@@ -358,16 +498,41 @@ Examples:
 (e) Table
 
 ```
-table := table-start, (box-drawing-char | whitespace)*, table-header, (box-drawing-char | whitespace)*, table-row+, box-drawing-char*, whitespace*, table-end ;
-binding := identifier, kind-annotation?, colon, expression, ","? ;
-table-column := table-column := (space | tab)*, expression, ((space | tab)*, ("," | table-separator)?, (space | tab)*) ;
-table-row := table-separator?, (space | tab)*, table-column+, semicolon?, new-line?, (box-drawing-char+, new-line)? ;
-table-header := list1(space-tab+, field), (space | tab)*, (bar| box-vert), whitespace* ;
+table := table-start
+      , (box-drawing-char | whitespace)*
+      , table-header
+      , (box-drawing-char | whitespace)*
+      , table-row+
+      , box-drawing-char*
+      , whitespace*
+      , table-end ;
+binding := identifier
+      , kind-annotation?
+      , colon
+      , expression
+      , ","? ;
+table-column := (space | tab)*
+      , expression
+      , ((space | tab)*
+      , ("," | table-separator)?
+      , (space | tab)*) ;
+table-row := table-separator?
+      , (space | tab)*
+      , table-column+
+      , semicolon?
+      , new-line?
+      , (box-drawing-char+, new-line)? ;
+table-header := list1(space-tab+, field)
+      , (space | tab)*
+      , (bar| box-vert)
+      , whitespace* ;
 field := identifier, kind-annotation? ;
-empty-table := table-start, whitespace*, table-end ;
+empty-table := table-start
+      , whitespace*
+      , table-end ;
 ```
 
-Examples:
+**Examples:**
 
   { x<f32>  y<u8> | 
     1.2     9 
@@ -379,7 +544,7 @@ Examples:
 record := table-start, whitespace*, binding+, whitespace*, table-end ;
 ```
 
-Examples:
+**Examples:**
 
   { x: 1 y: "a", z: [1 2 3] }
   { x<u8>: 1, y<string>: "a", z<[u8]:3,1>: [1;2;3] }
@@ -403,16 +568,32 @@ formula := l1, (range-operator, l1)* ;
 add-sub-operator := add | subtract ;
 l1 := l2, (add-sub-operator, l2)* ;
 mul-div-operator := multiply | divide ;
-matrix-operator := matrix-multiply | multiply | divide | matrix-solve ;
+matrix-operator := matrix-multiply 
+      | multiply 
+      | divide 
+      | matrix-solve ;
 l2 := l3, (mul-div-operator | matrix-operator, l3)* ;
 exponent-operator := exponent ;
 l3 := l4, (exponent-operator, l4)* ;
-logic-operator := and | or | xor ;
+logic-operator := and 
+      | or 
+      | xor ;
 l4 := l5, (logic-operator, l5)* ;
-comparison-operator := not-equal | equal-to | greater-than-equal | greater-than | less-than-equal | less-than ;
+comparison-operator := not-equal 
+      | equal-to 
+      | greater-than-equal 
+      | greater-than 
+      | less-than-equal 
+      | less-than ;
 l5 := factor, (comparison-operator, factor)* ;
 
-factor := (parenthetical-term | structure | fsm-pipe | function-call | literal | slice | var), transpose? ;
+factor := (parenthetical-term 
+      | structure 
+      | fsm-pipe 
+      | function-call 
+      | literal 
+      | slice 
+      | var), transpose? ;
 ```
 
 (a) Arithmetic
@@ -482,16 +663,23 @@ xor | ⊕ | ⊻   exclusive or
 -------------------------------------------------------------------------------
 
 ```
-subscript := (swizzle-subscript | dot-subscript-int | dot-subscript | bracket-subscript | brace-subscript)+ ; 
-index = identifier, subscript ;
+subscript := swizzle-subscript 
+      | dot-subscript-int 
+      | dot-subscript 
+      | bracket-subscript 
+      | brace-subscript ; 
+index = identifier, subscript+ ;
 ```
 
 (a) Slicing
 
 ```
-bracket-subscript := bracket-subscript := "[", list1(",", select-all | range-subscript | formula-subscript), "]" ;
-brace-subscript := brace-subscript := "{", list1(",", select-all | formula-subscript), "}" ;
-
+bracket-subscript := "["
+      , list1(",", select-all | range-subscript | formula-subscript)
+      , "]" ;
+brace-subscript := "{"
+      , list1(",", select-all | formula-subscript)
+      , "}" ;
 formula-subscript := formula ;
 range-subscript := range-expression ;
 select-all := ":" ;
@@ -507,7 +695,10 @@ dot-subscript-int := ".", integer-literal ;
 (c) Swizzle
 
 ```
-swizzle-subscript := ".", identifier, "," , list1(",", identifier) ;
+swizzle-subscript := "."
+      , identifier
+      , "," 
+      , list1(",", identifier) ;
 ```
 
 9. Statements
@@ -521,14 +712,20 @@ statement := variable-define | variable-assign | enum-define | fsm-declare | kin
 
 ```
 define-operator := ":=" ;
-variable-define := tilde?, var, !assign-operator, define-operator, expression ;
+variable-define := tilde?, var
+      , !assign-operator
+      , define-operator
+      , expression ;
 ```
 
 (b) Variable Assign
 
 ```
 assign-operator := "=";
-variable-assign := slice-ref, !define-operator, assign-operator, expression ;
+variable-assign := slice-ref
+      , !define-operator
+      , assign-operator
+      , expression ;
 ```
 
 (c) Op-Assign
@@ -539,22 +736,40 @@ sub-assign-operator := "-=";
 mul-assign-operator := "*=";
 div-assign-operator := "/=";
 exp-assign-operator := "^=";
-op-assign-operator := add-assign-operator | sub-assign-operator | mul-assign-operator | div-assign-operator | exp-assign-operator ;
-op-assign := slice-ref, !define-operator, op-assign-operator, expression ;
+op-assign-operator := add-assign-operator 
+      | sub-assign-operator 
+      | mul-assign-operator 
+      | div-assign-operator 
+      | exp-assign-operator ;
+op-assign := slice-ref
+      , !define-operator
+      , op-assign-operator
+      , expression ;
 ```
 
 (c) Enum Define
 
 ```
-enum-define := "<", identifier, ">", define-operator, list1(enum-separator, enum-variant);
-enum-variant := grave?, identifier, enum-variant-kind? ;
-enum-variant-kind := "(", kind-annotation, ")" ;
+enum-define := "<"
+      , identifier, ">"
+      , define-operator
+      , list1(enum-separator, enum-variant);
+enum-variant := grave?
+      , identifier
+      , enum-variant-kind? ;
+enum-variant-kind := "("
+      , kind-annotation
+      , ")" ;
 ```
 
 (d) Kind Define
 
 ```
-kind-define := "<", identifier, ">", define-operator, kind-annotation ;
+kind-define := "<"
+      , identifier
+      , ">"
+      , define-operator
+      , kind-annotation ;
 ```
 
 10. Functions
@@ -563,8 +778,18 @@ kind-define := "<", identifier, ">", define-operator, kind-annotation ;
 (a) Function Define
 
 ```
-function-define := identifier, "(", list0(list-separator function-arg), ")", "=", (function-out-args | function-out-arg), define-operator, list1((whitespace1 | statement-separator), statement), period ;
-function-out-args := "(", list1(list-separator, function-arg),")" ;
+function-define := identifier
+      , "("
+      , list0(list-separator function-arg)
+      , ")"
+      , "="
+      , (function-out-args | function-out-arg)
+      , define-operator
+      , list1((whitespace1 | statement-separator), statement)
+      , period ;
+function-out-args := "("
+      , list1(list-separator, function-arg)
+      ,")" ;
 function-out-arg := function-arg ;
 function-arg := identifier, kind-annotation ;
 argument-list := "(", list0(",", call-arg-with-biding | call-arg) ;
@@ -574,7 +799,9 @@ argument-list := "(", list0(",", call-arg-with-biding | call-arg) ;
 
 ```
 function-call := identifier, argument-list ;
-call-arg-with-binding := identifier, colon, expression ;
+call-arg-with-binding := identifier
+      , colon
+      , expression ;
 call-arg := expression ;
 var := identifier, kind-annotation? ;
 ```
@@ -583,7 +810,10 @@ var := identifier, kind-annotation? ;
 -------------------------------------------------------------------------------
 
 ```
-fsm := "#", identifier, argument-list?, kind-annotation? ;
+fsm := "#"
+      , identifier
+      , argument-list?
+      , kind-annotation? ;
 ```
 
 (a) Operators
@@ -592,36 +822,82 @@ fsm := "#", identifier, argument-list?, kind-annotation? ;
 output-operator := "=>" ;
 transition-operator := "->" ;
 async-transition-operator := "~>" ;
-guard-operator := "|" | "│" | "├" | "└" ;
+guard-operator := "|" 
+      | "│" 
+      | "├" 
+      | "└" ;
 ```
 
 (b) Specification
 
 ```
-fsm-specification := "#", identifier, "(", list0(",", var), ")", output-operator?, kind-annotation?, define-operator, fsm-state-definition+, "." ;
-fsm-tuple-struct := grave, identifier, "(", list1(",", fsm-pattern), ")" ;
-fsm-state-definition := guard-operator, grave, identifier, fsm-state-definition-variables? ;
-fsm-state-definition-variables := "(", list0(list-separator, var), ")" ;
+fsm-specification := "#"
+      , identifier
+      , "("
+      , list0(",", var)
+      , ")"
+      , output-operator?
+      , kind-annotation?, define-operator, fsm-state-definition+, "." ;
+fsm-tuple-struct := grave
+      , identifier
+      , "("
+      , list1(",", fsm-pattern)
+      , ")" ;
+fsm-state-definition := guard-operator
+      , grave
+      , identifier
+      , fsm-state-definition-variables? ;
+fsm-state-definition-variables := "("
+      , list0(list-separator, var)
+      , ")" ;
 fsm-pipe := fsm-instance, (fsm-state-transition | fsm-async-transition | fsm-output)* ;
-fsm-declare := fsm, define-operator, fsm-pipe ;
-fsm-instance := "#", identifier, fsm-args? ;
-fsm-args := "(", list0(list-separator, (call-arg-with-binding | call-arg)), ")" ;
+fsm-declare := fsm
+      , define-operator
+      , fsm-pipe ;
+fsm-instance := "#"
+      , identifier
+      , fsm-args? ;
+fsm-args := "("
+      , list0(list-separator, (call-arg-with-binding | call-arg))
+      , ")" ;
 ```
 
 (c) Implementation
 
 ```
-fsm-implementation := "#", identifier, "(", list0(",", identifier), ")", transition-operator, fsm-pattern, whitespace*, fsm-arm+, "." ;
-fsm-arm := comment*, (fsm-transition | fsm-guard-arm), whitespace* ;
-fsm-guard-arm := comment*, fsm-pattern, fsm-guard+ ;
-fsm-guard := guard-operator, fsm-pattern, (fsm-statement-transition | fsm-state-transition | fsm-output | fsm-async-transition | fsm-block-transition)+ ;
-fsm-transition := comment*, fsm-pattern, (fsm-statement-transition | fsm-state-transition | fsm-output | fsm-async-transition | fsm-block-transition)+ ;
+fsm-implementation := "#"
+      , identifier
+      , "("
+      , list0(",", identifier)
+      , ")"
+      , transition-operator
+      , fsm-pattern
+      , whitespace*
+      , fsm-arm+
+      , "." ;
+fsm-arm := comment*
+      , (fsm-transition | fsm-guard-arm)
+      , whitespace* ;
+fsm-guard-arm := comment*
+      , fsm-pattern
+      , fsm-guard+ ;
+fsm-guard := guard-operator
+      , fsm-pattern
+      , (fsm-statement-transition | fsm-state-transition | fsm-output | fsm-async-transition | fsm-block-transition)+ ;
+fsm-transition := comment*
+      , fsm-pattern
+      , (fsm-statement-transition | fsm-state-transition | fsm-output | fsm-async-transition | fsm-block-transition)+ ;
 fsm-state-transition := transition-operator, fsm-pattern ;
 fsm-async-transition := async-transition-operator, fsm-pattern ;
 fsm-statement-transition := transition-operator, statement ;
-fsm-block-transition := transition-operator, left-brace, mech-code+, right-brace ;
+fsm-block-transition := transition-operator
+      , left-brace
+      , mech-code+
+      , right-brace ;
 fsm-output := output-operator, fsm-pattern ;
-fsm-pattern := fsm-tuple-struct | wildcard | formula ;
+fsm-pattern := fsm-tuple-struct 
+      | wildcard 
+      | formula ;
 wildcard := "*" ;
 ```
 
@@ -635,12 +911,8 @@ title := text+, new-line, equal+, (space|tab)*, whitespace* ;
 subtitle := digit-token+, period, space*, text+, new-line, dash+, (space|tab)*, new-line, (space|tab)*, whitespace* ;
 number-subtitle := (space|tab)*, "(", integer-literal, ")", (space|tab)+, text+, (space|tab)*, whitespace* ;
 alpha-subtitle := (space|tab)*, "(", alpha, ")", (space|tab)+, text+, (space|tab)*, whitespace* ;
-
-paragraph-symbol := ampersand | at | slash | backslash | asterisk | caret | hashtag | underscore | equal | tilde | plus | percent ;
-paragraph-starter := (word | number | quote | left-angle | right-angle | left-bracket | right-bracket | period | exclamation | question | comma | colon | semicolon | left-parenthesis | right-parenthesis | emoji)+ ;
 paragraph-element := (!define-operator, text)+ ;
 paragraph := paragraph-starter, paragraph-element* ;
-
 unordered-list := list-item+, new-line?, whitespace* ;
 list-item := dash, <space+>, <paragraph>, new-line* ;
 code-block := grave, <grave>, <grave>, <new-line>, any, <grave{3}, new-line, whitespace*> ;
@@ -669,8 +941,17 @@ body := section+ ;
 (b) Sections
 
 ```
-section-element := mech-code | unordered-list | comment | paragraph | code-block | sub-section;
-sub-section-element := comment | unordered-list | mech-code | paragraph | code-block;
+section-element := mech-code 
+      | unordered-list 
+      | comment 
+      | paragraph 
+      | code-block 
+      | sub-section;
+sub-section-element := comment 
+      | unordered-list 
+      | mech-code 
+      | paragraph 
+      | code-block;
 sub-section := alpha-subtitle, sub-section-element* ;
 section := ul-subtitle?, section-element+ ;
 ```
