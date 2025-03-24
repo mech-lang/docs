@@ -4,7 +4,7 @@ Mech Language Specification
 1. Introduction
 -------------------------------------------------------------------------------
 
-This document specifies the default syntax of the Mech programming system, for developing reactive systems like robots, games, and user interfaces. The language specified herein is one of many possible syntaxes and interfaces for Mech, but it may be thought of as the default texual representation of Mech.
+This document specifies the default syntax of the Mech programming system, which is designed for developing reactive systems like robots, games, and user interfaces. The syntax specified herein is one of many possible syntaxes and interfaces for Mech, but it may be thought of as the default texual representation of Mech.
 
 This specification starts by defining the most atomic elements of the language, and then builds up to more complex structures.
 
@@ -24,15 +24,44 @@ The grammar is specified using extended Extended Backus-Naur Form (EBNF):
 │ Symbol │ Meaning  │ Semantics                 │
 ├────────┼──────────┼───────────────────────────┤
 │  "abc" │ terminal │ string literal "abc"      │
-│  p*    │ many 0   │ `p` for 0 or more times   │
-│  p+    │ many 1   │ `p` for 1 or more times   │
-│  p?    │ optional │ `p` for 0 or 1 time       │
 │ p1, p2 │ sequence │ `p1` followed by `p2`     │
 │ p1 | p2│ choice   │ `p1` or `p2`              │
-│  !!p   │ peek     │ `p`; do not consume input │
-│  !p    │ not      │ does not match `p`        │
-│ (...)  │ group    │ incrase precedence        │
+│   *p   │ repeat 0 │ `p` for 0 or more times   │
+│   +p   │ repeat 1 │ `p` for 1 or more times   │
+│   ?p   │ optional │ `p` for 0 or 1 time       │
+│   >p   │ peek     │ `p`; do not consume input │
+│   ¬p   │ not      │ does not match `p`        │
+│  (...) │ group    │ incrase precedence        │
 ╰────────┴──────────┴───────────────────────────╯
+```
+
+The grammar grammar:
+
+```ebnf
+grammar := +rule ;
+identifier := alpha-token, *(alpha-token | digit-token | dash) ;
+rule := identifier
+      , define-operator
+      , expression
+      , semicolon ;
+expression := term, *( "|", term ) ;
+term := factor, *( ",", factor ) ;
+definition := identifier ;
+repeat0 := "*", factor ;
+repeat1 := "+", factor ;
+optional := "?", factor ;
+peek := ">", factor ;
+not := "¬", factor ;
+factor := repeat0 
+      | repeat1 
+      | optional 
+      | peek 
+      | not 
+      | group 
+      | definition 
+      | terminal ;
+group := "(", expression, ")" ;
+terminal := quote, +any-token, quote ;
 ```
 
 3. Source Code Representation
@@ -140,19 +169,19 @@ Grouping symbols:
 
 Operators:
 ```
-:= = += -= *= /= ^=
-+ - * / ^ %
->- -<
-** · ⨯ \ ' 
-| & xor ⊕ ⊻ ! ¬
-∪ ∩ ∖ ∁ ⊆ ⊇ ⊊ ⊋ ∈ ∉ 
-.. ..=
-!= ¬= ≠ == > < >= ≤ ≥
-=> -> ~>
-| │ ├ └
+Assign       := = += -= *= /= ^=
+Arithmetic   + - * / ^ %
+Split        >- -<
+Matrix       ** · ⨯ \ ' 
+Logic        | & xor ⊕ ⊻ ! ¬
+Set          ∪ ∩ ∖ ∁ ⊆ ⊇ ⊊ ⊋ ∈ ∉ 
+Range        .. ..=
+Condition    != ¬= ≠ == > < >= ≤ ≥
+Transition   => -> ~>
+Guard        | │ ├ └
 ```
 
-```
+```ebnf
 punctuation := period 
       | exclamation 
       | question 
@@ -192,16 +221,16 @@ text := alpha
       | grouping-symbol 
       | symbol ;
 space-tab := space | tab ;
-list-separator := whitespace*, ",", whitespace* ;
+list-separator := *whitespace, ",", *whitespace ;
 ```
 
 (d) Comments
 
-```
+```ebnf
 comment-sigil := "--" | "//" ;
-comment :=  whitespace*
+comment :=  *whitespace
       , comment-sigil
-      , text+ ;
+      , +text ;
 ```
 
 **Examples:**
@@ -212,19 +241,19 @@ comment :=  whitespace*
 5. Literals
 -------------------------------------------------------------------------------
 
-```
-literal := (number | string | atom | boolean | empty), kind-annotation? ;
+```ebnf
+literal := (number | string | atom | boolean | empty), ?kind-annotation ;
 ```
 
 (a) Integers
 
-```
-number := number := real-number, "i"? | ("+", real-number, "i")? ;
-integer-literal := digit+;
-decimal-literal := "0d", <digit+> ;
-hexadecimal-literal := "0x", <hex-digit+> ;
-octal-literal := "0o", <oct-digit+> ;
-binary-literal := "0b", <bin-digit+> ;
+```ebnf
+number := real-number, ?"i" | ?("+", real-number, "i") ;
+integer-literal := +digit;
+decimal-literal := "0d", +digit ;
+hexadecimal-literal := "0x", +hex-digit ;
+octal-literal := "0o", +oct-digit ;
+binary-literal := "0b", +bin-digit ;
 ```
 
 An integer literal is a sequence of digits representing a whole number. Mech supports decimal, binary, octal, and hexadecimal integer literals, each distinguished by a unique prefix:
@@ -243,19 +272,19 @@ An integer literal is a sequence of digits representing a whole number. Mech sup
 
 (b) Floats
 
-```
+```ebnf
 scientific-literal :=  (float-literal | integer-literal)
       , ("e" | "E")
-      , plus?
-      , dash?
+      , ?plus
+      , ?dash
       , (float-literal | integer-literal) ;
 rational-literal := integer-literal
       , slash
       , integer-literal ;
-float-literal := "."?
-      , digit+
-      , "."?
-      , digit* ;
+float-literal := ?"."
+      , +digit
+      , ?"."
+      , *digit ;
 ```
 
 **Examples:**
@@ -266,8 +295,8 @@ float-literal := "."?
 
 (c) Strings
 
-```
-string := quote, (!quote, text)*, quote ;
+```ebnf
+string := quote, *(¬quote, text), quote ;
 ```
 
 **Examples:**
@@ -277,7 +306,7 @@ string := quote, (!quote, text)*, quote ;
 
 (d) Boolean
 
-```
+```ebnf
 boolean := true-literal | false-literal ;
 true-literal := english-true-literal | true-symbol ;
 false-literal := english-false-literal | false-symbol ;
@@ -296,7 +325,7 @@ english-false-literal := "false" ;
 
 (e) Atoms
 
-```
+```ebnf
 atom := "`", identifier ;
 ```
 
@@ -309,8 +338,8 @@ atom := "`", identifier ;
 
 (f) Empty
 
-```
-empty := underscore+ ;
+```ebnf
+empty := +underscore ;
 ```
 
 **Examples:**
@@ -329,7 +358,7 @@ kind := kind-fxn
       | kind-bracket 
       | kind-map 
       | kind-brace ;
-kind-empty := underscore+ ;
+kind-empty := +underscore ;
 kind-atom := "`", identifier ;
 kind-map := "{"
       , kind
@@ -362,7 +391,7 @@ kind-scalar := identifier ;
 6. Data Structures
 -------------------------------------------------------------------------------
 
-```
+```ebnf
 structure := empty-set 
       | empty-table 
       | table 
@@ -392,20 +421,20 @@ Each data structure has its own semantics, which will be described in this secti
 
 (a) Matrix
 
-```
-matrix-column := space-tab* 
-      , expression, 
-      , (space-tab*, ("," | table-separator)?, space-tab*) ;
-matrix-row := table-separator?
-      , space-tab*
-      , matrix-column+
-      , semicolon?
-      , new-line?
-      , (box-drawing-char+, new-line)? ;
+```ebnf
+matrix-column := *space-tab 
+      , expression 
+      , (*space-tab, ?("," | table-separator), *space-tab) ;
+matrix-row := ?table-separator
+      , *space-tab
+      , +matrix-column
+      , ?semicolon
+      , ?new-line
+      , ?(+box-drawing-char, new-line) ;
 matrix := matrix-start
-      , (box-drawing-char | whitespace)*
-      , matrix-row*
-      , box-drawing-char*
+      , *(box-drawing-char | whitespace)
+      , *matrix-row
+      , *box-drawing-char
       , matrix-end ;
 ```
 
@@ -705,7 +734,11 @@ swizzle-subscript := "."
 -------------------------------------------------------------------------------
 
 ```
-statement := variable-define | variable-assign | enum-define | fsm-declare | kind-define ;
+statement := variable-define 
+      | variable-assign 
+      | enum-define 
+      | fsm-declare 
+      | kind-define ;
 ```
 
 (a) Variable Define
