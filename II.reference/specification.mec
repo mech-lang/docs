@@ -41,9 +41,9 @@ The grammar grammar:
 grammar := +rule ;
 identifier := alpha-token, *(alpha-token | digit-token | dash) ;
 rule := identifier
-      , define-operator
+      , ":="
       , expression
-      , semicolon ;
+      , ";" ;
 expression := term, *( "|", term ) ;
 term := factor, *( ",", factor ) ;
 definition := identifier ;
@@ -108,25 +108,25 @@ Tokens are the smallest units of meaning in Mech. They include letters, digits, 
 
 Some Unicode characters are reserved for box drawing, and therefore are excluded from includsion in valid identifiers.
 
-```
-alpha = "a".."z" | "A".."Z";
-digt = "0".."9";
-emoji := emoji-grapheme+ ;
-word := alpha+ ;
-digit1 := digit+ ;
-digit0 := digit* ;
+```ebnf
+alpha := "a".."z" | "A".."Z" ;
+digt := "0".."9";
+emoji := +emoji-grapheme ;
+word := +alpha ;
+digit1 := +digit ;
+digit0 := *digit ;
 bin-digit := "0" | "1" ;
 hex-digit := digit | "a" .. "f" | "A" .. "F" ;
 oct-digit := "0" .. "7" ;
 number := digit1 ;
 forbidden-emoji := box-drawing | other-forbidden-shapes ;
-emoji := (!forbidden-emoji, emoji-grapheme) ;
+emoji := (¬forbidden-emoji, emoji-grapheme) ;
 ```
 
 (b) Identifiers
 
-```
-identifier := (alpha | emoji), (alpha | digit | symbol | emoji)* ;
+```ebnf
+identifier := (alpha | emoji), *(alpha | digit | symbol | emoji) ;
 ```
 
 Identifiers start with letters or most UTF-8 encoded emoji characters, and can contain alphanumeric, most emojis, /, \*, +, -, and ^ characters.
@@ -504,9 +504,9 @@ empty-set := table-start
 
 (c) Map
 
-```
-map := "{", whitespace*, mapping*, whitespace*, "}" ;
-mapping :=  whitespace*, expression, whitespace*, ":", whitespace*, expression, comma?, whitespace* ;
+```ebnf
+map := "{", *whitespace, *mapping, *whitespace, "}" ;
+mapping :=  *whitespace, expression, *whitespace, ":", *whitespace, expression, ?comma, *whitespace ;
 ```
 
 (d) Tuple
@@ -528,36 +528,36 @@ tuple-struct = atom, "(", expression, ")" ;
 
 ```
 table := table-start
-      , (box-drawing-char | whitespace)*
+      , *(box-drawing-char | whitespace)
       , table-header
-      , (box-drawing-char | whitespace)*
-      , table-row+
-      , box-drawing-char*
-      , whitespace*
+      , *(box-drawing-char | whitespace)
+      , +table-row
+      , *box-drawing-char
+      , *whitespace
       , table-end ;
 binding := identifier
-      , kind-annotation?
+      , ?kind-annotation
       , colon
       , expression
-      , ","? ;
-table-column := (space | tab)*
+      , ?"," ;
+table-column := *(space | tab)
       , expression
-      , ((space | tab)*
-      , ("," | table-separator)?
-      , (space | tab)*) ;
-table-row := table-separator?
-      , (space | tab)*
-      , table-column+
-      , semicolon?
-      , new-line?
-      , (box-drawing-char+, new-line)? ;
-table-header := list1(space-tab+, field)
-      , (space | tab)*
+      , *((space | tab)
+            , ?("," | table-separator)
+            , *(space | tab)) ;
+table-row := ?table-separator
+      , *(space | tab)
+      , +table-column
+      , ?semicolon
+      , ?new-line
+      , ?(+box-drawing-char, new-line) ;
+table-header := list1(+space-tab, field)
+      , *(space | tab)
       , (bar| box-vert)
-      , whitespace* ;
-field := identifier, kind-annotation? ;
+      , *whitespace ;
+field := identifier, ?kind-annotation ;
 empty-table := table-start
-      , whitespace*
+      , *whitespace
       , table-end ;
 ```
 
@@ -569,8 +569,12 @@ empty-table := table-start
 
 (f) Record
 
-```
-record := table-start, whitespace*, binding+, whitespace*, table-end ;
+```ebnf
+record := table-start
+      , *whitespace
+      , +binding
+      , *whitespace
+      , table-end ;
 ```
 
 **Examples:**
@@ -582,47 +586,46 @@ record := table-start, whitespace*, binding+, whitespace*, table-end ;
 7. Expressions
 -------------------------------------------------------------------------------
 
-```
+```ebnf
 expression := range-expression | formula ;
 ```
 
 (a) Formula 
 
-```
+```ebnf
 parenthetical-term := left-parenthesis, formula, right-parenthesis ;
 negate-factor := "-", factor ;
 not-factor := "not", factor ;
 
-formula := l1, (range-operator, l1)* ;
+formula := l1, *(range-operator, l1) ;
 add-sub-operator := add | subtract ;
-l1 := l2, (add-sub-operator, l2)* ;
+l1 := l2, *(add-sub-operator, l2) ;
 mul-div-operator := multiply | divide ;
 matrix-operator := matrix-multiply 
       | multiply 
       | divide 
       | matrix-solve ;
-l2 := l3, (mul-div-operator | matrix-operator, l3)* ;
+l2 := l3, *(mul-div-operator | matrix-operator, l3) ;
 exponent-operator := exponent ;
-l3 := l4, (exponent-operator, l4)* ;
+l3 := l4, *(exponent-operator, l4) ;
 logic-operator := and 
       | or 
       | xor ;
-l4 := l5, (logic-operator, l5)* ;
+l4 := l5, *(logic-operator, l5) ;
 comparison-operator := not-equal 
       | equal-to 
       | greater-than-equal 
       | greater-than 
       | less-than-equal 
       | less-than ;
-l5 := factor, (comparison-operator, factor)* ;
-
+l5 := factor, *(comparison-operator, factor) ;  
 factor := (parenthetical-term 
       | structure 
       | fsm-pipe 
       | function-call 
       | literal 
       | slice 
-      | var), transpose? ;
+      | var), ?transpose ;
 ```
 
 (a) Arithmetic
@@ -691,13 +694,13 @@ xor | ⊕ | ⊻   exclusive or
 8. Indexing
 -------------------------------------------------------------------------------
 
-```
+```ebnf
 subscript := swizzle-subscript 
       | dot-subscript-int 
       | dot-subscript 
       | bracket-subscript 
       | brace-subscript ; 
-index = identifier, subscript+ ;
+index := identifier, +subscript ;
 ```
 
 (a) Slicing
@@ -716,7 +719,7 @@ select-all := ":" ;
 
 (b) Dot Index
 
-```
+```ebnf
 dot-subscript := ".", identifier ;
 dot-subscript-int := ".", integer-literal ;
 ```
@@ -733,7 +736,7 @@ swizzle-subscript := "."
 9. Statements
 -------------------------------------------------------------------------------
 
-```
+```ebnf
 statement := variable-define 
       | variable-assign 
       | enum-define 
@@ -743,27 +746,27 @@ statement := variable-define
 
 (a) Variable Define
 
-```
+```ebnf
 define-operator := ":=" ;
-variable-define := tilde?, var
-      , !assign-operator
+variable-define := ?tilde, var
+      , ¬assign-operator
       , define-operator
       , expression ;
 ```
 
 (b) Variable Assign
 
-```
+```ebnf
 assign-operator := "=";
 variable-assign := slice-ref
-      , !define-operator
+      , ¬define-operator
       , assign-operator
       , expression ;
 ```
 
 (c) Op-Assign
 
-```
+```ebnf
 add-assign-operator := "+=";
 sub-assign-operator := "-=";
 mul-assign-operator := "*=";
@@ -775,7 +778,7 @@ op-assign-operator := add-assign-operator
       | div-assign-operator 
       | exp-assign-operator ;
 op-assign := slice-ref
-      , !define-operator
+      , ¬define-operator
       , op-assign-operator
       , expression ;
 ```
@@ -797,7 +800,7 @@ enum-variant-kind := "("
 
 (d) Kind Define
 
-```
+```ebnf
 kind-define := "<"
       , identifier
       , ">"
@@ -830,28 +833,28 @@ argument-list := "(", list0(",", call-arg-with-biding | call-arg) ;
 
 (b) Function Call
 
-```
+```ebnf
 function-call := identifier, argument-list ;
 call-arg-with-binding := identifier
       , colon
       , expression ;
 call-arg := expression ;
-var := identifier, kind-annotation? ;
+var := identifier, ?kind-annotation ;
 ```
 
 11. State Machines
 -------------------------------------------------------------------------------
 
-```
+```ebnf
 fsm := "#"
       , identifier
-      , argument-list?
-      , kind-annotation? ;
+      , ?argument-list
+      , ?kind-annotation ;
 ```
 
 (a) Operators
 
-```
+```ebnf
 output-operator := "=>" ;
 transition-operator := "->" ;
 async-transition-operator := "~>" ;
@@ -953,38 +956,38 @@ code-block := grave, <grave>, <grave>, <new-line>, any, <grave{3}, new-line, whi
 
 (b) Mech Extensions
 
-```
+```ebnf
 mech-code := mech-code-alt, ("\n" | ";" | comment) ;
 ```
 
 13. Mech Programs
 -------------------------------------------------------------------------------
 
-```
+```ebnf
 mech := program | statement ;
 ```
 
 (a) Programs
 
-```
-program := title?, body ;
-body := section+ ;
+```ebnf
+program := ?title, body ;
+body := +section ;
 ```
 
 (b) Sections
 
-```
+```ebnf
 section-element := mech-code 
       | unordered-list 
       | comment 
       | paragraph 
       | code-block 
-      | sub-section;
+      | sub-section ;
 sub-section-element := comment 
       | unordered-list 
       | mech-code 
       | paragraph 
       | code-block;
-sub-section := alpha-subtitle, sub-section-element* ;
-section := ul-subtitle?, section-element+ ;
+sub-section := alpha-subtitle, *sub-section-element ;
+section := ?ul-subtitle, +section-element ;
 ```
