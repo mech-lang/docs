@@ -530,7 +530,7 @@ tuple-struct := atom, "(", expression, ")" ;
 
 (e) Table
 
-```
+```ebnf
 table := table-start
       , *(box-drawing-char | whitespace)
       , table-header
@@ -555,7 +555,7 @@ table-row := ?table-separator
       , ?semicolon
       , ?new-line
       , ?(+box-drawing-char, new-line) ;
-table-header := list1(+space-tab, field)
+table-header := [field, +space-tab]
       , *(space | tab)
       , (bar| box-vert)
       , *whitespace ;
@@ -564,6 +564,7 @@ empty-table := table-start
       , *whitespace
       , table-end ;
 ```
+    
 
 **Examples:**
 
