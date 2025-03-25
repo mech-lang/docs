@@ -20,19 +20,20 @@ This document is for:
 The grammar is specified using extended Extended Backus-Naur Form (EBNF):
 
 ```
-╭────────┬──────────┬───────────────────────────╮
-│ Symbol │ Meaning  │ Semantics                 │
-├────────┼──────────┼───────────────────────────┤
-│  "abc" │ terminal │ string literal "abc"      │
-│ p1, p2 │ sequence │ `p1` followed by `p2`     │
-│ p1 | p2│ choice   │ `p1` or `p2`              │
-│   *p   │ repeat 0 │ `p` for 0 or more times   │
-│   +p   │ repeat 1 │ `p` for 1 or more times   │
-│   ?p   │ optional │ `p` for 0 or 1 time       │
-│   >p   │ peek     │ `p`; do not consume input │
-│   ¬p   │ not      │ does not match `p`        │
-│  (...) │ group    │ incrase precedence        │
-╰────────┴──────────┴───────────────────────────╯
+╭────────┬──────────┬────────────────────────────╮
+│ Symbol │ Meaning  │ Semantics                  │
+├────────┼──────────┼────────────────────────────┤
+│  "abc" │ terminal │ string literal "abc"       │
+│ p1, p2 │ sequence │ p1 followed by p2          │
+│ p1 | p2│ choice   │ p1 or p2                   │
+│ [p, q] │ list     │ list of p deliniated by q  │
+│   *p   │ repeat 0 │ p for 0 or more times      │
+│   +p   │ repeat 1 │ p for 1 or more times      │
+│   ?p   │ optional │ p for 0 or 1 time          │
+│   >p   │ peek     │ p; do not consume input    │
+│   ¬p   │ not      │ does not match p           │
+│  (...) │ group    │ incrase precedence         │
+╰────────┴──────────┴────────────────────────────╯
 ```
 
 The grammar grammar:
@@ -52,11 +53,13 @@ repeat1 := "+", factor ;
 optional := "?", factor ;
 peek := ">", factor ;
 not := "¬", factor ;
+list := "[", expression, terminal, "]" ;
 factor := repeat0 
       | repeat1 
       | optional 
       | peek 
       | not 
+      | list
       | group 
       | definition 
       | terminal ;
@@ -110,7 +113,7 @@ Some Unicode characters are reserved for box drawing, and therefore are excluded
 
 ```ebnf
 alpha := "a".."z" | "A".."Z" ;
-digt := "0".."9";
+digit := "0".."9";
 emoji := +emoji-grapheme ;
 word := +alpha ;
 digit1 := +digit ;
@@ -152,22 +155,22 @@ Combined with Mech's Unicode support, this allows users to write code in their n
 
 (c) Operators and Punctuation
 
-Punctutation:
+**Punctutation:**
 ```
 . ! ? , : ; ' "
 ```
 
-Symbols:
+**Symbols:**
 ```
 & | @ / # = \ ~ + - * ^ _
 ```
 
-Grouping symbols:
+**Grouping symbols:**
 ```
 ( ) < > { } [ ]
 ```
 
-Operators:
+**Operators:**
 ```
 Assign       := = += -= *= /= ^=
 Arithmetic   + - * / ^ %
@@ -348,8 +351,9 @@ empty := +underscore ;
 
 (g) Kinds
 
-```
-kind-annotation := left-angle, kind, right-angle ;
+
+```ebnf
+kind-annotation := "<", kind, ">" ;
 kind := kind-fxn 
       | kind-empty 
       | kind-atom 
@@ -358,7 +362,7 @@ kind := kind-fxn
       | kind-bracket 
       | kind-map 
       | kind-brace ;
-kind-empty := +underscore ;
+kind-empty := +"_" ;
 kind-atom := "`", identifier ;
 kind-map := "{"
       , kind
@@ -366,27 +370,28 @@ kind-map := "{"
       , kind
       , "}" ;
 kind-fxn := "("
-      , list0(list-separator, kind)
+      , ?[",", kind]
       , ")"
       , "="
       , "("
-      , list0(list-separator, kind)
+      , ?[",", kind]
       , ")" ;
 kind-brace := "{"
-      , list1(",", kind)
+      , [",", kind]
       , "}"
-      , ":"?
-      , list0("," , literal) ;
+      , ?":"
+      , ?[",", literal] ;
 kind-bracket := "["
-      , list1(",",kind)
+      , [",", kind]
       , "]"
-      , ":"?
-      , list0(",", literal) ;
-kind-tuple = "("
-      , list1(",",kind)
+      , ?":"
+      , ?[",", literal] ;
+kind-tuple := "("
+      , [",", kind]
       , ")" ;
 kind-scalar := identifier ;
 ```
+
 
 6. Data Structures
 -------------------------------------------------------------------------------
@@ -484,17 +489,16 @@ Negative indices indicate counting from the end of the matrix. For example, `-1`
 
 (b) Set
 
-```
+```ebnf
 set := "{"
-      , whitespace*
-      , list0(("," | whitespace+)
-      , expression)
-      , whitespace*
+      , *whitespace
+      , ?[expression, list-separator]
+      , *whitespace
       , "}" ;
 empty-set := table-start
-      , whitespace*
+      , *whitespace
       , empty
-      , whitespace*
+      , *whitespace
       , table-end ;
 ```
 
@@ -511,9 +515,9 @@ mapping :=  *whitespace, expression, *whitespace, ":", *whitespace, expression, 
 
 (d) Tuple
 
-```
-tuple := "(", list0(",", expression), ")" ;
-tuple-struct = atom, "(", expression, ")" ;
+```ebnf
+tuple := "(", ?[expression, ","], ")" ;
+tuple-struct := atom, "(", expression, ")" ;
 ```
 
 **Examples:**
@@ -705,12 +709,13 @@ index := identifier, +subscript ;
 
 (a) Slicing
 
-```
+```ebnf
 bracket-subscript := "["
-      , list1(",", select-all | range-subscript | formula-subscript)
+      , [(select-all | range-subscript | formula-subscript), ","]
       , "]" ;
+
 brace-subscript := "{"
-      , list1(",", select-all | formula-subscript)
+      , [(select-all | formula-subscript), ","]
       , "}" ;
 formula-subscript := formula ;
 range-subscript := range-expression ;
@@ -726,11 +731,11 @@ dot-subscript-int := ".", integer-literal ;
 
 (c) Swizzle
 
-```
+```ebnf
 swizzle-subscript := "."
       , identifier
       , "," 
-      , list1(",", identifier) ;
+      , [identifier, ","] ;
 ```
 
 9. Statements
@@ -785,14 +790,14 @@ op-assign := slice-ref
 
 (c) Enum Define
 
-```
+```ebnf
 enum-define := "<"
       , identifier, ">"
       , define-operator
-      , list1(enum-separator, enum-variant);
-enum-variant := grave?
+      , [enum-variant, enum-separator];
+enum-variant := ?grave
       , identifier
-      , enum-variant-kind? ;
+      , ?enum-variant-kind ;
 enum-variant-kind := "("
       , kind-annotation
       , ")" ;
@@ -813,22 +818,22 @@ kind-define := "<"
 
 (a) Function Define
 
-```
+```ebnf
 function-define := identifier
       , "("
-      , list0(list-separator function-arg)
+      , ?[function-arg,list-separator]
       , ")"
       , "="
       , (function-out-args | function-out-arg)
       , define-operator
-      , list1((whitespace1 | statement-separator), statement)
-      , period ;
+      , [statement, (+whitespace | statement-separator)]
+      , "." ;
 function-out-args := "("
-      , list1(list-separator, function-arg)
-      ,")" ;
+      , [function-arg, list-separator]
+      ,")" ;      
 function-out-arg := function-arg ;
 function-arg := identifier, kind-annotation ;
-argument-list := "(", list0(",", call-arg-with-biding | call-arg) ;
+argument-list := "(", ?[(call-arg-with-biding | call-arg), ","], ")" ;
 ```
 
 (b) Function Call
@@ -866,69 +871,69 @@ guard-operator := "|"
 
 (b) Specification
 
-```
+```ebnf
 fsm-specification := "#"
       , identifier
       , "("
-      , list0(",", var)
+      , ?[var, ","]
       , ")"
-      , output-operator?
-      , kind-annotation?, define-operator, fsm-state-definition+, "." ;
+      , ?output-operator
+      , ?kind-annotation, define-operator, +fsm-state-definition, "." ;
 fsm-tuple-struct := grave
       , identifier
       , "("
-      , list1(",", fsm-pattern)
+      , [fsm-pattern, ","]
       , ")" ;
 fsm-state-definition := guard-operator
       , grave
       , identifier
-      , fsm-state-definition-variables? ;
+      , ?fsm-state-definition-variables ;
 fsm-state-definition-variables := "("
-      , list0(list-separator, var)
+      , ?[var, list-separator]
       , ")" ;
-fsm-pipe := fsm-instance, (fsm-state-transition | fsm-async-transition | fsm-output)* ;
+fsm-pipe := fsm-instance, *(fsm-state-transition | fsm-async-transition | fsm-output) ;
 fsm-declare := fsm
       , define-operator
       , fsm-pipe ;
 fsm-instance := "#"
       , identifier
-      , fsm-args? ;
+      , ?fsm-args ;
 fsm-args := "("
-      , list0(list-separator, (call-arg-with-binding | call-arg))
+      , ?[(call-arg-with-binding | call-arg), list-separator]
       , ")" ;
 ```
 
 (c) Implementation
 
-```
+```ebnf
 fsm-implementation := "#"
       , identifier
       , "("
-      , list0(",", identifier)
+      , ?[identifier, list-separator]
       , ")"
       , transition-operator
       , fsm-pattern
-      , whitespace*
-      , fsm-arm+
+      , *whitespace
+      , +fsm-arm
       , "." ;
-fsm-arm := comment*
+fsm-arm := *comment
       , (fsm-transition | fsm-guard-arm)
-      , whitespace* ;
-fsm-guard-arm := comment*
+      , *whitespace ;
+fsm-guard-arm := *comment
       , fsm-pattern
-      , fsm-guard+ ;
+      , +fsm-guard ;
 fsm-guard := guard-operator
       , fsm-pattern
-      , (fsm-statement-transition | fsm-state-transition | fsm-output | fsm-async-transition | fsm-block-transition)+ ;
-fsm-transition := comment*
+      , +(fsm-statement-transition | fsm-state-transition | fsm-output | fsm-async-transition | fsm-block-transition) ;
+fsm-transition := *comment
       , fsm-pattern
-      , (fsm-statement-transition | fsm-state-transition | fsm-output | fsm-async-transition | fsm-block-transition)+ ;
+      , +(fsm-statement-transition | fsm-state-transition | fsm-output | fsm-async-transition | fsm-block-transition) ;
 fsm-state-transition := transition-operator, fsm-pattern ;
 fsm-async-transition := async-transition-operator, fsm-pattern ;
 fsm-statement-transition := transition-operator, statement ;
 fsm-block-transition := transition-operator
       , left-brace
-      , mech-code+
+      , +mech-code
       , right-brace ;
 fsm-output := output-operator, fsm-pattern ;
 fsm-pattern := fsm-tuple-struct 
@@ -942,16 +947,44 @@ wildcard := "*" ;
 
 (a) Markdown
 
-```
-title := text+, new-line, equal+, (space|tab)*, whitespace* ;
-subtitle := digit-token+, period, space*, text+, new-line, dash+, (space|tab)*, new-line, (space|tab)*, whitespace* ;
-number-subtitle := (space|tab)*, "(", integer-literal, ")", (space|tab)+, text+, (space|tab)*, whitespace* ;
-alpha-subtitle := (space|tab)*, "(", alpha, ")", (space|tab)+, text+, (space|tab)*, whitespace* ;
-paragraph-element := (!define-operator, text)+ ;
-paragraph := paragraph-starter, paragraph-element* ;
-unordered-list := list-item+, new-line?, whitespace* ;
-list-item := dash, <space+>, <paragraph>, new-line* ;
-code-block := grave, <grave>, <grave>, <new-line>, any, <grave{3}, new-line, whitespace*> ;
+```ebnf
+title := +text
+      , new-line
+      , +"="
+      , *(space|tab)
+      , *whitespace ;
+subtitle := +digit-token
+      , "."
+      , *space
+      , +text
+      , new-line
+      , +"-"
+      , *(space|tab)
+      , new-line
+      , *(space|tab)
+      , *whitespace ;
+number-subtitle := *(space|tab)
+      , "("
+      , integer-literal
+      , ")"
+      , +(space|tab)
+      , +text
+      , *(space|tab)
+      , *whitespace ;
+alpha-subtitle := *(space|tab)
+      , "(", alpha, ")"
+      , +(space|tab)
+      , +text
+      , *(space|tab)
+      , *whitespace ;
+paragraph-element := +(¬define-operator, text) ;
+paragraph := paragraph-starter, *paragraph-element ;
+unordered-list := +list-item, ?new-line, *whitespace ;
+list-item := dash
+      , +space
+      , paragraph
+      , *new-line ;
+code-block := (grave, grave, grave), new-line, any, (grave, grave, grave), new-line, *whitespace ;
 ```
 
 (b) Mech Extensions
