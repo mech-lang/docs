@@ -14,60 +14,7 @@ This document is for:
 - Tool developers who want to build tools that work with Mech code.
 - Developers who want to understand the syntax and structure of Mech programs.
 
-2. Notation
--------------------------------------------------------------------------------
-
-The grammar is specified using extended Extended Backus-Naur Form (EBNF):
-
-```
-╭────────┬──────────┬────────────────────────────╮
-│ Symbol │ Meaning  │ Semantics                  │
-├────────┼──────────┼────────────────────────────┤
-│  "abc" │ terminal │ string literal "abc"       │
-│ p1, p2 │ sequence │ p1 followed by p2          │
-│ p1 | p2│ choice   │ p1 or p2                   │
-│ [p, q] │ list     │ list of p deliniated by q  │
-│   *p   │ repeat 0 │ p for 0 or more times      │
-│   +p   │ repeat 1 │ p for 1 or more times      │
-│   ?p   │ optional │ p for 0 or 1 time          │
-│   >p   │ peek     │ p; do not consume input    │
-│   ¬p   │ not      │ does not match p           │
-│  (...) │ group    │ incrase precedence         │
-╰────────┴──────────┴────────────────────────────╯
-```
-
-The grammar grammar:
-
-```ebnf
-grammar := +rule ;
-identifier := alpha-token, *(alpha-token | digit-token | dash) ;
-rule := identifier
-      , ":="
-      , expression
-      , ";" ;
-expression := term, *( "|", term ) ;
-term := factor, *( ",", factor ) ;
-definition := identifier ;
-repeat0 := "*", factor ;
-repeat1 := "+", factor ;
-optional := "?", factor ;
-peek := ">", factor ;
-not := "¬", factor ;
-list := "[", expression, terminal, "]" ;
-factor := repeat0 
-      | repeat1 
-      | optional 
-      | peek 
-      | not 
-      | list
-      | group 
-      | definition 
-      | terminal ;
-group := "(", expression, ")" ;
-terminal := quote, +any-token, quote ;
-```
-
-3. Source Code Representation
+2. Source Code Representation
 -------------------------------------------------------------------------------
 
 (a) File Format
@@ -102,7 +49,7 @@ Semicolons and commas are treated as whitespace in most cases. Except in these c
 
 For more information, see the <a href="">Whitespace design document</a>.
 
-4. Lexical Elements
+3. Lexical Elements
 -------------------------------------------------------------------------------
 
 (a) Tokens
@@ -241,7 +188,7 @@ comment :=  *whitespace
   -- Single line comment.
   // Also a single line comment.
 
-5. Literals
+4. Literals
 -------------------------------------------------------------------------------
 
 ```ebnf
@@ -262,16 +209,17 @@ binary-literal := "0b", +bin-digit ;
 An integer literal is a sequence of digits representing a whole number. Mech supports decimal, binary, octal, and hexadecimal integer literals, each distinguished by a unique prefix:
 
 - Decimal: A sequence of digits without a prefix (e.g., 42, 123456).
-- Binary: Prefixed with 0b, containing only 0 and 1 (e.g., 0b1010).
-- Octal: Prefixed with 0o, containing digits 0-7 (e.g., 0o755).
 - Hexadecimal: Prefixed with 0x, containing digits 0-9 and a-f or A-F (e.g., 0x1A3F).
+- Octal: Prefixed with 0o, containing digits 0-7 (e.g., 0o755).
+- Binary: Prefixed with 0b, containing only 0 and 1 (e.g., 0b1010).
 
 **Examples:**
 
-  42
-  0b1010
-  0o755
-  0x1A3F
+  0d42                -- decimal
+  0x1234567890ABCDEF  -- hexadecimal
+  0x1234567890abcdef  
+  0o12345670          -- octal 
+  0b100110101         -- binary
 
 (b) Floats
 
@@ -291,10 +239,12 @@ float-literal := ?"."
 ```
 
 **Examples:**
-
+  
+  1234
   3.14
   0.001
   2.5e10
+  -12.3E4
 
 (c) Strings
 
@@ -393,7 +343,7 @@ kind-scalar := identifier ;
 ```
 
 
-6. Data Structures
+5. Data Structures
 -------------------------------------------------------------------------------
 
 ```ebnf
@@ -487,6 +437,14 @@ The elements of a matrix are indexed in the following ways:
 
 Negative indices indicate counting from the end of the matrix. For example, `-1` is the last element, `-2` is the second to last element, and so on.
 
+**Kind**
+
+```
+-- Dynamic matrix        <[u8]>
+-- 2D Matrix             <[u8]:2,3>
+-- 3D Matrix             <[u8]:2,3,4>
+```
+
 (b) Set
 
 ```ebnf
@@ -502,9 +460,43 @@ empty-set := table-start
       , table-end ;
 ```
 
+A Set is defined using curly braces `{}` and contains a comma-separated list of expressions. Sets do not maintain order and contain only unique elements.
+
+**Semantics:**
+
+- Homogeneity: All elements in a set must be of the same type.
+- Unordered: The order of elements within a set is not preserved.
+- Uniqueness: Duplicate elements are not allowed in a set.
+
+**Operations:**
+
+- Insertion: Adding an element to a set does not affect its order and only - succeeds if the element is not already present.
+- Deletion: Removing an element, if present, maintains the set property.
+- Union: Combines two sets, keeping only unique elements.
+- Intersection: Produces a set containing elements common to both sets.
+- Difference: Returns a set containing elements in the first set but not in the second.
+
 **Examples:**
 
-  {1, 2, 3}
+```
+- Empty: `{}` or `{_}`
+- Singleton: {1}
+- Basic:     {1,2,3}
+- Strings:   {"apple", "banana", "cherry"}
+- Nested:    {{1,2},{3,4}}
+```
+
+**Edge Cases**
+
+- `{}` represents an empty set.
+- `{1, 1, 2}` results in `{1, 2}` due to uniqueness constraints.
+- `{1, "hello"}` results in a type error due to homogeneity constraints.
+
+**Kind:**
+
+```
+<{u8}:3>
+```
 
 (c) Map
 
@@ -513,12 +505,63 @@ map := "{", *whitespace, *mapping, *whitespace, "}" ;
 mapping :=  *whitespace, expression, *whitespace, ":", *whitespace, expression, ?comma, *whitespace ;
 ```
 
+A Map is defined using curly braces `{}` and contains a set of key-value mappings. Each key is unique and associated with a corresponding value.
+
+**Semantics:**
+
+- Key Uniqueness: Each key in a map must be unique.
+- Unordered: The order of key-value pairs within a map is not preserved.
+- Key-Value Association: Each key is mapped to exactly one value.
+
+**Operations**
+
+- Insertion: Adding a key-value pair updates the map. If the key already exists, its value is updated.
+- Deletion: Removing a key-value pair removes the key and its associated value.
+- Lookup: Retrieving the value associated with a key.
+- Merge: Combining two maps, where duplicate keys take precedence from the second map.
+
+```
+- Empty:             {_:_}
+- Single element:    {"a":1}
+- Multiple elements: {"a":10, "b":20, "c": 30}
+- Nested:            {"a":{"a":10}}
+- Multiline:
+    { "a" : 10 
+      "b" : 20
+      "c" : 30 }
+```
+
+**Edge Cases**
+
+- `{_:_}` represents an empty map.
+- Duplicate keys result in an overwrite of the previous value, as long as the map is mutable.
+- `{1: "hello", 2: "world"}` is valid, but `{1: "hello", "one": "world"}` results in a type error if homogeneity is enforced.
+
+**Kind:**
+
+- A map of strings to u8s: `<{string:u8}>`
+- A map of strings to a map of strings to u8: `<{string:{string:u8}}>`
+
 (d) Tuple
 
 ```ebnf
 tuple := "(", ?[expression, ","], ")" ;
 tuple-struct := atom, "(", expression, ")" ;
 ```
+
+A Tuple is defined using parentheses `()` and contains an ordered collection of elements, which can be of different types. 
+
+**Semantics:**
+
+- Ordered: The order of elements within a tuple is preserved.
+- Heterogeneous: A tuple can contain elements of different types.
+- Immutable: Once created, the elements in a tuple cannot be changed.
+
+**Operations:**
+
+- Access: Elements can be accessed by their position (zero-based index).
+- Concatenation: Tuples can be combined to form a larger tuple.
+- Decomposition: Tuples can be unpacked into individual variables.
 
 **Examples:**
 
@@ -527,6 +570,21 @@ tuple-struct := atom, "(", expression, ")" ;
   (1,1,3)                
   (1,(2,3))                
   (1, true, "Hello")                 
+
+**Edge Cases:**
+
+- `()` represents an empty tuple.
+
+- `(1)` is a single-element tuple, not a parenthetical expression that evaluates to `1`.
+
+- Tuples maintain the type of each element, so `(1, "hello")` has the kind `<(f64,string)>`,, unlike sets which require homogeneity.
+
+**Kind**
+
+```
+-- Two-tuple of u8 and string    <(u8,string)>
+-- Three-tuple of u8s            <(u8,u8,u8)>
+```
 
 (e) Table
 
@@ -564,15 +622,96 @@ empty-table := table-start
       , *whitespace
       , table-end ;
 ```
-    
 
-**Examples:**
+A Table represents a structured collection of records, where each record consists of multiple fields (columns). Tables allow organizing data in a flexible, expressive manner.
+**Semantics:**
+
+- Structured: Each record consists of ordered fields (columns).
+- Heterogeneous: Fields can have different kinds (types).
+- Homogeneous: Each row has a similar structure, with the same fields.
+- Sparse: Tables allow missing values (denoted by `_`).
+
+**Defining Tables:**
+
+Tables are enclosed in {} and contain a header row specifying column names and kinds. The pipe | separates the header from the data rows.
 
   { x<f32>  y<u8> | 
     1.2     9 
     1.3     8     }
+This defines a table with two columns:
+
+- `x<f32>`: A floating-point column.
+- `y<u8>`: An unsigned 8-bit integer column.
+
+The same table can be written in a compact, inline format using semicolons (;) to separate rows.
+
+```
+{ x<f32> y<u8> | 1.2 9; 1.3 8 }
+```
+
+Where `|` denotes the end of the header, and each row is separated by a semicolon `;`.
+
+**Any Fields**
+
+The `_` is the "any" kind and allows columns to contain data from mixed kinds.
+
+  { x<_>   y<_> |
+    1.2    true 
+    "Hi"   8<u8>}
+
+Here, `x` holds both floats and strings, and y holds both integers and booleans. This can be useful for dealing with data whose type is not known at compiletime.
+
+**Sparse Tables**
+
+When used as a value in a table, `_` indicates that a cell is missing and will be filled in later.
+
+  { x<u8>  y<string> z<[u8]:3> |
+     _      "a"       [1;2;3] 
+     4      "b"          _    
+     7       _        [7;8;9]  }
+
+**Fancy Representation**
+
+Tables can be printed using a fancy printer, for example as output from the REPL. This representation is valid as input to a Mech program as well, for example:
+
+```
+╭──────────────────────────────╮
+│ x<u8>   y<string>  z<[u8]:3> │
+├───────┬──────────┬───────────┤
+│   _   │   "a"    │  [1;2;3]  │
+├───────┼──────────┼───────────┤
+│   4   │   "b"    │     _     │
+├───────┼──────────┼───────────┤
+│   7   │    _     │  [7;8;9]  │
+╰───────┴──────────┴───────────╯
+```
+
+**Kind:**
+
+A table's kind includes the column types and table dimensions. For example, the pretty print table's kind is:
+
+**This denotes:**
+
+- Columns: `{ u8, string, [u8]:3 }` (a mix of an -integer, a string, and a fixed-size array).
+
+- Shape: `3,3` (3 rows, 3 columns).
+
+**Performance Considerations:**
+
+Tables are more expressive and flexible than matrices, because they can support missing values and mixed types. However, they may be slower due to additional metadata and dynamic typing associated with each cell, and the unwrapping involved in accessing data.
+
+Table columns are stored in a column matrix with unboxed value element, so operating column-wise on table values can be fast.
+
+However, "any" kinded columns resolve to a column matrix of fully wrapped values, so they will not work with matrix operations that expect unboxed values.
+
+A table row is equivalent to a record.
+
+```
+<{u8, string, [u8]:3}:3,3>
+```
 
 (f) Record
+
 
 ```ebnf
 record := table-start
@@ -581,14 +720,71 @@ record := table-start
       , *whitespace
       , table-end ;
 ```
+A Record is a collection of named fields, where each field consists of a key-value pair. Records provide a structured way to group related data while allowing heterogeneous types.
 
-**Examples:**
+**Semantics:**
 
-  { x: 1 y: "a", z: [1 2 3] }
-  { x<u8>: 1, y<string>: "a", z<[u8]:3,1>: [1;2;3] }
+- Named Fields: Each field is identified by a unique name.
+- Heterogeneous: Fields can have different types.
+- Nested: Records can contain other records.
+
+**Defining Records:**
+
+Records are enclosed in {} and contain bindings of the form key: value. The type of each field can be inferred or explicitly specified.
+
+**Examples 1: Implicitly Typed Records**
+
+  { x: 1 y: "a", z: [1; 2; 3] }
+
+This defines a record with three fields:
+
+- x (implicitly an float).
+- y (implicitly a string).
+- z (implicitly a column matrix of floats).
+
+**Example 2: Explicitly Typed Record**
+
+  { x<u8>: 1, y<string>: "a", z<[u8]:3,1>: [1; 2; 3] }
+
+Here, each field has an explicit kind:
+
+- x<u8>: A `u8` integer.
+- y<string>: A string.
+- z<[u8]:3,1>: A fixed-size 3×1 matrix of `u8` integers.
+
+**Example 3: Nested Records**
+
   { a: {b: 1, c: "hi"}, b: [1;2;3] }
 
-7. Expressions
+This record contains:
+
+- a: A nested record `{b: 1, c: "hi"}`.
+- b: A columm matrix `[1;2;3]`.
+
+**Kind Representation:**
+
+A record's kind describes the types of its fields:
+
+```
+<{x: u8, y: string, z: [u8]:3,1}>
+```
+
+This denotes a record with:
+
+x: u8
+y: string
+z: [u8]:3,1 (a 3×1 array of u8 values)
+
+Comparison to Tables
+
+- Records group related attributes of a single entity.
+- Access a field on a record yields a scalar of that type, rather than a column matrix.
+- A table with one row is not the same as a record, as they have to be stored differently internally.
+- A table can be thought of as a vector of records.
+
+Tables represent multiple records (rows) sharing a common structure.
+
+6. Expressions
 -------------------------------------------------------------------------------
 
 ```ebnf
@@ -696,7 +892,7 @@ xor | ⊕ | ⊻   exclusive or
 ..      range exclusive
 ```
 
-8. Indexing
+7. Indexing
 -------------------------------------------------------------------------------
 
 ```ebnf
@@ -739,7 +935,7 @@ swizzle-subscript := "."
       , [identifier, ","] ;
 ```
 
-9. Statements
+8. Statements
 -------------------------------------------------------------------------------
 
 ```ebnf
@@ -814,7 +1010,7 @@ kind-define := "<"
       , kind-annotation ;
 ```
 
-10. Functions
+9. Functions
 -------------------------------------------------------------------------------
 
 (a) Function Define
@@ -848,7 +1044,7 @@ call-arg := expression ;
 var := identifier, ?kind-annotation ;
 ```
 
-11. State Machines
+10. State Machines
 -------------------------------------------------------------------------------
 
 ```ebnf
@@ -943,7 +1139,7 @@ fsm-pattern := fsm-tuple-struct
 wildcard := "*" ;
 ```
 
-12. Mechdown
+11. Mechdown
 -------------------------------------------------------------------------------
 
 (a) Markdown
@@ -992,6 +1188,59 @@ code-block := (grave, grave, grave), new-line, any, (grave, grave, grave), new-l
 
 ```ebnf
 mech-code := mech-code-alt, ("\n" | ";" | comment) ;
+```
+
+12. Notation
+-------------------------------------------------------------------------------
+
+The grammar is specified using extended Extended Backus-Naur Form (EBNF):
+
+```
+╭────────┬──────────┬────────────────────────────╮
+│ Symbol │ Meaning  │ Semantics                  │
+├────────┼──────────┼────────────────────────────┤
+│  "abc" │ terminal │ string literal "abc"       │
+│ p1, p2 │ sequence │ p1 followed by p2          │
+│ p1 | p2│ choice   │ p1 or p2                   │
+│ [p, q] │ list     │ list of p deliniated by q  │
+│   *p   │ repeat 0 │ p for 0 or more times      │
+│   +p   │ repeat 1 │ p for 1 or more times      │
+│   ?p   │ optional │ p for 0 or 1 time          │
+│   >p   │ peek     │ p; do not consume input    │
+│   ¬p   │ not      │ does not match p           │
+│  (...) │ group    │ incrase precedence         │
+╰────────┴──────────┴────────────────────────────╯
+```
+
+The grammar grammar:
+
+```ebnf
+grammar := +rule ;
+identifier := alpha-token, *(alpha-token | digit-token | dash) ;
+rule := identifier
+      , ":="
+      , expression
+      , ";" ;
+expression := term, *( "|", term ) ;
+term := factor, *( ",", factor ) ;
+definition := identifier ;
+repeat0 := "*", factor ;
+repeat1 := "+", factor ;
+optional := "?", factor ;
+peek := ">", factor ;
+not := "¬", factor ;
+list := "[", expression, terminal, "]" ;
+factor := repeat0 
+      | repeat1 
+      | optional 
+      | peek 
+      | not 
+      | list
+      | group 
+      | definition 
+      | terminal ;
+group := "(", expression, ")" ;
+terminal := quote, +any-token, quote ;
 ```
 
 13. Mech Programs
