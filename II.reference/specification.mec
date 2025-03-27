@@ -392,14 +392,34 @@ matrix := matrix-start
       , *box-drawing-char
       , matrix-end ;
 ```
+A Matrix is a structured, numbered sequence of elements of a single kind, arranged in rows and columns, enclosed bt square brackets, `[]`. The number of elements in the matrix is called its length, and the shape of a matrix is defined as a pair of non-negative integers representing the number of rows and columns.
 
-A matrix is a numbered sequence of elements of a single kind, arranged in rows and columns. The number of elements is called the length of the matrix and is never negative. The number of rows and columns is called the shape of the matrix. The shape is always a pair of non-negative integers. 
+**Semantics:**
 
-The shape is part of the matrix's kind; it must evaluate to a non-negative constant representable by a tuple of kind `(index,index)`. The shape of matrix `A` can be discovered using the built-in function `matrix/shape()`. The elements can be addressed by index indices `(1,1)` through `matrix/shape(A)`. 
+- Homogeneous Elements: All elements in a matrix must be of the same kind.
+- Fixed Shape: A static matrix's shape (rows, columns) is part of its kind and is always a tuple of non-negative integers.
+- One-Based Access: Elements are accessed using 1-based indexing for both rows and columns.
+- Column-Major Order: Matrix elements are stored and accessed in column-major order.
 
 Matrix kinds are always two-dimensional, so row vectors and column vectors are also represented as matrices with a single row or column, respectively.
 
+**Indexing:**
+
+Matrix elements can be accessed using either 1D or 2D indexing:
+
+- 1D Indexing (Column-Major Order): Elements are stored in column-major order, meaning the first element is the top-left element, proceeding down the first column before moving to the next.
+- 2D Indexing: Elements can be referenced using `[row, column]` notation, starting from 1 for both indices.
+- Negative Indices: Negative indices count from the end of the matrix, with -1 being the last element.
+
+See the Indexing section for more details and examples.
+
 **Examples:**
+
+  -- Empty Matrix
+  []
+
+  -- 1x1 Matrix
+  [1]
 
   -- 3x3 Matrix
   [1 2 3
@@ -428,7 +448,6 @@ Fancy matrix syntax is supported so that formatted output from the Mech REPL can
 ┃ 4   5   6 ┃
 ┗           ┛
 ```
-
 The elements of a matrix are indexed in the following ways:
 
 - **1D** - by their position in the matrix, starting from 1, in a column-major order starting at the top left corner of the matrix and proceeding down and to the right. The last element of the matrix, called the end of the matrix, is the most bottom right element.
@@ -438,6 +457,8 @@ The elements of a matrix are indexed in the following ways:
 Negative indices indicate counting from the end of the matrix. For example, `-1` is the last element, `-2` is the second to last element, and so on.
 
 **Kind**
+
+The kind of a matrix includes the type of its elements and its shape. For example, a matrix of unsigned 8-bit integers with 2 rows and 3 columns has the kind `<[u8]:2,3>`.
 
 ```
 -- Dynamic matrix        <[u8]>
