@@ -812,12 +812,30 @@ Tables represent multiple records (rows) sharing a common structure.
 expression := range-expression | formula ;
 ```
 
+Expressions define computations in Mech. Most expressions operate elementwise over collections according to the rules of broadcasting.
+
+**Broadcasting Rules:**
+
+- Scalars expand to match the shape of collections.
+- Operations between collections are elementwise when shapes are compatible.
+- Higher-dimensional collections expand along singleton dimensions when necessary.
+- Tables support column-wise elementwise operations but use set-based operations (e.g., unions, joins) for whole-table manipulation.
+
+**Expression Categories:**
+
+- Arithmetic: Addition, subtraction, multiplication, and division over scalars, vectors, and matrices.
+- Matrix Operations: Matrix multiplication, transposition, and other matrix-specific operations.
+- Comparison: Elementwise relational comparisons (<, >, ==, etc.).
+- Logical Operations: Boolean elementwise operations (and, or, not).
+- Set Operations: Union, intersection, and other set-specific operations.
+- Range Expressions: Constructing sequences of values.
+- Indexing: Accessing elements within collections using direct and computed indices.
+
 (a) Formula 
 
 ```ebnf
 parenthetical-term := left-parenthesis, formula, right-parenthesis ;
 negate-factor := "-", factor ;
-not-factor := "not", factor ;
 
 formula := l1, *(range-operator, l1) ;
 add-sub-operator := add | subtract ;
@@ -850,67 +868,87 @@ factor := (parenthetical-term
       | var), ?transpose ;
 ```
 
+A formula is an expression that follows operator precedence rules and consists of arithmetic, logical, comparison, matrix, and range expressions. Expressions in formulas are evaluated according to their precedence, with higher-precedence operations being evaluated first.
+
+**Operator Precedence:**
+
+Operators in formulas are applied according to the following precedence, from highest to lowest:
+
+- Parentheses - Explicit grouping of expressions.
+- Negation and Logical NOT - Unary operations.
+- Exponentiation - Raising to a power.
+- Multiplication, Division, and Matrix Operations - Elementwise and matrix operations.
+- Addition and Subtraction - Binary arithmetic operations.
+- Comparison Operators - Elementwise comparisons.
+- Logical Operators - and, or, xor.
+- Range Operators - Used in range expressions.
+
+**Evaluation Order and Associativity:**
+
+- Left-to-right associativity applies to all operators, including exponentiation.
+- Parentheses explicitly override precedence rules.
+
 (a) Arithmetic
 
-```
-+    add               integers, floats, complex values, strings
--    subtract          integers, floats, complex values
-*    multiply          integers, floats, complex values
-/    divide            integers, floats, complex values
-^    exponent          integers, floats, complex values
-%    remainder         integers
+```ebnf
+add       := "+" ;
+subtract  := "-" ;
+multiply  := "*" ;
+divide    := "/" ;
+exponent  := "^" ;
+remainder := "%" ;
 ```
 
 (b) Matrix
 
-```
-\              solve          
-·              dot product    
-⨯              cross product  
-**             matrix multiply
-'              transpose      
+```ebnf
+solve           := "\\" ;
+dot-product     := "·" ;
+cross-product   := "⨯" ;
+matrix-multiply := "**" ;
+transpose       := "'" ;
 ```
 
 (c) Comparison
 
-```
-!= | ¬= | ≠    not equal       
-==             equal                 
->              greater         
-<              less            
->= | ≥         greater or equal
-<= | ≤         less or equal   
+```ebnf
+not-equal        := "!=" | "¬=" | "≠" ;    
+equal            := "==" ;             
+greater          := "> " ;            
+less             := "< " ;            
+greater-or-equal := ">=" | "≥"  ;       
+less-or-equal    := "<=" | "≤"  ;       
 ```
 
 (d) Logical
 
-```
-|              or
-&              and
-! | ¬          not
-xor | ⊕ | ⊻   exclusive or
+```ebnf
+or           := "|" ;            
+and          := "&" ;            
+not          := "!" | "¬";         
+exclusive-or := "xor" | "⊕" | "⊻" ;   
 ```
 
 (e) Set
 
-```
-∪       union
-∩       intersection
-∖       difference
-∁ | '   complement
-⊆       subset
-⊇       superset
-⊊       proper subset
-⊋       proper superset
-∈       element of
-∉       not element of
+```ebnf
+union := "∪";       
+intersection := "∩";       
+difference := "∖";       
+complement := "∁" | "'" ;  
+subset := "⊆";       
+superset := "⊇";       
+proper-subset := "⊊";       
+proper-superset := "⊋";       
+element-of := "∈";       
+not-element-of := "∉";       
 ```
 
 (f) Range
 
-```
-..=     range inclusive
-..      range exclusive
+```ebnf
+range-inclusive := "..=" ;
+range-exclusive := ".." ;
 ```
 
 7. Indexing
