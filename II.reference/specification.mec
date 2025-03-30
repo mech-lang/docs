@@ -693,7 +693,7 @@ When used as a value in a table, `_` indicates that a cell is missing and will b
 
 **Fancy Representation**
 
-Tables can be printed using a fancy printer, for example as output from the REPL. This representation is valid as input to a Mech program as well, for example:
+The Mech REPL prints tables using a fancy represntation, which is valid as input to a Mech program as well. The above table is equavlent to the following fancy table:
 
 ```
 ╭──────────────────────────────╮
@@ -1198,7 +1198,40 @@ fsm-pattern := fsm-tuple-struct
 wildcard := "*" ;
 ```
 
-11. Mechdown
+
+11. Mech Programs
+-------------------------------------------------------------------------------
+
+```ebnf
+mech := program | statement ;
+```
+
+(a) Programs
+
+```ebnf
+program := ?title, body ;
+body := +section ;
+```
+
+(b) Sections
+
+```ebnf
+section-element := mech-code 
+      | unordered-list 
+      | comment 
+      | paragraph 
+      | code-block 
+      | sub-section ;
+sub-section-element := comment 
+      | unordered-list 
+      | mech-code 
+      | paragraph 
+      | code-block;
+sub-section := alpha-subtitle, *sub-section-element ;
+section := ?ul-subtitle, +section-element ;
+```
+
+12. Mechdown
 -------------------------------------------------------------------------------
 
 (a) Markdown
@@ -1249,7 +1282,7 @@ code-block := (grave, grave, grave), new-line, any, (grave, grave, grave), new-l
 mech-code := mech-code-alt, ("\n" | ";" | comment) ;
 ```
 
-12. Notation
+13. Notation
 -------------------------------------------------------------------------------
 
 The grammar is specified using extended Extended Backus-Naur Form (EBNF):
@@ -1300,36 +1333,4 @@ factor := repeat0
       | terminal ;
 group := "(", expression, ")" ;
 terminal := quote, +any-token, quote ;
-```
-
-13. Mech Programs
--------------------------------------------------------------------------------
-
-```ebnf
-mech := program | statement ;
-```
-
-(a) Programs
-
-```ebnf
-program := ?title, body ;
-body := +section ;
-```
-
-(b) Sections
-
-```ebnf
-section-element := mech-code 
-      | unordered-list 
-      | comment 
-      | paragraph 
-      | code-block 
-      | sub-section ;
-sub-section-element := comment 
-      | unordered-list 
-      | mech-code 
-      | paragraph 
-      | code-block;
-sub-section := alpha-subtitle, *sub-section-element ;
-section := ?ul-subtitle, +section-element ;
 ```
