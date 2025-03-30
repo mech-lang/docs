@@ -654,7 +654,7 @@ A Table represents a structured collection of records, where each record consist
 
 **Defining Tables:**
 
-Tables are enclosed in {} and contain a header row specifying column names and kinds. The pipe | separates the header from the data rows.
+Tables are enclosed in {} and contain a header row specifying column names and kinds. The pipe \| separates the header from the data rows.
 
   { x<f32>  y<u8> | 
     1.2     9 
@@ -1287,22 +1287,19 @@ mech-code := mech-code-alt, ("\n" | ";" | comment) ;
 
 The grammar is specified using extended Extended Backus-Naur Form (EBNF):
 
-```
-╭────────┬──────────┬────────────────────────────╮
-│ Symbol │ Meaning  │ Semantics                  │
-├────────┼──────────┼────────────────────────────┤
-│  "abc" │ terminal │ string literal "abc"       │
-│ p1, p2 │ sequence │ p1 followed by p2          │
-│ p1 | p2│ choice   │ p1 or p2                   │
-│ [p, q] │ list     │ list of p deliniated by q  │
-│   *p   │ repeat 0 │ p for 0 or more times      │
-│   +p   │ repeat 1 │ p for 1 or more times      │
-│   ?p   │ optional │ p for 0 or 1 time          │
-│   >p   │ peek     │ p; do not consume input    │
-│   ¬p   │ not      │ does not match p           │
-│  (...) │ group    │ incrase precedence         │
-╰────────┴──────────┴────────────────────────────╯
-```
+| Symbol   | Meaning  | Semantics                     |
+|----------|----------|-------------------------------|
+| `"abc"`  | terminal | string literal "abc"          |
+| `p1, p2` | sequence | `p1` followed by `p2`         |
+| `p1 | p2`| choice   | `p1` or `p2`                  |
+| `[p, q]` | list     | list of `p` deliniated by `q` |
+|   `*p`   | repeat 0 | `p` for 0 or more times       |
+|   `+p`   | repeat 1 | `p` for 1 or more times       |
+|   `?p`   | optional | `p` for 0 or 1 time           |
+|   `>p`   | peek     | `p`; do not consume input     |
+|   `¬p`   | not      | does not match `p`            |
+|  `(...)` | group    | incrase precedence            |
+
 
 The grammar grammar:
 
