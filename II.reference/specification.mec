@@ -6,7 +6,6 @@ Mech Language Specification
 
 This document specifies the default syntax of the Mech programming system, which is designed for developing reactive systems like robots, games, and user interfaces. The syntax specified herein is one of many possible syntaxes and interfaces for Mech, but it may be thought of as the default texual representation of Mech.
 
-
 This specification starts by defining the most atomic elements of the language, and then builds up to more complex structures.
 
 This document is for:
@@ -1204,38 +1203,48 @@ wildcard := "*" ;
 -------------------------------------------------------------------------------
 
 ```ebnf
-mech := program | statement ;
+mech := mechdown-program | statement ;
 ```
 
-(a) Programs
+12. Mechdown
+-------------------------------------------------------------------------------
+
+Mechdown is a markup language for writing Mech programs. It is designed to maintain vague compatibility with Markdown, it is *not* a superset of Markdown. Rather, Mechdown is a distinct markup language with its own syntax and semantics. For instance, hashtag notation is not supported for titles, which is a departure from Markdown. 
+
+Moreover, Mechdown supports tables and other features that are not present in Markdown, but can be found in extension to Markdown like Github Flavored Markdown (GFM), and Mech-specific features like that ability to query Mech values and print them inline using `{}` syntax.
+
+Mech programs and scripts can be written entirely without Mechdown, but literate programming with Mechdown is idomatic.
+
+(a) Body
 
 ```ebnf
 program := ?title, body ;
 body := +section ;
 ```
 
-(b) Sections
+(b) Sections and Section Elements
 
 ```ebnf
-section-element := mech-code 
+section-element := +mech-code 
       | unordered-list 
-      | comment 
-      | paragraph 
-      | code-block 
-      | sub-section ;
-sub-section-element := comment 
+      | markdown-table
+      | block-quote
+      | code-block
+      | thematic-break
+      | sub-section
+      | paragraph ;
+sub-section-element := +mech-code 
       | unordered-list 
-      | mech-code 
-      | paragraph 
-      | code-block;
+      | markdown-table
+      | block-quote
+      | code-block
+      | thematic-break
+      | paragraph ;
 sub-section := alpha-subtitle, *sub-section-element ;
 section := ?ul-subtitle, +section-element ;
 ```
 
-12. Mechdown
--------------------------------------------------------------------------------
-
-(a) Markdown
+(b) Titles
 
 ```ebnf
 title := +text
@@ -1243,6 +1252,8 @@ title := +text
       , +"="
       , *(space|tab)
       , *whitespace ;
+paragraph-element := +(¬define-operator, text) ;
+paragraph := paragraph-starter, *paragraph-element ;
 subtitle := +digit-token
       , "."
       , *space
@@ -1267,20 +1278,148 @@ alpha-subtitle := *(space|tab)
       , +text
       , *(space|tab)
       , *whitespace ;
-paragraph-element := +(¬define-operator, text) ;
-paragraph := paragraph-starter, *paragraph-element ;
+```
+
+There are 4 levels of titles: the document title, section titles, and two levels of sub section titles. 
+
+**Example:**
+
+```
+Title
+========
+
+1. Section Title
+----------------
+
+(2) Sub Section Title
+
+(a) Sub Sub Section Title
+```
+
+Section titles and the first level of sub-section titles comprise the table of contents, which is generated automatically.
+
+(c) Paragraphs and Paragraph Elements
+
+```ebnf
+paragraph := +paragraph-element;
+paragraph-element := hyperlink
+      | raw-hyperlink
+      | paragraph-text
+      | strong
+      | emphasis
+      | inline-code
+      | strikethrough
+      | underline ;
+paragraph-exclude := http-prefix | left-bracket | tilde | asterisk | underscore | grave | define-operator | bar ;
+paragraph-text := +(¬(paragraph-exclude), text) ;
+```
+
+Paragraphs are a block element that can contain a number of inline elements including:
+
+- **Strong text:** `**text**`
+- **Emphasis text:** `*text*`
+- **Strikethrough text:** `~text~`
+- **Underlined text:** `_text_`
+- **Inline code:** code 
+- **Hyperlinks:** `[text](url)` also raw links `http://example.com`
+- **Inline Mech:** `{expression}`
+
+(b) Lists
+
+```ebnf
 unordered-list := +list-item, ?new-line, *whitespace ;
+ordered-list := +ordered-list-item, ?new-line, *whitespace ;
+ordered-list-item := integer-literal
+      , "."
+      , *space
+      , paragraph
+      , *new-line ;
 list-item := dash
       , +space
       , paragraph
       , *new-line ;
+```
+
+There are two varities of lists, unordered, which are delinated with a `-` or a graphicl and ordered list, which are delinated with a numeral like `1.`, and are numbered in order automatically when formatted.
+
+**Example:**
+
+```
+- Item 1
+- Item 2
+- Item 3
+
+1. Item 1
+2. Item 2
+3. Item 3
+```
+
+When rendered, they look like this:
+
+- Item 1
+- Item 2
+- Item 3
+
+List items are paragraphs, and can contain any inline elements.
+
+**Example:**
+
+```
+- **First**: item 1
+- **Second**: item 2
+- **Third**: item 3
+```
+
+(b) Thematic Breaks
+
+```ebnf
+thematic-break := asterisks, asterisks, +asterisks ;
+```
+
+Thematic breaks are horizontal lines that can be used to separate sections of a document. They are created using three or more asterisks.
+
+**Example:**
+
+```
+***
+***********
+```
+
+When rendered, they look like this:
+
+***
+
+(b) Code Blocks
+
+```ebnf
 code-block := (grave, grave, grave), new-line, any, (grave, grave, grave), new-line, *whitespace ;
 ```
 
-(b) Mech Extensions
+Mechdown supports code blocks, which are enclosed in triple backticks (graves) and can contain any text. Code blocks are useful for including Mech code snippets or other text that should be displayed verbatim.
+
+(b) Block Quotes
+
+```ebnf
+block-quote := ">" , *whitespace, +paragraph ;
+```
+
+Block quotes are used to indicate quoted text. They are created using the `>` character followed by a space, and can contain any text until a newline.
+
+**Example:**
+
+```
+> This is a block quote.
+```
+
+When rendered, they look like this:
+
+> This is a block quote.
+
+(b) Mech Extensions 
 
 ```ebnf
 mech-code := mech-code-alt, ("\n" | ";" | comment) ;
+mech-code-alt := fsm-specification | fsm-implementation | function-define | statement | expression | comment ;
 ```
 
 13. Notation
