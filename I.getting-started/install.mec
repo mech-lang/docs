@@ -1,38 +1,29 @@
 Download and Install Mech
 ===============================================================================
 
-1. System Requirements
--------------------------------------------------------------------------------
-
-   Before installing Mech, ensure that your system meets the following requirements:
-
-   - Operating System: Linux, macOS, or Windows
-   - Dependencies: Rust (nightly version nightly-2025-01-15 required)
-   - Architecture: x86_64 or aarch64 (ARM64)
-
-2. Installing from Binary
+1. Installing from Binary
 -------------------------------------------------------------------------------
 
 Precompiled binaries are available for the following platforms:
 
-- <a href="https://github.com/mech-lang/mech/releases/download/v0.2.35-beta/mech-v0.2.35-beta-win-x86-64.7z">Linux</a>
-- <a href="https://github.com/mech-lang/mech/releases/download/v0.2.35-beta/mech-v0.2.35-beta-mac-aarch64.7z">macOS</a>
-- <a href="https://github.com/mech-lang/mech/releases/download/v0.2.35-beta/mech-v0.2.35-beta-win-x86-64.7z">Windows</a>
+- [Wndows](https://github.com/mech-lang/mech/releases/download/v0.2.35-beta/mech-v0.2.35-beta-win-x86-64.7z)
+- [Linux](https://github.com/mech-lang/mech/releases/download/v0.2.35-beta/mech-v0.2.35-beta-win-x86-64.7z)
+- [macOS](https://github.com/mech-lang/mech/releases/download/v0.2.35-beta/mech-v0.2.35-beta-mac-aarch64.7z)
 
-You can find previous releases and release notes here: <a href="https://github.com/mech-lang/mech/releases">https://github.com/mech-lang/mech/releases</a>.
+You can find previous releases and release notes at [/mech-lang/mech/releases](https://github.com/mech-lang/mech/releases).
 
 To install, simply download the appropriate binary for your operating system and extract it to a directory of your choice. The Mech toolchain is distributed as a solitary executable file and doesn't require an installer.
 
 See the toolchain documation for more information on how this file works.
 
-3. Installing from Source
+2. Installing from Source
 ----------------------------------------------------------------------------
 
 If mech is not available for your platform, or if you want to build it from source, follow these steps:
 
 (a) Install Rust and Cargo
 
-First you will need [Rust](https://www.rust-lang.org/learn/get-started). Make sure to install a recent version on the nightly release channel, currently nightly-2025-01-15.
+First you will need [Rust](https://www.rust-lang.org/learn/get-started). Make sure to install a recent version on the nightly release channel, currently `nightly-2025-01-15`.
 
 In Bash:
 
@@ -51,7 +42,7 @@ irm https://win.rustup.rs -OutFile rustup-init.exe; Start-Process -Wait -FilePat
 This command will: 
 
 - Download Rustup for Windows (rustup-init.exe)
-- Run the installer with -y (no prompts) and set the correct nightly toolchain
+- Run the installer with `-y` ("yes" to all, no prompts) and set the correct nightly toolchain
 - Delete the installer after completion
 
 You may need to allow scripts by running the following before executing the above command:
@@ -83,7 +74,7 @@ cd mech\src\wasm
 wasm-pack build --target web
 ```
 
-4. Installing from Source
+3. Installing from Cargo
 -------------------------------------------------------------------------------
 
 If you prefer to install Mech using Rust's Cargo package manager, you can use the following commands, first install Rust as described above. Then run:
@@ -92,7 +83,7 @@ If you prefer to install Mech using Rust's Cargo package manager, you can use th
 cargo install mech
 ```
 
-This will download the lasted version of Mech published to the cargo package manager, found here: <a href="https://crates.io/crates/mech">https://crates.io/crates/mech</a>.
+This will download the lasted version of Mech published to the cargo package manager, found here: https://crates.io/crates/mech.
 
 
 4. Verifying Installation
