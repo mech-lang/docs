@@ -6,6 +6,7 @@ Mech Language Specification
 
 This document specifies the default syntax of the Mech programming system, which is designed for developing reactive systems like robots, games, and user interfaces. The syntax specified herein is one of many possible syntaxes and interfaces for Mech, but it may be thought of as the default texual representation of Mech.
 
+
 This specification starts by defining the most atomic elements of the language, and then builds up to more complex structures.
 
 This document is for:
@@ -30,9 +31,9 @@ Source code is ecoded with UTF-8, which allows for Unicode support directly in t
 
 (b) Literate Programming and Mechdown
 
-Literate programming, introduced by Donald Knuth, presents programs as structured documents where explanations take precedence over code. In Mech, we support this concept through a format called Mechdown, a superset of Markdown with extensions to support embedded Mech syntax. This document is formatted with Mechdown to demonstrate how it is used.
+Literate programming presents programs as structured documents where explanations take precedence over code. In Mech, we support this concept through a format called Mechdown, a superset of Markdown with extensions to support embedded Mech syntax. This document is formatted with Mechdown to demonstrate how it is used.
 
-For more information, see the <a href="#58856088105263747">Mechdown Section</a>.
+For more information, see the [Mechdown Section](#58856088105263747).
 
 (c) Whitespace
 
@@ -47,7 +48,7 @@ Semicolons and commas are treated as whitespace in most cases. Except in these c
 - Semicolons can be used to separate statements so they can be written inline.
 - Semicolons can be used in a matrix to separate rows, so they can be written inline.
 
-For more information, see the <a href="">Whitespace design document</a>.
+For more information, see the [Whitespace Design Document](#).
 
 3. Lexical Elements
 -------------------------------------------------------------------------------
@@ -654,7 +655,7 @@ A Table represents a structured collection of records, where each record consist
 
 **Defining Tables:**
 
-Tables are enclosed in {} and contain a header row specifying column names and kinds. The pipe \| separates the header from the data rows.
+Tables are enclosed in `{}` and contain a header row specifying column names and kinds. The pipe \| separates the header from the data rows.
 
   { x<f32>  y<u8> | 
     1.2     9 
@@ -751,7 +752,7 @@ A Record is a collection of named fields, where each field consists of a key-val
 
 **Defining Records:**
 
-Records are enclosed in {} and contain bindings of the form key: value. The type of each field can be inferred or explicitly specified.
+Records are enclosed in `{}` and contain bindings of the form key: value. The type of each field can be inferred or explicitly specified.
 
 **Examples 1: Implicitly Typed Records**
 
@@ -769,9 +770,9 @@ This defines a record with three fields:
 
 Here, each field has an explicit kind:
 
-- x<u8>: A `u8` integer.
-- y<string>: A string.
-- z<[u8]:3,1>: A fixed-size 3×1 matrix of `u8` integers.
+- `x<u8>`: A `u8` integer.
+- `y<string>`: A string.
+- `z<[u8]:3,1>`: A fixed-size 3×1 matrix of `u8` integers.
 
 **Example 3: Nested Records**
 
@@ -792,9 +793,9 @@ A record's kind describes the types of its fields:
 
 This denotes a record with:
 
-x: u8
-y: string
-z: [u8]:3,1 (a 3×1 array of u8 values)
+- x: `u8`
+- y: `string`
+- z: `[u8]:3,1` (a 3×1 array of u8 values)
 
 Comparison to Tables
 
