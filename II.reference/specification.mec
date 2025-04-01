@@ -1415,6 +1415,77 @@ When rendered, they look like this:
 
 > This is a block quote.
 
+(b) Tables
+
+```ebnf
+markdown-table := markdown-table-header, *markdown-table-row ;
+markdown-table-header := whitespace0
+      , +column-header
+      , bar
+      , new-line
+      , whitespace0
+      , +column-alignment
+      , bar
+      , new-line ;
+column-header := bar, paragraph ;
+column-alignment := bar
+      , whitespace0
+      , alignment-separator
+      , whitespace0;
+alignment-separator := center-alignment 
+      | left-alignment 
+      | right-alignment 
+      | no-alignment ;
+no-alignment := +dash ;
+left-alignment := colon, +dash ;
+right-alignment := +dash, colon ;
+center-alignment := colon, +dash, colon ;
+markdown-table-row := whitespace0
+      , +column-cell
+      , bar
+      , new-line ;
+column-cell := bar, paragraph ;
+```
+
+Markdown tables consist of a header, and a body. The header is defined using a pipe `|` to separate columns, and a row of dashes `-` to indicate the alignment of each column. The body of the table contains rows of data, also separated by pipes. 
+
+**Table Heading::**
+
+The header of a table is defined using a row of text followed by a row of dashes. The dashes indicate the alignment of each column.
+
+**Column Alignment:**
+
+Columns can be aligned in one of three ways:
+
+- Left-aligned: `:--` or `--`
+- Right-aligned: `--:`
+- Center-aligned: `:--:`
+
+Any number of dashes can be used to indicate the width of the column, and they can be of different lengths.
+
+**Table Body:**
+
+The body of a table is defined using rows of text separated by pipes. Each row can contain any number of columns, and the number of columns in each row must match the number of columns in the header.
+
+**Example:**
+
+```
+| Left  | Center | Right |
+|:------|-------:|:-----:|
+| One   | Four   | 10    |
+| Two   | Five   | 100   |
+| Three | Six    | 1000  |
+```
+
+Renders the following table:
+
+| Left  | Center | Right |
+|:------|:------:|------:|
+| One   | Four   | 10    |
+| Two   | Five   | 100   |
+| Three | Six    | 1000  |
+
+
 (b) Mech Extensions 
 
 ```ebnf
