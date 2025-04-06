@@ -58,25 +58,23 @@ Tokens are the smallest units of meaning in Mech. They include letters, digits, 
 
 Some Unicode characters are reserved for box drawing, and therefore are excluded from includsion in valid identifiers.
 
-```ebnf
-alpha := "a".."z" | "A".."Z" ;
-digit := "0".."9";
-emoji := +emoji-grapheme ;
-word := +alpha ;
-digit1 := +digit ;
-digit0 := *digit ;
+```
+alpha = "a".."z" | "A".."Z";
+digt = "0".."9";
+emoji := emoji-grapheme+ ;
+word := alpha+ ;
+digit1 := digit+ ;
+digit0 := digit* ;
 bin-digit := "0" | "1" ;
 hex-digit := digit | "a" .. "f" | "A" .. "F" ;
 oct-digit := "0" .. "7" ;
 number := digit1 ;
-forbidden-emoji := box-drawing | other-forbidden-shapes ;
-emoji := (¬forbidden-emoji, emoji-grapheme) ;
 ```
 
 (b) Identifiers
 
-```ebnf
-identifier := (alpha | emoji), *(alpha | digit | symbol | emoji) ;
+```
+identifier := (alpha | emoji), (alpha | digit | symbol | emoji)* ;
 ```
 
 Identifiers start with letters or most UTF-8 encoded emoji characters, and can contain alphanumeric, most emojis, /, \*, +, -, and ^ characters.
@@ -102,36 +100,36 @@ Combined with Mech's Unicode support, this allows users to write code in their n
 
 (c) Operators and Punctuation
 
-**Punctutation:**
+Punctutation:
 ```
 . ! ? , : ; ' "
 ```
 
-**Symbols:**
+Symbols:
 ```
 & | @ / # = \ ~ + - * ^ _
 ```
 
-**Grouping symbols:**
+Grouping symbols:
 ```
 ( ) < > { } [ ]
 ```
 
-**Operators:**
+Operators:
 ```
-Assign       := = += -= *= /= ^=
-Arithmetic   + - * / ^ %
-Split        >- -<
-Matrix       ** · ⨯ \ ' 
-Logic        | & xor ⊕ ⊻ ! ¬
-Set          ∪ ∩ ∖ ∁ ⊆ ⊇ ⊊ ⊋ ∈ ∉ 
-Range        .. ..=
-Condition    != ¬= ≠ == > < >= ≤ ≥
-Transition   => -> ~>
-Guard        | │ ├ └
+:= = += -= *= /= ^=
++ - * / ^ %
+>- -<
+** · ⨯ \ ' 
+| & xor ⊕ ⊻ ! ¬
+∪ ∩ ∖ ∁ ⊆ ⊇ ⊊ ⊋ ∈ ∉ 
+.. ..=
+!= ¬= ≠ == > < >= ≤ ≥
+=> -> ~>
+| │ ├ └
 ```
 
-```ebnf
+```
 punctuation := period 
       | exclamation 
       | question 
@@ -171,39 +169,41 @@ text := alpha
       | grouping-symbol 
       | symbol ;
 space-tab := space | tab ;
-list-separator := *whitespace, ",", *whitespace ;
+list-separator := whitespace*, ",", whitespace* ;
 ```
 
 (d) Comments
 
-```ebnf
+```
 comment-sigil := "--" | "//" ;
-comment :=  *whitespace
-      , comment-sigil
-      , +text ;
+comment := comment-singleline | comment-multiline ;
+comment-singleline := ws0, comment-sigil, text+ ;
+comment-multiline := whitespace*, "/*", (!"*/", whitespace* | text)+, "*/" ;
 ```
 
 **Examples:**
 
   -- Single line comment.
   // Also a single line comment.
+  /* A multi-line comment.
+     It can span multiple lines. */
 
 4. Literals
 -------------------------------------------------------------------------------
 
-```ebnf
-literal := (number | string | atom | boolean | empty), ?kind-annotation ;
+```
+literal := (number | string | atom | boolean | empty), kind-annotation? ;
 ```
 
 (a) Integers
 
-```ebnf
-number := real-number, ?"i" | ?("+", real-number, "i") ;
-integer-literal := +digit;
-decimal-literal := "0d", +digit ;
-hexadecimal-literal := "0x", +hex-digit ;
-octal-literal := "0o", +oct-digit ;
-binary-literal := "0b", +bin-digit ;
+```
+number := number := real-number, "i"? | ("+", real-number, "i")? ;
+integer-literal := digit+;
+decimal-literal := "0d", <digit+> ;
+binary-literal := "0b", <bin-digit+> ;
+octal-literal := "0o", <oct-digit+> ;
+hexadecimal-literal := "0x", <hex-digit+> ;
 ```
 
 An integer literal is a sequence of digits representing a whole number. Mech supports decimal, binary, octal, and hexadecimal integer literals, each distinguished by a unique prefix:
@@ -223,19 +223,19 @@ An integer literal is a sequence of digits representing a whole number. Mech sup
 
 (b) Floats
 
-```ebnf
-scientific-literal :=  (float-literal | integer-literal)
-      , ("e" | "E")
-      , ?plus
-      , ?dash
-      , (float-literal | integer-literal) ;
+```
+float-literal := "."?
+      , digit+
+      , "."?
+      , digit* ;
 rational-literal := integer-literal
       , slash
       , integer-literal ;
-float-literal := ?"."
-      , +digit
-      , ?"."
-      , *digit ;
+scientific-literal :=  (float-literal | integer-literal)
+      , ("e" | "E")
+      , plus?
+      , dash?
+      , (float-literal | integer-literal) ;
 ```
 
 **Examples:**
@@ -244,12 +244,13 @@ float-literal := ?"."
   3.14
   0.001
   2.5e10
-  -12.3E4
+  1/3     // Rational literal
+  1 / 3   // NOT a rational literal, but a division operation
 
 (c) Strings
 
-```ebnf
-string := quote, *(¬quote, text), quote ;
+```
+string := quote, (!quote, text)*, quote ;
 ```
 
 **Examples:**
@@ -259,7 +260,7 @@ string := quote, *(¬quote, text), quote ;
 
 (d) Boolean
 
-```ebnf
+```
 boolean := true-literal | false-literal ;
 true-literal := english-true-literal | true-symbol ;
 false-literal := english-false-literal | false-symbol ;
@@ -273,12 +274,12 @@ english-false-literal := "false" ;
 
   true
   false
-  ✗
   ✓
+  ✗
 
 (e) Atoms
 
-```ebnf
+```
 atom := "`", identifier ;
 ```
 
@@ -291,8 +292,8 @@ atom := "`", identifier ;
 
 (f) Empty
 
-```ebnf
-empty := +underscore ;
+```
+empty := underscore+ ;
 ```
 
 **Examples:**
@@ -301,9 +302,8 @@ empty := +underscore ;
 
 (g) Kinds
 
-
-```ebnf
-kind-annotation := "<", kind, ">" ;
+```
+kind-annotation := left-angle, kind, right-angle ;
 kind := kind-fxn 
       | kind-empty 
       | kind-atom 
@@ -312,7 +312,7 @@ kind := kind-fxn
       | kind-bracket 
       | kind-map 
       | kind-brace ;
-kind-empty := +"_" ;
+kind-empty := underscore+ ;
 kind-atom := "`", identifier ;
 kind-map := "{"
       , kind
@@ -320,39 +320,49 @@ kind-map := "{"
       , kind
       , "}" ;
 kind-fxn := "("
-      , ?[",", kind]
+      , list0(list-separator, kind)
       , ")"
       , "="
       , "("
-      , ?[",", kind]
+      , list0(list-separator, kind)
       , ")" ;
 kind-brace := "{"
-      , [",", kind]
+      , list1(",", kind)
       , "}"
-      , ?":"
-      , ?[",", literal] ;
+      , ":"?
+      , list0("," , literal) ;
 kind-bracket := "["
-      , [",", kind]
+      , list1(",",kind)
       , "]"
-      , ?":"
-      , ?[",", literal] ;
-kind-tuple := "("
-      , [",", kind]
+      , ":"?
+      , list0(",", literal) ;
+kind-tuple = "("
+      , list1(",",kind)
       , ")" ;
 kind-scalar := identifier ;
 ```
 
-
+**Examples:**
+  
+  <_>
+  <`A>
+  <{A:B}>
+  <(A,B)=(C,D)>
+  <{A,B,C}>
+  <[A,B,C]>
+  <(A,B,C)>
+  <A>
+  
 5. Data Structures
 -------------------------------------------------------------------------------
 
-```ebnf
-structure := empty-set 
-      | empty-table 
+```
+structure := empty_set 
+      | empty_table 
       | table 
       | matrix 
       | tuple 
-      | tuple-struct 
+      | tuple_struct 
       | record 
       | map 
       | set ;
@@ -376,21 +386,21 @@ Each data structure has its own semantics, which will be described in this secti
 
 (a) Matrix
 
-```ebnf
-matrix-column := *space-tab 
-      , expression 
-      , (*space-tab, ?("," | table-separator), *space-tab) ;
-matrix-row := ?table-separator
-      , *space-tab
-      , +matrix-column
-      , ?semicolon
-      , ?new-line
-      , ?(+box-drawing-char, new-line) ;
-matrix := matrix-start
-      , *(box-drawing-char | whitespace)
-      , *matrix-row
-      , *box-drawing-char
-      , matrix-end ;
+```
+matrix_column := space_tab*
+      , expression
+      , (space_tab*, ("," | table_separator)?, space_tab*) ;
+matrix_row := table_separator?
+      , space_tab*
+      , matrix_column+
+      , semicolon?
+      , new_line?
+      , (box_drawing_char+, new_line)? ;
+matrix := matrix_start
+      , (box_drawing_char | whitespace)*
+      , matrix_row*
+      , box_drawing_char*
+      , matrix_end ;
 ```
 A Matrix is a structured, numbered sequence of elements of a single kind, arranged in rows and columns, enclosed bt square brackets, `[]`. The number of elements in the matrix is called its length, and the shape of a matrix is defined as a pair of non-negative integers representing the number of rows and columns.
 
@@ -468,17 +478,18 @@ The kind of a matrix includes the type of its elements and its shape. For exampl
 
 (b) Set
 
-```ebnf
+```
 set := "{"
-      , *whitespace
-      , ?[expression, list-separator]
-      , *whitespace
+      , whitespace*
+      , list0(("," | whitespace+)
+      , expression)
+      , whitespace*
       , "}" ;
-empty-set := table-start
-      , *whitespace
+empty_set := table_start
+      , whitespace*
       , empty
-      , *whitespace
-      , table-end ;
+      , whitespace*
+      , table_end ;
 ```
 
 A Set is defined using curly braces `{}` and contains a comma-separated list of expressions. Sets do not maintain order and contain only unique elements.
@@ -521,9 +532,20 @@ A Set is defined using curly braces `{}` and contains a comma-separated list of 
 
 (c) Map
 
-```ebnf
-map := "{", *whitespace, *mapping, *whitespace, "}" ;
-mapping :=  *whitespace, expression, *whitespace, ":", *whitespace, expression, ?comma, *whitespace ;
+```
+map := "{"
+      , whitespace*
+      , mapping*
+      , whitespace*
+      , "}" ;
+mapping :=  whitespace*
+      , expression
+      , whitespace*
+      , ":"
+      , whitespace*
+      , expression
+      , comma?
+      , whitespace* ;
 ```
 
 A Map is defined using curly braces `{}` and contains a set of key-value mappings. Each key is unique and associated with a corresponding value.
@@ -565,9 +587,9 @@ A Map is defined using curly braces `{}` and contains a set of key-value mapping
 
 (d) Tuple
 
-```ebnf
-tuple := "(", ?[expression, ","], ")" ;
-tuple-struct := atom, "(", expression, ")" ;
+```
+tuple := "(", list0(",", expression), ")" ;
+tuple_struct = atom, "(", expression, ")" ;
 ```
 
 A Tuple is defined using parentheses `()` and contains an ordered collection of elements, which can be of different types. 
@@ -590,7 +612,9 @@ A Tuple is defined using parentheses `()` and contains an ordered collection of 
   (1)                
   (1,1,3)                
   (1,(2,3))                
-  (1, true, "Hello")                 
+  (1, true, "Hello")
+  ([1, 2; 3, 4], 7, false)
+  ()                 
 
 **Edge Cases:**
 
@@ -609,39 +633,39 @@ A Tuple is defined using parentheses `()` and contains an ordered collection of 
 
 (e) Table
 
-```ebnf
-table := table-start
-      , *(box-drawing-char | whitespace)
-      , table-header
-      , *(box-drawing-char | whitespace)
-      , +table-row
-      , *box-drawing-char
-      , *whitespace
-      , table-end ;
+```
+table := table_start
+      , (box_drawing_char | whitespace)*
+      , table_header
+      , (box_drawing_char | whitespace)*
+      , table_row+
+      , box_drawing_char*
+      , whitespace*
+      , table_end ;
 binding := identifier
-      , ?kind-annotation
+      , kind_annotation?
       , colon
       , expression
-      , ?"," ;
-table-column := *(space | tab)
+      , ","? ;
+table_column := space_tab*
       , expression
-      , *((space | tab)
-            , ?("," | table-separator)
-            , *(space | tab)) ;
-table-row := ?table-separator
-      , *(space | tab)
-      , +table-column
-      , ?semicolon
-      , ?new-line
-      , ?(+box-drawing-char, new-line) ;
-table-header := [field, +space-tab]
-      , *(space | tab)
-      , (bar| box-vert)
-      , *whitespace ;
-field := identifier, ?kind-annotation ;
-empty-table := table-start
-      , *whitespace
-      , table-end ;
+      , (space_tab*
+      , ("," | table_separator)?
+      , space_tab*) ;
+table_row := table_separator?
+      , space_tab*
+      , table_column+
+      , semicolon?
+      , new_line?
+      , (box_drawing_char+, new_line)? ;
+table_header := list1(space_tab+, field)
+      , space_tab*
+      , (bar | box_vert)
+      , whitespace* ;
+field := identifier, kind_annotation? ;
+empty_table := table_start
+      , whitespace*
+      , table_end ;
 ```
 
 A Table represents a structured collection of records, where each record consists of multiple fields (columns). Tables allow organizing data in a flexible, expressive manner.
@@ -808,7 +832,7 @@ Tables represent multiple records (rows) sharing a common structure.
 6. Expressions
 -------------------------------------------------------------------------------
 
-```ebnf
+```
 expression := range-expression | formula ;
 ```
 
@@ -833,39 +857,40 @@ Expressions define computations in Mech. Most expressions operate elementwise ov
 
 (a) Formula 
 
-```ebnf
+```
 parenthetical-term := left-parenthesis, formula, right-parenthesis ;
 negate-factor := "-", factor ;
 
-formula := l1, *(range-operator, l1) ;
-add-sub-operator := add | subtract ;
-l1 := l2, *(add-sub-operator, l2) ;
-mul-div-operator := multiply | divide ;
-matrix-operator := matrix-multiply 
+formula := l1, (range_operator, l1)* ;
+add_sub_operator := add | subtract ;
+l1 := l2, (add_sub_operator, l2)* ;
+mul_div_operator := multiply | divide ;
+matrix_operator := matrix_multiply 
       | multiply 
       | divide 
-      | matrix-solve ;
-l2 := l3, *(mul-div-operator | matrix-operator, l3) ;
-exponent-operator := exponent ;
-l3 := l4, *(exponent-operator, l4) ;
-logic-operator := and 
+      | matrix_solve ;
+l2 := l3, (mul_div_operator | matrix_operator, l3)* ;
+exponent_operator := exponent ;
+l3 := l4, (exponent_operator, l4)* ;
+logic_operator := and 
       | or 
       | xor ;
-l4 := l5, *(logic-operator, l5) ;
-comparison-operator := not-equal 
-      | equal-to 
-      | greater-than-equal 
-      | greater-than 
-      | less-than-equal 
-      | less-than ;
-l5 := factor, *(comparison-operator, factor) ;  
-factor := (parenthetical-term 
+l4 := l5, (logic_operator, l5)* ;
+comparison_operator := not_equal 
+      | equal_to 
+      | greater_than_equal 
+      | greater_than 
+      | less_than_equal 
+      | less_than ;
+l5 := factor, (comparison_operator, factor)* ;
+
+factor := (parenthetical_term 
       | structure 
-      | fsm-pipe 
-      | function-call 
+      | fsm_pipe 
+      | function_call 
       | literal 
       | slice 
-      | var), ?transpose ;
+      | var), transpose? ;
 ```
 
 A formula is an expression that follows operator precedence rules and consists of arithmetic, logical, comparison, matrix, and range expressions. Expressions in formulas are evaluated according to their precedence, with higher-precedence operations being evaluated first.
@@ -977,6 +1002,17 @@ formula-subscript := formula ;
 range-subscript := range-expression ;
 select-all := ":" ;
 ```
+**Examples**
+    array := [10, 20, 30, 40, 50]
+    slice_1 := array[1:]                -- Select all from index 1 to the end (select-all)
+    slice_2 := array[1, 3]              -- Range subscript (from index 1 to 3)
+    slice_3 := array[2, 4]              -- Another range from index 2 to 4
+    slice_4 := array[:4]                -- Select all up to index 4
+    slice_formula := array[(x + y), 3]  -- Formula-based subscript, with a calculated index
+
+    matrix := { {1, 2}, {3, 4}, {5, 6} }
+    brace_index := matrix{(x * y)}      -- Formula-based indexing within braces
+
 
 (b) Dot Index
 
@@ -984,6 +1020,9 @@ select-all := ":" ;
 dot-subscript := ".", identifier ;
 dot-subscript-int := ".", integer-literal ;
 ```
+**Examples**
+    dot_result_1 := object.field        -- Dot subscript with identifier
+    dot_result_2 := object.42           -- Dot subscript with integer literal
 
 (c) Swizzle
 
@@ -993,6 +1032,11 @@ swizzle-subscript := "."
       , "," 
       , [identifier, ","] ;
 ```
+**Examples:**
+    vector := {x: 1, y: 2, z: 3}
+    swizzle_result := vector.x, y      -- Swizzling: selecting x and y
+    swizzle_combined := vector.x, y, z -- Swizzling: selecting x, y, z
+
 
 8. Statements
 -------------------------------------------------------------------------------
@@ -1014,6 +1058,10 @@ variable-define := ?tilde, var
       , define-operator
       , expression ;
 ```
+**Examples** 
+    intVar := 10                                -- Variable definition with initialization
+    optionalVar := ~stringVar                   -- Variable definition with optional tilde
+    varWithExpression := ~calculatedValue * 5   -- Variable definition with expression
 
 (b) Variable Assign
 
@@ -1024,6 +1072,9 @@ variable-assign := slice-ref
       , assign-operator
       , expression ;
 ```
+**Examples**
+    numbers := [1, 2, 3, 4, 5]
+    numbers[2] = 10             -- Assign value 10 to index 2 of the array
 
 (c) Op-Assign
 
@@ -1043,6 +1094,13 @@ op-assign := slice-ref
       , op-assign-operator
       , expression ;
 ```
+**Examples**
+    counter := 0
+    counter += 5                 -- Add 5 to counter (addition assignment)
+    counter -= 3                 -- Subtract 3 from counter (subtraction assignment)
+    counter *= 2                 -- Multiply counter by 2 (multiplication assignment)
+    counter /= 4                 -- Divide counter by 4 (division assignment)
+    counter ^= 2                 -- Exponentiate counter by 2 (exponentiation assignment)
 
 (c) Enum Define
 
@@ -1058,6 +1116,9 @@ enum-variant-kind := "("
       , kind-annotation
       , ")" ;
 ```
+**Examples**
+    status < Active | Inactive | Pending  -- Enum definition with variants
+    priority < High | Medium | Low        -- Enum definition for priority levels
 
 (d) Kind Define
 
@@ -1068,6 +1129,8 @@ kind-define := "<"
       , define-operator
       , kind-annotation ;
 ```
+**Examples**
+    userKind < Person > :< string | int -- Kind definition with annotation
 
 9. Functions
 -------------------------------------------------------------------------------
@@ -1092,6 +1155,31 @@ function-arg := identifier, kind-annotation ;
 argument-list := "(", ?[(call-arg-with-biding | call-arg), ","], ")" ;
 ```
 
+**Examples**
+
+    -- Simple function definition with no return value
+    addNumbers(x: int, y: int) = (result: int) := 
+        result = x + y
+        .  -- Return result (implicitly)
+
+    -- Function with multiple output arguments
+    createRectangle(length: int, width: int) = (area: int, perimeter: int) := 
+        area = length * width
+        perimeter = 2 * (length + width)
+        .  -- Return both area and perimeter
+
+    -- Function with an optional argument (no output)
+    greetUser(name: string) = := 
+        print("Hello, " + name)
+        .  -- No output, just side-effect
+
+    -- Function with complex arguments and output
+    calculateStats(x: int, y: int, z: int) = (average: float, max: int) := 
+        average = (x + y + z) / 3.0
+        max = max(x, max(y, z))  -- Function calls inside function body
+        .  -- Return both average and max
+
+
 (b) Function Call
 
 ```ebnf
@@ -1102,6 +1190,22 @@ call-arg-with-binding := identifier
 call-arg := expression ;
 var := identifier, ?kind-annotation ;
 ```
+**Examples**
+    -- Call function with simple arguments
+    sumResult = addNumbers(5, 10)   -- Call addNumbers with two integer arguments
+
+    // Call function with binding (using colon syntax to bind a specific argument)
+    rectangleDetails = createRectangle(10, 20)  -- Call with two integers
+    area = rectangleDetails.area                -- Accessing the area
+    perimeter = rectangleDetails.perimeter      -- Accessing the perimeter
+
+    // Call function with complex arguments and output
+    stats = calculateStats(10, 20, 30)          -- Call calculateStats
+    average = stats.average                     -- Extract average
+    maxValue = stats.max                        -- Extract max value
+
+    // Call function with optional argument
+    greetUser("Alice")      -- Function call with a single string argument
 
 10. State Machines
 -------------------------------------------------------------------------------
@@ -1197,6 +1301,189 @@ fsm-pattern := fsm-tuple-struct
       | formula ;
 wildcard := "*" ;
 ```
+**Examples**
+    -- Simple FSM Declaration
+    fsm SimpleFSM
+        (var1, var2)         -- Variables for FSM
+        =>                   -- Output operator
+        ;                    -- End of the state machine definition
+
+    -- FSM with states and transitions
+    fsm StateMachine1
+        (state1, state2)
+        => "StateMachineOutput"   -- Output operator for the FSM
+        kind "simple"
+        define
+        #state1
+            -> state2    -- Transition operator
+            | guard1     -- Guard operator for conditional transitions
+        .
+
+    fsm-instance MyFSM
+        (stateA, stateB)
+        -> stateB         -- Simple state transition
+        ~> stateA         -- Asynchronous transition operator
+
+
+    -- FSM with variables and multiple states
+    fsm ComplexFSM
+        (state1, state2, state3)
+        => "Processing"
+        define
+        #state1
+            -> state2    -- Transition from state1 to state2
+        | state2
+            -> state3    -- Transition from state2 to state3
+            ~> state1    -- Asynchronous transition back to state1
+        .
+
+    fsm-instance ComplexFSMInstance
+        (stateX, stateY, stateZ)
+        -> stateX       -- Transition to stateX
+        ~> stateY       -- Async transition to stateY
+        => outputX      -- FSM Output
+        .
+
+
+    -- FSM with guards and output operators
+    fsm-implementation MyFSMImpl
+        #FSMTransition1
+        (state1, state2)
+        -> state3         -- Transition from state1 to state3
+        => stateOutput    -- Output from this FSM transition
+        .
+
+    fsm-guard-arm MyFSMGuard
+        #FSMGuardState
+        (stateGuard)
+        | guard-condition  -- Guard operator for conditional checking
+        .
+
+    fsm-guard MyFSMGuardExample
+        | FSMGuardPattern
+        -> FSMGuardTransition
+        ~> FSMAsyncGuard
+        .
+
+    fsm-block-transition MyFSMBlockTransition
+        -> {
+            // Complex code block executed during state transition
+            set stateA = true
+            set stateB = false
+        }
+        .
+
+
+    -- FSM pattern with tuple struct
+    fsm-pattern MyFSMPattern
+        grave TupleState
+        (varA, varB)
+        .
+
+
+    -- FSM instance with arguments
+    fsm-instance ComplexArgsFSM
+        (stateStart, stateEnd)
+        (inputData1, inputData2) -- Call arguments with bindings
+        -> stateStart
+        .
+
+
+    -- FSM State definition with guard and pattern matching
+    fsm-state-definition MyStateDefinition
+        | stateGuard
+        grave stateDefinition
+        (variableX, variableY)
+        .
+
+
+    -- FSM with wildcards and formulas in patterns
+    fsm-pattern MyWildcardPattern
+        *
+        .
+
+    fsm-pattern MyFormulaPattern
+        formula("x + y = 10")
+        .
+
+11. Mech Programs
+-------------------------------------------------------------------------------
+
+```ebnf
+mech := program | statement ;
+```
+
+(a) Programs
+
+```ebnf
+program := ?title, body ;
+body := +section ;
+```
+**Examples**
+    -- Mech Program
+
+    ```mech
+    -- Program starts with an optional title
+
+    program MyProgram
+        -- Body of the program
+        section Introduction
+            This section explains the purpose of the program.
+            -> state1
+            .
+        section Usage
+            This section describes how to use the program.
+            - Run `mech-program run` in the terminal.
+        .
+
+(b) Sections
+
+```ebnf
+section-element := mech-code 
+      | unordered-list 
+      | comment 
+      | paragraph 
+      | code-block 
+      | sub-section ;
+sub-section-element := comment 
+      | unordered-list 
+      | mech-code 
+      | paragraph 
+      | code-block;
+sub-section := alpha-subtitle, *sub-section-element ;
+section := ?ul-subtitle, +section-element ;
+```
+**Examples**
+    -- Mech Program with Sections
+
+    ```mech
+    -- A program with sections and sub-sections
+
+    program MechProgram
+        section Introduction
+            This section provides an introduction to Mech programming.
+            - First, define your variables.
+            - Second, initialize your FSM.
+            - Finally, run your program.
+        section Installation
+            alpha-subtitle "Step 1"
+            - Install Mech interpreter.
+            - Download the latest version from the website.
+            alpha-subtitle "Step 2"
+            - Setup environment variables.
+            - Test the installation by running `mech --version`.
+        section Example Code
+            Here is a simple example of a Mech program:
+            ```mech
+            fsm SimpleFSM
+                (input, output)
+                define
+                #startState
+                    -> nextState
+                    => "Example Output"
+                .
+            ```
+        .
 
 
 11. Mech Programs
