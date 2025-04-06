@@ -30,9 +30,9 @@ Source code is ecoded with UTF-8, which allows for Unicode support directly in t
 
 (b) Literate Programming and Mechdown
 
-Literate programming, introduced by Donald Knuth, presents programs as structured documents where explanations take precedence over code. In Mech, we support this concept through a format called Mechdown, a superset of Markdown with extensions to support embedded Mech syntax. This document is formatted with Mechdown to demonstrate how it is used.
+Literate programming presents programs as structured documents where explanations take precedence over code. In Mech, we support this concept through a format called Mechdown, a superset of Markdown with extensions to support embedded Mech syntax. This document is formatted with Mechdown to demonstrate how it is used.
 
-For more information, see the <a href="#58856088105263747">Mechdown Section</a>.
+For more information, see the [Mechdown Section](#58856088105263747).
 
 (c) Whitespace
 
@@ -47,7 +47,7 @@ Semicolons and commas are treated as whitespace in most cases. Except in these c
 - Semicolons can be used to separate statements so they can be written inline.
 - Semicolons can be used in a matrix to separate rows, so they can be written inline.
 
-For more information, see the <a href="">Whitespace design document</a>.
+For more information, see the [Whitespace Design Document](#).
 
 3. Lexical Elements
 -------------------------------------------------------------------------------
@@ -209,16 +209,17 @@ hexadecimal-literal := "0x", <hex-digit+> ;
 An integer literal is a sequence of digits representing a whole number. Mech supports decimal, binary, octal, and hexadecimal integer literals, each distinguished by a unique prefix:
 
 - Decimal: A sequence of digits without a prefix (e.g., 42, 123456).
-- Binary: Prefixed with 0b, containing only 0 and 1 (e.g., 0b1010).
-- Octal: Prefixed with 0o, containing digits 0-7 (e.g., 0o755).
 - Hexadecimal: Prefixed with 0x, containing digits 0-9 and a-f or A-F (e.g., 0x1A3F).
+- Octal: Prefixed with 0o, containing digits 0-7 (e.g., 0o755).
+- Binary: Prefixed with 0b, containing only 0 and 1 (e.g., 0b1010).
 
 **Examples:**
 
-  42
-  0b1010
-  0o755
-  0x1A3F
+  0d42                -- decimal
+  0x1234567890ABCDEF  -- hexadecimal
+  0x1234567890abcdef  
+  0o12345670          -- octal 
+  0b100110101         -- binary
 
 (b) Floats
 
@@ -238,7 +239,8 @@ scientific-literal :=  (float-literal | integer-literal)
 ```
 
 **Examples:**
-
+  
+  1234
   3.14
   0.001
   2.5e10
@@ -400,14 +402,34 @@ matrix := matrix_start
       , box_drawing_char*
       , matrix_end ;
 ```
+A Matrix is a structured, numbered sequence of elements of a single kind, arranged in rows and columns, enclosed bt square brackets, `[]`. The number of elements in the matrix is called its length, and the shape of a matrix is defined as a pair of non-negative integers representing the number of rows and columns.
 
-A matrix is a numbered sequence of elements of a single kind, arranged in rows and columns. The number of elements is called the length of the matrix and is never negative. The number of rows and columns is called the shape of the matrix. The shape is always a pair of non-negative integers. 
+**Semantics:**
 
-The shape is part of the matrix's kind; it must evaluate to a non-negative constant representable by a tuple of kind `(index,index)`. The shape of matrix `A` can be discovered using the built-in function `matrix/shape()`. The elements can be addressed by index indices `(1,1)` through `matrix/shape(A)`. 
+- Homogeneous Elements: All elements in a matrix must be of the same kind.
+- Fixed Shape: A static matrix's shape (rows, columns) is part of its kind and is always a tuple of non-negative integers.
+- One-Based Access: Elements are accessed using 1-based indexing for both rows and columns.
+- Column-Major Order: Matrix elements are stored and accessed in column-major order.
 
 Matrix kinds are always two-dimensional, so row vectors and column vectors are also represented as matrices with a single row or column, respectively.
 
+**Indexing:**
+
+Matrix elements can be accessed using either 1D or 2D indexing:
+
+- 1D Indexing (Column-Major Order): Elements are stored in column-major order, meaning the first element is the top-left element, proceeding down the first column before moving to the next.
+- 2D Indexing: Elements can be referenced using `[row, column]` notation, starting from 1 for both indices.
+- Negative Indices: Negative indices count from the end of the matrix, with -1 being the last element.
+
+See the Indexing section for more details and examples.
+
 **Examples:**
+
+  -- Empty Matrix
+  []
+
+  -- 1x1 Matrix
+  [1]
 
   -- 3x3 Matrix
   [1 2 3
@@ -436,7 +458,6 @@ Fancy matrix syntax is supported so that formatted output from the Mech REPL can
 ┃ 4   5   6 ┃
 ┗           ┛
 ```
-
 The elements of a matrix are indexed in the following ways:
 
 - **1D** - by their position in the matrix, starting from 1, in a column-major order starting at the top left corner of the matrix and proceeding down and to the right. The last element of the matrix, called the end of the matrix, is the most bottom right element.
@@ -444,6 +465,16 @@ The elements of a matrix are indexed in the following ways:
 - **2D** - by the row and column index, starting from 1 for each.
 
 Negative indices indicate counting from the end of the matrix. For example, `-1` is the last element, `-2` is the second to last element, and so on.
+
+**Kind**
+
+The kind of a matrix includes the type of its elements and its shape. For example, a matrix of unsigned 8-bit integers with 2 rows and 3 columns has the kind `<[u8]:2,3>`.
+
+```
+-- Dynamic matrix        <[u8]>
+-- 2D Matrix             <[u8]:2,3>
+-- 3D Matrix             <[u8]:2,3,4>
+```
 
 (b) Set
 
@@ -461,9 +492,43 @@ empty_set := table_start
       , table_end ;
 ```
 
+A Set is defined using curly braces `{}` and contains a comma-separated list of expressions. Sets do not maintain order and contain only unique elements.
+
+**Semantics:**
+
+- Homogeneity: All elements in a set must be of the same type.
+- Unordered: The order of elements within a set is not preserved.
+- Uniqueness: Duplicate elements are not allowed in a set.
+
+**Operations:**
+
+- Insertion: Adding an element to a set does not affect its order and only - succeeds if the element is not already present.
+- Deletion: Removing an element, if present, maintains the set property.
+- Union: Combines two sets, keeping only unique elements.
+- Intersection: Produces a set containing elements common to both sets.
+- Difference: Returns a set containing elements in the first set but not in the second.
+
 **Examples:**
 
-  {1, 2, 3}
+```
+- Empty: `{}` or `{_}`
+- Singleton: {1}
+- Basic:     {1,2,3}
+- Strings:   {"apple", "banana", "cherry"}
+- Nested:    {{1,2},{3,4}}
+```
+
+**Edge Cases**
+
+- `{}` represents an empty set.
+- `{1, 1, 2}` results in `{1, 2}` due to uniqueness constraints.
+- `{1, "hello"}` results in a type error due to homogeneity constraints.
+
+**Kind:**
+
+```
+<{u8}:3>
+```
 
 (c) Map
 
@@ -483,12 +548,63 @@ mapping :=  whitespace*
       , whitespace* ;
 ```
 
+A Map is defined using curly braces `{}` and contains a set of key-value mappings. Each key is unique and associated with a corresponding value.
+
+**Semantics:**
+
+- Key Uniqueness: Each key in a map must be unique.
+- Unordered: The order of key-value pairs within a map is not preserved.
+- Key-Value Association: Each key is mapped to exactly one value.
+
+**Operations**
+
+- Insertion: Adding a key-value pair updates the map. If the key already exists, its value is updated.
+- Deletion: Removing a key-value pair removes the key and its associated value.
+- Lookup: Retrieving the value associated with a key.
+- Merge: Combining two maps, where duplicate keys take precedence from the second map.
+
+```
+- Empty:             {_:_}
+- Single element:    {"a":1}
+- Multiple elements: {"a":10, "b":20, "c": 30}
+- Nested:            {"a":{"a":10}}
+- Multiline:
+    { "a" : 10 
+      "b" : 20
+      "c" : 30 }
+```
+
+**Edge Cases**
+
+- `{_:_}` represents an empty map.
+- Duplicate keys result in an overwrite of the previous value, as long as the map is mutable.
+- `{1: "hello", 2: "world"}` is valid, but `{1: "hello", "one": "world"}` results in a type error if homogeneity is enforced.
+
+**Kind:**
+
+- A map of strings to u8s: `<{string:u8}>`
+- A map of strings to a map of strings to u8: `<{string:{string:u8}}>`
+
 (d) Tuple
 
 ```
 tuple := "(", list0(",", expression), ")" ;
 tuple_struct = atom, "(", expression, ")" ;
 ```
+
+A Tuple is defined using parentheses `()` and contains an ordered collection of elements, which can be of different types. 
+
+**Semantics:**
+
+- Ordered: The order of elements within a tuple is preserved.
+- Heterogeneous: A tuple can contain elements of different types.
+- Immutable: Once created, the elements in a tuple cannot be changed.
+
+**Operations:**
+
+- Access: Elements can be accessed by their position (zero-based index).
+- Concatenation: Tuples can be combined to form a larger tuple.
+- Decomposition: Tuples can be unpacked into individual variables.
 
 **Examples:**
 
@@ -499,6 +615,21 @@ tuple_struct = atom, "(", expression, ")" ;
   (1, true, "Hello")
   ([1, 2; 3, 4], 7, false)
   ()                 
+
+**Edge Cases:**
+
+- `()` represents an empty tuple.
+
+- `(1)` is a single-element tuple, not a parenthetical expression that evaluates to `1`.
+
+- Tuples maintain the type of each element, so `(1, "hello")` has the kind `<(f64,string)>`,, unlike sets which require homogeneity.
+
+**Kind**
+
+```
+-- Two-tuple of u8 and string    <(u8,string)>
+-- Three-tuple of u8s            <(u8,u8,u8)>
+```
 
 (e) Table
 
@@ -537,27 +668,166 @@ empty_table := table_start
       , table_end ;
 ```
 
-**Examples:**
+A Table represents a structured collection of records, where each record consists of multiple fields (columns). Tables allow organizing data in a flexible, expressive manner.
+**Semantics:**
+
+- Structured: Each record consists of ordered fields (columns).
+- Heterogeneous: Fields can have different kinds (types).
+- Homogeneous: Each row has a similar structure, with the same fields.
+- Sparse: Tables allow missing values (denoted by `_`).
+
+**Defining Tables:**
+
+Tables are enclosed in `{}` and contain a header row specifying column names and kinds. The pipe \| separates the header from the data rows.
 
   { x<f32>  y<u8> | 
     1.2     9 
     1.3     8     }
+This defines a table with two columns:
+
+- `x<f32>`: A floating-point column.
+- `y<u8>`: An unsigned 8-bit integer column.
+
+The same table can be written in a compact, inline format using semicolons (;) to separate rows.
+
+```
+{ x<f32> y<u8> | 1.2 9; 1.3 8 }
+```
+
+Where `|` denotes the end of the header, and each row is separated by a semicolon `;`.
+
+**Any Fields**
+
+The `_` is the "any" kind and allows columns to contain data from mixed kinds.
+
+  { x<_>   y<_> |
+    1.2    true 
+    "Hi"   8<u8>}
+
+Here, `x` holds both floats and strings, and y holds both integers and booleans. This can be useful for dealing with data whose type is not known at compiletime.
+
+**Sparse Tables**
+
+When used as a value in a table, `_` indicates that a cell is missing and will be filled in later.
+
+  { x<u8>  y<string> z<[u8]:3> |
+     _      "a"       [1;2;3] 
+     4      "b"          _    
+     7       _        [7;8;9]  }
+
+**Fancy Representation**
+
+The Mech REPL prints tables using a fancy represntation, which is valid as input to a Mech program as well. The above table is equavlent to the following fancy table:
+
+```
+╭──────────────────────────────╮
+│ x<u8>   y<string>  z<[u8]:3> │
+├───────┬──────────┬───────────┤
+│   _   │   "a"    │  [1;2;3]  │
+├───────┼──────────┼───────────┤
+│   4   │   "b"    │     _     │
+├───────┼──────────┼───────────┤
+│   7   │    _     │  [7;8;9]  │
+╰───────┴──────────┴───────────╯
+```
+
+**Kind:**
+
+A table's kind includes the column types and table dimensions. For example, the pretty print table's kind is:
+
+**This denotes:**
+
+- Columns: `{ u8, string, [u8]:3 }` (a mix of an -integer, a string, and a fixed-size array).
+
+- Shape: `3,3` (3 rows, 3 columns).
+
+**Performance Considerations:**
+
+Tables are more expressive and flexible than matrices, because they can support missing values and mixed types. However, they may be slower due to additional metadata and dynamic typing associated with each cell, and the unwrapping involved in accessing data.
+
+Table columns are stored in a column matrix with unboxed value element, so operating column-wise on table values can be fast.
+
+However, "any" kinded columns resolve to a column matrix of fully wrapped values, so they will not work with matrix operations that expect unboxed values.
+
+A table row is equivalent to a record.
+
+```
+<{u8, string, [u8]:3}:3,3>
+```
 
 (f) Record
 
-```
-record := table_start
-      , whitespace*
-      , binding+
-      , whitespace*
-      , table_end ;
-```
 
-**Examples:**
+```ebnf
+record := table-start
+      , *whitespace
+      , +binding
+      , *whitespace
+      , table-end ;
+```
+A Record is a collection of named fields, where each field consists of a key-value pair. Records provide a structured way to group related data while allowing heterogeneous types.
 
-  { x: 1 y: "a", z: [1 2 3] }
-  { x<u8>: 1, y<string>: "a", z<[u8]:3,1>: [1;2;3] }
+**Semantics:**
+
+- Named Fields: Each field is identified by a unique name.
+- Heterogeneous: Fields can have different types.
+- Nested: Records can contain other records.
+
+**Defining Records:**
+
+Records are enclosed in `{}` and contain bindings of the form key: value. The type of each field can be inferred or explicitly specified.
+
+**Examples 1: Implicitly Typed Records**
+
+  { x: 1 y: "a", z: [1; 2; 3] }
+
+This defines a record with three fields:
+
+- x (implicitly an float).
+- y (implicitly a string).
+- z (implicitly a column matrix of floats).
+
+**Example 2: Explicitly Typed Record**
+
+  { x<u8>: 1, y<string>: "a", z<[u8]:3,1>: [1; 2; 3] }
+
+Here, each field has an explicit kind:
+
+- `x<u8>`: A `u8` integer.
+- `y<string>`: A string.
+- `z<[u8]:3,1>`: A fixed-size 3×1 matrix of `u8` integers.
+
+**Example 3: Nested Records**
+
   { a: {b: 1, c: "hi"}, b: [1;2;3] }
+
+This record contains:
+
+- a: A nested record `{b: 1, c: "hi"}`.
+- b: A columm matrix `[1;2;3]`.
+
+**Kind Representation:**
+
+A record's kind describes the types of its fields:
+
+```
+<{x: u8, y: string, z: [u8]:3,1}>
+```
+
+This denotes a record with:
+
+- x: `u8`
+- y: `string`
+- z: `[u8]:3,1` (a 3×1 array of u8 values)
+
+Comparison to Tables
+
+- Records group related attributes of a single entity.
+- Access a field on a record yields a scalar of that type, rather than a column matrix.
+- A table with one row is not the same as a record, as they have to be stored differently internally.
+- A table can be thought of as a vector of records.
+
+Tables represent multiple records (rows) sharing a common structure.
 
 6. Expressions
 -------------------------------------------------------------------------------
@@ -566,12 +836,30 @@ record := table_start
 expression := range-expression | formula ;
 ```
 
+Expressions define computations in Mech. Most expressions operate elementwise over collections according to the rules of broadcasting.
+
+**Broadcasting Rules:**
+
+- Scalars expand to match the shape of collections.
+- Operations between collections are elementwise when shapes are compatible.
+- Higher-dimensional collections expand along singleton dimensions when necessary.
+- Tables support column-wise elementwise operations but use set-based operations (e.g., unions, joins) for whole-table manipulation.
+
+**Expression Categories:**
+
+- Arithmetic: Addition, subtraction, multiplication, and division over scalars, vectors, and matrices.
+- Matrix Operations: Matrix multiplication, transposition, and other matrix-specific operations.
+- Comparison: Elementwise relational comparisons (<, >, ==, etc.).
+- Logical Operations: Boolean elementwise operations (and, or, not).
+- Set Operations: Union, intersection, and other set-specific operations.
+- Range Expressions: Constructing sequences of values.
+- Indexing: Accessing elements within collections using direct and computed indices.
+
 (a) Formula 
 
 ```
 parenthetical-term := left-parenthesis, formula, right-parenthesis ;
 negate-factor := "-", factor ;
-not-factor := "not", factor ;
 
 formula := l1, (range_operator, l1)* ;
 add_sub_operator := add | subtract ;
@@ -605,67 +893,87 @@ factor := (parenthetical_term
       | var), transpose? ;
 ```
 
+A formula is an expression that follows operator precedence rules and consists of arithmetic, logical, comparison, matrix, and range expressions. Expressions in formulas are evaluated according to their precedence, with higher-precedence operations being evaluated first.
+
+**Operator Precedence:**
+
+Operators in formulas are applied according to the following precedence, from highest to lowest:
+
+- Parentheses - Explicit grouping of expressions.
+- Negation and Logical NOT - Unary operations.
+- Exponentiation - Raising to a power.
+- Multiplication, Division, and Matrix Operations - Elementwise and matrix operations.
+- Addition and Subtraction - Binary arithmetic operations.
+- Comparison Operators - Elementwise comparisons.
+- Logical Operators - and, or, xor.
+- Range Operators - Used in range expressions.
+
+**Evaluation Order and Associativity:**
+
+- Left-to-right associativity applies to all operators, including exponentiation.
+- Parentheses explicitly override precedence rules.
+
 (a) Arithmetic
 
-```
-+    add               integers, floats, complex values, strings
--    subtract          integers, floats, complex values
-*    multiply          integers, floats, complex values
-/    divide            integers, floats, complex values
-^    exponent          integers, floats, complex values
-%    remainder         integers
+```ebnf
+add       := "+" ;
+subtract  := "-" ;
+multiply  := "*" ;
+divide    := "/" ;
+exponent  := "^" ;
+remainder := "%" ;
 ```
 
 (b) Matrix
 
-```
-\              solve          
-·              dot product    
-⨯              cross product  
-**             matrix multiply
-'              transpose      
+```ebnf
+solve           := "\\" ;
+dot-product     := "·" ;
+cross-product   := "⨯" ;
+matrix-multiply := "**" ;
+transpose       := "'" ;
 ```
 
 (c) Comparison
 
-```
-!= | ¬= | ≠    not equal       
-==             equal                 
->              greater         
-<              less            
->= | ≥         greater or equal
-<= | ≤         less or equal   
+```ebnf
+not-equal        := "!=" | "¬=" | "≠" ;    
+equal            := "==" ;             
+greater          := "> " ;            
+less             := "< " ;            
+greater-or-equal := ">=" | "≥"  ;       
+less-or-equal    := "<=" | "≤"  ;       
 ```
 
 (d) Logical
 
-```
-|              or
-&              and
-! | ¬          not
-xor | ⊕ | ⊻   exclusive or
+```ebnf
+or           := "|" ;            
+and          := "&" ;            
+not          := "!" | "¬";         
+exclusive-or := "xor" | "⊕" | "⊻" ;   
 ```
 
 (e) Set
 
-```
-∪       union
-∩       intersection
-∖       difference
-∁ | '   complement
-⊆       subset
-⊇       superset
-⊊       proper subset
-⊋       proper superset
-∈       element of
-∉       not element of
+```ebnf
+union := "∪";       
+intersection := "∩";       
+difference := "∖";       
+complement := "∁" | "'" ;  
+subset := "⊆";       
+superset := "⊇";       
+proper-subset := "⊊";       
+proper-superset := "⊋";       
+element-of := "∈";       
+not-element-of := "∉";       
 ```
 
 (f) Range
 
-```
-..=     range inclusive
-..      range exclusive
+```ebnf
+range-inclusive := "..=" ;
+range-exclusive := ".." ;
 ```
 
 7. Indexing
@@ -1177,10 +1485,53 @@ section := ?ul-subtitle, +section-element ;
             ```
         .
 
+
+11. Mech Programs
+-------------------------------------------------------------------------------
+
+```ebnf
+mech := mechdown-program | statement ;
+```
+
 12. Mechdown
 -------------------------------------------------------------------------------
 
-(a) Markdown
+Mechdown is a markup language for writing Mech programs. It is designed to maintain vague compatibility with Markdown, it is *not* a superset of Markdown. Rather, Mechdown is a distinct markup language with its own syntax and semantics. For instance, hashtag notation is not supported for titles, which is a departure from Markdown. 
+
+Moreover, Mechdown supports tables and other features that are not present in Markdown, but can be found in extension to Markdown like Github Flavored Markdown (GFM), and Mech-specific features like that ability to query Mech values and print them inline using `{}` syntax.
+
+Mech programs and scripts can be written entirely without Mechdown, but literate programming with Mechdown is idomatic.
+
+(a) Body
+
+```ebnf
+program := ?title, body ;
+body := +section ;
+```
+
+(b) Sections and Section Elements
+
+```ebnf
+section-element := +mech-code 
+      | unordered-list 
+      | markdown-table
+      | block-quote
+      | code-block
+      | thematic-break
+      | sub-section
+      | paragraph ;
+sub-section-element := +mech-code 
+      | unordered-list 
+      | markdown-table
+      | block-quote
+      | code-block
+      | thematic-break
+      | paragraph ;
+sub-section := alpha-subtitle, *sub-section-element ;
+section := ?ul-subtitle, +section-element ;
+```
+
+(b) Titles
 
 ```ebnf
 title := +text
@@ -1188,6 +1539,8 @@ title := +text
       , +"="
       , *(space|tab)
       , *whitespace ;
+paragraph-element := +(¬define-operator, text) ;
+paragraph := paragraph-starter, *paragraph-element ;
 subtitle := +digit-token
       , "."
       , *space
@@ -1212,53 +1565,220 @@ alpha-subtitle := *(space|tab)
       , +text
       , *(space|tab)
       , *whitespace ;
-paragraph-element := +(¬define-operator, text) ;
-paragraph := paragraph-starter, *paragraph-element ;
+```
+
+There are 4 levels of titles: the document title, section titles, and two levels of sub section titles. 
+
+**Example:**
+
+```
+Title
+========
+
+1. Section Title
+----------------
+
+(2) Sub Section Title
+
+(a) Sub Sub Section Title
+```
+
+Section titles and the first level of sub-section titles comprise the table of contents, which is generated automatically.
+
+(c) Paragraphs and Paragraph Elements
+
+```ebnf
+paragraph := +paragraph-element;
+paragraph-element := hyperlink
+      | raw-hyperlink
+      | paragraph-text
+      | strong
+      | emphasis
+      | inline-code
+      | strikethrough
+      | underline ;
+paragraph-exclude := http-prefix | left-bracket | tilde | asterisk | underscore | grave | define-operator | bar ;
+paragraph-text := +(¬(paragraph-exclude), text) ;
+```
+
+Paragraphs are a block element that can contain a number of inline elements including:
+
+- **Strong text:** `**text**`
+- **Emphasis text:** `*text*`
+- **Strikethrough text:** `~text~`
+- **Underlined text:** `_text_`
+- **Inline code:** code 
+- **Hyperlinks:** `[text](url)` also raw links `http://example.com`
+- **Inline Mech:** `{expression}`
+
+(b) Lists
+
+```ebnf
 unordered-list := +list-item, ?new-line, *whitespace ;
+ordered-list := +ordered-list-item, ?new-line, *whitespace ;
+ordered-list-item := integer-literal
+      , "."
+      , *space
+      , paragraph
+      , *new-line ;
 list-item := dash
       , +space
       , paragraph
       , *new-line ;
+```
+
+There are two varities of lists, unordered, which are delinated with a `-` or a graphicl and ordered list, which are delinated with a numeral like `1.`, and are numbered in order automatically when formatted.
+
+**Example:**
+
+```
+- Item 1
+- Item 2
+- Item 3
+
+1. Item 1
+2. Item 2
+3. Item 3
+```
+
+When rendered, they look like this:
+
+- Item 1
+- Item 2
+- Item 3
+
+List items are paragraphs, and can contain any inline elements.
+
+**Example:**
+
+```
+- **First**: item 1
+- **Second**: item 2
+- **Third**: item 3
+```
+
+(b) Thematic Breaks
+
+```ebnf
+thematic-break := asterisks, asterisks, +asterisks ;
+```
+
+Thematic breaks are horizontal lines that can be used to separate sections of a document. They are created using three or more asterisks.
+
+**Example:**
+
+```
+***
+***********
+```
+
+When rendered, they look like this:
+
+***
+
+(b) Code Blocks
+
+```ebnf
 code-block := (grave, grave, grave), new-line, any, (grave, grave, grave), new-line, *whitespace ;
 ```
 
-(b) Mech Extensions
+Mechdown supports code blocks, which are enclosed in triple backticks (graves) and can contain any text. Code blocks are useful for including Mech code snippets or other text that should be displayed verbatim.
+
+(b) Block Quotes
+
+```ebnf
+block-quote := ">" , *whitespace, +paragraph ;
+```
+
+Block quotes are used to indicate quoted text. They are created using the `>` character followed by a space, and can contain any text until a newline.
+
+**Example:**
+
+```
+> This is a block quote.
+```
+
+When rendered, they look like this:
+
+> This is a block quote.
+
+(b) Tables
+
+```ebnf
+markdown-table := markdown-table-header, *markdown-table-row ;
+markdown-table-header := whitespace0
+      , +column-header
+      , bar
+      , new-line
+      , whitespace0
+      , +column-alignment
+      , bar
+      , new-line ;
+column-header := bar, paragraph ;
+column-alignment := bar
+      , whitespace0
+      , alignment-separator
+      , whitespace0;
+alignment-separator := center-alignment 
+      | left-alignment 
+      | right-alignment 
+      | no-alignment ;
+no-alignment := +dash ;
+left-alignment := colon, +dash ;
+right-alignment := +dash, colon ;
+center-alignment := colon, +dash, colon ;
+markdown-table-row := whitespace0
+      , +column-cell
+      , bar
+      , new-line ;
+column-cell := bar, paragraph ;
+```
+
+Markdown tables consist of a header, and a body. The header is defined using a pipe `|` to separate columns, and a row of dashes `-` to indicate the alignment of each column. The body of the table contains rows of data, also separated by pipes. 
+
+**Table Heading::**
+
+The header of a table is defined using a row of text followed by a row of dashes. The dashes indicate the alignment of each column.
+
+**Column Alignment:**
+
+Columns can be aligned in one of three ways:
+
+- Left-aligned: `:--` or `--`
+- Right-aligned: `--:`
+- Center-aligned: `:--:`
+
+Any number of dashes can be used to indicate the width of the column, and they can be of different lengths.
+
+**Table Body:**
+
+The body of a table is defined using rows of text separated by pipes. Each row can contain any number of columns, and the number of columns in each row must match the number of columns in the header.
+
+**Example:**
+
+```
+| Left  | Center | Right |
+|:------|-------:|:-----:|
+| One   | Four   | 10    |
+| Two   | Five   | 100   |
+| Three | Six    | 1000  |
+```
+
+Renders the following table:
+
+| Left  | Center | Right |
+|:------|:------:|------:|
+| One   | Four   | 10    |
+| Two   | Five   | 100   |
+| Three | Six    | 1000  |
+
+
+(b) Mech Extensions 
 
 ```ebnf
 mech-code := mech-code-alt, ("\n" | ";" | comment) ;
+mech-code-alt := fsm-specification | fsm-implementation | function-define | statement | expression | comment ;
 ```
-
-**Example**
-    -- Title for the Document
-    # Title Here
-    =========================================
-
-    -- Subtitle with Numbering
-    1.Subtitle Here
-    -----------------------------------
-
-    -- Alpha Subtitle Example
-    (A) Alpha Subtitle
-    -------------------------------
-
-    -- Numbered Subtitle with Parentheses
-    (1) Num Subtitle w/ Paren
-    -------------------------
-
-    -- Unordered List Example
-    - First
-    - Second
-    - Third
-
-    -- Code Block Example with New Lines
-    ```mech
-    -- Example of a Mech function
-    fsm SimpleFSM
-        (input, output)
-        define
-        #state1
-            -> state2
-            => output
 
 13. Notation
 -------------------------------------------------------------------------------
