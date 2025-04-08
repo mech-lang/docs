@@ -58,13 +58,13 @@ Tokens are the smallest units of meaning in Mech. They include letters, digits, 
 
 Some Unicode characters are reserved for box drawing, and therefore are excluded from includsion in valid identifiers.
 
-```
-alpha = "a".."z" | "A".."Z";
-digt = "0".."9";
-emoji := emoji-grapheme+ ;
-word := alpha+ ;
-digit1 := digit+ ;
-digit0 := digit* ;
+```ebnf
+alpha := "a".."z" | "A".."Z";
+digt := "0".."9";
+emoji := +emoji-grapheme ;
+word := +alpha ;
+digit1 := +digit ;
+digit0 := *digit ;
 bin-digit := "0" | "1" ;
 hex-digit := digit | "a" .. "f" | "A" .. "F" ;
 oct-digit := "0" .. "7" ;
@@ -73,8 +73,8 @@ number := digit1 ;
 
 (b) Identifiers
 
-```
-identifier := (alpha | emoji), (alpha | digit | symbol | emoji)* ;
+```ebnf
+identifier := (alpha | emoji), *(alpha | digit | symbol | emoji) ;
 ```
 
 Identifiers start with letters or most UTF-8 encoded emoji characters, and can contain alphanumeric, most emojis, /, \*, +, -, and ^ characters.
