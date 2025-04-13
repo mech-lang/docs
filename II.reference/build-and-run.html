@@ -364,7 +364,7 @@ h4:before{
 
 
 .mech-grammar-terminal {
-    color: #ef5f90;
+    color: #ee6262;
 }
 
 
@@ -407,17 +407,31 @@ h4:before{
 .mech-term {
 }
 
+code {
+    margin: 0px;
+    padding: 0px;
+}
+
 .mech-inline-code {
     background-color: #171D21;
     color: #ada594;
     font-family: 'FiraCodeLight', monospace;
     font-size: 12pt;
-    padding: 2px 2px;
+    padding: 3px;
     margin: 0px;
-    margin-left: 2px;
-    margin-right: 7px;
     border-radius: 5px;
 }
+
+.mech-inline-mech-code {
+    background-color: #171D21;
+    color: #C7DCAE;
+    font-family: 'FiraCodeLight', monospace;
+    font-size: 12pt;
+    padding: 3px;
+    margin: 0px;
+    border-radius: 5px;
+}
+
 
 .mech-formula-operator {
     color: #ffd139;
@@ -669,33 +683,45 @@ h4:before{
 }
 
 .mech-comment {
-    color: #ef5f90;
+    color: #ee6262;
     font-style: italic;
     padding-top: 20px;
 }
 
 .mech-string {
-    color: #ef5f90;
+    color: #ee6262;
 }
 
-.mech-unordered-list {
+ol {
+    color: #ee6262;
 }
 
-.mech-list-item {
+.mech-list-item-emoji {
+    list-style-type: none;
+    color: #ee6262;
+}
+
+.mech-list-item-emoji {
     line-height: 0px;
-    color: #ef5f90;
-    margin: 0px;
-    padding: 0px;
+    color: #ee6262;
+}
+
+.mech-list-item-emoji::before {
+    content: attr(data-bullet); 
+    position: relative;         
+    font-size: 12pt;          
+    color: #ee6262;;    
+    right: 30px;
+    top: 13px;
+}
+
+li {
+    padding-left: 5px;
 }
 
 li p {
-    margin: 0px;
-    padding: 0px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-.mech-table {
+    margin-top: 2px;
+    margin-bottom: 2px;
 }
 
 .mech-table-header {
@@ -709,10 +735,11 @@ li p {
 }
 
 .mech-table {
-    width: 100%;
     border-collapse: collapse;
     background-color: #2F353B;
     color: #f2ead9; 
+    margin: auto;
+    margin-bottom: 20px;
 }
 
 .mech-table thead {
@@ -755,12 +782,13 @@ li p {
 }
 
 .mech-block-quote {
+    width: 80%;
     background-color: #232A30; 
     border-left: 5px solid #ee6262; 
     padding: 15px 20px;
     color: #f2ead9; 
     font-style: italic; 
-    margin: 20px 0;
+    margin: auto;
     border-radius: 5px;
 }
 
@@ -777,6 +805,92 @@ li p {
     width: 100%;
     opacity: 0.7;
 }
+
+.mech-fenced-mech-block {
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.mech-fenced-mech-block .mech-code-block {
+    background-color: #171D21;
+    border-radius: 10px 10px 0px 0px;  
+    border-bottom: 2px solid rgb(199, 220, 174);
+    margin-bottom: 0px;
+}
+
+.mech-block-output {
+    margin-top: 0px;
+    background-color: #222A30; 
+    color: #f2ead9;
+    font-family: 'FiraCodeLight', monospace;
+    font-size: 12pt;
+    padding: 20px;
+    border-radius: 0px 0px 10px 10px; /* Only bottom corners rounded */
+    overflow-x: auto;
+}
+
+.mech-block-output::-webkit-scrollbar {
+    height: 8px; /* Horizontal scrollbar height */
+}
+
+.mech-block-output::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.mech-block-output::-webkit-scrollbar-thumb {
+    background: rgba(128, 128, 128, 0.7);
+    border-radius: 10px;
+}
+
+.mech-block-output::-webkit-scrollbar-thumb:hover {
+    background: rgba(128, 128, 128, 0.9);
+}
+
+/* Firefox */
+.mech-block-output {
+    scrollbar-color: rgba(128, 128, 128, 0.7) transparent;
+    scrollbar-width: thin;
+}
+
+.mech-footnote {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75em;
+    margin-top: 1em;
+    font-size: 0.9em;
+    color: #ada594;
+  }
+  
+  .mech-footnote-id {
+    color: #ee6262;
+    font-weight: bold;
+    min-width: 2em;
+    text-align: right;
+    font-family: monospace;
+  }
+  
+  .mech-footnote .mech-paragraph {
+    margin: 0;
+    line-height: 1.6;
+    color: #f2ead9;
+  }
+
+  .mech-footnote-reference {
+    font-size: 0.7em;
+    vertical-align: super;
+    text-decoration: none;
+    margin-left: 0.1em;
+    color: #ee6262;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  
+  .mech-footnote-reference:hover {
+    color: #f28b82;
+    text-decoration: underline;
+  }
+  
+
         
     </style>
   </head>
@@ -915,7 +1029,7 @@ li p {
                 </h4>
                 <div class="mech-section-element">
                   <ul class="mech-unordered-list">
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         <em class="mech-em">
                           format
@@ -923,7 +1037,7 @@ li p {
                          - Format Mech source code into standard format.
                       </p>
                     </li>
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         <em class="mech-em">
                           serve
@@ -931,7 +1045,7 @@ li p {
                          - Serve Mech program over an HTTP server.
                       </p>
                     </li>
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         <em class="mech-em">
                           help
@@ -972,7 +1086,7 @@ li p {
                 </h4>
                 <div class="mech-section-element">
                   <ul class="mech-unordered-list">
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         <code class="mech-inline-code">-d</code>
                         , 
@@ -980,7 +1094,7 @@ li p {
                          Prints debug information.
                       </p>
                     </li>
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         <code class="mech-inline-code">-e</code>
                         , 
@@ -988,7 +1102,7 @@ li p {
                          Prints the parse tree of the Mech program.
                       </p>
                     </li>
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         <code class="mech-inline-code">-t</code>
                         , 
@@ -996,7 +1110,7 @@ li p {
                          Measures execution time of the program.
                       </p>
                     </li>
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         <code class="mech-inline-code">-r</code>
                         , 
@@ -1059,7 +1173,7 @@ mech script1.mec script2.mec dir1
                 </div>
                 <div class="mech-section-element">
                   <ul class="mech-unordered-list">
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         <code class="mech-inline-code">-o</code>
                         , 
@@ -1067,7 +1181,7 @@ mech script1.mec script2.mec dir1
                          Specifies the output directory.
                       </p>
                     </li>
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         <code class="mech-inline-code">-s</code>
                         , 
@@ -1075,7 +1189,7 @@ mech script1.mec script2.mec dir1
                          Sets the stylesheet for HTML output.
                       </p>
                     </li>
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         <code class="mech-inline-code">-t</code>
                         , 
@@ -1123,7 +1237,7 @@ mech script1.mec script2.mec dir1
                 </div>
                 <div class="mech-section-element">
                   <ul class="mech-unordered-list">
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         <code class="mech-inline-code">-p</code>
                         , 
@@ -1131,7 +1245,7 @@ mech script1.mec script2.mec dir1
                          Sets the port for the server (default: 8081).
                       </p>
                     </li>
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         <code class="mech-inline-code">-a</code>
                         , 
@@ -1185,7 +1299,7 @@ mech serve --help
       let wasm_core;
       async function run() {
         await init();
-        var code = `GyoKAByHcaywmu62EPqx+ZPER/Dni3MR/nCgiWDNnwLOiTgmLlyL2nm893jvvcemARtvj7nJzTkca8TXzhB9i7RMa9ztthezhOuGSjNphMYTX0IiE2LAZDTt1Gmx5JAPEsoKqNgzxZ3BXcGnbD3mTuPwLEKoV10V7B8UCeFdzACBSiQ8x1d3QIAq8i/DgJd7A1Utkc+JYOltKrn7OIG3BiPur/VtX9Et/VMtSIEmot5za+wfHfWAF4EBjRAPgpNWv4HMD7TwowCFshNZD6JK0z4aI8QEnFshDf8QUmRaQIO9uBYTIA0YlLN8quHmlJqigEiDRZ0EO96A4ewpO371RrxzJadCCNox46WnOq1DOnIlWNvXr32D2qADghqMFUnit70JmqgibcY1PCO1OEMx3lAhFuwkqkyKpnRT1SWfCv9yMzSn7o0WSsM0inPqxC588TMITYpm2jzhhBewU26Bltp74yTKn6A8Igh1edteJsS/SsWlQw+3pFrmoxtKdUtb1Ka21QPGlt+voHvEs491rFWGcRXiRCi3lvoCTv+sqi/uQB1TRIITKzumO+YV+celO6/dK8cOSATakV0KL1S+qSe3rKHgnB9wFhakmpYCMYQX7jAzqvKXz+daE+S14PE59/IodPXnomOh4z9paGV4mdZpN+qBSUArzSp9al/d/e8BiMT82gCDKBKPMkMzUkRqnKeP5QY1mhTZzTLsI6KVGjWj2Rh1xRabYDJTMw0EioeySc3Ge+sILhTVyy5ArNaBNCXMJnPSVdvXLGT7sloWchmWpdng0FwKshar1gbk82i2KVu2feQh35fX8jhEjuVp3s+VvcsgQd9IL+8A6+dwBdF5s6FgfmttWOSb8h45A+3doM5e5HZTgzDYjTFZqoSvKDhzARd1eDPMx6TB0W4hqzpkTVpT//T3qVHFmrYmDfKZVxMG93T67K3XMaW/TeMQ1KWOTjkaQ/neqZ3MMO2Ac2PGlEGVJ9SJ9O00Roq03y6TPJx/8bS4gAoOaTCCQ8ZaxonL6+58qtMyqiCMsCJr08DSShVXKdTc215dcJmruYY6urIC3smFcnfwXOq2K5KxHbr5k/36lNuNVHM73KKDtsQDj3maZ+hSDrJOTS64vJPnUS+ryDzbidGnKGODYp88mxZezltOGn0++H2+5kMFi/nU97PrEh5MyrRYfH2fYxe7OC38Jt8hhRhn2aAyg2coaRgm4S3+6sT0GHv+GXGWsz03jxYyEyoU6kvqEmWez3p7YcIuXpauoJURDf3+ovGBXBtvHW10b+EtM7a9BRCwQAsMOhxweY+XXf7NaUCDDkUK4oIyNjDgwo3AUK2lZYWV7JIzLILOYMF920UIIQu10NBCspDA8aZIfz0NadjnCzlMF1Y92OCMF4UtbHH3SdgfrjGA7eG905wYrfkb+2LbNuMXzBbf92VC9RAdoftTDcfK0DG7fgInLVnPhZM9CIIXgixKjqTrkWSQ9QhFLrLGxk9vkRfN+QcbpkBdPO3WAXgXiGM0FM1HmVmU88L8jk6jR8bVS3SNAA==`;
+        var code = `G0YKAIyU7jLDEZJ0/l/TxcdPmEzE2hhSLOiMwTapYK2IpWLDrSlPdvvxvsf73ve4GcDG6/+3XyOunj6IrkVapjXu+/cPKjKDSjNphMYSVxqhkQkt0EQgQB/qnMlZI4Y1Rpd1Q3G4iztPfYf/tc4Oouf3Fof/AgBGNAVIC5EYvI8YAmoosRY9v8cEUiL/Mhyo4M5A1XL5nOstu0yl80MUo7eFRo67weaeWbf8Uy1oQFOwvvzd7KqZVg+yCho0IhxEJ0u/AfODFX7JQCE70XoQlaY9LEa4HXBuxhT+AyAylUEjtbgWJjDRrmJyUaU2M0FSS1IEaLdroam+GYDhjjt286kI0y4W3wkhOGLGi+8M2goGQKkhdf1+atfaDQRdaVFUhchECLd2YiclMs+4jWeJLydJJeRQid0EZbwsEp2pzrICq1Ijgb4u7Ery2pIjZsW6E0ONj/V3FUOjKdFFuxaAVCAG9XVjN+GtSC4UpBIRKaPibZCZhArMuNw0GU91J7s3lFDXJmunLejVettQRbEqT08vF69KVr/WaM3VHcXCxrU2G3Dyp8a+sB/6l1EiiOX9K/0bRP6BdKvxdjN2ISQeODC79DB0cFbo1oqKdP2BRSJPLWMFbkteXIUnDfD615ryBJYLh8/4kC0lUL8v+jf7/0N7D0ObKYMOwTC2VOtCbWBUG229/QIVRKnyFxPNBJHqDDN1M4lS55xQlprU7CRyKNWksoglPqbMLnNGgROKLLSUpVueBCRFn0WtDsFpOWZU7EUyvS18mhZWp1WBG/qSwUx2Rs+A5agMzdRMdqygVVpTNdCvcKYzUwy95TCXndNz0mJO5Wiuitt+195CVckKXh+2iuMtctITTvobx/tTIteZc5V4re6rFnX6kfstmMCJIVV99JaCBjqcesQbs7kz+mey8DJsg13Otyv28j/9fYpXslfsoX2xlmClM+4YtOZshTOX0745eHWxY1AOs8AHT5wyxzYHnbyqZld9C9pCalMEiMx/LxLfz358LlyCJQfaTe9wtsVI5XC7098ZtAglIKAQSYhhrFRWy1SgJdSoYlVV9aqnlT9foKJy6Nxp3Cqt9hHJ2GnMVcUj+KkHIGm42l+VGBeKXXSVq7ueQWPH60TlIMzTuS51M0Tm2GmEgoaBNqgCdG5GuFl3h0ayPfSyPd2D2qU86lWxXxheE0u6xujl1skeY5hLhNfpOUqMuM0v45RW1VUK7VMxeYM3YEzNstrPMIGd1O/cgE3mQjkxtK1t0zSstL/PjNnje/Eu7E5rH3NXZu+beCUdwKE6Vo8Daqjpo6983fcY2BOruDke8y/ufOr3EyliGFbaMMPJ9aieVGfSllghX3CmhD/gb0Z16DHAQAV64OlmNkn1zXhJf74LaDDqDkFzZdOJdc6cFHmRF9ePgrFgPxXUuXp+ksfIGG+y+fwtYvyR5cV9z5QYuIJruJ1o349Gpe2hW7ztZkPnVmoX1DxmcpE0aQeS+ZNDIYRV/CoefW6GbrheNVFoBVPyHMkDOFcdhSg/3AjzswbORfwtgwaPswee4AUA`;
         wasm_core = new WasmMech();
         var xhr = new XMLHttpRequest();
         var codeUrl = `/code${window.location.pathname}`;

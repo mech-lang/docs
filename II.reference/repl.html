@@ -364,7 +364,7 @@ h4:before{
 
 
 .mech-grammar-terminal {
-    color: #ef5f90;
+    color: #ee6262;
 }
 
 
@@ -407,17 +407,31 @@ h4:before{
 .mech-term {
 }
 
+code {
+    margin: 0px;
+    padding: 0px;
+}
+
 .mech-inline-code {
     background-color: #171D21;
     color: #ada594;
     font-family: 'FiraCodeLight', monospace;
     font-size: 12pt;
-    padding: 2px 2px;
+    padding: 3px;
     margin: 0px;
-    margin-left: 2px;
-    margin-right: 7px;
     border-radius: 5px;
 }
+
+.mech-inline-mech-code {
+    background-color: #171D21;
+    color: #C7DCAE;
+    font-family: 'FiraCodeLight', monospace;
+    font-size: 12pt;
+    padding: 3px;
+    margin: 0px;
+    border-radius: 5px;
+}
+
 
 .mech-formula-operator {
     color: #ffd139;
@@ -669,33 +683,45 @@ h4:before{
 }
 
 .mech-comment {
-    color: #ef5f90;
+    color: #ee6262;
     font-style: italic;
     padding-top: 20px;
 }
 
 .mech-string {
-    color: #ef5f90;
+    color: #ee6262;
 }
 
-.mech-unordered-list {
+ol {
+    color: #ee6262;
 }
 
-.mech-list-item {
+.mech-list-item-emoji {
+    list-style-type: none;
+    color: #ee6262;
+}
+
+.mech-list-item-emoji {
     line-height: 0px;
-    color: #ef5f90;
-    margin: 0px;
-    padding: 0px;
+    color: #ee6262;
+}
+
+.mech-list-item-emoji::before {
+    content: attr(data-bullet); 
+    position: relative;         
+    font-size: 12pt;          
+    color: #ee6262;;    
+    right: 30px;
+    top: 13px;
+}
+
+li {
+    padding-left: 5px;
 }
 
 li p {
-    margin: 0px;
-    padding: 0px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-.mech-table {
+    margin-top: 2px;
+    margin-bottom: 2px;
 }
 
 .mech-table-header {
@@ -709,10 +735,11 @@ li p {
 }
 
 .mech-table {
-    width: 100%;
     border-collapse: collapse;
     background-color: #2F353B;
     color: #f2ead9; 
+    margin: auto;
+    margin-bottom: 20px;
 }
 
 .mech-table thead {
@@ -755,12 +782,13 @@ li p {
 }
 
 .mech-block-quote {
+    width: 80%;
     background-color: #232A30; 
     border-left: 5px solid #ee6262; 
     padding: 15px 20px;
     color: #f2ead9; 
     font-style: italic; 
-    margin: 20px 0;
+    margin: auto;
     border-radius: 5px;
 }
 
@@ -777,6 +805,92 @@ li p {
     width: 100%;
     opacity: 0.7;
 }
+
+.mech-fenced-mech-block {
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.mech-fenced-mech-block .mech-code-block {
+    background-color: #171D21;
+    border-radius: 10px 10px 0px 0px;  
+    border-bottom: 2px solid rgb(199, 220, 174);
+    margin-bottom: 0px;
+}
+
+.mech-block-output {
+    margin-top: 0px;
+    background-color: #222A30; 
+    color: #f2ead9;
+    font-family: 'FiraCodeLight', monospace;
+    font-size: 12pt;
+    padding: 20px;
+    border-radius: 0px 0px 10px 10px; /* Only bottom corners rounded */
+    overflow-x: auto;
+}
+
+.mech-block-output::-webkit-scrollbar {
+    height: 8px; /* Horizontal scrollbar height */
+}
+
+.mech-block-output::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.mech-block-output::-webkit-scrollbar-thumb {
+    background: rgba(128, 128, 128, 0.7);
+    border-radius: 10px;
+}
+
+.mech-block-output::-webkit-scrollbar-thumb:hover {
+    background: rgba(128, 128, 128, 0.9);
+}
+
+/* Firefox */
+.mech-block-output {
+    scrollbar-color: rgba(128, 128, 128, 0.7) transparent;
+    scrollbar-width: thin;
+}
+
+.mech-footnote {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75em;
+    margin-top: 1em;
+    font-size: 0.9em;
+    color: #ada594;
+  }
+  
+  .mech-footnote-id {
+    color: #ee6262;
+    font-weight: bold;
+    min-width: 2em;
+    text-align: right;
+    font-family: monospace;
+  }
+  
+  .mech-footnote .mech-paragraph {
+    margin: 0;
+    line-height: 1.6;
+    color: #f2ead9;
+  }
+
+  .mech-footnote-reference {
+    font-size: 0.7em;
+    vertical-align: super;
+    text-decoration: none;
+    margin-left: 0.1em;
+    color: #ee6262;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  
+  .mech-footnote-reference:hover {
+    color: #f28b82;
+    text-decoration: underline;
+  }
+  
+
         
     </style>
   </head>
@@ -1175,7 +1289,7 @@ li p {
       let wasm_core;
       async function run() {
         await init();
-        var code = `G3cIAIyUrppvh7/pc4xelaYqmRits0zCxJ2yUZ3QZ/b7JaFg2VKpDfDfuyMjZGyITrMtpTfU+iYdBhrAEBgU1BpKAMxjOFf1aOUOOUZ9kzARtBT64Y6hm/RwZX8bAEI9AoggsH/HL84YD7WC/7LWgk0EbKZaRj7SMcra3H7o8Co+uRE5ShYkrAZzjYMvxyFeZYUTHUhI3vI8aTLoZAciFMFYGYBjwj5QlED6DyAwvwVMX9d83zqUMCzavuBo9PiFQdLXf5Wn7x863AnOGBJsG7ope0AGsUdgk54skFyj0Gjb7QRC/+MXexZY1B4kQKaQYaEQvucQ4WReYA6KOPs4WSAbSJKytdE3zdH2lzvhp4ptQ2+TAARbqtZFjFmS3BOhppoW+IhW0fBSGMIqMuDhsTAT2J9AZQo0+M2zHeypo6yjtz3sKef5VOmJOAiQxTTHMYmnHLeBGDZnwuPhv7ul37HU/lNUinpEtwASMhs3jdZrAhNugYl0JOFJeJGJ3EyQhF9gMJoIJIKSKILAZmwooTfA38p/WmN0zuOHocbGFKRmkdhl3CJngQIIFA4o9GFf0ufpK7/1kb60L9DXQvx1dlqKuFIcgAGfoBAj1mEYRvodHJdnFVS8l5JCFH/VUgJKqKKElUhbgzT1GpZGkcxQeLokRwdJcFE1Hjqlo2wvKBmPYaZfcv/4lzzkm0j83JK5RT8arRe93v0il6CiGqBdQUU1UT1q+VUlaqoG1JupnWHx0kGMlSIDllYaPBHriUmYkoECngUNtUTzaOVPGtFSLaB1nJ5RS21FxVKvow2tL3nVuKQaFGZg5qwlCgouuKsOofES5mHxoMT1lr6My66utOxelqv6snfZV1n2LwdaS94uueVEVum3t9XKyWznuyz7i3QVVstIcLpP3oBNEACQPUfUe24btz1C19764Hat72W5mt94og+2P8qk+ogZkMrzqfeQTHE5VNyF3TskAZn75Pub6Wf5AI6g6rFxUjd3gifupWXek2qrpb2F1emwMgirBAMFYR20Rkmjoe7GMzhbQHIo9Jl07rwX8AyRrAu82ZBhTb6EG7AzrhGLXuWUe+3mDu98sLeuOTWox0T5gbwcQokio37cLD7AwzqSzCynvGXJ9+/SUvtLCZxQg6cVB9drtJsz0fR27UOeBL2+Pq9d34DGMJKIHHX1WmhDp8fJTTqbr3ZvXvGV9DPPG12DATlXS0qIUzNxOW6HeDdCq5ZdNGnsvHRRSdiEFks3tVbe/pHiO7ybSPgspz8/Uz5DK2UliY+zOeoYQHstM7OuWqG0UPCcEKeZD/AFAA==`;
+        var code = `G3cIAIyUrppvPvjOdW90uYy1y8wJYt28xwVSxL0rFNHuzH6/JBQsWyq1Af57d2SEjA3Rabal9IZa36TDQAMYAoOCWkMJgHkM56oerdwhx6hvEkMRS6EfrtiWwzdn1pcBRFvegIKKf9svztgXjZL/staSTQRsplr6PtLRz9rcvnjkVXxyI3KULEhYDeYaB1+OQ7zKCic6kJC85XrSZNDJDkQogrEyAMeEfaCsQPkPUBGygOlrOu9bRxQS83i/4Ghi+4lB0td/VeSvHx6lD74kGHmwLUdToYG2UDHoyQLJNQqNtt1OIPRffrFngUXtQQY2pAhSKoXvOcQkG6eCcsTZJ9kEWwDLyNbG3zTHH76cCT9VfrCtNgkj0lK3LmLMkuSeCDXVtMBHtIqGl2KIGYqAjL2LDVDxJ1CZAg1+82wHe+oo6+htF3vKeT5VeiIOAmQxzXFM4inHbSCGzZnY+9jf3dJPp9p/SigJ1eP3QVGEVzr2/XOapP1UeHhfWk0HFOGRTpqlQ1SgPx1ORxQPBRUjNpTQG+Bv5T+tMTrn8cNQY2MW2VGwtzJu0drAAQKFAwodpCPpUDvKLx2sI+0Id7Qwf52driKulLvQFRQUYsQ69KKvn0pcntWJHriUdKaHqq4e1qMVPabH225JU6/tahTJDIWnS3J0kAQXVeOhUzrK9oKS8Rhm+iX3j38pongHFpKuJl3+0b5/sm6aX7QKaqoB2hUMYiSGapSfDWakRti4md0ZFi8dxFgpD2AgpzR4ItYTgxiSgQKeBZOYiama5U8mM1MzbHbsnlFLbUXFUq+jDfdfiqpxSTUojGBkryUBCi64qw6h8RLGMXlQkda9NU2mW7vStH9aq1rTgelgZTo0HW6teLvklhNZpd/eVjcns52vsuwv81nMVsHIdJ+2gEX4AEU8R9R7bpksq0LXnvrgdq2vZbmaX7jiF7Y/yqT6iBmQyvOp95BMcTlUXsXqGVhY5j7t/mb+WdvAFlQ9Xknq5nbIjn9pGfek2upqb2F1OtwMwirBQEFYB91+0miou3EPexNgm0KfSefOewHPEMm6wJsNGda0Q5yAnWkdcflRTrnXTs7IWRD21jmnBvWYKD+Ql0MoUWTUjzvlC1zMg+VHJZf3rnb/Lq88fKmAExq4WqHSavBuziFOoGvv8STo9fV57fpb3PaCxeWoazXCAx57fNKks/lo9eSZPLN+5nqhaTMg52pJCXFqJi7H7RDvRmjVsoomjY9PTVQSNqHF1U2ttbd/pPyKVwdMjkr+8zOXI7xWVZL4OFugjgG01zIj6+o1zkslzwlxmvmALwA=`;
         wasm_core = new WasmMech();
         var xhr = new XMLHttpRequest();
         var codeUrl = `/code${window.location.pathname}`;

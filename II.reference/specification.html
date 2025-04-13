@@ -364,7 +364,7 @@ h4:before{
 
 
 .mech-grammar-terminal {
-    color: #ef5f90;
+    color: #ee6262;
 }
 
 
@@ -683,63 +683,45 @@ code {
 }
 
 .mech-comment {
-    color: #ef5f90;
+    color: #ee6262;
     font-style: italic;
     padding-top: 20px;
 }
 
 .mech-string {
-    color: #ef5f90;
+    color: #ee6262;
 }
 
-.mech-unordered-list {
+ol {
+    color: #ee6262;
 }
 
-.mech-list-item::before {
-    content: "•";
-    position: relative;         
-    font-size: 1.2rem;          
-    color: #ef5f90;;    
-    right: 20px;
-    top: 18px;
-    font-weight: bold;
-    font-size: 18pt;
+.mech-list-item-emoji {
+    list-style-type: none;
+    color: #ee6262;
 }
 
-.mech-list-item {
+.mech-list-item-emoji {
     line-height: 0px;
-    color: #ef5f90;
-    padding-left: 20px;
+    color: #ee6262;
 }
 
 .mech-list-item-emoji::before {
     content: attr(data-bullet); 
     position: relative;         
-    font-size: 1.2rem;          
-    color: #ef5f90;;    
-    right: 35px;
-    top: 17px;
+    font-size: 12pt;          
+    color: #ee6262;;    
+    right: 30px;
+    top: 13px;
 }
 
-.mech-list-item-emoji {
-    line-height: 0px;
-    color: #ef5f90;
-    padding-left: 30px;
+li {
+    padding-left: 5px;
 }
-
-ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;   
-}
-
-
 
 li p {
-    margin: 0px;
-    padding: 0px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
 }
 
 .mech-table-header {
@@ -870,7 +852,44 @@ li p {
     scrollbar-width: thin;
 }
 
+.mech-footnote {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75em;
+    margin-top: 1em;
+    font-size: 0.9em;
+    color: #ada594;
+  }
+  
+  .mech-footnote-id {
+    color: #ee6262;
+    font-weight: bold;
+    min-width: 2em;
+    text-align: right;
+    font-family: monospace;
+  }
+  
+  .mech-footnote .mech-paragraph {
+    margin: 0;
+    line-height: 1.6;
+    color: #f2ead9;
+  }
 
+  .mech-footnote-reference {
+    font-size: 0.7em;
+    vertical-align: super;
+    text-decoration: none;
+    margin-left: 0.1em;
+    color: #ee6262;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  
+  .mech-footnote-reference:hover {
+    color: #f28b82;
+    text-decoration: underline;
+  }
+  
 
         
     </style>
@@ -1462,17 +1481,17 @@ li p {
             </div>
             <div class="mech-section-element">
               <ul class="mech-unordered-list">
-                <li class="mech-list-item">
+                <li class="mech-ul-list-item">
                   <p class="mech-paragraph">
                     Language designers who want to implement a parser for Mech.
                   </p>
                 </li>
-                <li class="mech-list-item">
+                <li class="mech-ul-list-item">
                   <p class="mech-paragraph">
                     Tool developers who want to build tools that work with Mech code.
                   </p>
                 </li>
-                <li class="mech-list-item">
+                <li class="mech-ul-list-item">
                   <p class="mech-paragraph">
                     Developers who want to understand the syntax and structure of Mech programs.
                   </p>
@@ -1509,22 +1528,22 @@ li p {
                 </div>
                 <div class="mech-section-element">
                   <ul class="mech-unordered-list">
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         Makes code more accessible to non-English speakers
                       </p>
                     </li>
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         Enables domain experts to use notation from their fields directly in code
                       </p>
                     </li>
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         Allows for more expressive and intuitive naming conventions
                       </p>
                     </li>
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         Supports mathematical notation that closely resembles standard written forms
                       </p>
@@ -1570,17 +1589,17 @@ li p {
                 </div>
                 <div class="mech-section-element">
                   <ul class="mech-unordered-list">
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         In lists, whitespace is used to separate items.
                       </p>
                     </li>
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         In matrix and table definitions, whitespace deliniates columns and rows.
                       </p>
                     </li>
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         In formulas, whitespace is required around operators.
                       </p>
@@ -1594,12 +1613,12 @@ li p {
                 </div>
                 <div class="mech-section-element">
                   <ul class="mech-unordered-list">
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         Semicolons can be used to separate statements so they can be written inline.
                       </p>
                     </li>
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         Semicolons can be used in a matrix to separate rows, so they can be written inline.
                       </p>
@@ -3284,22 +3303,22 @@ false
                 </div>
                 <div class="mech-section-element">
                   <ul class="mech-unordered-list">
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         Decimal: A sequence of digits without a prefix (e.g., 42, 123456).
                       </p>
                     </li>
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         Hexadecimal: Prefixed with 0x, containing digits 0-9 and a-f or A-F (e.g., 0x1A3F).
                       </p>
                     </li>
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         Octal: Prefixed with 0o, containing digits 0-7 (e.g., 0o755).
                       </p>
                     </li>
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         Binary: Prefixed with 0b, containing only 0 and 1 (e.g., 0b1010).
                       </p>
@@ -4943,38 +4962,28 @@ false
                 </div>
                 <div class="mech-section-element">
                   <ul class="mech-unordered-list">
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         Vector (Nx1)
                       </p>
                     </li>
-                  </ul>
-                </div>
-                <div class="mech-section-element">
-                  <ul class="mech-unordered-list">
-                    <li class="mech-list-item">
-                      <p class="mech-paragraph">
-                        Row Vector (1xN)
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-                <div class="mech-section-element">
-                  <ul class="mech-unordered-list">
-                    <li class="mech-list-item">
-                      <p class="mech-paragraph">
-                        Matrix (N-D)
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-                <div class="mech-section-element">
-                  <ul class="mech-unordered-list">
-                    <li class="mech-list-item">
-                      <p class="mech-paragraph">
-                        Tuple
-                      </p>
-                    </li>
+                    <ul class="mech-unordered-list">
+                      <li class="mech-ul-list-item">
+                        <p class="mech-paragraph">
+                          Row Vector (1xN)
+                        </p>
+                      </li>
+                      <li class="mech-ul-list-item">
+                        <p class="mech-paragraph">
+                          Matrix (N-D)
+                        </p>
+                      </li>
+                      <li class="mech-ul-list-item">
+                        <p class="mech-paragraph">
+                          Tuple
+                        </p>
+                      </li>
+                    </ul>
                   </ul>
                 </div>
                 <div class="mech-section-element">
@@ -4986,38 +4995,28 @@ false
                 </div>
                 <div class="mech-section-element">
                   <ul class="mech-unordered-list">
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         Record
                       </p>
                     </li>
-                  </ul>
-                </div>
-                <div class="mech-section-element">
-                  <ul class="mech-unordered-list">
-                    <li class="mech-list-item">
-                      <p class="mech-paragraph">
-                        Table
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-                <div class="mech-section-element">
-                  <ul class="mech-unordered-list">
-                    <li class="mech-list-item">
-                      <p class="mech-paragraph">
-                        Set
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-                <div class="mech-section-element">
-                  <ul class="mech-unordered-list">
-                    <li class="mech-list-item">
-                      <p class="mech-paragraph">
-                        Map
-                      </p>
-                    </li>
+                    <ul class="mech-unordered-list">
+                      <li class="mech-ul-list-item">
+                        <p class="mech-paragraph">
+                          Table
+                        </p>
+                      </li>
+                      <li class="mech-ul-list-item">
+                        <p class="mech-paragraph">
+                          Set
+                        </p>
+                      </li>
+                      <li class="mech-ul-list-item">
+                        <p class="mech-paragraph">
+                          Map
+                        </p>
+                      </li>
+                    </ul>
                   </ul>
                 </div>
                 <div class="mech-section-element">
@@ -5382,22 +5381,22 @@ false
                     </div>
                     <div class="mech-section-element">
                       <ul class="mech-unordered-list">
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Homogeneous Elements: All elements in a matrix must be of the same kind.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Fixed Shape: A static matrix's shape (rows, columns) is part of its kind and is always a tuple of non-negative integers.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             One-Based Access: Elements are accessed using 1-based indexing for both rows and columns.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Column-Major Order: Matrix elements are stored and accessed in column-major order.
                           </p>
@@ -5423,19 +5422,19 @@ false
                     </div>
                     <div class="mech-section-element">
                       <ul class="mech-unordered-list">
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             1D Indexing (Column-Major Order): Elements are stored in column-major order, meaning the first element is the top-left element, proceeding down the first column before moving to the next.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             2D Indexing: Elements can be referenced using 
                             <code class="mech-inline-code">[row, column]</code>
                              notation, starting from 1 for both indices.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Negative Indices: Negative indices count from the end of the matrix, with -1 being the last element.
                           </p>
@@ -5866,7 +5865,7 @@ false
                     </div>
                     <div class="mech-section-element">
                       <ul class="mech-unordered-list">
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             <strong class="mech-strong">
                               1D
@@ -5874,7 +5873,7 @@ false
                              - by their position in the matrix, starting from 1, in a column-major order starting at the top left corner of the matrix and proceeding down and to the right. The last element of the matrix, called the end of the matrix, is the most bottom right element.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             <strong class="mech-strong">
                               2D
@@ -6211,17 +6210,17 @@ false
                     </div>
                     <div class="mech-section-element">
                       <ul class="mech-unordered-list">
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Homogeneity: All elements in a set must be of the same type.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Unordered: The order of elements within a set is not preserved.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Uniqueness: Duplicate elements are not allowed in a set.
                           </p>
@@ -6237,27 +6236,27 @@ false
                     </div>
                     <div class="mech-section-element">
                       <ul class="mech-unordered-list">
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Insertion: Adding an element to a set does not affect its order and only - succeeds if the element is not already present.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Deletion: Removing an element, if present, maintains the set property.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Union: Combines two sets, keeping only unique elements.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Intersection: Produces a set containing elements common to both sets.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Difference: Returns a set containing elements in the first set but not in the second.
                           </p>
@@ -6362,13 +6361,13 @@ false
                     </div>
                     <div class="mech-section-element">
                       <ul class="mech-unordered-list">
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             <code class="mech-inline-code">{}</code>
                              represents an empty set.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             <code class="mech-inline-code">{1, 1, 2}</code>
                              results in 
@@ -6376,7 +6375,7 @@ false
                              due to uniqueness constraints.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             <code class="mech-inline-code">{1, "hello"}</code>
                              results in a type error due to homogeneity constraints.
@@ -6626,17 +6625,17 @@ false
                     </div>
                     <div class="mech-section-element">
                       <ul class="mech-unordered-list">
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Key Uniqueness: Each key in a map must be unique.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Unordered: The order of key-value pairs within a map is not preserved.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Key-Value Association: Each key is mapped to exactly one value.
                           </p>
@@ -6652,22 +6651,22 @@ false
                     </div>
                     <div class="mech-section-element">
                       <ul class="mech-unordered-list">
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Insertion: Adding a key-value pair updates the map. If the key already exists, its value is updated.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Deletion: Removing a key-value pair removes the key and its associated value.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Lookup: Retrieving the value associated with a key.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Merge: Combining two maps, where duplicate keys take precedence from the second map.
                           </p>
@@ -6694,18 +6693,18 @@ false
                     </div>
                     <div class="mech-section-element">
                       <ul class="mech-unordered-list">
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             <code class="mech-inline-code">{_:_}</code>
                              represents an empty map.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Duplicate keys result in an overwrite of the previous value, as long as the map is mutable.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             <code class="mech-inline-code">{1: "hello", 2: "world"}</code>
                              is valid, but 
@@ -6724,13 +6723,13 @@ false
                     </div>
                     <div class="mech-section-element">
                       <ul class="mech-unordered-list">
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             A map of strings to u8s: 
                             <code class="mech-inline-code"><{string:u8}></code>
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             A map of strings to a map of strings to u8: 
                             <code class="mech-inline-code"><{string:{string:u8}}></code>
@@ -6868,17 +6867,17 @@ false
                     </div>
                     <div class="mech-section-element">
                       <ul class="mech-unordered-list">
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Ordered: The order of elements within a tuple is preserved.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Heterogeneous: A tuple can contain elements of different types.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Immutable: Once created, the elements in a tuple cannot be changed.
                           </p>
@@ -6894,17 +6893,17 @@ false
                     </div>
                     <div class="mech-section-element">
                       <ul class="mech-unordered-list">
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Access: Elements can be accessed by their position (zero-based index).
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Concatenation: Tuples can be combined to form a larger tuple.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Decomposition: Tuples can be unpacked into individual variables.
                           </p>
@@ -7179,13 +7178,13 @@ false
                     </div>
                     <div class="mech-section-element">
                       <ul class="mech-unordered-list">
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             <code class="mech-inline-code">()</code>
                              represents an empty tuple.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             <code class="mech-inline-code">(1)</code>
                              is a single-element tuple, not a parenthetical expression that evaluates to 
@@ -7193,7 +7192,7 @@ false
                             .
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Tuples maintain the type of each element, so 
                             <code class="mech-inline-code">(1, "hello")</code>
@@ -7990,22 +7989,22 @@ false
                     </div>
                     <div class="mech-section-element">
                       <ul class="mech-unordered-list">
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Structured: Each record consists of ordered fields (columns).
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Heterogeneous: Fields can have different kinds (types).
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Homogeneous: Each row has a similar structure, with the same fields.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Sparse: Tables allow missing values (denoted by 
                             <code class="mech-inline-code">_</code>
@@ -8129,13 +8128,13 @@ false
                     </div>
                     <div class="mech-section-element">
                       <ul class="mech-unordered-list">
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             <code class="mech-inline-code">x<f32></code>
                             : A floating-point column.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             <code class="mech-inline-code">y<u8></code>
                             : An unsigned 8-bit integer column.
@@ -8571,14 +8570,14 @@ false
                     </div>
                     <div class="mech-section-element">
                       <ul class="mech-unordered-list">
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Columns: 
                             <code class="mech-inline-code">{ u8, string, [u8]:3 }</code>
                              (a mix of an -integer, a string, and a fixed-size array).
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Shape: 
                             <code class="mech-inline-code">3,3</code>
@@ -8726,17 +8725,17 @@ false
                     </div>
                     <div class="mech-section-element">
                       <ul class="mech-unordered-list">
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Named Fields: Each field is identified by a unique name.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Heterogeneous: Fields can have different types.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Nested: Records can contain other records.
                           </p>
@@ -8876,17 +8875,17 @@ false
                     </div>
                     <div class="mech-section-element">
                       <ul class="mech-unordered-list">
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             x (implicitly an float).
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             y (implicitly a string).
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             z (implicitly a column matrix of floats).
                           </p>
@@ -9012,7 +9011,7 @@ false
                     </div>
                     <div class="mech-section-element">
                       <ul class="mech-unordered-list">
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             <code class="mech-inline-code">x<u8></code>
                             : A 
@@ -9020,13 +9019,13 @@ false
                              integer.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             <code class="mech-inline-code">y<string></code>
                             : A string.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             <code class="mech-inline-code">z<[u8]:3,1></code>
                             : A fixed-size 3×1 matrix of 
@@ -9177,14 +9176,14 @@ false
                     </div>
                     <div class="mech-section-element">
                       <ul class="mech-unordered-list">
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             a: A nested record 
                             <code class="mech-inline-code">{b: 1, c: "hi"}</code>
                             .
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             b: A columm matrix 
                             <code class="mech-inline-code">[1;2;3]</code>
@@ -9216,19 +9215,19 @@ false
                     </div>
                     <div class="mech-section-element">
                       <ul class="mech-unordered-list">
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             x: 
                             <code class="mech-inline-code">u8</code>
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             y: 
                             <code class="mech-inline-code">string</code>
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             z: 
                             <code class="mech-inline-code">[u8]:3,1</code>
@@ -9244,22 +9243,22 @@ false
                     </div>
                     <div class="mech-section-element">
                       <ul class="mech-unordered-list">
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Records group related attributes of a single entity.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             Access a field on a record yields a scalar of that type, rather than a column matrix.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             A table with one row is not the same as a record, as they have to be stored differently internally.
                           </p>
                         </li>
-                        <li class="mech-list-item">
+                        <li class="mech-ul-list-item">
                           <p class="mech-paragraph">
                             A table can be thought of as a vector of records.
                           </p>
@@ -9326,22 +9325,22 @@ false
                 </div>
                 <div class="mech-section-element">
                   <ul class="mech-unordered-list">
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         Scalars expand to match the shape of collections.
                       </p>
                     </li>
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         Operations between collections are elementwise when shapes are compatible.
                       </p>
                     </li>
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         Higher-dimensional collections expand along singleton dimensions when necessary.
                       </p>
                     </li>
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         Tables support column-wise elementwise operations but use set-based operations (e.g., unions, joins) for whole-table manipulation.
                       </p>
@@ -9357,39 +9356,39 @@ false
                 </div>
                 <div class="mech-section-element">
                   <ul class="mech-unordered-list">
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         Arithmetic: Addition, subtraction, multiplication, and division over scalars, vectors, and matrices.
                       </p>
                     </li>
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         Matrix Operations: Matrix multiplication, transposition, and other matrix-specific operations.
                       </p>
                     </li>
-                    <li class="mech-list-item">
+                    <li class="mech-ul-list-item">
                       <p class="mech-paragraph">
                         Comparison: Elementwise relational comparisons (
                         <, >
                           , ==, etc.).
                         </p>
                       </li>
-                      <li class="mech-list-item">
+                      <li class="mech-ul-list-item">
                         <p class="mech-paragraph">
                           Logical Operations: Boolean elementwise operations (and, or, not).
                         </p>
                       </li>
-                      <li class="mech-list-item">
+                      <li class="mech-ul-list-item">
                         <p class="mech-paragraph">
                           Set Operations: Union, intersection, and other set-specific operations.
                         </p>
                       </li>
-                      <li class="mech-list-item">
+                      <li class="mech-ul-list-item">
                         <p class="mech-paragraph">
                           Range Expressions: Constructing sequences of values.
                         </p>
                       </li>
-                      <li class="mech-list-item">
+                      <li class="mech-ul-list-item">
                         <p class="mech-paragraph">
                           Indexing: Accessing elements within collections using direct and computed indices.
                         </p>
@@ -10145,42 +10144,42 @@ false
                       </div>
                       <div class="mech-section-element">
                         <ul class="mech-unordered-list">
-                          <li class="mech-list-item">
+                          <li class="mech-ul-list-item">
                             <p class="mech-paragraph">
                               Parentheses - Explicit grouping of expressions.
                             </p>
                           </li>
-                          <li class="mech-list-item">
+                          <li class="mech-ul-list-item">
                             <p class="mech-paragraph">
                               Negation and Logical NOT - Unary operations.
                             </p>
                           </li>
-                          <li class="mech-list-item">
+                          <li class="mech-ul-list-item">
                             <p class="mech-paragraph">
                               Exponentiation - Raising to a power.
                             </p>
                           </li>
-                          <li class="mech-list-item">
+                          <li class="mech-ul-list-item">
                             <p class="mech-paragraph">
                               Multiplication, Division, and Matrix Operations - Elementwise and matrix operations.
                             </p>
                           </li>
-                          <li class="mech-list-item">
+                          <li class="mech-ul-list-item">
                             <p class="mech-paragraph">
                               Addition and Subtraction - Binary arithmetic operations.
                             </p>
                           </li>
-                          <li class="mech-list-item">
+                          <li class="mech-ul-list-item">
                             <p class="mech-paragraph">
                               Comparison Operators - Elementwise comparisons.
                             </p>
                           </li>
-                          <li class="mech-list-item">
+                          <li class="mech-ul-list-item">
                             <p class="mech-paragraph">
                               Logical Operators - and, or, xor.
                             </p>
                           </li>
-                          <li class="mech-list-item">
+                          <li class="mech-ul-list-item">
                             <p class="mech-paragraph">
                               Range Operators - Used in range expressions.
                             </p>
@@ -10196,12 +10195,12 @@ false
                       </div>
                       <div class="mech-section-element">
                         <ul class="mech-unordered-list">
-                          <li class="mech-list-item">
+                          <li class="mech-ul-list-item">
                             <p class="mech-paragraph">
                               Left-to-right associativity applies to all operators, including exponentiation.
                             </p>
                           </li>
-                          <li class="mech-list-item">
+                          <li class="mech-ul-list-item">
                             <p class="mech-paragraph">
                               Parentheses explicitly override precedence rules.
                             </p>
@@ -16473,7 +16472,7 @@ false
                                               </div>
                                               <div class="mech-section-element">
                                                 <ul class="mech-unordered-list">
-                                                  <li class="mech-list-item">
+                                                  <li class="mech-ul-list-item">
                                                     <p class="mech-paragraph">
                                                       <strong class="mech-strong">
                                                         Strong text:
@@ -16481,7 +16480,7 @@ false
                                                       <code class="mech-inline-code">**text**</code>
                                                     </p>
                                                   </li>
-                                                  <li class="mech-list-item">
+                                                  <li class="mech-ul-list-item">
                                                     <p class="mech-paragraph">
                                                       <strong class="mech-strong">
                                                         Emphasis text:
@@ -16489,7 +16488,7 @@ false
                                                       <code class="mech-inline-code">*text*</code>
                                                     </p>
                                                   </li>
-                                                  <li class="mech-list-item">
+                                                  <li class="mech-ul-list-item">
                                                     <p class="mech-paragraph">
                                                       <strong class="mech-strong">
                                                         Strikethrough text:
@@ -16497,7 +16496,7 @@ false
                                                       <code class="mech-inline-code">~text~</code>
                                                     </p>
                                                   </li>
-                                                  <li class="mech-list-item">
+                                                  <li class="mech-ul-list-item">
                                                     <p class="mech-paragraph">
                                                       <strong class="mech-strong">
                                                         Underlined text:
@@ -16505,7 +16504,7 @@ false
                                                       <code class="mech-inline-code">_text_</code>
                                                     </p>
                                                   </li>
-                                                  <li class="mech-list-item">
+                                                  <li class="mech-ul-list-item">
                                                     <p class="mech-paragraph">
                                                       <strong class="mech-strong">
                                                         Inline code:
@@ -16513,7 +16512,7 @@ false
                                                        code 
                                                     </p>
                                                   </li>
-                                                  <li class="mech-list-item">
+                                                  <li class="mech-ul-list-item">
                                                     <p class="mech-paragraph">
                                                       <strong class="mech-strong">
                                                         Hyperlinks:
@@ -16523,7 +16522,7 @@ false
                                                       <code class="mech-inline-code">http://example.com</code>
                                                     </p>
                                                   </li>
-                                                  <li class="mech-list-item">
+                                                  <li class="mech-ul-list-item">
                                                     <p class="mech-paragraph">
                                                       <strong class="mech-strong">
                                                         Inline Mech:
@@ -16815,17 +16814,17 @@ false
                                               </div>
                                               <div class="mech-section-element">
                                                 <ul class="mech-unordered-list">
-                                                  <li class="mech-list-item">
+                                                  <li class="mech-ul-list-item">
                                                     <p class="mech-paragraph">
                                                       Item 1
                                                     </p>
                                                   </li>
-                                                  <li class="mech-list-item">
+                                                  <li class="mech-ul-list-item">
                                                     <p class="mech-paragraph">
                                                       Item 2
                                                     </p>
                                                   </li>
-                                                  <li class="mech-list-item">
+                                                  <li class="mech-ul-list-item">
                                                     <p class="mech-paragraph">
                                                       Item 3
                                                     </p>
@@ -17697,7 +17696,7 @@ false
                                               </div>
                                               <div class="mech-section-element">
                                                 <ul class="mech-unordered-list">
-                                                  <li class="mech-list-item">
+                                                  <li class="mech-ul-list-item">
                                                     <p class="mech-paragraph">
                                                       Left-aligned: 
                                                       <code class="mech-inline-code">:--</code>
@@ -17705,13 +17704,13 @@ false
                                                       <code class="mech-inline-code">--</code>
                                                     </p>
                                                   </li>
-                                                  <li class="mech-list-item">
+                                                  <li class="mech-ul-list-item">
                                                     <p class="mech-paragraph">
                                                       Right-aligned: 
                                                       <code class="mech-inline-code">--:</code>
                                                     </p>
                                                   </li>
-                                                  <li class="mech-list-item">
+                                                  <li class="mech-ul-list-item">
                                                     <p class="mech-paragraph">
                                                       Center-aligned: 
                                                       <code class="mech-inline-code">:--:</code>
@@ -18812,7 +18811,7 @@ false
       let wasm_core;
       async function run() {
         await init();
-        var code = `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`;
+        var code = `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`;
         wasm_core = new WasmMech();
         var xhr = new XMLHttpRequest();
         var codeUrl = `/code${window.location.pathname}`;
