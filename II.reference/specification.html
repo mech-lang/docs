@@ -11,8 +11,13 @@ html {
     scroll-behavior: smooth;
 }
 
-.mech-program{counter-reset: section}
-.mech-toc{counter-reset: section}
+.mech-program {
+    counter-reset: section;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 700px;
+}
 
 body {
     font-family: 'Roboto', sans-serif;
@@ -23,31 +28,40 @@ body {
 }
 
 .mech-root {
+    width: 100%;
     display: flex;
     flex-direction: row;
 }
 
-.mech-output {
+#mech-output {
+    max-width: 700px;
+    min-width: 250px;
     background-color: #171D21;
     color: #f2ead9;
-    padding: 20px;
-    margin: 20px;
     border-radius: 10px;
-    flex-grow: 1;
-    overflow-y: auto;
 }
 
 .mech-toc {
+    width: 250px;
+    min-width: 250px;
+    counter-reset: section;
     background-color: #171D21;
     color: #f2ead9;
     overflow-y: auto;
     margin-right: 20px;
     padding-right: 15px;
-    width: 250px;
     padding-left: 10px;
     position: sticky; 
     top: 0; 
     height: 100vh;
+}
+
+.mech-toc h2 {
+    line-height: 23px;
+}
+
+.mech-toc h3 {
+    line-height: 23px;
 }
 
 .mech-toc::-webkit-scrollbar {
@@ -83,42 +97,47 @@ body {
     padding-left: 15px;
 }
 
+h2.toc::before {
+    padding-right: 5px;
+}
+
+h3.toc::before {
+    font-size: 12pt;
+    padding-right: 5px;
+    color: rgba(255, 255, 255, 0.55);
+}
+
 .mech-toc h2 a {
     color: #f2ead9;
     text-decoration: none;
 }
 
+.mech-toc h2:hover::before {
+    color: #ee6262;
+}
+
 .mech-toc h2 a:hover {
-    color: #ffd139;
-    text-decoration: none;
-}
-
-.mech-toc h4 {
-    font-size: 12pt;
-    padding-left: 30px;
-    font-weight: normal;
-}
-
-.mech-toc h4 a {
-    color: #f2ead9;
-    text-decoration: none;
-}
-
-.mech-toc h4 a:hover {
     color: #ee6262;
     text-decoration: none;
 }
 
-
-.mech-program {
-    margin: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 690px;
+.mech-toc h3 {
+    font-size: 12pt;
+    padding-left: 30px;
 }
 
-.mech-output {
-    flex-grow: 1;
+.mech-toc h3 a {
+    color: #f2ead9;
+    text-decoration: none;
+}
+
+.mech-toc h3:hover::before {
+    color: #ee6262;
+}
+
+.mech-toc h3 a:hover {
+    color: #ee6262;
+    text-decoration: none;
 }
 
 .mech-matrix {
@@ -175,29 +194,18 @@ h2:before{
     content: counter(section) " ";
 }
 
-h4:before{
-    counter-increment: sub-section;
-    color: #ee6262;
-    content: counter(section) "." counter(sub-section) " ";
-}
-
 .mech-program .mech-program-title {
+    width: 900px;
     font-family: 'FiraCodeRegular', monospace;
+    padding-bottom: 10px;
+    border-bottom: 4px dashed #d19710;
     color: #f2ead9;
     letter-spacing: 2px;
     font-size: 22pt;
     font-weight: bold;
     text-align: center;
     margin-bottom: 16px;
-}
-.mech-program .mech-program-title::after {
-    letter-spacing: 0px;
-    content: "==============================================================================";
-    color: #F3B62D; 
-    font-size: 12pt; 
-    display: block;
-    text-align: left; 
-    margin-top: 5px; 
+    margin-left: -100px;
 }
 
 .mech-program h2 a {
@@ -206,23 +214,23 @@ h4:before{
 }
 
 .mech-program h2 {
+    width: 850px;
     font-family: 'FiraCodeRegular', monospace;
+    padding-bottom: 10px;
+    border-bottom: 3px dashed #d19710;
     color: #f2ead9;
     font-size: 16pt;
     font-weight: bold;
     letter-spacing: 2px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     margin-top: 50px;
-    margin-left: -50px;
+    margin-left: -75px;
 }
-.mech-program h2::after {
-    content: "------------------------------------------------------------------------------------";
-    letter-spacing: 0px;
-    color: #F3B62D; 
-    font-size: 12pt; 
-    display: block;
-    text-align: left; 
-    margin-top: 5px; 
+
+h3:before{
+    counter-increment: sub-section;
+    color: #F3B62D;
+    content: counter(section) "." counter(sub-section) " ";
 }
 
 .mech-program h3 a {
@@ -237,6 +245,14 @@ h4:before{
     font-weight: bold;
     margin-bottom: 10px;
     letter-spacing: 1px;
+    margin-left: -48px;
+}
+
+h4:before {
+    counter-increment: h4-section;
+    color: #F3B62D;
+    font-weight: bold;
+    content: counter(section) "." counter(sub-section) "." counter(h4-section) " ";
 }
 
 .mech-program h4 a {
@@ -247,10 +263,28 @@ h4:before{
 .mech-program h4 {
     font-family: 'FiraCodeRegular', monospace;
     color: #f2ead9;
-    font-size: 14pt;
+    font-size: 12pt;
     font-weight: bold;
     margin-bottom: 10px;
     letter-spacing: 1px;
+}
+
+.mech-program h4 a {
+    color: #f2ead9;
+    text-decoration: none;
+}
+
+.mech-program h4 {
+    font-family: 'FiraCodeRegular', monospace;
+    color: #f2ead9;
+    font-size: 12pt;
+    font-weight: bold;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+h4.toc {
+    display: none;
 }
 
 .mech-variable-mutable {
@@ -683,7 +717,7 @@ code {
 }
 
 .mech-comment {
-    color: #ee6262;
+    color: #ef5f90;;
     font-style: italic;
     padding-top: 20px;
 }
@@ -692,8 +726,57 @@ code {
     color: #ee6262;
 }
 
+
+ul {
+    color: #F3B62D;
+    font-weight: bold;
+}
+
 ol {
-    color: #ee6262;
+    color: #F3B62D;
+    font-weight: bold;
+}
+
+
+.mech-check-list {
+    list-style: none;
+    padding-left: 9px;
+    margin-top: 0.5em;
+}
+
+.mech-check-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5em;
+    margin: 0;
+    color: #dcd4c9;
+}
+
+.mech-check-list-item input[type="checkbox"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    margin-top: 3px;
+    border: 2px solid #777;
+    border-radius: 3px;
+    background-color: #171D21;
+    cursor: pointer;
+    position: relative;
+}
+
+.mech-check-list-item input[type="checkbox"]:checked {
+    background-color: #171D21;
+    border-color: #F3B62D;
+}
+
+.mech-check-list-item input[type="checkbox"]:checked::after {
+    content: "✓";
+    color: #F3B62D;
+    position: absolute;
+    top: 0px;
+    left: 1px;
+    font-size: 12px;
+    line-height: 1;
 }
 
 .mech-list-item-emoji {
@@ -715,6 +798,32 @@ ol {
     top: 13px;
 }
 
+.mech-figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px auto;
+}
+
+.mech-image {
+    max-width: 120%;
+}
+
+.mech-figure-label {
+    color: #F3B62D; 
+    font-size: 12pt;
+}
+
+.mech-figure-caption {
+    margin-top: 1em;
+    color: #eadec2;
+    font-size: 12pt;
+    text-align: left;;
+    line-height: 1.4;
+    font-style: italic;
+    padding: 1em;
+}
+
 li {
     padding-left: 5px;
 }
@@ -722,6 +831,7 @@ li {
 li p {
     margin-top: 2px;
     margin-bottom: 2px;
+    font-weight: normal;
 }
 
 .mech-table-header {
@@ -784,7 +894,7 @@ li p {
 .mech-block-quote {
     width: 80%;
     background-color: #232A30; 
-    border-left: 5px solid #ee6262; 
+    border-left: 4px solid #F3B62D;; 
     padding: 15px 20px;
     color: #f2ead9; 
     font-style: italic; 
@@ -859,23 +969,23 @@ li p {
     margin-top: 1em;
     font-size: 0.9em;
     color: #ada594;
-  }
-  
-  .mech-footnote-id {
+}
+
+.mech-footnote-id {
     color: #ee6262;
     font-weight: bold;
     min-width: 2em;
     text-align: right;
     font-family: monospace;
-  }
-  
-  .mech-footnote .mech-paragraph {
+}
+
+.mech-footnote .mech-paragraph {
     margin: 0;
     line-height: 1.6;
     color: #f2ead9;
-  }
+}
 
-  .mech-footnote-reference {
+.mech-footnote-reference {
     font-size: 0.7em;
     vertical-align: super;
     text-decoration: none;
@@ -883,13 +993,27 @@ li p {
     color: #ee6262;
     cursor: pointer;
     transition: color 0.2s;
-  }
-  
-  .mech-footnote-reference:hover {
+}
+
+.mech-footnote-reference:hover {
     color: #f28b82;
     text-decoration: underline;
-  }
-  
+}
+
+.mech-abstract {
+    background-color: #1f252a;
+    border: 1px solid #F3B62D;
+    padding: 2em 2em;
+    margin: 2em 2em;
+    border-radius: 8px;
+    color: #dcd4c9;
+}
+
+.mech-abstract p {
+    line-height: 25pt;
+    margin: 0px;
+    text-align: justify;
+}
 
         
     </style>
@@ -900,558 +1024,576 @@ li p {
         <h1 class="mech-program-title">
           Mech Language Specification 
         </h1>
-        <div class="mech-toc-sections">
+        <section class="mech-toc-sections">
           <section class="mech-program-section">
-            <h2 id="36994328039486253" class="mech-program-subtitle">
+            <h2 id="36994328039486253" class="mech-program-subtitle toc">
               <a href="#24532585919651604">
                 Introduction
               </a>
             </h2>
           </section>
           <section class="mech-program-section">
-            <h2 id="2046190110316975" class="mech-program-subtitle">
+            <h2 id="2046190110316975" class="mech-program-subtitle toc">
               <a href="#56123367594090733">
                 Source Code Representation
               </a>
             </h2>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="15488515123597817" class="mech-program-subtitle">
-                  <a href="#6267646157868218">
+                <h3 id="21951671964955764" class="mech-program-subtitle toc">
+                  <a href="#9102677322633041">
                     File Format
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="71153871848144224" class="mech-program-subtitle">
-                  <a href="#28594290095510921">
+                <h3 id="19514289845507523" class="mech-program-subtitle toc">
+                  <a href="#20328676855703785">
                     Literate Programming and Mechdown
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="71858534310066997" class="mech-program-subtitle">
-                  <a href="#34719180229817784">
+                <h3 id="9024330477319524" class="mech-program-subtitle toc">
+                  <a href="#42171376016192898">
                     Whitespace
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
           </section>
           <section class="mech-program-section">
-            <h2 id="19079177696538542" class="mech-program-subtitle">
+            <h2 id="19079177696538542" class="mech-program-subtitle toc">
               <a href="#58393432045966419">
                 Lexical Elements
               </a>
             </h2>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="59905203553921169" class="mech-program-subtitle">
-                  <a href="#24537488838193854">
+                <h3 id="53609553224379957" class="mech-program-subtitle toc">
+                  <a href="#39003557984811317">
                     Tokens
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="70801611600718042" class="mech-program-subtitle">
-                  <a href="#9287141900204930">
+                <h3 id="16689442428074856" class="mech-program-subtitle toc">
+                  <a href="#43017858710171234">
                     Identifiers
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="37374590624936251" class="mech-program-subtitle">
-                  <a href="#8963022753421757">
+                <h3 id="756409863924366" class="mech-program-subtitle toc">
+                  <a href="#39605662223839302">
                     Keywords
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="61346583819792870" class="mech-program-subtitle">
-                  <a href="#2060175734101298">
+                <h3 id="70941003848447744" class="mech-program-subtitle toc">
+                  <a href="#2586856908299748">
                     Operators and Punctuation
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="66827791843789042" class="mech-program-subtitle">
-                  <a href="#46854540920651094">
+                <h3 id="48937038842715609" class="mech-program-subtitle toc">
+                  <a href="#66971550547548669">
                     Comments
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
           </section>
           <section class="mech-program-section">
-            <h2 id="70878089536908432" class="mech-program-subtitle">
+            <h2 id="70878089536908432" class="mech-program-subtitle toc">
               <a href="#13548466691974027">
                 Literals
               </a>
             </h2>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="38458632833255417" class="mech-program-subtitle">
-                  <a href="#30012329113757651">
+                <h3 id="35859497590162990" class="mech-program-subtitle toc">
+                  <a href="#28690539064134279">
                     Integers
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="25087415629185131" class="mech-program-subtitle">
-                  <a href="#70295139270730791">
+                <h3 id="35456495036683753" class="mech-program-subtitle toc">
+                  <a href="#2042156932785894">
                     Floats
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="31263199641577927" class="mech-program-subtitle">
-                  <a href="#24974892666436952">
+                <h3 id="50254415197364909" class="mech-program-subtitle toc">
+                  <a href="#21169752732356841">
                     Strings
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="43285224210955225" class="mech-program-subtitle">
-                  <a href="#17422427828280240">
+                <h3 id="21240782534590548" class="mech-program-subtitle toc">
+                  <a href="#48833498362309643">
                     Boolean
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="66803148564223320" class="mech-program-subtitle">
-                  <a href="#42750777693310624">
+                <h3 id="20120761000597115" class="mech-program-subtitle toc">
+                  <a href="#68509148100556906">
                     Atoms
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="1394190913697363" class="mech-program-subtitle">
-                  <a href="#38366745670584623">
+                <h3 id="69346110227499504" class="mech-program-subtitle toc">
+                  <a href="#17298325730330198">
                     Empty
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="27672927409709950" class="mech-program-subtitle">
-                  <a href="#8246677518709720">
+                <h3 id="32740842523583713" class="mech-program-subtitle toc">
+                  <a href="#14363386780018812">
                     Kinds
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
           </section>
           <section class="mech-program-section">
-            <h2 id="32811389418331062" class="mech-program-subtitle">
+            <h2 id="32811389418331062" class="mech-program-subtitle toc">
               <a href="#15331616162454808">
                 Data Structures
               </a>
             </h2>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="32774866323494224" class="mech-program-subtitle">
-                  <a href="#9615151635654986">
+                <h3 id="61679891363836758" class="mech-program-subtitle toc">
+                  <a href="#27865179858996576">
                     Matrix
                   </a>
+                </h3>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h4 id="14373116748134503" class="mech-program-subtitle toc">
+                  <a href="#63395306464426874">
+                    Semantics
+                  </a>
                 </h4>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="25525042252776942" class="mech-program-subtitle">
-                  <a href="#14644804838715525">
+                <h4 id="13245914660778496" class="mech-program-subtitle toc">
+                  <a href="#71031831835916959">
+                    Indexing
+                  </a>
+                </h4>
+              </section>
+            </div>
+            <div class="mech-section-element">
+              <section class="mech-program-section">
+                <h3 id="19042668876472496" class="mech-program-subtitle toc">
+                  <a href="#49951722079361804">
                     Set
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="68297347317941409" class="mech-program-subtitle">
-                  <a href="#66886079494499391">
+                <h3 id="39171763221634403" class="mech-program-subtitle toc">
+                  <a href="#59692554284260063">
                     Map
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="61569749363447249" class="mech-program-subtitle">
-                  <a href="#45297339292174744">
+                <h3 id="53354446642339150" class="mech-program-subtitle toc">
+                  <a href="#42253555381459885">
                     Tuple
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="44140618079485541" class="mech-program-subtitle">
-                  <a href="#48673187961689229">
+                <h3 id="57405889413822559" class="mech-program-subtitle toc">
+                  <a href="#10613674505557548">
                     Table
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="19856747406775543" class="mech-program-subtitle">
-                  <a href="#7990985436189957">
+                <h3 id="23896306868186123" class="mech-program-subtitle toc">
+                  <a href="#30561180784945766">
                     Record
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
           </section>
           <section class="mech-program-section">
-            <h2 id="28395122023194653" class="mech-program-subtitle">
+            <h2 id="28395122023194653" class="mech-program-subtitle toc">
               <a href="#17615722433656962">
                 Expressions
               </a>
             </h2>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="3057864713824973" class="mech-program-subtitle">
-                  <a href="#71500568225100300">
+                <h3 id="40733863670925073" class="mech-program-subtitle toc">
+                  <a href="#28878434296157517">
                     Formula 
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="52032752495097963" class="mech-program-subtitle">
-                  <a href="#69443252458544776">
+                <h3 id="33479907725460411" class="mech-program-subtitle toc">
+                  <a href="#10222323886279296">
                     Arithmetic
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="32774866323494224" class="mech-program-subtitle">
-                  <a href="#9615151635654986">
+                <h3 id="61679891363836758" class="mech-program-subtitle toc">
+                  <a href="#27865179858996576">
                     Matrix
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="43680580247723275" class="mech-program-subtitle">
-                  <a href="#6566005626084704">
+                <h3 id="579347343084759" class="mech-program-subtitle toc">
+                  <a href="#37623867850127866">
                     Comparison
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="17002654642409632" class="mech-program-subtitle">
-                  <a href="#5930734924315717">
+                <h3 id="39930767280334116" class="mech-program-subtitle toc">
+                  <a href="#12321332577925727">
                     Logical
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="25525042252776942" class="mech-program-subtitle">
-                  <a href="#14644804838715525">
+                <h3 id="19042668876472496" class="mech-program-subtitle toc">
+                  <a href="#49951722079361804">
                     Set
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="13172273264347398" class="mech-program-subtitle">
-                  <a href="#60535861837135520">
+                <h3 id="36944738618009505" class="mech-program-subtitle toc">
+                  <a href="#38745572305653217">
                     Range
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
           </section>
           <section class="mech-program-section">
-            <h2 id="26477053682364841" class="mech-program-subtitle">
+            <h2 id="26477053682364841" class="mech-program-subtitle toc">
               <a href="#23424592651318844">
                 Indexing
               </a>
             </h2>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="47669887209407315" class="mech-program-subtitle">
-                  <a href="#70770035521817702">
+                <h3 id="29595270581331319" class="mech-program-subtitle toc">
+                  <a href="#25975552186652453">
                     Slicing
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="27210748475108175" class="mech-program-subtitle">
-                  <a href="#7127186079993695">
+                <h3 id="9178780296426126" class="mech-program-subtitle toc">
+                  <a href="#16462837927006734">
                     Dot Index
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="15729638168728938" class="mech-program-subtitle">
-                  <a href="#41715567564737817">
+                <h3 id="48957721814532946" class="mech-program-subtitle toc">
+                  <a href="#5586608584477147">
                     Swizzle
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
           </section>
           <section class="mech-program-section">
-            <h2 id="31266955199904745" class="mech-program-subtitle">
+            <h2 id="31266955199904745" class="mech-program-subtitle toc">
               <a href="#42210057184409305">
                 Statements
               </a>
             </h2>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="46690332865332770" class="mech-program-subtitle">
-                  <a href="#17682643806895169">
+                <h3 id="61448917554984352" class="mech-program-subtitle toc">
+                  <a href="#25320986092777655">
                     Variable Define
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="46066390734155921" class="mech-program-subtitle">
-                  <a href="#46004168174192996">
+                <h3 id="57051371328311051" class="mech-program-subtitle toc">
+                  <a href="#41754116523992945">
                     Variable Assign
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="18719027010455039" class="mech-program-subtitle">
-                  <a href="#66301087657226087">
+                <h3 id="5984700951143947" class="mech-program-subtitle toc">
+                  <a href="#10759455172489637">
                     Op-Assign
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="61021014975380329" class="mech-program-subtitle">
-                  <a href="#43918846925318846">
+                <h3 id="62051499909883035" class="mech-program-subtitle toc">
+                  <a href="#57828258959426563">
                     Enum Define
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="13515115819082434" class="mech-program-subtitle">
-                  <a href="#55850960549636316">
+                <h3 id="68585111073137433" class="mech-program-subtitle toc">
+                  <a href="#35879810577683239">
                     Kind Define
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
           </section>
           <section class="mech-program-section">
-            <h2 id="70294957479892157" class="mech-program-subtitle">
+            <h2 id="70294957479892157" class="mech-program-subtitle toc">
               <a href="#9518895069535147">
                 Functions
               </a>
             </h2>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="57378048641043579" class="mech-program-subtitle">
-                  <a href="#55882549029406679">
+                <h3 id="53654391522340252" class="mech-program-subtitle toc">
+                  <a href="#20791652209506204">
                     Function Define
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="60359260318311171" class="mech-program-subtitle">
-                  <a href="#7863497594701243">
+                <h3 id="54972978623366874" class="mech-program-subtitle toc">
+                  <a href="#23430584261268144">
                     Function Call
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
           </section>
           <section class="mech-program-section">
-            <h2 id="62573954381288290" class="mech-program-subtitle">
+            <h2 id="62573954381288290" class="mech-program-subtitle toc">
               <a href="#27482184148317386">
                 State Machines
               </a>
             </h2>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="55067390483754777" class="mech-program-subtitle">
-                  <a href="#61658507070099573">
+                <h3 id="71405666409855695" class="mech-program-subtitle toc">
+                  <a href="#29304226518681632">
                     Operators
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="51347561960039465" class="mech-program-subtitle">
-                  <a href="#42873239106270548">
+                <h3 id="30760061428354645" class="mech-program-subtitle toc">
+                  <a href="#2754413432152289">
                     Specification
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="20036260941160947" class="mech-program-subtitle">
-                  <a href="#26283582811565256">
+                <h3 id="5232086989602174" class="mech-program-subtitle toc">
+                  <a href="#69760434990933626">
                     Implementation
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
           </section>
           <section class="mech-program-section">
-            <h2 id="50912998999441410" class="mech-program-subtitle">
+            <h2 id="50912998999441410" class="mech-program-subtitle toc">
               <a href="#39536909611123540">
                 Mech Programs
               </a>
             </h2>
           </section>
           <section class="mech-program-section">
-            <h2 id="23039652014622174" class="mech-program-subtitle">
+            <h2 id="23039652014622174" class="mech-program-subtitle toc">
               <a href="#58856088105263747">
                 Mechdown
               </a>
             </h2>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="33382292041823872" class="mech-program-subtitle">
-                  <a href="#67215532846030283">
+                <h3 id="46226313027660666" class="mech-program-subtitle toc">
+                  <a href="#25909320932656450">
                     Body
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="15681477878021357" class="mech-program-subtitle">
-                  <a href="#68231641367295086">
+                <h3 id="59031367606602645" class="mech-program-subtitle toc">
+                  <a href="#46787659068830473">
                     Sections and Section Elements
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="34334746904144605" class="mech-program-subtitle">
-                  <a href="#60094108042275253">
+                <h3 id="26537366376624423" class="mech-program-subtitle toc">
+                  <a href="#36427539524860106">
                     Titles
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="31749083085735261" class="mech-program-subtitle">
-                  <a href="#27649883832638885">
+                <h3 id="15023620763898374" class="mech-program-subtitle toc">
+                  <a href="#37989451758331414">
                     Paragraphs and Paragraph Elements
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="41003531072548853" class="mech-program-subtitle">
-                  <a href="#40669846692705342">
+                <h3 id="2943128496462977" class="mech-program-subtitle toc">
+                  <a href="#36445845987784221">
                     Lists
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="64604655071189445" class="mech-program-subtitle">
-                  <a href="#21188293635455520">
+                <h3 id="63597585154988977" class="mech-program-subtitle toc">
+                  <a href="#30018332365366280">
                     Thematic Breaks
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="28708893430820737" class="mech-program-subtitle">
-                  <a href="#19801176536848024">
+                <h3 id="59437071588037031" class="mech-program-subtitle toc">
+                  <a href="#10129127222073905">
                     Code Blocks
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="53068377762083701" class="mech-program-subtitle">
-                  <a href="#32503052646355842">
+                <h3 id="11332899541586912" class="mech-program-subtitle toc">
+                  <a href="#58164702047910138">
                     Block Quotes
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="68674780485579893" class="mech-program-subtitle">
-                  <a href="#61430647230727563">
+                <h3 id="29725227932606166" class="mech-program-subtitle toc">
+                  <a href="#36002764547065843">
                     Tables
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="64469816490151078" class="mech-program-subtitle">
-                  <a href="#22769507094017899">
+                <h3 id="63408031568011164" class="mech-program-subtitle toc">
+                  <a href="#17951035829636679">
                     Mech Extensions 
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
           </section>
           <section class="mech-program-section">
-            <h2 id="3641434550465705" class="mech-program-subtitle">
+            <h2 id="3641434550465705" class="mech-program-subtitle toc">
               <a href="#64840961086673677">
                 Notation
               </a>
             </h2>
           </section>
-        </div>
+        </section>
       </div>
       <div class="mech-program">
         <h1 class="mech-program-title">
@@ -1459,7 +1601,7 @@ li p {
         </h1>
         <div class="mech-program-body">
           <section class="mech-program-section">
-            <h2 id="24532585919651604" class="mech-program-subtitle">
+            <h2 id="24532585919651604" class="mech-program-subtitle ">
               <a href="#24532585919651604">
                 Introduction
               </a>
@@ -1500,18 +1642,18 @@ li p {
             </div>
           </section>
           <section class="mech-program-section">
-            <h2 id="56123367594090733" class="mech-program-subtitle">
+            <h2 id="56123367594090733" class="mech-program-subtitle ">
               <a href="#56123367594090733">
                 Source Code Representation
               </a>
             </h2>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="6267646157868218" class="mech-program-subtitle">
-                  <a href="#6267646157868218">
+                <h3 id="9102677322633041" class="mech-program-subtitle ">
+                  <a href="#9102677322633041">
                     File Format
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <p class="mech-paragraph">
                     Mech source code can be stored in files with either the 
@@ -1554,11 +1696,11 @@ li p {
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="28594290095510921" class="mech-program-subtitle">
-                  <a href="#28594290095510921">
+                <h3 id="20328676855703785" class="mech-program-subtitle ">
+                  <a href="#20328676855703785">
                     Literate Programming and Mechdown
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <p class="mech-paragraph">
                     Literate programming presents programs as structured documents where explanations take precedence over code. In Mech, we support this concept through a format called Mechdown, a superset of Markdown with extensions to support embedded Mech syntax. This document is formatted with Mechdown to demonstrate how it is used.
@@ -1577,11 +1719,11 @@ li p {
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="34719180229817784" class="mech-program-subtitle">
-                  <a href="#34719180229817784">
+                <h3 id="42171376016192898" class="mech-program-subtitle ">
+                  <a href="#42171376016192898">
                     Whitespace
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <p class="mech-paragraph">
                     Whitespace in Mech is used to separate tokens and is generally ignored. This includes spaces, tabs, and newlines. However, whitespace can be significant in certain contexts:
@@ -1638,18 +1780,18 @@ li p {
             </div>
           </section>
           <section class="mech-program-section">
-            <h2 id="58393432045966419" class="mech-program-subtitle">
+            <h2 id="58393432045966419" class="mech-program-subtitle ">
               <a href="#58393432045966419">
                 Lexical Elements
               </a>
             </h2>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="24537488838193854" class="mech-program-subtitle">
-                  <a href="#24537488838193854">
+                <h3 id="39003557984811317" class="mech-program-subtitle ">
+                  <a href="#39003557984811317">
                     Tokens
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <p class="mech-paragraph">
                     Tokens are the smallest units of meaning in Mech. They include letters, digits, punctuation, and special symbols.
@@ -1926,11 +2068,11 @@ li p {
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="9287141900204930" class="mech-program-subtitle">
-                  <a href="#9287141900204930">
+                <h3 id="43017858710171234" class="mech-program-subtitle ">
+                  <a href="#43017858710171234">
                     Identifiers
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <div class="mech-grammar">
                     <div class="mech-grammar-rule">
@@ -2087,11 +2229,11 @@ li p {
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="8963022753421757" class="mech-program-subtitle">
-                  <a href="#8963022753421757">
+                <h3 id="39605662223839302" class="mech-program-subtitle ">
+                  <a href="#39605662223839302">
                     Keywords
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <p class="mech-paragraph">
                     There are only two keywords in Mech:
@@ -2111,11 +2253,11 @@ false
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="2060175734101298" class="mech-program-subtitle">
-                  <a href="#2060175734101298">
+                <h3 id="2586856908299748" class="mech-program-subtitle ">
+                  <a href="#2586856908299748">
                     Operators and Punctuation
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <p class="mech-paragraph">
                     <strong class="mech-strong">
@@ -2880,11 +3022,11 @@ false
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="46854540920651094" class="mech-program-subtitle">
-                  <a href="#46854540920651094">
+                <h3 id="66971550547548669" class="mech-program-subtitle ">
+                  <a href="#66971550547548669">
                     Comments
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <div class="mech-grammar">
                     <div class="mech-grammar-rule">
@@ -2982,7 +3124,7 @@ false
             </div>
           </section>
           <section class="mech-program-section">
-            <h2 id="13548466691974027" class="mech-program-subtitle">
+            <h2 id="13548466691974027" class="mech-program-subtitle ">
               <a href="#13548466691974027">
                 Literals
               </a>
@@ -3082,11 +3224,11 @@ false
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="30012329113757651" class="mech-program-subtitle">
-                  <a href="#30012329113757651">
+                <h3 id="28690539064134279" class="mech-program-subtitle ">
+                  <a href="#28690539064134279">
                     Integers
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <div class="mech-grammar">
                     <div class="mech-grammar-rule">
@@ -3385,11 +3527,11 @@ false
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="70295139270730791" class="mech-program-subtitle">
-                  <a href="#70295139270730791">
+                <h3 id="2042156932785894" class="mech-program-subtitle ">
+                  <a href="#2042156932785894">
                     Floats
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <div class="mech-grammar">
                     <div class="mech-grammar-rule">
@@ -3719,11 +3861,11 @@ false
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="24974892666436952" class="mech-program-subtitle">
-                  <a href="#24974892666436952">
+                <h3 id="21169752732356841" class="mech-program-subtitle ">
+                  <a href="#21169752732356841">
                     Strings
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <div class="mech-grammar">
                     <div class="mech-grammar-rule">
@@ -3823,11 +3965,11 @@ false
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="17422427828280240" class="mech-program-subtitle">
-                  <a href="#17422427828280240">
+                <h3 id="48833498362309643" class="mech-program-subtitle ">
+                  <a href="#48833498362309643">
                     Boolean
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <div class="mech-grammar">
                     <div class="mech-grammar-rule">
@@ -4015,11 +4157,11 @@ false
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="42750777693310624" class="mech-program-subtitle">
-                  <a href="#42750777693310624">
+                <h3 id="68509148100556906" class="mech-program-subtitle ">
+                  <a href="#68509148100556906">
                     Atoms
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <div class="mech-grammar">
                     <div class="mech-grammar-rule">
@@ -4119,11 +4261,11 @@ false
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="38366745670584623" class="mech-program-subtitle">
-                  <a href="#38366745670584623">
+                <h3 id="17298325730330198" class="mech-program-subtitle ">
+                  <a href="#17298325730330198">
                     Empty
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <div class="mech-grammar">
                     <div class="mech-grammar-rule">
@@ -4171,11 +4313,11 @@ false
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="8246677518709720" class="mech-program-subtitle">
-                  <a href="#8246677518709720">
+                <h3 id="14363386780018812" class="mech-program-subtitle ">
+                  <a href="#14363386780018812">
                     Kinds
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <div class="mech-grammar">
                     <div class="mech-grammar-rule">
@@ -4825,7 +4967,7 @@ false
                 </div>
               </section>
               <section class="mech-program-section">
-                <h2 id="15331616162454808" class="mech-program-subtitle">
+                <h2 id="15331616162454808" class="mech-program-subtitle ">
                   <a href="#15331616162454808">
                     Data Structures
                   </a>
@@ -5026,11 +5168,11 @@ false
                 </div>
                 <div class="mech-section-element">
                   <section class="mech-program-section">
-                    <h4 id="9615151635654986" class="mech-program-subtitle">
-                      <a href="#9615151635654986">
+                    <h3 id="27865179858996576" class="mech-program-subtitle ">
+                      <a href="#27865179858996576">
                         Matrix
                       </a>
-                    </h4>
+                    </h3>
                     <div class="mech-section-element">
                       <div class="mech-grammar">
                         <div class="mech-grammar-rule">
@@ -5372,13 +5514,15 @@ false
                         . The number of elements in the matrix is called its length, and the shape of a matrix is defined as a pair of non-negative integers representing the number of rows and columns.
                       </p>
                     </div>
-                    <div class="mech-section-element">
-                      <p class="mech-paragraph">
-                        <strong class="mech-strong">
-                          Semantics:
-                        </strong>
-                      </p>
-                    </div>
+                  </section>
+                </div>
+                <div class="mech-section-element">
+                  <section class="mech-program-section">
+                    <h4 id="63395306464426874" class="mech-program-subtitle ">
+                      <a href="#63395306464426874">
+                        Semantics
+                      </a>
+                    </h4>
                     <div class="mech-section-element">
                       <ul class="mech-unordered-list">
                         <li class="mech-ul-list-item">
@@ -5408,13 +5552,15 @@ false
                         Matrix kinds are always two-dimensional, so row vectors and column vectors are also represented as matrices with a single row or column, respectively.
                       </p>
                     </div>
-                    <div class="mech-section-element">
-                      <p class="mech-paragraph">
-                        <strong class="mech-strong">
-                          Indexing:
-                        </strong>
-                      </p>
-                    </div>
+                  </section>
+                </div>
+                <div class="mech-section-element">
+                  <section class="mech-program-section">
+                    <h4 id="71031831835916959" class="mech-program-subtitle ">
+                      <a href="#71031831835916959">
+                        Indexing
+                      </a>
+                    </h4>
                     <div class="mech-section-element">
                       <p class="mech-paragraph">
                         Matrix elements can be accessed using either 1D or 2D indexing:
@@ -6014,11 +6160,11 @@ false
                 </div>
                 <div class="mech-section-element">
                   <section class="mech-program-section">
-                    <h4 id="14644804838715525" class="mech-program-subtitle">
-                      <a href="#14644804838715525">
+                    <h3 id="49951722079361804" class="mech-program-subtitle ">
+                      <a href="#49951722079361804">
                         Set
                       </a>
-                    </h4>
+                    </h3>
                     <div class="mech-section-element">
                       <div class="mech-grammar">
                         <div class="mech-grammar-rule">
@@ -6398,11 +6544,11 @@ false
                 </div>
                 <div class="mech-section-element">
                   <section class="mech-program-section">
-                    <h4 id="66886079494499391" class="mech-program-subtitle">
-                      <a href="#66886079494499391">
+                    <h3 id="59692554284260063" class="mech-program-subtitle ">
+                      <a href="#59692554284260063">
                         Map
                       </a>
-                    </h4>
+                    </h3>
                     <div class="mech-section-element">
                       <div class="mech-grammar">
                         <div class="mech-grammar-rule">
@@ -6741,11 +6887,11 @@ false
                 </div>
                 <div class="mech-section-element">
                   <section class="mech-program-section">
-                    <h4 id="45297339292174744" class="mech-program-subtitle">
-                      <a href="#45297339292174744">
+                    <h3 id="42253555381459885" class="mech-program-subtitle ">
+                      <a href="#42253555381459885">
                         Tuple
                       </a>
-                    </h4>
+                    </h3>
                     <div class="mech-section-element">
                       <div class="mech-grammar">
                         <div class="mech-grammar-rule">
@@ -7219,11 +7365,11 @@ false
                 </div>
                 <div class="mech-section-element">
                   <section class="mech-program-section">
-                    <h4 id="48673187961689229" class="mech-program-subtitle">
-                      <a href="#48673187961689229">
+                    <h3 id="10613674505557548" class="mech-program-subtitle ">
+                      <a href="#10613674505557548">
                         Table
                       </a>
-                    </h4>
+                    </h3>
                     <div class="mech-section-element">
                       <div class="mech-grammar">
                         <div class="mech-grammar-rule">
@@ -8621,11 +8767,11 @@ false
                 </div>
                 <div class="mech-section-element">
                   <section class="mech-program-section">
-                    <h4 id="7990985436189957" class="mech-program-subtitle">
-                      <a href="#7990985436189957">
+                    <h3 id="30561180784945766" class="mech-program-subtitle ">
+                      <a href="#30561180784945766">
                         Record
                       </a>
-                    </h4>
+                    </h3>
                     <div class="mech-section-element">
                       <div class="mech-grammar">
                         <div class="mech-grammar-rule">
@@ -9274,7 +9420,7 @@ false
                 </div>
               </section>
               <section class="mech-program-section">
-                <h2 id="17615722433656962" class="mech-program-subtitle">
+                <h2 id="17615722433656962" class="mech-program-subtitle ">
                   <a href="#17615722433656962">
                     Expressions
                   </a>
@@ -9397,11 +9543,11 @@ false
                   </div>
                   <div class="mech-section-element">
                     <section class="mech-program-section">
-                      <h4 id="71500568225100300" class="mech-program-subtitle">
-                        <a href="#71500568225100300">
+                      <h3 id="28878434296157517" class="mech-program-subtitle ">
+                        <a href="#28878434296157517">
                           Formula 
                         </a>
-                      </h4>
+                      </h3>
                       <div class="mech-section-element">
                         <div class="mech-grammar">
                           <div class="mech-grammar-rule">
@@ -10211,11 +10357,11 @@ false
                   </div>
                   <div class="mech-section-element">
                     <section class="mech-program-section">
-                      <h4 id="69443252458544776" class="mech-program-subtitle">
-                        <a href="#69443252458544776">
+                      <h3 id="10222323886279296" class="mech-program-subtitle ">
+                        <a href="#10222323886279296">
                           Arithmetic
                         </a>
-                      </h4>
+                      </h3>
                       <div class="mech-section-element">
                         <div class="mech-grammar">
                           <div class="mech-grammar-rule">
@@ -10308,11 +10454,11 @@ false
                   </div>
                   <div class="mech-section-element">
                     <section class="mech-program-section">
-                      <h4 id="9615151635654986" class="mech-program-subtitle">
-                        <a href="#9615151635654986">
+                      <h3 id="27865179858996576" class="mech-program-subtitle ">
+                        <a href="#27865179858996576">
                           Matrix
                         </a>
-                      </h4>
+                      </h3>
                       <div class="mech-section-element">
                         <div class="mech-grammar">
                           <div class="mech-grammar-rule">
@@ -10391,11 +10537,11 @@ false
                   </div>
                   <div class="mech-section-element">
                     <section class="mech-program-section">
-                      <h4 id="6566005626084704" class="mech-program-subtitle">
-                        <a href="#6566005626084704">
+                      <h3 id="37623867850127866" class="mech-program-subtitle ">
+                        <a href="#37623867850127866">
                           Comparison
                         </a>
-                      </h4>
+                      </h3>
                       <div class="mech-section-element">
                         <div class="mech-grammar">
                           <div class="mech-grammar-rule">
@@ -10526,11 +10672,11 @@ false
                           </div>
                           <div class="mech-section-element">
                             <section class="mech-program-section">
-                              <h4 id="5930734924315717" class="mech-program-subtitle">
-                                <a href="#5930734924315717">
+                              <h3 id="12321332577925727" class="mech-program-subtitle ">
+                                <a href="#12321332577925727">
                                   Logical
                                 </a>
-                              </h4>
+                              </h3>
                               <div class="mech-section-element">
                                 <div class="mech-grammar">
                                   <div class="mech-grammar-rule">
@@ -10623,11 +10769,11 @@ false
                           </div>
                           <div class="mech-section-element">
                             <section class="mech-program-section">
-                              <h4 id="14644804838715525" class="mech-program-subtitle">
-                                <a href="#14644804838715525">
+                              <h3 id="49951722079361804" class="mech-program-subtitle ">
+                                <a href="#49951722079361804">
                                   Set
                                 </a>
-                              </h4>
+                              </h3>
                               <div class="mech-section-element">
                                 <div class="mech-grammar">
                                   <div class="mech-grammar-rule">
@@ -10786,11 +10932,11 @@ false
                           </div>
                           <div class="mech-section-element">
                             <section class="mech-program-section">
-                              <h4 id="60535861837135520" class="mech-program-subtitle">
-                                <a href="#60535861837135520">
+                              <h3 id="38745572305653217" class="mech-program-subtitle ">
+                                <a href="#38745572305653217">
                                   Range
                                 </a>
-                              </h4>
+                              </h3>
                               <div class="mech-section-element">
                                 <div class="mech-grammar">
                                   <div class="mech-grammar-rule">
@@ -10827,7 +10973,7 @@ false
                           </div>
                         </section>
                         <section class="mech-program-section">
-                          <h2 id="23424592651318844" class="mech-program-subtitle">
+                          <h2 id="23424592651318844" class="mech-program-subtitle ">
                             <a href="#23424592651318844">
                               Indexing
                             </a>
@@ -10935,11 +11081,11 @@ false
                           </div>
                           <div class="mech-section-element">
                             <section class="mech-program-section">
-                              <h4 id="70770035521817702" class="mech-program-subtitle">
-                                <a href="#70770035521817702">
+                              <h3 id="25975552186652453" class="mech-program-subtitle ">
+                                <a href="#25975552186652453">
                                   Slicing
                                 </a>
-                              </h4>
+                              </h3>
                               <div class="mech-section-element">
                                 <div class="mech-grammar">
                                   <div class="mech-grammar-rule">
@@ -11155,11 +11301,11 @@ false
                           </div>
                           <div class="mech-section-element">
                             <section class="mech-program-section">
-                              <h4 id="7127186079993695" class="mech-program-subtitle">
-                                <a href="#7127186079993695">
+                              <h3 id="16462837927006734" class="mech-program-subtitle ">
+                                <a href="#16462837927006734">
                                   Dot Index
                                 </a>
-                              </h4>
+                              </h3>
                               <div class="mech-section-element">
                                 <div class="mech-grammar">
                                   <div class="mech-grammar-rule">
@@ -11281,11 +11427,11 @@ false
                           </div>
                           <div class="mech-section-element">
                             <section class="mech-program-section">
-                              <h4 id="41715567564737817" class="mech-program-subtitle">
-                                <a href="#41715567564737817">
+                              <h3 id="5586608584477147" class="mech-program-subtitle ">
+                                <a href="#5586608584477147">
                                   Swizzle
                                 </a>
-                              </h4>
+                              </h3>
                               <div class="mech-section-element">
                                 <div class="mech-grammar">
                                   <div class="mech-grammar-rule">
@@ -11373,7 +11519,7 @@ false
                           </div>
                         </section>
                         <section class="mech-program-section">
-                          <h2 id="42210057184409305" class="mech-program-subtitle">
+                          <h2 id="42210057184409305" class="mech-program-subtitle ">
                             <a href="#42210057184409305">
                               Statements
                             </a>
@@ -11450,11 +11596,11 @@ false
                           </div>
                           <div class="mech-section-element">
                             <section class="mech-program-section">
-                              <h4 id="17682643806895169" class="mech-program-subtitle">
-                                <a href="#17682643806895169">
+                              <h3 id="25320986092777655" class="mech-program-subtitle ">
+                                <a href="#25320986092777655">
                                   Variable Define
                                 </a>
-                              </h4>
+                              </h3>
                               <div class="mech-section-element">
                                 <div class="mech-grammar">
                                   <div class="mech-grammar-rule">
@@ -11566,11 +11712,11 @@ false
                           </div>
                           <div class="mech-section-element">
                             <section class="mech-program-section">
-                              <h4 id="46004168174192996" class="mech-program-subtitle">
-                                <a href="#46004168174192996">
+                              <h3 id="41754116523992945" class="mech-program-subtitle ">
+                                <a href="#41754116523992945">
                                   Variable Assign
                                 </a>
-                              </h4>
+                              </h3>
                               <div class="mech-section-element">
                                 <div class="mech-grammar">
                                   <div class="mech-grammar-rule">
@@ -11784,11 +11930,11 @@ false
                           </div>
                           <div class="mech-section-element">
                             <section class="mech-program-section">
-                              <h4 id="66301087657226087" class="mech-program-subtitle">
-                                <a href="#66301087657226087">
+                              <h3 id="10759455172489637" class="mech-program-subtitle ">
+                                <a href="#10759455172489637">
                                   Op-Assign
                                 </a>
-                              </h4>
+                              </h3>
                               <div class="mech-section-element">
                                 <div class="mech-grammar">
                                   <div class="mech-grammar-rule">
@@ -12169,11 +12315,11 @@ false
                           </div>
                           <div class="mech-section-element">
                             <section class="mech-program-section">
-                              <h4 id="43918846925318846" class="mech-program-subtitle">
-                                <a href="#43918846925318846">
+                              <h3 id="57828258959426563" class="mech-program-subtitle ">
+                                <a href="#57828258959426563">
                                   Enum Define
                                 </a>
-                              </h4>
+                              </h3>
                               <div class="mech-section-element">
                                 <div class="mech-grammar">
                                   <div class="mech-grammar-rule">
@@ -12443,11 +12589,11 @@ false
                                       </div>
                                       <div class="mech-section-element">
                                         <section class="mech-program-section">
-                                          <h4 id="55850960549636316" class="mech-program-subtitle">
-                                            <a href="#55850960549636316">
+                                          <h3 id="35879810577683239" class="mech-program-subtitle ">
+                                            <a href="#35879810577683239">
                                               Kind Define
                                             </a>
-                                          </h4>
+                                          </h3>
                                           <div class="mech-section-element">
                                             <div class="mech-grammar">
                                               <div class="mech-grammar-rule">
@@ -12529,18 +12675,18 @@ false
                                           </div>
                                         </section>
                                         <section class="mech-program-section">
-                                          <h2 id="9518895069535147" class="mech-program-subtitle">
+                                          <h2 id="9518895069535147" class="mech-program-subtitle ">
                                             <a href="#9518895069535147">
                                               Functions
                                             </a>
                                           </h2>
                                           <div class="mech-section-element">
                                             <section class="mech-program-section">
-                                              <h4 id="55882549029406679" class="mech-program-subtitle">
-                                                <a href="#55882549029406679">
+                                              <h3 id="20791652209506204" class="mech-program-subtitle ">
+                                                <a href="#20791652209506204">
                                                   Function Define
                                                 </a>
-                                              </h4>
+                                              </h3>
                                               <div class="mech-section-element">
                                                 <div class="mech-grammar">
                                                   <div class="mech-grammar-rule">
@@ -12933,11 +13079,11 @@ false
                                           </div>
                                           <div class="mech-section-element">
                                             <section class="mech-program-section">
-                                              <h4 id="7863497594701243" class="mech-program-subtitle">
-                                                <a href="#7863497594701243">
+                                              <h3 id="23430584261268144" class="mech-program-subtitle ">
+                                                <a href="#23430584261268144">
                                                   Function Call
                                                 </a>
-                                              </h4>
+                                              </h3>
                                               <div class="mech-section-element">
                                                 <div class="mech-grammar">
                                                   <div class="mech-grammar-rule">
@@ -13446,7 +13592,7 @@ false
                                           </div>
                                         </section>
                                         <section class="mech-program-section">
-                                          <h2 id="27482184148317386" class="mech-program-subtitle">
+                                          <h2 id="27482184148317386" class="mech-program-subtitle ">
                                             <a href="#27482184148317386">
                                               State Machines
                                             </a>
@@ -13519,11 +13665,11 @@ false
                                           </div>
                                           <div class="mech-section-element">
                                             <section class="mech-program-section">
-                                              <h4 id="61658507070099573" class="mech-program-subtitle">
-                                                <a href="#61658507070099573">
+                                              <h3 id="29304226518681632" class="mech-program-subtitle ">
+                                                <a href="#29304226518681632">
                                                   Operators
                                                 </a>
-                                              </h4>
+                                              </h3>
                                               <div class="mech-section-element">
                                                 <div class="mech-grammar">
                                                   <div class="mech-grammar-rule">
@@ -13620,11 +13766,11 @@ false
                                           </div>
                                           <div class="mech-section-element">
                                             <section class="mech-program-section">
-                                              <h4 id="42873239106270548" class="mech-program-subtitle">
-                                                <a href="#42873239106270548">
+                                              <h3 id="2754413432152289" class="mech-program-subtitle ">
+                                                <a href="#2754413432152289">
                                                   Specification
                                                 </a>
-                                              </h4>
+                                              </h3>
                                               <div class="mech-section-element">
                                                 <div class="mech-grammar">
                                                   <div class="mech-grammar-rule">
@@ -14182,11 +14328,11 @@ false
                                           </div>
                                           <div class="mech-section-element">
                                             <section class="mech-program-section">
-                                              <h4 id="26283582811565256" class="mech-program-subtitle">
-                                                <a href="#26283582811565256">
+                                              <h3 id="69760434990933626" class="mech-program-subtitle ">
+                                                <a href="#69760434990933626">
                                                   Implementation
                                                 </a>
-                                              </h4>
+                                              </h3>
                                               <div class="mech-section-element">
                                                 <div class="mech-grammar">
                                                   <div class="mech-grammar-rule">
@@ -14981,7 +15127,7 @@ false
                                           </div>
                                         </section>
                                         <section class="mech-program-section">
-                                          <h2 id="39536909611123540" class="mech-program-subtitle">
+                                          <h2 id="39536909611123540" class="mech-program-subtitle ">
                                             <a href="#39536909611123540">
                                               Mech Programs
                                             </a>
@@ -15020,7 +15166,7 @@ false
                                           </div>
                                         </section>
                                         <section class="mech-program-section">
-                                          <h2 id="58856088105263747" class="mech-program-subtitle">
+                                          <h2 id="58856088105263747" class="mech-program-subtitle ">
                                             <a href="#58856088105263747">
                                               Mechdown
                                             </a>
@@ -15048,11 +15194,11 @@ false
                                           </div>
                                           <div class="mech-section-element">
                                             <section class="mech-program-section">
-                                              <h4 id="67215532846030283" class="mech-program-subtitle">
-                                                <a href="#67215532846030283">
+                                              <h3 id="25909320932656450" class="mech-program-subtitle ">
+                                                <a href="#25909320932656450">
                                                   Body
                                                 </a>
-                                              </h4>
+                                              </h3>
                                               <div class="mech-section-element">
                                                 <div class="mech-grammar">
                                                   <div class="mech-grammar-rule">
@@ -15113,11 +15259,11 @@ false
                                           </div>
                                           <div class="mech-section-element">
                                             <section class="mech-program-section">
-                                              <h4 id="68231641367295086" class="mech-program-subtitle">
-                                                <a href="#68231641367295086">
+                                              <h3 id="46787659068830473" class="mech-program-subtitle ">
+                                                <a href="#46787659068830473">
                                                   Sections and Section Elements
                                                 </a>
-                                              </h4>
+                                              </h3>
                                               <div class="mech-section-element">
                                                 <div class="mech-grammar">
                                                   <div class="mech-grammar-rule">
@@ -15395,11 +15541,11 @@ false
                                           </div>
                                           <div class="mech-section-element">
                                             <section class="mech-program-section">
-                                              <h4 id="60094108042275253" class="mech-program-subtitle">
-                                                <a href="#60094108042275253">
+                                              <h3 id="36427539524860106" class="mech-program-subtitle ">
+                                                <a href="#36427539524860106">
                                                   Titles
                                                 </a>
-                                              </h4>
+                                              </h3>
                                               <div class="mech-section-element">
                                                 <div class="mech-grammar">
                                                   <div class="mech-grammar-rule">
@@ -16179,11 +16325,11 @@ false
                                           </div>
                                           <div class="mech-section-element">
                                             <section class="mech-program-section">
-                                              <h4 id="27649883832638885" class="mech-program-subtitle">
-                                                <a href="#27649883832638885">
+                                              <h3 id="37989451758331414" class="mech-program-subtitle ">
+                                                <a href="#37989451758331414">
                                                   Paragraphs and Paragraph Elements
                                                 </a>
-                                              </h4>
+                                              </h3>
                                               <div class="mech-section-element">
                                                 <div class="mech-grammar">
                                                   <div class="mech-grammar-rule">
@@ -16536,11 +16682,11 @@ false
                                           </div>
                                           <div class="mech-section-element">
                                             <section class="mech-program-section">
-                                              <h4 id="40669846692705342" class="mech-program-subtitle">
-                                                <a href="#40669846692705342">
+                                              <h3 id="36445845987784221" class="mech-program-subtitle ">
+                                                <a href="#36445845987784221">
                                                   Lists
                                                 </a>
-                                              </h4>
+                                              </h3>
                                               <div class="mech-section-element">
                                                 <div class="mech-grammar">
                                                   <div class="mech-grammar-rule">
@@ -16853,11 +16999,11 @@ false
                                           </div>
                                           <div class="mech-section-element">
                                             <section class="mech-program-section">
-                                              <h4 id="21188293635455520" class="mech-program-subtitle">
-                                                <a href="#21188293635455520">
+                                              <h3 id="30018332365366280" class="mech-program-subtitle ">
+                                                <a href="#30018332365366280">
                                                   Thematic Breaks
                                                 </a>
-                                              </h4>
+                                              </h3>
                                               <div class="mech-section-element">
                                                 <div class="mech-grammar">
                                                   <div class="mech-grammar-rule">
@@ -16930,11 +17076,11 @@ false
                                           </div>
                                           <div class="mech-section-element">
                                             <section class="mech-program-section">
-                                              <h4 id="19801176536848024" class="mech-program-subtitle">
-                                                <a href="#19801176536848024">
+                                              <h3 id="10129127222073905" class="mech-program-subtitle ">
+                                                <a href="#10129127222073905">
                                                   Code Blocks
                                                 </a>
-                                              </h4>
+                                              </h3>
                                               <div class="mech-section-element">
                                                 <div class="mech-grammar">
                                                   <div class="mech-grammar-rule">
@@ -17083,11 +17229,11 @@ false
                                           </div>
                                           <div class="mech-section-element">
                                             <section class="mech-program-section">
-                                              <h4 id="32503052646355842" class="mech-program-subtitle">
-                                                <a href="#32503052646355842">
+                                              <h3 id="58164702047910138" class="mech-program-subtitle ">
+                                                <a href="#58164702047910138">
                                                   Block Quotes
                                                 </a>
-                                              </h4>
+                                              </h3>
                                               <div class="mech-section-element">
                                                 <div class="mech-grammar">
                                                   <div class="mech-grammar-rule">
@@ -17168,11 +17314,11 @@ false
                                           </div>
                                           <div class="mech-section-element">
                                             <section class="mech-program-section">
-                                              <h4 id="61430647230727563" class="mech-program-subtitle">
-                                                <a href="#61430647230727563">
+                                              <h3 id="36002764547065843" class="mech-program-subtitle ">
+                                                <a href="#36002764547065843">
                                                   Tables
                                                 </a>
-                                              </h4>
+                                              </h3>
                                               <div class="mech-section-element">
                                                 <div class="mech-grammar">
                                                   <div class="mech-grammar-rule">
@@ -17835,11 +17981,11 @@ false
                                           </div>
                                           <div class="mech-section-element">
                                             <section class="mech-program-section">
-                                              <h4 id="22769507094017899" class="mech-program-subtitle">
-                                                <a href="#22769507094017899">
+                                              <h3 id="17951035829636679" class="mech-program-subtitle ">
+                                                <a href="#17951035829636679">
                                                   Mech Extensions 
                                                 </a>
-                                              </h4>
+                                              </h3>
                                               <div class="mech-section-element">
                                                 <div class="mech-grammar">
                                                   <div class="mech-grammar-rule">
@@ -17978,7 +18124,7 @@ false
                                           </div>
                                         </section>
                                         <section class="mech-program-section">
-                                          <h2 id="64840961086673677" class="mech-program-subtitle">
+                                          <h2 id="64840961086673677" class="mech-program-subtitle ">
                                             <a href="#64840961086673677">
                                               Notation
                                             </a>
@@ -18811,7 +18957,7 @@ false
       let wasm_core;
       async function run() {
         await init();
-        var code = `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`;
+        var code = `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`;
         wasm_core = new WasmMech();
         var xhr = new XMLHttpRequest();
         var codeUrl = `/code${window.location.pathname}`;

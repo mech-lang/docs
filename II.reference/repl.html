@@ -11,8 +11,13 @@ html {
     scroll-behavior: smooth;
 }
 
-.mech-program{counter-reset: section}
-.mech-toc{counter-reset: section}
+.mech-program {
+    counter-reset: section;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 700px;
+}
 
 body {
     font-family: 'Roboto', sans-serif;
@@ -23,31 +28,40 @@ body {
 }
 
 .mech-root {
+    width: 100%;
     display: flex;
     flex-direction: row;
 }
 
-.mech-output {
+#mech-output {
+    max-width: 700px;
+    min-width: 250px;
     background-color: #171D21;
     color: #f2ead9;
-    padding: 20px;
-    margin: 20px;
     border-radius: 10px;
-    flex-grow: 1;
-    overflow-y: auto;
 }
 
 .mech-toc {
+    width: 250px;
+    min-width: 250px;
+    counter-reset: section;
     background-color: #171D21;
     color: #f2ead9;
     overflow-y: auto;
     margin-right: 20px;
     padding-right: 15px;
-    width: 250px;
     padding-left: 10px;
     position: sticky; 
     top: 0; 
     height: 100vh;
+}
+
+.mech-toc h2 {
+    line-height: 23px;
+}
+
+.mech-toc h3 {
+    line-height: 23px;
 }
 
 .mech-toc::-webkit-scrollbar {
@@ -83,42 +97,47 @@ body {
     padding-left: 15px;
 }
 
+h2.toc::before {
+    padding-right: 5px;
+}
+
+h3.toc::before {
+    font-size: 12pt;
+    padding-right: 5px;
+    color: rgba(255, 255, 255, 0.55);
+}
+
 .mech-toc h2 a {
     color: #f2ead9;
     text-decoration: none;
 }
 
+.mech-toc h2:hover::before {
+    color: #ee6262;
+}
+
 .mech-toc h2 a:hover {
-    color: #ffd139;
-    text-decoration: none;
-}
-
-.mech-toc h4 {
-    font-size: 12pt;
-    padding-left: 30px;
-    font-weight: normal;
-}
-
-.mech-toc h4 a {
-    color: #f2ead9;
-    text-decoration: none;
-}
-
-.mech-toc h4 a:hover {
     color: #ee6262;
     text-decoration: none;
 }
 
-
-.mech-program {
-    margin: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 690px;
+.mech-toc h3 {
+    font-size: 12pt;
+    padding-left: 30px;
 }
 
-.mech-output {
-    flex-grow: 1;
+.mech-toc h3 a {
+    color: #f2ead9;
+    text-decoration: none;
+}
+
+.mech-toc h3:hover::before {
+    color: #ee6262;
+}
+
+.mech-toc h3 a:hover {
+    color: #ee6262;
+    text-decoration: none;
 }
 
 .mech-matrix {
@@ -175,29 +194,18 @@ h2:before{
     content: counter(section) " ";
 }
 
-h4:before{
-    counter-increment: sub-section;
-    color: #ee6262;
-    content: counter(section) "." counter(sub-section) " ";
-}
-
 .mech-program .mech-program-title {
+    width: 900px;
     font-family: 'FiraCodeRegular', monospace;
+    padding-bottom: 10px;
+    border-bottom: 4px dashed #d19710;
     color: #f2ead9;
     letter-spacing: 2px;
     font-size: 22pt;
     font-weight: bold;
     text-align: center;
     margin-bottom: 16px;
-}
-.mech-program .mech-program-title::after {
-    letter-spacing: 0px;
-    content: "==============================================================================";
-    color: #F3B62D; 
-    font-size: 12pt; 
-    display: block;
-    text-align: left; 
-    margin-top: 5px; 
+    margin-left: -100px;
 }
 
 .mech-program h2 a {
@@ -206,23 +214,23 @@ h4:before{
 }
 
 .mech-program h2 {
+    width: 850px;
     font-family: 'FiraCodeRegular', monospace;
+    padding-bottom: 10px;
+    border-bottom: 3px dashed #d19710;
     color: #f2ead9;
     font-size: 16pt;
     font-weight: bold;
     letter-spacing: 2px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     margin-top: 50px;
-    margin-left: -50px;
+    margin-left: -75px;
 }
-.mech-program h2::after {
-    content: "------------------------------------------------------------------------------------";
-    letter-spacing: 0px;
-    color: #F3B62D; 
-    font-size: 12pt; 
-    display: block;
-    text-align: left; 
-    margin-top: 5px; 
+
+h3:before{
+    counter-increment: sub-section;
+    color: #F3B62D;
+    content: counter(section) "." counter(sub-section) " ";
 }
 
 .mech-program h3 a {
@@ -237,6 +245,14 @@ h4:before{
     font-weight: bold;
     margin-bottom: 10px;
     letter-spacing: 1px;
+    margin-left: -48px;
+}
+
+h4:before {
+    counter-increment: h4-section;
+    color: #F3B62D;
+    font-weight: bold;
+    content: counter(section) "." counter(sub-section) "." counter(h4-section) " ";
 }
 
 .mech-program h4 a {
@@ -247,10 +263,28 @@ h4:before{
 .mech-program h4 {
     font-family: 'FiraCodeRegular', monospace;
     color: #f2ead9;
-    font-size: 14pt;
+    font-size: 12pt;
     font-weight: bold;
     margin-bottom: 10px;
     letter-spacing: 1px;
+}
+
+.mech-program h4 a {
+    color: #f2ead9;
+    text-decoration: none;
+}
+
+.mech-program h4 {
+    font-family: 'FiraCodeRegular', monospace;
+    color: #f2ead9;
+    font-size: 12pt;
+    font-weight: bold;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+h4.toc {
+    display: none;
 }
 
 .mech-variable-mutable {
@@ -683,7 +717,7 @@ code {
 }
 
 .mech-comment {
-    color: #ee6262;
+    color: #ef5f90;;
     font-style: italic;
     padding-top: 20px;
 }
@@ -692,8 +726,57 @@ code {
     color: #ee6262;
 }
 
+
+ul {
+    color: #F3B62D;
+    font-weight: bold;
+}
+
 ol {
-    color: #ee6262;
+    color: #F3B62D;
+    font-weight: bold;
+}
+
+
+.mech-check-list {
+    list-style: none;
+    padding-left: 9px;
+    margin-top: 0.5em;
+}
+
+.mech-check-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5em;
+    margin: 0;
+    color: #dcd4c9;
+}
+
+.mech-check-list-item input[type="checkbox"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    margin-top: 3px;
+    border: 2px solid #777;
+    border-radius: 3px;
+    background-color: #171D21;
+    cursor: pointer;
+    position: relative;
+}
+
+.mech-check-list-item input[type="checkbox"]:checked {
+    background-color: #171D21;
+    border-color: #F3B62D;
+}
+
+.mech-check-list-item input[type="checkbox"]:checked::after {
+    content: "✓";
+    color: #F3B62D;
+    position: absolute;
+    top: 0px;
+    left: 1px;
+    font-size: 12px;
+    line-height: 1;
 }
 
 .mech-list-item-emoji {
@@ -715,6 +798,32 @@ ol {
     top: 13px;
 }
 
+.mech-figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px auto;
+}
+
+.mech-image {
+    max-width: 120%;
+}
+
+.mech-figure-label {
+    color: #F3B62D; 
+    font-size: 12pt;
+}
+
+.mech-figure-caption {
+    margin-top: 1em;
+    color: #eadec2;
+    font-size: 12pt;
+    text-align: left;;
+    line-height: 1.4;
+    font-style: italic;
+    padding: 1em;
+}
+
 li {
     padding-left: 5px;
 }
@@ -722,6 +831,7 @@ li {
 li p {
     margin-top: 2px;
     margin-bottom: 2px;
+    font-weight: normal;
 }
 
 .mech-table-header {
@@ -784,7 +894,7 @@ li p {
 .mech-block-quote {
     width: 80%;
     background-color: #232A30; 
-    border-left: 5px solid #ee6262; 
+    border-left: 4px solid #F3B62D;; 
     padding: 15px 20px;
     color: #f2ead9; 
     font-style: italic; 
@@ -859,23 +969,23 @@ li p {
     margin-top: 1em;
     font-size: 0.9em;
     color: #ada594;
-  }
-  
-  .mech-footnote-id {
+}
+
+.mech-footnote-id {
     color: #ee6262;
     font-weight: bold;
     min-width: 2em;
     text-align: right;
     font-family: monospace;
-  }
-  
-  .mech-footnote .mech-paragraph {
+}
+
+.mech-footnote .mech-paragraph {
     margin: 0;
     line-height: 1.6;
     color: #f2ead9;
-  }
+}
 
-  .mech-footnote-reference {
+.mech-footnote-reference {
     font-size: 0.7em;
     vertical-align: super;
     text-decoration: none;
@@ -883,13 +993,27 @@ li p {
     color: #ee6262;
     cursor: pointer;
     transition: color 0.2s;
-  }
-  
-  .mech-footnote-reference:hover {
+}
+
+.mech-footnote-reference:hover {
     color: #f28b82;
     text-decoration: underline;
-  }
-  
+}
+
+.mech-abstract {
+    background-color: #1f252a;
+    border: 1px solid #F3B62D;
+    padding: 2em 2em;
+    margin: 2em 2em;
+    border-radius: 8px;
+    color: #dcd4c9;
+}
+
+.mech-abstract p {
+    line-height: 25pt;
+    margin: 0px;
+    text-align: justify;
+}
 
         
     </style>
@@ -900,123 +1024,123 @@ li p {
         <h1 class="mech-program-title">
           Using the Mech REPL
         </h1>
-        <div class="mech-toc-sections">
+        <section class="mech-toc-sections">
           <section class="mech-program-section">
           </section>
           <section class="mech-program-section">
-            <h2 id="23631285232603429" class="mech-program-subtitle">
+            <h2 id="23631285232603429" class="mech-program-subtitle toc">
               <a href="#22007619943642332">
                 Starting the REPL
               </a>
             </h2>
           </section>
           <section class="mech-program-section">
-            <h2 id="54691789434409436" class="mech-program-subtitle">
+            <h2 id="54691789434409436" class="mech-program-subtitle toc">
               <a href="#26559346203622286">
                 Commands
               </a>
             </h2>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="58199385111074153" class="mech-program-subtitle">
-                  <a href="#22660318148496655">
+                <h3 id="64513440002190676" class="mech-program-subtitle toc">
+                  <a href="#23133555530643862">
                     :help (:h)
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="36284154936079495" class="mech-program-subtitle">
-                  <a href="#24412840592059729">
+                <h3 id="32769631875683795" class="mech-program-subtitle toc">
+                  <a href="#61467324567636763">
                     :quit (:q)
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="51458647998525867" class="mech-program-subtitle">
-                  <a href="#40749646085233256">
+                <h3 id="7075310916710902" class="mech-program-subtitle toc">
+                  <a href="#62043743529159564">
                     :symbols (:s)
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="68371876167616774" class="mech-program-subtitle">
-                  <a href="#19065907259798370">
+                <h3 id="67487934116923998" class="mech-program-subtitle toc">
+                  <a href="#20368161057465423">
                     :plan (:p)
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="62644034277322498" class="mech-program-subtitle">
-                  <a href="#21836515523793348">
+                <h3 id="31802093453001170" class="mech-program-subtitle toc">
+                  <a href="#42523132004832845">
                     :whos (:w)
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="15590108990418582" class="mech-program-subtitle">
-                  <a href="#12988479487243465">
+                <h3 id="25730141871399172" class="mech-program-subtitle toc">
+                  <a href="#49911524571794189">
                     :clc (:c)
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="67618841023236864" class="mech-program-subtitle">
-                  <a href="#63387920561116096">
+                <h3 id="35534567905810970" class="mech-program-subtitle toc">
+                  <a href="#17948093707882322">
                     :clear
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="32521258124943399" class="mech-program-subtitle">
-                  <a href="#37755829581378548">
+                <h3 id="49406996640187627" class="mech-program-subtitle toc">
+                  <a href="#69687534261021011">
                     :load
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="51421916260275814" class="mech-program-subtitle">
-                  <a href="#31197196142195512">
+                <h3 id="16212692922729690" class="mech-program-subtitle toc">
+                  <a href="#4641695825969036">
                     :ls [PATH]
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="64721532506411247" class="mech-program-subtitle">
-                  <a href="#22636104351545785">
+                <h3 id="61154003846602880" class="mech-program-subtitle toc">
+                  <a href="#24268471616615586">
                     :cd PATH
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="51776682783049657" class="mech-program-subtitle">
-                  <a href="#41774395897641103">
+                <h3 id="25543336875779768" class="mech-program-subtitle toc">
+                  <a href="#38267891659591093">
                     :step [N]
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
           </section>
-        </div>
+        </section>
       </div>
       <div class="mech-program">
         <h1 class="mech-program-title">
@@ -1031,7 +1155,7 @@ li p {
             </div>
           </section>
           <section class="mech-program-section">
-            <h2 id="22007619943642332" class="mech-program-subtitle">
+            <h2 id="22007619943642332" class="mech-program-subtitle ">
               <a href="#22007619943642332">
                 Starting the REPL
               </a>
@@ -1065,18 +1189,18 @@ li p {
             </div>
           </section>
           <section class="mech-program-section">
-            <h2 id="26559346203622286" class="mech-program-subtitle">
+            <h2 id="26559346203622286" class="mech-program-subtitle ">
               <a href="#26559346203622286">
                 Commands
               </a>
             </h2>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="22660318148496655" class="mech-program-subtitle">
-                  <a href="#22660318148496655">
+                <h3 id="23133555530643862" class="mech-program-subtitle ">
+                  <a href="#23133555530643862">
                     :help (:h)
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <p class="mech-paragraph">
                     Displays this help message with a list of available commands.
@@ -1090,11 +1214,11 @@ li p {
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="24412840592059729" class="mech-program-subtitle">
-                  <a href="#24412840592059729">
+                <h3 id="61467324567636763" class="mech-program-subtitle ">
+                  <a href="#61467324567636763">
                     :quit (:q)
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <p class="mech-paragraph">
                     Exits the REPL.
@@ -1108,11 +1232,11 @@ li p {
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="40749646085233256" class="mech-program-subtitle">
-                  <a href="#40749646085233256">
+                <h3 id="62043743529159564" class="mech-program-subtitle ">
+                  <a href="#62043743529159564">
                     :symbols (:s)
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <p class="mech-paragraph">
                     Searches for symbols in the current session. You can provide an optional search pattern to filter results.
@@ -1127,11 +1251,11 @@ li p {
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="19065907259798370" class="mech-program-subtitle">
-                  <a href="#19065907259798370">
+                <h3 id="20368161057465423" class="mech-program-subtitle ">
+                  <a href="#20368161057465423">
                     :plan (:p)
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <p class="mech-paragraph">
                     Displays the execution plan.
@@ -1145,11 +1269,11 @@ li p {
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="21836515523793348" class="mech-program-subtitle">
-                  <a href="#21836515523793348">
+                <h3 id="42523132004832845" class="mech-program-subtitle ">
+                  <a href="#42523132004832845">
                     :whos (:w)
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <p class="mech-paragraph">
                     Searches the symbol directory. Optionally, provide a search pattern to filter results.
@@ -1164,11 +1288,11 @@ li p {
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="12988479487243465" class="mech-program-subtitle">
-                  <a href="#12988479487243465">
+                <h3 id="49911524571794189" class="mech-program-subtitle ">
+                  <a href="#49911524571794189">
                     :clc (:c)
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <p class="mech-paragraph">
                     Clears the screen, resets the cursor position. 
@@ -1182,11 +1306,11 @@ li p {
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="63387920561116096" class="mech-program-subtitle">
-                  <a href="#63387920561116096">
+                <h3 id="17948093707882322" class="mech-program-subtitle ">
+                  <a href="#17948093707882322">
                     :clear
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <p class="mech-paragraph">
                     Clears the interpreter state. If a target variable is provided, only that variable is cleared.
@@ -1201,11 +1325,11 @@ li p {
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="37755829581378548" class="mech-program-subtitle">
-                  <a href="#37755829581378548">
+                <h3 id="69687534261021011" class="mech-program-subtitle ">
+                  <a href="#69687534261021011">
                     :load
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <p class="mech-paragraph">
                     Loads and executes the supplied a Mech file(s) into the session.
@@ -1221,11 +1345,11 @@ li p {
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="31197196142195512" class="mech-program-subtitle">
-                  <a href="#31197196142195512">
+                <h3 id="4641695825969036" class="mech-program-subtitle ">
+                  <a href="#4641695825969036">
                     :ls [PATH]
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <p class="mech-paragraph">
                     Lists contents of working directory. Optionally, provide a target path.
@@ -1240,11 +1364,11 @@ li p {
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="22636104351545785" class="mech-program-subtitle">
-                  <a href="#22636104351545785">
+                <h3 id="24268471616615586" class="mech-program-subtitle ">
+                  <a href="#24268471616615586">
                     :cd PATH
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <p class="mech-paragraph">
                     Changes the current working directory.
@@ -1258,11 +1382,11 @@ li p {
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="41774395897641103" class="mech-program-subtitle">
-                  <a href="#41774395897641103">
+                <h3 id="38267891659591093" class="mech-program-subtitle ">
+                  <a href="#38267891659591093">
                     :step [N]
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <p class="mech-paragraph">
                     Iterates the execution plan by the specified number of steps. If N is not provided, defaults to 1 step.
@@ -1289,7 +1413,7 @@ li p {
       let wasm_core;
       async function run() {
         await init();
-        var code = `G3cIAIyUrppvPvjOdW90uYy1y8wJYt28xwVSxL0rFNHuzH6/JBQsWyq1Af57d2SEjA3Rabal9IZa36TDQAMYAoOCWkMJgHkM56oerdwhx6hvEkMRS6EfrtiWwzdn1pcBRFvegIKKf9svztgXjZL/staSTQRsplr6PtLRz9rcvnjkVXxyI3KULEhYDeYaB1+OQ7zKCic6kJC85XrSZNDJDkQogrEyAMeEfaCsQPkPUBGygOlrOu9bRxQS83i/4Ghi+4lB0td/VeSvHx6lD74kGHmwLUdToYG2UDHoyQLJNQqNtt1OIPRffrFngUXtQQY2pAhSKoXvOcQkG6eCcsTZJ9kEWwDLyNbG3zTHH76cCT9VfrCtNgkj0lK3LmLMkuSeCDXVtMBHtIqGl2KIGYqAjL2LDVDxJ1CZAg1+82wHe+oo6+htF3vKeT5VeiIOAmQxzXFM4inHbSCGzZnY+9jf3dJPp9p/SigJ1eP3QVGEVzr2/XOapP1UeHhfWk0HFOGRTpqlQ1SgPx1ORxQPBRUjNpTQG+Bv5T+tMTrn8cNQY2MW2VGwtzJu0drAAQKFAwodpCPpUDvKLx2sI+0Id7Qwf52driKulLvQFRQUYsQ69KKvn0pcntWJHriUdKaHqq4e1qMVPabH225JU6/tahTJDIWnS3J0kAQXVeOhUzrK9oKS8Rhm+iX3j38pongHFpKuJl3+0b5/sm6aX7QKaqoB2hUMYiSGapSfDWakRti4md0ZFi8dxFgpD2AgpzR4ItYTgxiSgQKeBZOYiama5U8mM1MzbHbsnlFLbUXFUq+jDfdfiqpxSTUojGBkryUBCi64qw6h8RLGMXlQkda9NU2mW7vStH9aq1rTgelgZTo0HW6teLvklhNZpd/eVjcns52vsuwv81nMVsHIdJ+2gEX4AEU8R9R7bpksq0LXnvrgdq2vZbmaX7jiF7Y/yqT6iBmQyvOp95BMcTlUXsXqGVhY5j7t/mb+WdvAFlQ9Xknq5nbIjn9pGfek2upqb2F1OtwMwirBQEFYB91+0miou3EPexNgm0KfSefOewHPEMm6wJsNGda0Q5yAnWkdcflRTrnXTs7IWRD21jmnBvWYKD+Ql0MoUWTUjzvlC1zMg+VHJZf3rnb/Lq88fKmAExq4WqHSavBuziFOoGvv8STo9fV57fpb3PaCxeWoazXCAx57fNKks/lo9eSZPLN+5nqhaTMg52pJCXFqJi7H7RDvRmjVsoomjY9PTVQSNqHF1U2ttbd/pPyKVwdMjkr+8zOXI7xWVZL4OFugjgG01zIj6+o1zkslzwlxmvmALwA=`;
+        var code = `G3cIAIyUrppvP76b7YUStCQUs0ys4D3J0ol7KWKTcma/XxIK/vf7tbob8n9/BUibKJFMTG/ONcQtmV/wSNwQKRFPZo3IYzhX9WjlDjlGfaMgApZCv9wxjQY7XNnfBoCgbQBc4OT/jl+cMB+qef9ljXmbCNhMNUx8pGWStbn80ONVfHIjcpQsSFgN5hoHX45DvMoKJzqQkLyhPmky6GQHIhTBWBmAY8I+UpBA+g/g5H4LmK5+433LsIRDyP4FByPHTwySvl4tx14/9MS3XFFEcdc0GrIXZHDZnJx7skByjUKjbbcTCN2PX+xZYFG7kwCZkjjO58P37CKCzDu5kyHONkEWyAaiCdma2JumWPfLnfBjha5ptIkCgYaKdRFjliT3RKippgU+olU0vBaCkCZxEKE3obdO/idQmQINfvNoB3vqKOvoTQ97ynk+VXoiDgJkMc1xTOIpx20ghs2J0LvQ393S7Vxqb49IES/yuEGSuF1g6v/Ecdzj5IhNxL1xn8SRaMRJ3O/kMBlX4gEbcoGTz9hQQm+Av5X/tMbonMcPQ42VSUjOIuqQcY2cAQYgUDigMISHkiHvUOXLEBlKh5ShBuKvs9VSxIXCCIxQQSFGrMM4THQ7BS5Pqlj1XSpUovpLlqqowSo1pIabWqSp07Q0imSGwtMlOTpIgouq8dApHWV7Qcl4DDP9kvvHv+Qg10bULyxZWOyj2Xkymv0vchHKqgHaFTSsJZpXq3zWiJZqinYxuTMsXjqIsVB4C29TSoMnYj3CYUoGCngWdKwnulev/KQTPdUVveX0jFpqKyqWeh0t63zJqcYp1aAwAzNnDRFQcMFddQiNlzAPizslYXSMZbzs7iqWPctyyVj2LdOqZf+y0lj0dsktJ7JKv72NVk5mW19l2V5gq7BaQhRP18kbsAluAIk/R9R7ahtve4WueeuD2zW+luVqeqPGHmx/lEn1ETMgledD7yGZ4rKrsAu7d4gqMnfJ91ezz/IBHEHVYRekbuoEn3iWhnlPqo2W9hZWp8XKIKwSDBSEtdeaJI2GuivP4GwB0UOhj6Rzx72AZ4hkneDNhgxL8iXcgJ1xD1jsKqfcSzd3+I7C3rjm1KAeE+UH8nQIJYqM+ulG4QEe1hFNzwomOpZ8/yordr8UwQlVqC04hVFl3VQDN3xd85gnQa+vj2uXt6A1jmhYjlqNauhCr8MlTDqrr3ZvnvEz6SfqG32TATlWS0qIUzNxOW6HeDdCq4ZdNCnvPfVRSdiEBks3NZbf/pnCK7w2EBWzgv38zMQMK5eUJD7OZqljAO21zMyySpmxfN5zQpwmPsAXAA==`;
         wasm_core = new WasmMech();
         var xhr = new XMLHttpRequest();
         var codeUrl = `/code${window.location.pathname}`;

@@ -385,7 +385,7 @@ Data structures in Mech can be broadly classified into two categories: ordered c
 
 Each data structure has its own semantics, which will be described in this section.
 
-(a) Matrix
+(5.1) Matrix
 
 ```ebnf
 matrix-column := *space-tab 
@@ -406,7 +406,7 @@ matrix := matrix-start
 
 A Matrix is a structured, numbered sequence of elements of a single kind, arranged in rows and columns, enclosed bt square brackets, `[]`. The number of elements in the matrix is called its length, and the shape of a matrix is defined as a pair of non-negative integers representing the number of rows and columns.
 
-**Semantics:**
+(5.1.1) Semantics
 
 - Homogeneous Elements: All elements in a matrix must be of the same kind.
 - Fixed Shape: A static matrix's shape (rows, columns) is part of its kind and is always a tuple of non-negative integers.
@@ -415,7 +415,7 @@ A Matrix is a structured, numbered sequence of elements of a single kind, arrang
 
 Matrix kinds are always two-dimensional, so row vectors and column vectors are also represented as matrices with a single row or column, respectively.
 
-**Indexing:**
+(5.1.2) Indexing
 
 Matrix elements can be accessed using either 1D or 2D indexing:
 

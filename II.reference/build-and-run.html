@@ -11,8 +11,13 @@ html {
     scroll-behavior: smooth;
 }
 
-.mech-program{counter-reset: section}
-.mech-toc{counter-reset: section}
+.mech-program {
+    counter-reset: section;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 700px;
+}
 
 body {
     font-family: 'Roboto', sans-serif;
@@ -23,31 +28,40 @@ body {
 }
 
 .mech-root {
+    width: 100%;
     display: flex;
     flex-direction: row;
 }
 
-.mech-output {
+#mech-output {
+    max-width: 700px;
+    min-width: 250px;
     background-color: #171D21;
     color: #f2ead9;
-    padding: 20px;
-    margin: 20px;
     border-radius: 10px;
-    flex-grow: 1;
-    overflow-y: auto;
 }
 
 .mech-toc {
+    width: 250px;
+    min-width: 250px;
+    counter-reset: section;
     background-color: #171D21;
     color: #f2ead9;
     overflow-y: auto;
     margin-right: 20px;
     padding-right: 15px;
-    width: 250px;
     padding-left: 10px;
     position: sticky; 
     top: 0; 
     height: 100vh;
+}
+
+.mech-toc h2 {
+    line-height: 23px;
+}
+
+.mech-toc h3 {
+    line-height: 23px;
 }
 
 .mech-toc::-webkit-scrollbar {
@@ -83,42 +97,47 @@ body {
     padding-left: 15px;
 }
 
+h2.toc::before {
+    padding-right: 5px;
+}
+
+h3.toc::before {
+    font-size: 12pt;
+    padding-right: 5px;
+    color: rgba(255, 255, 255, 0.55);
+}
+
 .mech-toc h2 a {
     color: #f2ead9;
     text-decoration: none;
 }
 
+.mech-toc h2:hover::before {
+    color: #ee6262;
+}
+
 .mech-toc h2 a:hover {
-    color: #ffd139;
-    text-decoration: none;
-}
-
-.mech-toc h4 {
-    font-size: 12pt;
-    padding-left: 30px;
-    font-weight: normal;
-}
-
-.mech-toc h4 a {
-    color: #f2ead9;
-    text-decoration: none;
-}
-
-.mech-toc h4 a:hover {
     color: #ee6262;
     text-decoration: none;
 }
 
-
-.mech-program {
-    margin: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 690px;
+.mech-toc h3 {
+    font-size: 12pt;
+    padding-left: 30px;
 }
 
-.mech-output {
-    flex-grow: 1;
+.mech-toc h3 a {
+    color: #f2ead9;
+    text-decoration: none;
+}
+
+.mech-toc h3:hover::before {
+    color: #ee6262;
+}
+
+.mech-toc h3 a:hover {
+    color: #ee6262;
+    text-decoration: none;
 }
 
 .mech-matrix {
@@ -175,29 +194,18 @@ h2:before{
     content: counter(section) " ";
 }
 
-h4:before{
-    counter-increment: sub-section;
-    color: #ee6262;
-    content: counter(section) "." counter(sub-section) " ";
-}
-
 .mech-program .mech-program-title {
+    width: 900px;
     font-family: 'FiraCodeRegular', monospace;
+    padding-bottom: 10px;
+    border-bottom: 4px dashed #d19710;
     color: #f2ead9;
     letter-spacing: 2px;
     font-size: 22pt;
     font-weight: bold;
     text-align: center;
     margin-bottom: 16px;
-}
-.mech-program .mech-program-title::after {
-    letter-spacing: 0px;
-    content: "==============================================================================";
-    color: #F3B62D; 
-    font-size: 12pt; 
-    display: block;
-    text-align: left; 
-    margin-top: 5px; 
+    margin-left: -100px;
 }
 
 .mech-program h2 a {
@@ -206,23 +214,23 @@ h4:before{
 }
 
 .mech-program h2 {
+    width: 850px;
     font-family: 'FiraCodeRegular', monospace;
+    padding-bottom: 10px;
+    border-bottom: 3px dashed #d19710;
     color: #f2ead9;
     font-size: 16pt;
     font-weight: bold;
     letter-spacing: 2px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     margin-top: 50px;
-    margin-left: -50px;
+    margin-left: -75px;
 }
-.mech-program h2::after {
-    content: "------------------------------------------------------------------------------------";
-    letter-spacing: 0px;
-    color: #F3B62D; 
-    font-size: 12pt; 
-    display: block;
-    text-align: left; 
-    margin-top: 5px; 
+
+h3:before{
+    counter-increment: sub-section;
+    color: #F3B62D;
+    content: counter(section) "." counter(sub-section) " ";
 }
 
 .mech-program h3 a {
@@ -237,6 +245,14 @@ h4:before{
     font-weight: bold;
     margin-bottom: 10px;
     letter-spacing: 1px;
+    margin-left: -48px;
+}
+
+h4:before {
+    counter-increment: h4-section;
+    color: #F3B62D;
+    font-weight: bold;
+    content: counter(section) "." counter(sub-section) "." counter(h4-section) " ";
 }
 
 .mech-program h4 a {
@@ -247,10 +263,28 @@ h4:before{
 .mech-program h4 {
     font-family: 'FiraCodeRegular', monospace;
     color: #f2ead9;
-    font-size: 14pt;
+    font-size: 12pt;
     font-weight: bold;
     margin-bottom: 10px;
     letter-spacing: 1px;
+}
+
+.mech-program h4 a {
+    color: #f2ead9;
+    text-decoration: none;
+}
+
+.mech-program h4 {
+    font-family: 'FiraCodeRegular', monospace;
+    color: #f2ead9;
+    font-size: 12pt;
+    font-weight: bold;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+h4.toc {
+    display: none;
 }
 
 .mech-variable-mutable {
@@ -683,7 +717,7 @@ code {
 }
 
 .mech-comment {
-    color: #ee6262;
+    color: #ef5f90;;
     font-style: italic;
     padding-top: 20px;
 }
@@ -692,8 +726,57 @@ code {
     color: #ee6262;
 }
 
+
+ul {
+    color: #F3B62D;
+    font-weight: bold;
+}
+
 ol {
-    color: #ee6262;
+    color: #F3B62D;
+    font-weight: bold;
+}
+
+
+.mech-check-list {
+    list-style: none;
+    padding-left: 9px;
+    margin-top: 0.5em;
+}
+
+.mech-check-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5em;
+    margin: 0;
+    color: #dcd4c9;
+}
+
+.mech-check-list-item input[type="checkbox"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    margin-top: 3px;
+    border: 2px solid #777;
+    border-radius: 3px;
+    background-color: #171D21;
+    cursor: pointer;
+    position: relative;
+}
+
+.mech-check-list-item input[type="checkbox"]:checked {
+    background-color: #171D21;
+    border-color: #F3B62D;
+}
+
+.mech-check-list-item input[type="checkbox"]:checked::after {
+    content: "✓";
+    color: #F3B62D;
+    position: absolute;
+    top: 0px;
+    left: 1px;
+    font-size: 12px;
+    line-height: 1;
 }
 
 .mech-list-item-emoji {
@@ -715,6 +798,32 @@ ol {
     top: 13px;
 }
 
+.mech-figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px auto;
+}
+
+.mech-image {
+    max-width: 120%;
+}
+
+.mech-figure-label {
+    color: #F3B62D; 
+    font-size: 12pt;
+}
+
+.mech-figure-caption {
+    margin-top: 1em;
+    color: #eadec2;
+    font-size: 12pt;
+    text-align: left;;
+    line-height: 1.4;
+    font-style: italic;
+    padding: 1em;
+}
+
 li {
     padding-left: 5px;
 }
@@ -722,6 +831,7 @@ li {
 li p {
     margin-top: 2px;
     margin-bottom: 2px;
+    font-weight: normal;
 }
 
 .mech-table-header {
@@ -784,7 +894,7 @@ li p {
 .mech-block-quote {
     width: 80%;
     background-color: #232A30; 
-    border-left: 5px solid #ee6262; 
+    border-left: 4px solid #F3B62D;; 
     padding: 15px 20px;
     color: #f2ead9; 
     font-style: italic; 
@@ -859,23 +969,23 @@ li p {
     margin-top: 1em;
     font-size: 0.9em;
     color: #ada594;
-  }
-  
-  .mech-footnote-id {
+}
+
+.mech-footnote-id {
     color: #ee6262;
     font-weight: bold;
     min-width: 2em;
     text-align: right;
     font-family: monospace;
-  }
-  
-  .mech-footnote .mech-paragraph {
+}
+
+.mech-footnote .mech-paragraph {
     margin: 0;
     line-height: 1.6;
     color: #f2ead9;
-  }
+}
 
-  .mech-footnote-reference {
+.mech-footnote-reference {
     font-size: 0.7em;
     vertical-align: super;
     text-decoration: none;
@@ -883,13 +993,27 @@ li p {
     color: #ee6262;
     cursor: pointer;
     transition: color 0.2s;
-  }
-  
-  .mech-footnote-reference:hover {
+}
+
+.mech-footnote-reference:hover {
     color: #f28b82;
     text-decoration: underline;
-  }
-  
+}
+
+.mech-abstract {
+    background-color: #1f252a;
+    border: 1px solid #F3B62D;
+    padding: 2em 2em;
+    margin: 2em 2em;
+    border-radius: 8px;
+    color: #dcd4c9;
+}
+
+.mech-abstract p {
+    line-height: 25pt;
+    margin: 0px;
+    text-align: justify;
+}
 
         
     </style>
@@ -900,92 +1024,92 @@ li p {
         <h1 class="mech-program-title">
           Build and Run Mech Programs
         </h1>
-        <div class="mech-toc-sections">
+        <section class="mech-toc-sections">
           <section class="mech-program-section">
           </section>
           <section class="mech-program-section">
-            <h2 id="10274920823479450" class="mech-program-subtitle">
+            <h2 id="10274920823479450" class="mech-program-subtitle toc">
               <a href="#9148887274623244">
                 Basic Usage
               </a>
             </h2>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="68728894286069098" class="mech-program-subtitle">
-                  <a href="#68015936780205514">
+                <h3 id="49601666764129008" class="mech-program-subtitle toc">
+                  <a href="#68730717030946422">
                     Usage
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="32864866614097310" class="mech-program-subtitle">
-                  <a href="#52576151040052246">
+                <h3 id="46831151531678568" class="mech-program-subtitle toc">
+                  <a href="#662121554906284">
                     Commands
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="43243410804396569" class="mech-program-subtitle">
-                  <a href="#26537700164405511">
+                <h3 id="33687232737616969" class="mech-program-subtitle toc">
+                  <a href="#51707433060259580">
                     Arguments
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="69635674515888948" class="mech-program-subtitle">
-                  <a href="#12170607680435885">
+                <h3 id="301838369530597" class="mech-program-subtitle toc">
+                  <a href="#14768238141369347">
                     Options
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
           </section>
           <section class="mech-program-section">
-            <h2 id="9392949484822145" class="mech-program-subtitle">
+            <h2 id="9392949484822145" class="mech-program-subtitle toc">
               <a href="#1567844077058650">
                 Running a Mech Program
               </a>
             </h2>
           </section>
           <section class="mech-program-section">
-            <h2 id="33092477156035272" class="mech-program-subtitle">
+            <h2 id="33092477156035272" class="mech-program-subtitle toc">
               <a href="#67853873490704586">
                 Subcommands
               </a>
             </h2>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="54321880553341771" class="mech-program-subtitle">
-                  <a href="#469823122283793">
+                <h3 id="54760630664816624" class="mech-program-subtitle toc">
+                  <a href="#49199380357969637">
                     format
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="20455879651604475" class="mech-program-subtitle">
-                  <a href="#64903968472638722">
+                <h3 id="24427482395799792" class="mech-program-subtitle toc">
+                  <a href="#36941501204587806">
                     serve
                   </a>
-                </h4>
+                </h3>
               </section>
             </div>
           </section>
           <section class="mech-program-section">
-            <h2 id="990958044869406" class="mech-program-subtitle">
+            <h2 id="990958044869406" class="mech-program-subtitle toc">
               <a href="#68565994143118057">
                 Additional Help
               </a>
             </h2>
           </section>
-        </div>
+        </section>
       </div>
       <div class="mech-program">
         <h1 class="mech-program-title">
@@ -1002,18 +1126,18 @@ li p {
             </div>
           </section>
           <section class="mech-program-section">
-            <h2 id="9148887274623244" class="mech-program-subtitle">
+            <h2 id="9148887274623244" class="mech-program-subtitle ">
               <a href="#9148887274623244">
                 Basic Usage
               </a>
             </h2>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="68015936780205514" class="mech-program-subtitle">
-                  <a href="#68015936780205514">
+                <h3 id="68730717030946422" class="mech-program-subtitle ">
+                  <a href="#68730717030946422">
                     Usage
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <pre class="mech-code-block">mech [OPTIONS] [mech_paths]... [COMMAND]
 </pre>
@@ -1022,11 +1146,11 @@ li p {
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="52576151040052246" class="mech-program-subtitle">
-                  <a href="#52576151040052246">
+                <h3 id="662121554906284" class="mech-program-subtitle ">
+                  <a href="#662121554906284">
                     Commands
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <ul class="mech-unordered-list">
                     <li class="mech-ul-list-item">
@@ -1059,11 +1183,11 @@ li p {
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="26537700164405511" class="mech-program-subtitle">
-                  <a href="#26537700164405511">
+                <h3 id="51707433060259580" class="mech-program-subtitle ">
+                  <a href="#51707433060259580">
                     Arguments
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <p class="mech-paragraph">
                     Source .mec files and directories. You can specify one or more 
@@ -1079,11 +1203,11 @@ li p {
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="12170607680435885" class="mech-program-subtitle">
-                  <a href="#12170607680435885">
+                <h3 id="14768238141369347" class="mech-program-subtitle ">
+                  <a href="#14768238141369347">
                     Options
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <ul class="mech-unordered-list">
                     <li class="mech-ul-list-item">
@@ -1124,7 +1248,7 @@ li p {
             </div>
           </section>
           <section class="mech-program-section">
-            <h2 id="1567844077058650" class="mech-program-subtitle">
+            <h2 id="1567844077058650" class="mech-program-subtitle ">
               <a href="#1567844077058650">
                 Running a Mech Program
               </a>
@@ -1143,18 +1267,18 @@ mech script1.mec script2.mec dir1
             </div>
           </section>
           <section class="mech-program-section">
-            <h2 id="67853873490704586" class="mech-program-subtitle">
+            <h2 id="67853873490704586" class="mech-program-subtitle ">
               <a href="#67853873490704586">
                 Subcommands
               </a>
             </h2>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="469823122283793" class="mech-program-subtitle">
-                  <a href="#469823122283793">
+                <h3 id="49199380357969637" class="mech-program-subtitle ">
+                  <a href="#49199380357969637">
                     format
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <p class="mech-paragraph">
                     Formats Mech source code into a standard format.
@@ -1214,11 +1338,11 @@ mech script1.mec script2.mec dir1
             </div>
             <div class="mech-section-element">
               <section class="mech-program-section">
-                <h4 id="64903968472638722" class="mech-program-subtitle">
-                  <a href="#64903968472638722">
+                <h3 id="36941501204587806" class="mech-program-subtitle ">
+                  <a href="#36941501204587806">
                     serve
                   </a>
-                </h4>
+                </h3>
                 <div class="mech-section-element">
                   <p class="mech-paragraph">
                     Serves a Mech program over an HTTP server.
@@ -1270,7 +1394,7 @@ mech script1.mec script2.mec dir1
             </div>
           </section>
           <section class="mech-program-section">
-            <h2 id="68565994143118057" class="mech-program-subtitle">
+            <h2 id="68565994143118057" class="mech-program-subtitle ">
               <a href="#68565994143118057">
                 Additional Help
               </a>
@@ -1299,7 +1423,7 @@ mech serve --help
       let wasm_core;
       async function run() {
         await init();
-        var code = `G0YKAIyU7jLDEZJ0/l/TxcdPmEzE2hhSLOiMwTapYK2IpWLDrSlPdvvxvsf73ve4GcDG6/+3XyOunj6IrkVapjXu+/cPKjKDSjNphMYSVxqhkQkt0EQgQB/qnMlZI4Y1Rpd1Q3G4iztPfYf/tc4Oouf3Fof/AgBGNAVIC5EYvI8YAmoosRY9v8cEUiL/Mhyo4M5A1XL5nOstu0yl80MUo7eFRo67weaeWbf8Uy1oQFOwvvzd7KqZVg+yCho0IhxEJ0u/AfODFX7JQCE70XoQlaY9LEa4HXBuxhT+AyAylUEjtbgWJjDRrmJyUaU2M0FSS1IEaLdroam+GYDhjjt286kI0y4W3wkhOGLGi+8M2goGQKkhdf1+atfaDQRdaVFUhchECLd2YiclMs+4jWeJLydJJeRQid0EZbwsEp2pzrICq1Ijgb4u7Ery2pIjZsW6E0ONj/V3FUOjKdFFuxaAVCAG9XVjN+GtSC4UpBIRKaPibZCZhArMuNw0GU91J7s3lFDXJmunLejVettQRbEqT08vF69KVr/WaM3VHcXCxrU2G3Dyp8a+sB/6l1EiiOX9K/0bRP6BdKvxdjN2ISQeODC79DB0cFbo1oqKdP2BRSJPLWMFbkteXIUnDfD615ryBJYLh8/4kC0lUL8v+jf7/0N7D0ObKYMOwTC2VOtCbWBUG229/QIVRKnyFxPNBJHqDDN1M4lS55xQlprU7CRyKNWksoglPqbMLnNGgROKLLSUpVueBCRFn0WtDsFpOWZU7EUyvS18mhZWp1WBG/qSwUx2Rs+A5agMzdRMdqygVVpTNdCvcKYzUwy95TCXndNz0mJO5Wiuitt+195CVckKXh+2iuMtctITTvobx/tTIteZc5V4re6rFnX6kfstmMCJIVV99JaCBjqcesQbs7kz+mey8DJsg13Otyv28j/9fYpXslfsoX2xlmClM+4YtOZshTOX0745eHWxY1AOs8AHT5wyxzYHnbyqZld9C9pCalMEiMx/LxLfz358LlyCJQfaTe9wtsVI5XC7098ZtAglIKAQSYhhrFRWy1SgJdSoYlVV9aqnlT9foKJy6Nxp3Cqt9hHJ2GnMVcUj+KkHIGm42l+VGBeKXXSVq7ueQWPH60TlIMzTuS51M0Tm2GmEgoaBNqgCdG5GuFl3h0ayPfSyPd2D2qU86lWxXxheE0u6xujl1skeY5hLhNfpOUqMuM0v45RW1VUK7VMxeYM3YEzNstrPMIGd1O/cgE3mQjkxtK1t0zSstL/PjNnje/Eu7E5rH3NXZu+beCUdwKE6Vo8Daqjpo6983fcY2BOruDke8y/ufOr3EyliGFbaMMPJ9aieVGfSllghX3CmhD/gb0Z16DHAQAV64OlmNkn1zXhJf74LaDDqDkFzZdOJdc6cFHmRF9ePgrFgPxXUuXp+ksfIGG+y+fwtYvyR5cV9z5QYuIJruJ1o349Gpe2hW7ztZkPnVmoX1DxmcpE0aQeS+ZNDIYRV/CoefW6GbrheNVFoBVPyHMkDOFcdhSg/3AjzswbORfwtgwaPswee4AUA`;
+        var code = `G0YKAByHcaywmu7CrY4wQpLZw5xqKZfIVuMg1AoV3FpNigrZRXRdwJRcomz8/O/533/PpQAbb4+5yc35v7V2cc9eH0TPIi3TGv/v31mZXUxtBj3RhngjxCNaSWRCC8DckDGD+jp8LGbrq+cKixID5w2jRnaKO80T9lfZhsu9x+G/QAjlvBJSPLIA595lgMALAl7c63vwAZXFX4YDthEMqFoGnzOipbapDD64XfRW0EgPN/x+pumW/qkW5EATsd6602J41AO+BAY0QjoInRT9BpgfeOFHAwqxE64HkdJ0hscIYwLOw9AD/xCSRY+BBntxbfSBL4iBPuV4HzyoEMXvQTik5043O9mA4YEzdvJrd8ou0T3jnNOOGW8+U6kfqQiKJ/f1GwuSYPCOypJHwpIsfCk8GoYwlUWVGT6eMb/0IsWUg0psFCjlyyYe7gk3JViOlwTGIhBR8OtoEVNyXc+hzkt/BEOjJR6hkXEgNmDQWBSiMv4WWqFAKhEi+ew2mQmpQM7LQwMPRpXogpTqVqV32oY4iYc8GMWEpadbfB3Wv1YazTXsdrmPa+42IPmnxr4xiZLTIADE9uRMckEWfyCVvHWRqhCYD7QxuxRh0MGpQzdXVHDqD3gK5anirMAYyQtn5EkTxuvXF+UJWC4EnObBLIVQP86Ti8n/OBRjaLOk0gzKYotLhNpEnuQDl1+ABCCwcaOB5pMFHmYa0RQQxDAIZatGtbAsMqWGnUUU8bGkRbRhCU7ELUCBFUhB84GkGCvQQojwEK4ZFWqRVN4KPi3zQrjQghv5UoJSVYmUgOWwEi15AxMrcJVWVg34d7QULtUjnxWoVFVIBUfMsQqtCMP3O48WdJW0jf6wwsBbsKR/OmAvbK8P8kq4Ykr56ia6RaVecr8N/dCfwfg22nDe0CHlEm/k4c4wP5OCl1Ed6c06vaVP/9Pfh3INfUYfhyZeCqxF3FDpS7B27VG6HxiFqG6uqdRAI4gPJu0yx74a1OLHnF2tHyfjqsenSFH9y6Z7TX/5tXESTdZwSIsOPawwUlxu989nKq2jBlKQJAuZGOYaTU1KyBN5a0ObtUlb89PHF7BbS+f+wWzTdkIWjO3mnOju4CffgKTpdrI9hXGRrgkmM4mppaWKV1JrEeY/mSY1S7KosF0XBSUHbaAKUHAr3CybKzRSZYFVZREL1C5mUUuwTxjudSVdp3tzGWSXw9zCrbBVk3LEGH5ZpjGLZykODeZkkfEGY2mEvfzsFLBe+oMLaJG5kJyYWibL/jJ09L9Hdtnlz+ZVtDok1BsuPnxu4TW3gTbZNt4O4ci7DTazia2pUBOzT9ZjPndmUzs5STyHwUsbPKBbPdwBdebHBhNVURvkdspezOrIpQMOc4ijRclM4p7sl/T7M4c6+XAINL1YDmJfbXSKV3mV9y2n11kvBbaP95ONHJkz3tlY9W1ixiWr8uuZJTFxhI7RJSlYj4ZO21OncBplQxlbvQu8SyMXkSb5gST75FQHddr41dR9fu+YnXnR32gFruRpJw8gONdNUV1noVOQdRiGiC9RafLo4YkrdIMA`;
         wasm_core = new WasmMech();
         var xhr = new XMLHttpRequest();
         var codeUrl = `/code${window.location.pathname}`;
