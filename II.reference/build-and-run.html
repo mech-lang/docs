@@ -12,7 +12,7 @@ html {
 }
 
 .mech-program {
-    counter-reset: section;
+    counter-reset: h2;
     margin: auto;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -44,7 +44,7 @@ body {
 .mech-toc {
     width: 250px;
     min-width: 250px;
-    counter-reset: section;
+    counter-reset: h2;
     background-color: #171D21;
     color: #f2ead9;
     overflow-y: auto;
@@ -186,14 +186,6 @@ h3.toc::before {
     padding-right: 6px;
 }
 
-h2{counter-reset: sub-section}
-
-h2:before{
-    counter-increment: section;
-    color: #F3B62D;
-    content: counter(section) " ";
-}
-
 .mech-program .mech-program-title {
     width: 900px;
     font-family: 'FiraCodeRegular', monospace;
@@ -227,12 +219,6 @@ h2:before{
     margin-left: -75px;
 }
 
-h3:before{
-    counter-increment: sub-section;
-    color: #F3B62D;
-    content: counter(section) "." counter(sub-section) " ";
-}
-
 .mech-program h3 a {
     color: #f2ead9;
     text-decoration: none;
@@ -246,13 +232,6 @@ h3:before{
     margin-bottom: 10px;
     letter-spacing: 1px;
     margin-left: -48px;
-}
-
-h4:before {
-    counter-increment: h4-section;
-    color: #F3B62D;
-    font-weight: bold;
-    content: counter(section) "." counter(sub-section) "." counter(h4-section) " ";
 }
 
 .mech-program h4 a {
@@ -806,7 +785,7 @@ ol {
 }
 
 .mech-image {
-    max-width: 120%;
+    max-width: 110%;
 }
 
 .mech-figure-label {
@@ -1015,6 +994,31 @@ li p {
     text-align: justify;
 }
 
+h2 {
+    counter-reset: h3;
+}
+
+h3 {
+    counter-reset: h4;
+}
+
+h2::before {
+    color: #F3B62D;
+    counter-increment: h2;
+    content: counter(h2) ". ";
+}
+
+h3::before {
+    color: #F3B62D;
+    counter-increment: h3;
+    content: counter(h2) "." counter(h3) " ";
+}
+
+h4::before {
+    color: #F3B62D;
+    counter-increment: h4;
+    content: counter(h2) "." counter(h3) "." counter(h4) " ";
+}
         
     </style>
   </head>
@@ -1033,42 +1037,26 @@ li p {
                 Basic Usage
               </a>
             </h2>
-            <div class="mech-section-element">
-              <section class="mech-program-section">
-                <h3 id="49601666764129008" class="mech-program-subtitle toc">
-                  <a href="#68730717030946422">
-                    Usage
-                  </a>
-                </h3>
-              </section>
-            </div>
-            <div class="mech-section-element">
-              <section class="mech-program-section">
-                <h3 id="46831151531678568" class="mech-program-subtitle toc">
-                  <a href="#662121554906284">
-                    Commands
-                  </a>
-                </h3>
-              </section>
-            </div>
-            <div class="mech-section-element">
-              <section class="mech-program-section">
-                <h3 id="33687232737616969" class="mech-program-subtitle toc">
-                  <a href="#51707433060259580">
-                    Arguments
-                  </a>
-                </h3>
-              </section>
-            </div>
-            <div class="mech-section-element">
-              <section class="mech-program-section">
-                <h3 id="301838369530597" class="mech-program-subtitle toc">
-                  <a href="#14768238141369347">
-                    Options
-                  </a>
-                </h3>
-              </section>
-            </div>
+            <h3 id="49601666764129008" class="mech-program-subtitle toc">
+              <a href="#68730717030946422">
+                Usage
+              </a>
+            </h3>
+            <h3 id="46831151531678568" class="mech-program-subtitle toc">
+              <a href="#662121554906284">
+                Commands
+              </a>
+            </h3>
+            <h3 id="33687232737616969" class="mech-program-subtitle toc">
+              <a href="#51707433060259580">
+                Arguments
+              </a>
+            </h3>
+            <h3 id="301838369530597" class="mech-program-subtitle toc">
+              <a href="#14768238141369347">
+                Options
+              </a>
+            </h3>
           </section>
           <section class="mech-program-section">
             <h2 id="9392949484822145" class="mech-program-subtitle toc">
@@ -1083,24 +1071,16 @@ li p {
                 Subcommands
               </a>
             </h2>
-            <div class="mech-section-element">
-              <section class="mech-program-section">
-                <h3 id="54760630664816624" class="mech-program-subtitle toc">
-                  <a href="#49199380357969637">
-                    format
-                  </a>
-                </h3>
-              </section>
-            </div>
-            <div class="mech-section-element">
-              <section class="mech-program-section">
-                <h3 id="24427482395799792" class="mech-program-subtitle toc">
-                  <a href="#36941501204587806">
-                    serve
-                  </a>
-                </h3>
-              </section>
-            </div>
+            <h3 id="54760630664816624" class="mech-program-subtitle toc">
+              <a href="#49199380357969637">
+                format
+              </a>
+            </h3>
+            <h3 id="24427482395799792" class="mech-program-subtitle toc">
+              <a href="#36941501204587806">
+                serve
+              </a>
+            </h3>
           </section>
           <section class="mech-program-section">
             <h2 id="990958044869406" class="mech-program-subtitle toc">
@@ -1117,13 +1097,11 @@ li p {
         </h1>
         <div class="mech-program-body">
           <section class="mech-program-section">
-            <div class="mech-section-element">
-              <p class="mech-paragraph">
-                The 
-                <code class="mech-inline-code">mech</code>
-                 command-line tool provides various functionalities for working with Mech programs, including executing scripts, debugging, formatting code, and serving applications over HTTP. Below are the available options and subcommands.
-              </p>
-            </div>
+            <p class="mech-paragraph">
+              The 
+              <code class="mech-inline-code">mech</code>
+               command-line tool provides various functionalities for working with Mech programs, including executing scripts, debugging, formatting code, and serving applications over HTTP. Below are the available options and subcommands.
+            </p>
           </section>
           <section class="mech-program-section">
             <h2 id="9148887274623244" class="mech-program-subtitle ">
@@ -1131,121 +1109,95 @@ li p {
                 Basic Usage
               </a>
             </h2>
-            <div class="mech-section-element">
-              <section class="mech-program-section">
-                <h3 id="68730717030946422" class="mech-program-subtitle ">
-                  <a href="#68730717030946422">
-                    Usage
-                  </a>
-                </h3>
-                <div class="mech-section-element">
-                  <pre class="mech-code-block">mech [OPTIONS] [mech_paths]... [COMMAND]
+            <h3 id="68730717030946422" class="mech-program-subtitle ">
+              <a href="#68730717030946422">
+                Usage
+              </a>
+            </h3>
+            <pre class="mech-code-block">mech [OPTIONS] [mech_paths]... [COMMAND]
 </pre>
-                </div>
-              </section>
-            </div>
-            <div class="mech-section-element">
-              <section class="mech-program-section">
-                <h3 id="662121554906284" class="mech-program-subtitle ">
-                  <a href="#662121554906284">
-                    Commands
-                  </a>
-                </h3>
-                <div class="mech-section-element">
-                  <ul class="mech-unordered-list">
-                    <li class="mech-ul-list-item">
-                      <p class="mech-paragraph">
-                        <em class="mech-em">
-                          format
-                        </em>
-                         - Format Mech source code into standard format.
-                      </p>
-                    </li>
-                    <li class="mech-ul-list-item">
-                      <p class="mech-paragraph">
-                        <em class="mech-em">
-                          serve
-                        </em>
-                         - Serve Mech program over an HTTP server.
-                      </p>
-                    </li>
-                    <li class="mech-ul-list-item">
-                      <p class="mech-paragraph">
-                        <em class="mech-em">
-                          help
-                        </em>
-                         - Print this message or the help of the given subcommand(s)
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-              </section>
-            </div>
-            <div class="mech-section-element">
-              <section class="mech-program-section">
-                <h3 id="51707433060259580" class="mech-program-subtitle ">
-                  <a href="#51707433060259580">
-                    Arguments
-                  </a>
-                </h3>
-                <div class="mech-section-element">
-                  <p class="mech-paragraph">
-                    Source .mec files and directories. You can specify one or more 
-                    <code class="mech-inline-code">.mec</code>
-                     files or directories containing Mech scripts. The command will execute the specified files in the order they are provided, and alpha-numeric sorting is applied to the files.
-                  </p>
-                </div>
-                <div class="mech-section-element">
-                  <pre class="mech-code-block">  [mech_paths]... 
+            <h3 id="662121554906284" class="mech-program-subtitle ">
+              <a href="#662121554906284">
+                Commands
+              </a>
+            </h3>
+            <ul class="mech-unordered-list">
+              <li class="mech-ul-list-item">
+                <p class="mech-paragraph">
+                  <em class="mech-em">
+                    format
+                  </em>
+                   - Format Mech source code into standard format.
+                </p>
+              </li>
+              <li class="mech-ul-list-item">
+                <p class="mech-paragraph">
+                  <em class="mech-em">
+                    serve
+                  </em>
+                   - Serve Mech program over an HTTP server.
+                </p>
+              </li>
+              <li class="mech-ul-list-item">
+                <p class="mech-paragraph">
+                  <em class="mech-em">
+                    help
+                  </em>
+                   - Print this message or the help of the given subcommand(s)
+                </p>
+              </li>
+            </ul>
+            <h3 id="51707433060259580" class="mech-program-subtitle ">
+              <a href="#51707433060259580">
+                Arguments
+              </a>
+            </h3>
+            <p class="mech-paragraph">
+              Source .mec files and directories. You can specify one or more 
+              <code class="mech-inline-code">.mec</code>
+               files or directories containing Mech scripts. The command will execute the specified files in the order they are provided, and alpha-numeric sorting is applied to the files.
+            </p>
+            <pre class="mech-code-block">  [mech_paths]... 
 </pre>
-                </div>
-              </section>
-            </div>
-            <div class="mech-section-element">
-              <section class="mech-program-section">
-                <h3 id="14768238141369347" class="mech-program-subtitle ">
-                  <a href="#14768238141369347">
-                    Options
-                  </a>
-                </h3>
-                <div class="mech-section-element">
-                  <ul class="mech-unordered-list">
-                    <li class="mech-ul-list-item">
-                      <p class="mech-paragraph">
-                        <code class="mech-inline-code">-d</code>
-                        , 
-                        <code class="mech-inline-code">--debug</code>
-                         Prints debug information.
-                      </p>
-                    </li>
-                    <li class="mech-ul-list-item">
-                      <p class="mech-paragraph">
-                        <code class="mech-inline-code">-e</code>
-                        , 
-                        <code class="mech-inline-code">--tree</code>
-                         Prints the parse tree of the Mech program.
-                      </p>
-                    </li>
-                    <li class="mech-ul-list-item">
-                      <p class="mech-paragraph">
-                        <code class="mech-inline-code">-t</code>
-                        , 
-                        <code class="mech-inline-code">--time</code>
-                         Measures execution time of the program.
-                      </p>
-                    </li>
-                    <li class="mech-ul-list-item">
-                      <p class="mech-paragraph">
-                        <code class="mech-inline-code">-r</code>
-                        , 
-                        <code class="mech-inline-code">--repl</code>
-                         Starts the Mech Read-Eval-Print Loop (REPL).
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-              </section>
-            </div>
+            <h3 id="14768238141369347" class="mech-program-subtitle ">
+              <a href="#14768238141369347">
+                Options
+              </a>
+            </h3>
+            <ul class="mech-unordered-list">
+              <li class="mech-ul-list-item">
+                <p class="mech-paragraph">
+                  <code class="mech-inline-code">-d</code>
+                  , 
+                  <code class="mech-inline-code">--debug</code>
+                   Prints debug information.
+                </p>
+              </li>
+              <li class="mech-ul-list-item">
+                <p class="mech-paragraph">
+                  <code class="mech-inline-code">-e</code>
+                  , 
+                  <code class="mech-inline-code">--tree</code>
+                   Prints the parse tree of the Mech program.
+                </p>
+              </li>
+              <li class="mech-ul-list-item">
+                <p class="mech-paragraph">
+                  <code class="mech-inline-code">-t</code>
+                  , 
+                  <code class="mech-inline-code">--time</code>
+                   Measures execution time of the program.
+                </p>
+              </li>
+              <li class="mech-ul-list-item">
+                <p class="mech-paragraph">
+                  <code class="mech-inline-code">-r</code>
+                  , 
+                  <code class="mech-inline-code">--repl</code>
+                   Starts the Mech Read-Eval-Print Loop (REPL).
+                </p>
+              </li>
+            </ul>
           </section>
           <section class="mech-program-section">
             <h2 id="1567844077058650" class="mech-program-subtitle ">
@@ -1253,18 +1205,14 @@ li p {
                 Running a Mech Program
               </a>
             </h2>
-            <div class="mech-section-element">
-              <p class="mech-paragraph">
-                To execute a Mech script, provide the path to one or more 
-                <code class="mech-inline-code">.mec</code>
-                 files or directories containing Mech scripts. The command will execute the specified files in the order they are provided:
-              </p>
-            </div>
-            <div class="mech-section-element">
-              <pre class="mech-code-block">mech program.mec
+            <p class="mech-paragraph">
+              To execute a Mech script, provide the path to one or more 
+              <code class="mech-inline-code">.mec</code>
+               files or directories containing Mech scripts. The command will execute the specified files in the order they are provided:
+            </p>
+            <pre class="mech-code-block">mech program.mec
 mech script1.mec script2.mec dir1
 </pre>
-            </div>
           </section>
           <section class="mech-program-section">
             <h2 id="67853873490704586" class="mech-program-subtitle ">
@@ -1272,126 +1220,94 @@ mech script1.mec script2.mec dir1
                 Subcommands
               </a>
             </h2>
-            <div class="mech-section-element">
-              <section class="mech-program-section">
-                <h3 id="49199380357969637" class="mech-program-subtitle ">
-                  <a href="#49199380357969637">
-                    format
-                  </a>
-                </h3>
-                <div class="mech-section-element">
-                  <p class="mech-paragraph">
-                    Formats Mech source code into a standard format.
-                  </p>
-                </div>
-                <div class="mech-section-element">
-                  <pre class="mech-code-block">mech format [OPTIONS] [FILES]
+            <h3 id="49199380357969637" class="mech-program-subtitle ">
+              <a href="#49199380357969637">
+                format
+              </a>
+            </h3>
+            <p class="mech-paragraph">
+              Formats Mech source code into a standard format.
+            </p>
+            <pre class="mech-code-block">mech format [OPTIONS] [FILES]
 </pre>
-                </div>
-                <div class="mech-section-element">
-                  <p class="mech-paragraph">
-                    <em class="mech-em">
-                      Options:
-                    </em>
-                  </p>
-                </div>
-                <div class="mech-section-element">
-                  <ul class="mech-unordered-list">
-                    <li class="mech-ul-list-item">
-                      <p class="mech-paragraph">
-                        <code class="mech-inline-code">-o</code>
-                        , 
-                        <code class="mech-inline-code">--out <PATH></code>
-                         Specifies the output directory.
-                      </p>
-                    </li>
-                    <li class="mech-ul-list-item">
-                      <p class="mech-paragraph">
-                        <code class="mech-inline-code">-s</code>
-                        , 
-                        <code class="mech-inline-code">--stylesheet <STYLESHEET></code>
-                         Sets the stylesheet for HTML output.
-                      </p>
-                    </li>
-                    <li class="mech-ul-list-item">
-                      <p class="mech-paragraph">
-                        <code class="mech-inline-code">-t</code>
-                        , 
-                        <code class="mech-inline-code">--html</code>
-                         Outputs formatted code as HTML.
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-                <div class="mech-section-element">
-                  <p class="mech-paragraph">
-                    <em class="mech-em">
-                      Example:
-                    </em>
-                  </p>
-                </div>
-                <div class="mech-section-element">
-                  <pre class="mech-code-block">mech format -o formatted/ my_script.mec
+            <p class="mech-paragraph">
+              <em class="mech-em">
+                Options:
+              </em>
+            </p>
+            <ul class="mech-unordered-list">
+              <li class="mech-ul-list-item">
+                <p class="mech-paragraph">
+                  <code class="mech-inline-code">-o</code>
+                  , 
+                  <code class="mech-inline-code">--out <PATH></code>
+                   Specifies the output directory.
+                </p>
+              </li>
+              <li class="mech-ul-list-item">
+                <p class="mech-paragraph">
+                  <code class="mech-inline-code">-s</code>
+                  , 
+                  <code class="mech-inline-code">--stylesheet <STYLESHEET></code>
+                   Sets the stylesheet for HTML output.
+                </p>
+              </li>
+              <li class="mech-ul-list-item">
+                <p class="mech-paragraph">
+                  <code class="mech-inline-code">-t</code>
+                  , 
+                  <code class="mech-inline-code">--html</code>
+                   Outputs formatted code as HTML.
+                </p>
+              </li>
+            </ul>
+            <p class="mech-paragraph">
+              <em class="mech-em">
+                Example:
+              </em>
+            </p>
+            <pre class="mech-code-block">mech format -o formatted/ my_script.mec
 </pre>
-                </div>
-              </section>
-            </div>
-            <div class="mech-section-element">
-              <section class="mech-program-section">
-                <h3 id="36941501204587806" class="mech-program-subtitle ">
-                  <a href="#36941501204587806">
-                    serve
-                  </a>
-                </h3>
-                <div class="mech-section-element">
-                  <p class="mech-paragraph">
-                    Serves a Mech program over an HTTP server.
-                  </p>
-                </div>
-                <div class="mech-section-element">
-                  <pre class="mech-code-block">mech serve [OPTIONS] [FILES]
+            <h3 id="36941501204587806" class="mech-program-subtitle ">
+              <a href="#36941501204587806">
+                serve
+              </a>
+            </h3>
+            <p class="mech-paragraph">
+              Serves a Mech program over an HTTP server.
+            </p>
+            <pre class="mech-code-block">mech serve [OPTIONS] [FILES]
 </pre>
-                </div>
-                <div class="mech-section-element">
-                  <p class="mech-paragraph">
-                    <em class="mech-em">
-                      Options:
-                    </em>
-                  </p>
-                </div>
-                <div class="mech-section-element">
-                  <ul class="mech-unordered-list">
-                    <li class="mech-ul-list-item">
-                      <p class="mech-paragraph">
-                        <code class="mech-inline-code">-p</code>
-                        , 
-                        <code class="mech-inline-code">--port [PORT]</code>
-                         Sets the port for the server (default: 8081).
-                      </p>
-                    </li>
-                    <li class="mech-ul-list-item">
-                      <p class="mech-paragraph">
-                        <code class="mech-inline-code">-a</code>
-                        , 
-                        <code class="mech-inline-code">--address [ADDRESS]</code>
-                         Sets the server address (default: 127.0.0.1).
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-                <div class="mech-section-element">
-                  <p class="mech-paragraph">
-                    <em class="mech-em">
-                      Example:
-                    </em>
-                  </p>
-                </div>
-                <div class="mech-section-element">
-                  <pre class="mech-code-block">mech serve -p 3000 -a 0.0.0.0 my_script.mec
+            <p class="mech-paragraph">
+              <em class="mech-em">
+                Options:
+              </em>
+            </p>
+            <ul class="mech-unordered-list">
+              <li class="mech-ul-list-item">
+                <p class="mech-paragraph">
+                  <code class="mech-inline-code">-p</code>
+                  , 
+                  <code class="mech-inline-code">--port [PORT]</code>
+                   Sets the port for the server (default: 8081).
+                </p>
+              </li>
+              <li class="mech-ul-list-item">
+                <p class="mech-paragraph">
+                  <code class="mech-inline-code">-a</code>
+                  , 
+                  <code class="mech-inline-code">--address [ADDRESS]</code>
+                   Sets the server address (default: 127.0.0.1).
+                </p>
+              </li>
+            </ul>
+            <p class="mech-paragraph">
+              <em class="mech-em">
+                Example:
+              </em>
+            </p>
+            <pre class="mech-code-block">mech serve -p 3000 -a 0.0.0.0 my_script.mec
 </pre>
-                </div>
-              </section>
-            </div>
           </section>
           <section class="mech-program-section">
             <h2 id="68565994143118057" class="mech-program-subtitle ">
@@ -1399,18 +1315,14 @@ mech script1.mec script2.mec dir1
                 Additional Help
               </a>
             </h2>
-            <div class="mech-section-element">
-              <p class="mech-paragraph">
-                For more information on a specific command, you can use the 
-                <code class="mech-inline-code">--help</code>
-                 option with that command. For example:
-              </p>
-            </div>
-            <div class="mech-section-element">
-              <pre class="mech-code-block">mech --help
+            <p class="mech-paragraph">
+              For more information on a specific command, you can use the 
+              <code class="mech-inline-code">--help</code>
+               option with that command. For example:
+            </p>
+            <pre class="mech-code-block">mech --help
 mech serve --help
 </pre>
-            </div>
           </section>
         </div>
       </div>
@@ -1423,7 +1335,7 @@ mech serve --help
       let wasm_core;
       async function run() {
         await init();
-        var code = `G0YKAByHcaywmu7CrY4wQpLZw5xqKZfIVuMg1AoV3FpNigrZRXRdwJRcomz8/O/533/PpQAbb4+5yc35v7V2cc9eH0TPIi3TGv/v31mZXUxtBj3RhngjxCNaSWRCC8DckDGD+jp8LGbrq+cKixID5w2jRnaKO80T9lfZhsu9x+G/QAjlvBJSPLIA595lgMALAl7c63vwAZXFX4YDthEMqFoGnzOipbapDD64XfRW0EgPN/x+pumW/qkW5EATsd6602J41AO+BAY0QjoInRT9BpgfeOFHAwqxE64HkdJ0hscIYwLOw9AD/xCSRY+BBntxbfSBL4iBPuV4HzyoEMXvQTik5043O9mA4YEzdvJrd8ou0T3jnNOOGW8+U6kfqQiKJ/f1GwuSYPCOypJHwpIsfCk8GoYwlUWVGT6eMb/0IsWUg0psFCjlyyYe7gk3JViOlwTGIhBR8OtoEVNyXc+hzkt/BEOjJR6hkXEgNmDQWBSiMv4WWqFAKhEi+ew2mQmpQM7LQwMPRpXogpTqVqV32oY4iYc8GMWEpadbfB3Wv1YazTXsdrmPa+42IPmnxr4xiZLTIADE9uRMckEWfyCVvHWRqhCYD7QxuxRh0MGpQzdXVHDqD3gK5anirMAYyQtn5EkTxuvXF+UJWC4EnObBLIVQP86Ti8n/OBRjaLOk0gzKYotLhNpEnuQDl1+ABCCwcaOB5pMFHmYa0RQQxDAIZatGtbAsMqWGnUUU8bGkRbRhCU7ELUCBFUhB84GkGCvQQojwEK4ZFWqRVN4KPi3zQrjQghv5UoJSVYmUgOWwEi15AxMrcJVWVg34d7QULtUjnxWoVFVIBUfMsQqtCMP3O48WdJW0jf6wwsBbsKR/OmAvbK8P8kq4Ykr56ia6RaVecr8N/dCfwfg22nDe0CHlEm/k4c4wP5OCl1Ed6c06vaVP/9Pfh3INfUYfhyZeCqxF3FDpS7B27VG6HxiFqG6uqdRAI4gPJu0yx74a1OLHnF2tHyfjqsenSFH9y6Z7TX/5tXESTdZwSIsOPawwUlxu989nKq2jBlKQJAuZGOYaTU1KyBN5a0ObtUlb89PHF7BbS+f+wWzTdkIWjO3mnOju4CffgKTpdrI9hXGRrgkmM4mppaWKV1JrEeY/mSY1S7KosF0XBSUHbaAKUHAr3CybKzRSZYFVZREL1C5mUUuwTxjudSVdp3tzGWSXw9zCrbBVk3LEGH5ZpjGLZykODeZkkfEGY2mEvfzsFLBe+oMLaJG5kJyYWibL/jJ09L9Hdtnlz+ZVtDok1BsuPnxu4TW3gTbZNt4O4ci7DTazia2pUBOzT9ZjPndmUzs5STyHwUsbPKBbPdwBdebHBhNVURvkdspezOrIpQMOc4ijRclM4p7sl/T7M4c6+XAINL1YDmJfbXSKV3mV9y2n11kvBbaP95ONHJkz3tlY9W1ixiWr8uuZJTFxhI7RJSlYj4ZO21OncBplQxlbvQu8SyMXkSb5gST75FQHddr41dR9fu+YnXnR32gFruRpJw8gONdNUV1noVOQdRiGiC9RafLo4YkrdIMA`;
+        var code = `GzoKAIyT5TIH9whJOo/aNJZMkG2ISlkiFVq2oboxqCqloqlRM+78+b/n//73vBRg4/X/268Rv+3pg+hqo2Va4755f1CRGVSaSSM0lmjNMyEmkgigx2reIr9XWICKgXPNqFno4s56XeF8fSUb3vW9xuFfI4SKQQ7JAYmBe+8RQBAEBi/HTQcBsMT+NgEpMIxBUsvnc761zDKVxgfPR28DjaS5gfc1Rbf8p1qwAk3C+vy7zUXDrR7oEDRohDsYnYz0DZgftPCTAIXZiUoHcaJpDY0Rfgeci6EH/iEksR4BDdXiGi+AEOFlvKcwuG2BLMqhAB/V/aaanEy/cMMZObkUdEMu6p9RSnm+jCeeKTiEFASjRKro90FEjEQCIhfgeE5iguuWxiCGJVYnhn5n8isZnORqJIf9wGQ/mURjPbEWB6swiP5tcYjLbJ2kYYaPS9+pvHz9FBEUGqJxHB8HUgDY05aAhMRukwQKMRIjUULB5wQzEQXo/rhgwB9MyIkFzs2lcsW0gZSYigaQq8hOoefTdyGpWau142r2fKrdWikM2PkzrT4xgzLTwADE1MxMZkFifyDhIP2rZR7IF3hKdtm6SH1zVW6VRKFOP7CLYlJDTYHfhhc34kYdxuvXl2QTmC0M3uNBIEVQn08zi5n/fDRJUGZQwXlUwJRiMTZrL4ml8P0PwAEw3rhRQRUkxg8TVVRlYKJhEMhUFasxieVDjCqJGNHGkBpXhzk4QU8DTWiiZgmIIdo0rEUFhmisqMg9clgbuDRMtZjWhhv8UoFKckWsgNWICq6UDHSooJKyepJAvUOVWKUR/KxBLbkm1qilnKjhWpGh811ZC1UkC4x6sEUGzkKC/uKAs7C9PkhrsZrFkXRxujrU7kuuN6Ef+vM8/2xtum/IsOsSa/RmzuiXycDKkI70Vrre1qf/6e8lXlOf0eejEy8BlrvhjIJfjC0wt/K6MwqrTjYVbKARxP927DLFOhPMrLDiVOPHxXElIKOPvBzEf+x9eZ04iSZNPqpahjcbDJQG2f3+mYIbqIlkxElMooRos6WFvUDwrQMd0RE7Voh/tEBBe8Dc71gd3ElLjJBdfyvy5+1TTTtSdyfTmcK3oG+BJSzRsnJadmtHe+jl71kWtioSq5FdDwE1tWxIALBxI9SqWisUkmyDnWyLNhJbwsZ2Efld4SV+/Fbp3dwbyaUPcwq1Y7bJ+Yjf6DJOc5afxXx00CdPGG8whkbIy89u8Mqwn7GAFhFGEUTnsrgcCsFC/XJNn1x+Jq+i1SHRXlNp87pBl9MG2hTb/LbHB98dcIQjOpaC3FfByRjMnzhzsJORGPVfaGbDBinpKB5IwrzbJKzOzEHqZJ1Fjw5euuAKV3StBItGik/mSPrxmYvdkjkMmg/WjZhnjk7ROq3T20Nur7seBmKf399p+Eif8U7G6ptEjEtSp481wyF2hI4R2hHJO6OidtcpnCZY0L7tGgUll4ItJkvW/cgyya4u6nawK7v3/N61uvNF/QVVUB/Ps3cA44o9F6V3F7q5pMIwovZTCnYeb+64QjcI`;
         wasm_core = new WasmMech();
         var xhr = new XMLHttpRequest();
         var codeUrl = `/code${window.location.pathname}`;

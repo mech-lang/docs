@@ -1595,6 +1595,29 @@ List items are paragraphs, and can contain any inline elements.
 - **Third**: item 3
 ```
 
+Here's a list of some of the features of lists:
+
+1. Bullet lists
+    - One
+    - Two
+    - Three
+2. Custom lists
+    -(🦜) Four
+    -(🏴‍☠️) Five
+    -(🐷) Six
+3. Numbered lists
+    1. One
+    2. Two
+    3. Three
+4. Custom start number
+    7. One
+    8. Two
+    9. Three
+5. Check lists
+    -[ ] One
+    -[x] Two
+    -[ ] Three
+
 (b) Thematic Breaks
 
 ```ebnf
