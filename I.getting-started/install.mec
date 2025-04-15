@@ -21,7 +21,7 @@ See the toolchain documation for more information on how this file works.
 
 If mech is not available for your platform, or if you want to build it from source, follow these steps:
 
-(a) Install Rust and Cargo
+(2.1) Install Rust and Cargo
 
 First you will need [Rust](https://www.rust-lang.org/learn/get-started). Make sure to install a recent version on the nightly release channel, currently `nightly-2025-01-15`.
 
@@ -51,7 +51,7 @@ You may need to allow scripts by running the following before executing the abov
 Set-ExecutionPolicy Bypass -Scope Process -Force
 ```
 
-(b) Download and Build Mech
+(2.2) Download and Build Mech
 
 ```bash
 git clone https://gitlab.com/mech-lang/mech
@@ -59,7 +59,7 @@ cd mech
 cargo build --bin mech --release
 ```
 
-(c) Build the Wasm Target
+(2.3) Build the Wasm Target
 
 If you want to build the WebAssembly target, you will need to install the `wasm-pack` tool. You can do this using Cargo:
 
