@@ -12,7 +12,7 @@ This document is for:
 
 - Language designers who want to implement a parser for Mech.
 - Tool developers who want to build tools that work with Mech code.
-- Developers who want to understand the syntax and structure of Mech programs.
+- Anyone who want to understand the syntax and structure of Mech programs.
 
 2. Source Code Representation
 -------------------------------------------------------------------------------
