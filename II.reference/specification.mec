@@ -1456,16 +1456,8 @@ section-element := +mech-code
       | block-quote
       | code-block
       | thematic-break
-      | sub-section
+      | equation
       | paragraph ;
-sub-section-element := +mech-code 
-      | unordered-list 
-      | markdown-table
-      | block-quote
-      | code-block
-      | thematic-break
-      | paragraph ;
-sub-section := alpha-subtitle, *sub-section-element ;
 section := ?ul-subtitle, +section-element ;
 ```
 
@@ -1644,6 +1636,26 @@ code-block := (grave, grave, grave), new-line, any, (grave, grave, grave), new-l
 ```
 
 Mechdown supports code blocks, which are enclosed in triple backticks (graves) and can contain any text. Code blocks are useful for including Mech code snippets or other text that should be displayed verbatim.
+
+(b) Equations
+
+```ebnf
+equation := (dollar, dollar), +text, new-line;
+```
+
+Equations are orefixed with `$$` and can contain any text. They are used to display mathematical expressions or formulas expressed in LaTeX syntax.
+
+For instance,
+
+```
+$$ c = \pm\sqrt{a^2 + b^2}
+```
+
+when rendered will look like this:
+
+$$ c = \pm\sqrt{a^2 + b^2}
+
+Mechdown also supports inline equations, which begin and conclude with a `$$`. They are expressed with LaTeX syntax, like so: `$$c^2 = a^2 + b^2$$`. This is rendered by a third-party library into $$c^2 = a^2 + b^2$$.
 
 (b) Block Quotes
 
