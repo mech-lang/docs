@@ -1,14 +1,21 @@
 
-<html>
-  <head>
-    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <style>
-      
+<!DOCTYPE html>
+  <html>
+    <head>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous">
+      <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous">
+      </script>
+      <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);">
+      </script>
+      <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+      <style>
+        
                   @import url(https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css);
 
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
 }
 
 .mech-program {
@@ -49,18 +56,14 @@ body {
     color: #f2ead9;
     overflow-y: auto;
     margin-right: 20px;
-    padding-right: 15px;
-    padding-left: 10px;
+    padding-right: 0px;
+    padding-left: 0px;
     position: sticky; 
     top: 0; 
     height: 100vh;
 }
 
 .mech-toc h2 {
-    line-height: 23px;
-}
-
-.mech-toc h3 {
     line-height: 23px;
 }
 
@@ -101,12 +104,6 @@ h2.toc::before {
     padding-right: 5px;
 }
 
-h3.toc::before {
-    font-size: 12pt;
-    padding-right: 5px;
-    color: rgba(255, 255, 255, 0.55);
-}
-
 .mech-toc h2 a {
     color: #f2ead9;
     text-decoration: none;
@@ -119,6 +116,15 @@ h3.toc::before {
 .mech-toc h2 a:hover {
     color: #ee6262;
     text-decoration: none;
+}
+
+h3.toc::before {
+    font-size: 12pt;
+    padding-right: 5px;
+    color: rgba(255, 255, 255, 0.55);
+}
+.mech-toc h3 {
+    line-height: 23px;
 }
 
 .mech-toc h3 {
@@ -136,6 +142,31 @@ h3.toc::before {
 }
 
 .mech-toc h3 a:hover {
+    color: #ee6262;
+    text-decoration: none;
+}
+
+h4.toc::before {
+    font-size: 12pt;
+    padding-right: 5px;
+    color: rgba(255, 255, 255, 0.55);
+}
+.mech-toc h4 {
+    line-height: 15px;
+    font-size: 12pt;
+    padding-left: 60px;
+}
+
+.mech-toc h4 a {
+    color: #f2ead9;
+    text-decoration: none;
+}
+
+.mech-toc h4:hover::before {
+    color: #ee6262;
+}
+
+.mech-toc h4 a:hover {
     color: #ee6262;
     text-decoration: none;
 }
@@ -1019,261 +1050,611 @@ h4::before {
     counter-increment: h4;
     content: counter(h2) "." counter(h3) "." counter(h4) " ";
 }
+
+.mech-program-subtitle.toc.active::before{
+    color: #ee6262;
+}
+
+.mech-program-subtitle.toc.active a{
+    color: #ee6262;
+}
+
+.mech-program-section.toc.active{
+    background-color: #0d1013;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+h2:hover a {
+    color: #ee6262;
+}
+
+h3:hover a {
+    color: #ee6262;
+}
+
+h4:hover a {
+    color: #ee6262;
+}
+
+.mech-program-section {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.mech-program-subtitle.toc.visible {
+    display: block;
+    visibility: visible;
+}
+
+.mech-equation {
+    text-align: center;
+    color: #f2ead9;
+}
+
+.mech-inline-equation {
+    font-size: 10pt;
+    color: #efe4cd;
+}
+
+mark {
+    background-color: #F3B62D;
+    color: #2F353B;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    margin: 0px 7px 0px 3px;
+}
+
+.mech-citation {
+    display: flex;
+    align-items: baseline;
+    color: #f2ead9;
+}
+
+.mech-citation-id {
+    color: #F3B62D;
+    font-family: 'FiraCodeRegular', monospace;
+    flex-shrink: 0;
+    padding: 5px 10px 5px 10px;
+}
+
+.mech-citation-link {
+    color: #eedcb4;
+    text-decoration: none;
+    word-break: break-all;
+    transition: color 0.2s ease;
+}
+
+.mech-citation-link:hover {
+    color: #ee6262;
+    text-decoration: underline;
+}
         
-    </style>
-  </head>
-  <body>
-    <div class="mech-root">
-      <div class="mech-toc">
-        <h1 class="mech-program-title">
-          Using the Mech REPL
-        </h1>
-        <section class="mech-toc-sections">
-          <section class="mech-program-section">
+      </style>
+    </head>
+    <body>
+      <div class="mech-root">
+        <div class="mech-toc">
+          <h1 class="mech-program-title">
+            Using the Mech REPL
+          </h1>
+          <section class="mech-toc-sections">
+            <section id="10256256531960684" section="47366548527342352" class="mech-program-section toc">
+            </section>
+            <section id="60729636669089557" section="19828278399897027" class="mech-program-section toc">
+              <h2 id="48576315069692778" section="1.0" class="mech-program-subtitle toc">
+                <a class="mech-program-subtitle-link toc" href="#4016604308879711">
+                  Starting the REPL
+                </a>
+              </h2>
+            </section>
+            <section id="62115203941730927" section="34084800487801956" class="mech-program-section toc">
+              <h2 id="25583487790708595" section="2.0" class="mech-program-subtitle toc">
+                <a class="mech-program-subtitle-link toc" href="#39989981217595373">
+                  Commands
+                </a>
+              </h2>
+              <h3 id="50909675261749279" section="2.1" class="mech-program-subtitle toc">
+                <a class="mech-program-subtitle-link toc" href="#5108139711275160">
+                  :help (:h)
+                </a>
+              </h3>
+              <h3 id="31891450278014698" section="2.2" class="mech-program-subtitle toc">
+                <a class="mech-program-subtitle-link toc" href="#53448773141888059">
+                  :quit (:q)
+                </a>
+              </h3>
+              <h3 id="71799209120238657" section="2.3" class="mech-program-subtitle toc">
+                <a class="mech-program-subtitle-link toc" href="#2322566134256070">
+                  :symbols (:s)
+                </a>
+              </h3>
+              <h3 id="30844315760083935" section="2.4" class="mech-program-subtitle toc">
+                <a class="mech-program-subtitle-link toc" href="#65712214521139996">
+                  :plan (:p)
+                </a>
+              </h3>
+              <h3 id="59223110050670042" section="2.5" class="mech-program-subtitle toc">
+                <a class="mech-program-subtitle-link toc" href="#37329989915126529">
+                  :whos (:w)
+                </a>
+              </h3>
+              <h3 id="948288980848529" section="2.6" class="mech-program-subtitle toc">
+                <a class="mech-program-subtitle-link toc" href="#8942451595429135">
+                  :clc (:c)
+                </a>
+              </h3>
+              <h3 id="70997789559297705" section="2.7" class="mech-program-subtitle toc">
+                <a class="mech-program-subtitle-link toc" href="#54864169704492494">
+                  :clear
+                </a>
+              </h3>
+              <h3 id="867420218043841" section="2.8" class="mech-program-subtitle toc">
+                <a class="mech-program-subtitle-link toc" href="#68768209684329077">
+                  :load
+                </a>
+              </h3>
+              <h3 id="23378782530310054" section="2.9" class="mech-program-subtitle toc">
+                <a class="mech-program-subtitle-link toc" href="#30651751686203022">
+                  :ls [PATH]
+                </a>
+              </h3>
+              <h3 id="10462415761012285" section="2.10" class="mech-program-subtitle toc">
+                <a class="mech-program-subtitle-link toc" href="#50885138022548148">
+                  :cd PATH
+                </a>
+              </h3>
+              <h3 id="52596868522423958" section="2.11" class="mech-program-subtitle toc">
+                <a class="mech-program-subtitle-link toc" href="#52163969273584785">
+                  :step [N]
+                </a>
+              </h3>
+            </section>
           </section>
-          <section class="mech-program-section">
-            <h2 id="23631285232603429" class="mech-program-subtitle toc">
-              <a href="#22007619943642332">
-                Starting the REPL
-              </a>
-            </h2>
-          </section>
-          <section class="mech-program-section">
-            <h2 id="54691789434409436" class="mech-program-subtitle toc">
-              <a href="#26559346203622286">
-                Commands
-              </a>
-            </h2>
-            <h3 id="64513440002190676" class="mech-program-subtitle toc">
-              <a href="#23133555530643862">
-                :help (:h)
-              </a>
-            </h3>
-            <h3 id="32769631875683795" class="mech-program-subtitle toc">
-              <a href="#61467324567636763">
-                :quit (:q)
-              </a>
-            </h3>
-            <h3 id="7075310916710902" class="mech-program-subtitle toc">
-              <a href="#62043743529159564">
-                :symbols (:s)
-              </a>
-            </h3>
-            <h3 id="67487934116923998" class="mech-program-subtitle toc">
-              <a href="#20368161057465423">
-                :plan (:p)
-              </a>
-            </h3>
-            <h3 id="31802093453001170" class="mech-program-subtitle toc">
-              <a href="#42523132004832845">
-                :whos (:w)
-              </a>
-            </h3>
-            <h3 id="25730141871399172" class="mech-program-subtitle toc">
-              <a href="#49911524571794189">
-                :clc (:c)
-              </a>
-            </h3>
-            <h3 id="35534567905810970" class="mech-program-subtitle toc">
-              <a href="#17948093707882322">
-                :clear
-              </a>
-            </h3>
-            <h3 id="49406996640187627" class="mech-program-subtitle toc">
-              <a href="#69687534261021011">
-                :load
-              </a>
-            </h3>
-            <h3 id="16212692922729690" class="mech-program-subtitle toc">
-              <a href="#4641695825969036">
-                :ls [PATH]
-              </a>
-            </h3>
-            <h3 id="61154003846602880" class="mech-program-subtitle toc">
-              <a href="#24268471616615586">
-                :cd PATH
-              </a>
-            </h3>
-            <h3 id="25543336875779768" class="mech-program-subtitle toc">
-              <a href="#38267891659591093">
-                :step [N]
-              </a>
-            </h3>
-          </section>
-        </section>
-      </div>
-      <div class="mech-program">
-        <h1 class="mech-program-title">
-          Using the Mech REPL
-        </h1>
-        <div class="mech-program-body">
-          <section class="mech-program-section">
-            <p class="mech-paragraph">
-              The Mech Read-Eval-Print Loop (REPL) provides an interactive environment for executing Mech commands, inspecting symbols, and debugging programs. Below are the available REPL commands.
-            </p>
-          </section>
-          <section class="mech-program-section">
-            <h2 id="22007619943642332" class="mech-program-subtitle ">
-              <a href="#22007619943642332">
-                Starting the REPL
-              </a>
-            </h2>
-            <p class="mech-paragraph">
-              To start the REPL, run:
-            </p>
-            <pre class="mech-code-block">mech
+        </div>
+        <div class="mech-program">
+          <h1 class="mech-program-title">
+            Using the Mech REPL
+          </h1>
+          <div class="mech-program-body">
+            <section id="47366548527342352" section="47366548527342352" class="mech-program-section ">
+              <p class="mech-paragraph">
+                The Mech Read-Eval-Print Loop (REPL) provides an interactive environment for executing Mech commands, inspecting symbols, and debugging programs. Below are the available REPL commands.
+              </p>
+            </section>
+            <section id="19828278399897027" section="19828278399897027" class="mech-program-section ">
+              <h2 id="4016604308879711" section="1.0" class="mech-program-subtitle ">
+                <a class="mech-program-subtitle-link " href="#4016604308879711">
+                  Starting the REPL
+                </a>
+              </h2>
+              <p class="mech-paragraph">
+                To start the REPL, run:
+              </p>
+              <pre class="mech-code-block">mech
 </pre>
-            <p class="mech-paragraph">
-              You can load a script into the REPL by running with the 
-              <code class="mech-inline-code">--repl</code>
-               option:
-            </p>
-            <pre class="mech-code-block">mech --repl my_script.mec
+              <p class="mech-paragraph">
+                You can load a script into the REPL by running with the 
+                <code class="mech-inline-code">--repl</code>
+                 option:
+              </p>
+              <pre class="mech-code-block">mech --repl my_script.mec
 </pre>
-            <p class="mech-paragraph">
-              Once inside, you can enter commands prefixed with 
-              <code class="mech-inline-code">:</code>
-              , otherwise the REPL will interpret the input as a Mech expression and evaluate it, and print the result and the associated type.
-            </p>
-          </section>
-          <section class="mech-program-section">
-            <h2 id="26559346203622286" class="mech-program-subtitle ">
-              <a href="#26559346203622286">
-                Commands
-              </a>
-            </h2>
-            <h3 id="23133555530643862" class="mech-program-subtitle ">
-              <a href="#23133555530643862">
-                :help (:h)
-              </a>
-            </h3>
-            <p class="mech-paragraph">
-              Displays this help message with a list of available commands.
-            </p>
-            <pre class="mech-code-block">:help
+              <p class="mech-paragraph">
+                Once inside, you can enter commands prefixed with 
+                <code class="mech-inline-code">:</code>
+                , otherwise the REPL will interpret the input as a Mech expression and evaluate it, and print the result and the associated type.
+              </p>
+            </section>
+            <section id="34084800487801956" section="34084800487801956" class="mech-program-section ">
+              <h2 id="39989981217595373" section="2.0" class="mech-program-subtitle ">
+                <a class="mech-program-subtitle-link " href="#39989981217595373">
+                  Commands
+                </a>
+              </h2>
+              <h3 id="5108139711275160" section="2.1" class="mech-program-subtitle ">
+                <a class="mech-program-subtitle-link " href="#5108139711275160">
+                  :help (:h)
+                </a>
+              </h3>
+              <p class="mech-paragraph">
+                Displays this help message with a list of available commands.
+              </p>
+              <pre class="mech-code-block">:help
 </pre>
-            <h3 id="61467324567636763" class="mech-program-subtitle ">
-              <a href="#61467324567636763">
-                :quit (:q)
-              </a>
-            </h3>
-            <p class="mech-paragraph">
-              Exits the REPL.
-            </p>
-            <pre class="mech-code-block">:quit
+              <h3 id="53448773141888059" section="2.2" class="mech-program-subtitle ">
+                <a class="mech-program-subtitle-link " href="#53448773141888059">
+                  :quit (:q)
+                </a>
+              </h3>
+              <p class="mech-paragraph">
+                Exits the REPL.
+              </p>
+              <pre class="mech-code-block">:quit
 </pre>
-            <h3 id="62043743529159564" class="mech-program-subtitle ">
-              <a href="#62043743529159564">
-                :symbols (:s)
-              </a>
-            </h3>
-            <p class="mech-paragraph">
-              Searches for symbols in the current session. You can provide an optional search pattern to filter results.
-            </p>
-            <pre class="mech-code-block">:s
+              <h3 id="2322566134256070" section="2.3" class="mech-program-subtitle ">
+                <a class="mech-program-subtitle-link " href="#2322566134256070">
+                  :symbols (:s)
+                </a>
+              </h3>
+              <p class="mech-paragraph">
+                Searches for symbols in the current session. You can provide an optional search pattern to filter results.
+              </p>
+              <pre class="mech-code-block">:s
 :s velocity
 </pre>
-            <h3 id="20368161057465423" class="mech-program-subtitle ">
-              <a href="#20368161057465423">
-                :plan (:p)
-              </a>
-            </h3>
-            <p class="mech-paragraph">
-              Displays the execution plan.
-            </p>
-            <pre class="mech-code-block">:plan
+              <h3 id="65712214521139996" section="2.4" class="mech-program-subtitle ">
+                <a class="mech-program-subtitle-link " href="#65712214521139996">
+                  :plan (:p)
+                </a>
+              </h3>
+              <p class="mech-paragraph">
+                Displays the execution plan.
+              </p>
+              <pre class="mech-code-block">:plan
 </pre>
-            <h3 id="42523132004832845" class="mech-program-subtitle ">
-              <a href="#42523132004832845">
-                :whos (:w)
-              </a>
-            </h3>
-            <p class="mech-paragraph">
-              Searches the symbol directory. Optionally, provide a search pattern to filter results.
-            </p>
-            <pre class="mech-code-block">:whos
+              <h3 id="37329989915126529" section="2.5" class="mech-program-subtitle ">
+                <a class="mech-program-subtitle-link " href="#37329989915126529">
+                  :whos (:w)
+                </a>
+              </h3>
+              <p class="mech-paragraph">
+                Searches the symbol directory. Optionally, provide a search pattern to filter results.
+              </p>
+              <pre class="mech-code-block">:whos
 :whos position
 </pre>
-            <h3 id="49911524571794189" class="mech-program-subtitle ">
-              <a href="#49911524571794189">
-                :clc (:c)
-              </a>
-            </h3>
-            <p class="mech-paragraph">
-              Clears the screen, resets the cursor position. 
-            </p>
-            <pre class="mech-code-block">:clc
+              <h3 id="8942451595429135" section="2.6" class="mech-program-subtitle ">
+                <a class="mech-program-subtitle-link " href="#8942451595429135">
+                  :clc (:c)
+                </a>
+              </h3>
+              <p class="mech-paragraph">
+                Clears the screen, resets the cursor position. 
+              </p>
+              <pre class="mech-code-block">:clc
 </pre>
-            <h3 id="17948093707882322" class="mech-program-subtitle ">
-              <a href="#17948093707882322">
-                :clear
-              </a>
-            </h3>
-            <p class="mech-paragraph">
-              Clears the interpreter state. If a target variable is provided, only that variable is cleared.
-            </p>
-            <pre class="mech-code-block">:clear
+              <h3 id="54864169704492494" section="2.7" class="mech-program-subtitle ">
+                <a class="mech-program-subtitle-link " href="#54864169704492494">
+                  :clear
+                </a>
+              </h3>
+              <p class="mech-paragraph">
+                Clears the interpreter state. If a target variable is provided, only that variable is cleared.
+              </p>
+              <pre class="mech-code-block">:clear
 :clear x
 </pre>
-            <h3 id="69687534261021011" class="mech-program-subtitle ">
-              <a href="#69687534261021011">
-                :load
-              </a>
-            </h3>
-            <p class="mech-paragraph">
-              Loads and executes the supplied a Mech file(s) into the session.
-            </p>
-            <pre class="mech-code-block">:load my_script.mec
+              <h3 id="68768209684329077" section="2.8" class="mech-program-subtitle ">
+                <a class="mech-program-subtitle-link " href="#68768209684329077">
+                  :load
+                </a>
+              </h3>
+              <p class="mech-paragraph">
+                Loads and executes the supplied a Mech file(s) into the session.
+              </p>
+              <pre class="mech-code-block">:load my_script.mec
 :load my_script.mec my_other_script.mec
 :load my_directory
 </pre>
-            <h3 id="4641695825969036" class="mech-program-subtitle ">
-              <a href="#4641695825969036">
-                :ls [PATH]
-              </a>
-            </h3>
-            <p class="mech-paragraph">
-              Lists contents of working directory. Optionally, provide a target path.
-            </p>
-            <pre class="mech-code-block">>: :ls
+              <h3 id="30651751686203022" section="2.9" class="mech-program-subtitle ">
+                <a class="mech-program-subtitle-link " href="#30651751686203022">
+                  :ls [PATH]
+                </a>
+              </h3>
+              <p class="mech-paragraph">
+                Lists contents of working directory. Optionally, provide a target path.
+              </p>
+              <pre class="mech-code-block">>: :ls
 >: :ls /my/directory
 </pre>
-            <h3 id="24268471616615586" class="mech-program-subtitle ">
-              <a href="#24268471616615586">
-                :cd PATH
-              </a>
-            </h3>
-            <p class="mech-paragraph">
-              Changes the current working directory.
-            </p>
-            <pre class="mech-code-block">>: :cd /my/directory
+              <h3 id="50885138022548148" section="2.10" class="mech-program-subtitle ">
+                <a class="mech-program-subtitle-link " href="#50885138022548148">
+                  :cd PATH
+                </a>
+              </h3>
+              <p class="mech-paragraph">
+                Changes the current working directory.
+              </p>
+              <pre class="mech-code-block">>: :cd /my/directory
 </pre>
-            <h3 id="38267891659591093" class="mech-program-subtitle ">
-              <a href="#38267891659591093">
-                :step [N]
-              </a>
-            </h3>
-            <p class="mech-paragraph">
-              Iterates the execution plan by the specified number of steps. If N is not provided, defaults to 1 step.
-            </p>
-            <pre class="mech-code-block">>: ~x := 10
+              <h3 id="52163969273584785" section="2.11" class="mech-program-subtitle ">
+                <a class="mech-program-subtitle-link " href="#52163969273584785">
+                  :step [N]
+                </a>
+              </h3>
+              <p class="mech-paragraph">
+                Iterates the execution plan by the specified number of steps. If N is not provided, defaults to 1 step.
+              </p>
+              <pre class="mech-code-block">>: ~x := 10
 >: x += 1
 >: :step 10
 >: x == 21  -- true
 </pre>
-          </section>
+            </section>
+          </div>
+        </div>
+        <div id = "mech-output">
         </div>
       </div>
-      <div id = "mech-output">
-      </div>
-    </div>
-    <script type="module">
-      
+      <script>
+        
+
+let observer = null;
+let userScrolling = false;
+let scrollTimeout = null;
+let scrollLock = false;
+
+
+document.querySelectorAll('.mech-program-subtitle.toc').forEach(entry => {
+  entry.addEventListener('click', () => {
+    scrollLock = true;
+    if (observer) observer.disconnect();
+    const id = entry.id;
+    const tag = entry.tagName; // H1, H2, H3, etc.
+
+
+    const headings = document.querySelectorAll(".mech-program-subtitle:not(.toc)");
+    const navItems = document.querySelectorAll(".mech-program-subtitle.toc");
+    const sections = document.querySelectorAll(".mech-program-section.toc");
+    const all_the_headers = Array.from(document.querySelectorAll('[section]'));
+
+    navItems.forEach(item => item.classList.remove("active"));
+    sections.forEach(item => item.classList.remove("active"));
+
+    const section = entry.closest("section");
+
+    if (section) {
+      section.scrollIntoView();
+      const matchingTocSection = Array.from(sections).find(item => item.id === section.id);
+      if (matchingTocSection) {
+        matchingTocSection.classList.add("active");
+      }
+
+      // Now grab the h2, h3, and h4 elements within that section
+      const h3s = Array.from(section.querySelectorAll('h3'));
+
+      if (tag === "H4") {
+        const closestH3 = h3s.reverse().find(h3 => h3.compareDocumentPosition(entry) & Node.DOCUMENT_POSITION_FOLLOWING);
+        const H3Nav = Array.from(navItems).find(item => {
+            const link = item.querySelector("a[href]");
+            return link && link.getAttribute("href") === `#${closestH3.id}`;
+        });
+        closestH3.classList.add("active");
+      }
+
+      // if tag is h3 then we want to add a "visible" class to all of the headings with the same section
+      if (tag === "H3") {
+        const h3_id = entry.getAttribute("section");
+        all_the_headers.forEach(item => {
+          const item_id = item.getAttribute("section");
+          if (item_id === h3_id) {
+            item.classList.add("visible");
+          } else {
+            item.classList.remove("visible");
+          }
+        });
+      }
+
+      const topLevelHeading = section.querySelector("h2");
+      topLevelHeading.classList.add("active");
+
+    }
+    entry.classList.add("active");
+    currentActiveTag = tag;
+    const link = entry.querySelector('a[href]');
+    if (link) {
+      window.location.hash = link.getAttribute('href');
+    }
+  });
+});
+
+function createObserver(rootMarginValue,scrolling_down) {
+  if (observer) observer.disconnect(); // Clean up old observer
+  const headings = document.querySelectorAll(".mech-program-subtitle:not(.toc)");
+  const navItems = document.querySelectorAll(".mech-program-subtitle.toc");
+  const sections = document.querySelectorAll(".mech-program-section.toc");
+  const all_the_headers = Array.from(document.querySelectorAll('[section]'));
+  observer = new IntersectionObserver((entries) => {
+
+
+entries
+  .slice() // Create a shallow copy to avoid mutating the original entries array
+  .sort((a, b) => {
+    // Sort entries based on scroll direction
+    return scrolling_down
+      ? a.boundingClientRect.top - b.boundingClientRect.top // Ascending for scrolling down
+      : b.boundingClientRect.top - a.boundingClientRect.top; // Descending for scrolling up
+  })
+  .forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        const tag = entry.target.tagName; // H1, H2, H3, etc.
+
+        const activeNav = Array.from(navItems).find(item => {
+          const link = item.querySelector("a[href]");
+          return link && link.getAttribute("href") === `#${id}`;
+        });
+
+        if (!activeNav) return;
+
+        // Deactivate all TOC items
+        navItems.forEach(item => item.classList.remove("active"));
+        sections.forEach(item => item.classList.remove("active"));
+
+        // Activate the current section's top-level H2
+        const section = entry.target.closest("section");
+        if (section) {
+          const matchingTocSection = Array.from(sections).find(item => {
+            const toc_section_id = item.getAttribute("section");
+            const section_id = section.getAttribute("section");
+            if (toc_section_id && section_id) {
+              return toc_section_id === section_id;
+            }
+          });
+          if (matchingTocSection) {
+            matchingTocSection.classList.add("active");
+            const toc = document.querySelector(".mech-toc");
+
+            if (toc && matchingTocSection) {
+              const itemOffsetTop = matchingTocSection.offsetTop;
+              const itemHeight = matchingTocSection.offsetHeight;
+              const tocHeight = toc.clientHeight;
+              const scrollTop = toc.scrollTop;
+
+              // Center the item manually if it's out of view
+              const visibleTop = scrollTop;
+              const visibleBottom = scrollTop + tocHeight;
+
+              if (itemOffsetTop 
+        < visibleTop || itemOffsetTop + itemHeight >
+           visibleBottom) {
+                toc.scrollTo({
+                  top: itemOffsetTop - tocHeight / 2 + itemHeight / 2,
+                  behavior: "smooth"
+                });
+              }
+            }
+          }
+
+          // Now grab the h2, h3, and h4 elements within that section
+          const h3s = Array.from(section.querySelectorAll('h3'));
+
+          if (tag === "H4") {
+            const closestH3 = h3s.reverse().find(h3 => h3.compareDocumentPosition(entry.target) & Node.DOCUMENT_POSITION_FOLLOWING);
+            const H3Nav = Array.from(navItems).find(item => {
+              const link = item.querySelector("a[href]");
+              return link && link.getAttribute("href") === `#${closestH3.id}`;
+            });
+            if (H3Nav) {
+              H3Nav.classList.add("active");
+              const h3_id = H3Nav.getAttribute("section");
+              all_the_headers.forEach(item => {
+                const item_id = item.getAttribute("section");
+                if (item_id === h3_id) {
+                  item.classList.add("visible");
+                } else {
+                  item.classList.remove("visible");
+                }
+              });
+            }
+          }
+
+          // if tag is h3 then we want to add a "visible" class to all of the headings with the same section
+          if (tag === "H3") {
+            const h3_id = entry.target.getAttribute("section");
+            all_the_headers.forEach(item => {
+              const item_id = item.getAttribute("section");
+              if (item_id === h3_id) {
+                item.classList.add("visible");
+              } else {
+                item.classList.remove("visible");
+              }
+            });
+          }
+
+          const topLevelHeading = section.querySelector("h2");
+          if (topLevelHeading) {
+            const topLevelNav = Array.from(navItems).find(item => {
+              const link = item.querySelector("a[href]");
+              return link && link.getAttribute("href") === `#${topLevelHeading.id}`;
+            });
+            if (topLevelNav) {
+              topLevelNav.classList.add("active");
+            }
+          }
+        }
+        activeNav.classList.add("active");
+        currentActiveTag = tag;
+      }
+    });
+  }, {
+    root: null,
+    rootMargin: rootMarginValue,
+    threshold: 0
+  });
+  headings.forEach(heading => observer.observe(heading));
+}
+
+
+window.addEventListener("DOMContentLoaded", () => {
+  createObserver("0px 0px 0px 0px");
+  const elements = document.querySelectorAll(".mech-equation");
+  elements.forEach(el => {
+    const eq = el.getAttribute("equation");
+    if (eq) {
+      katex.render(eq, el, { throwOnError: false });
+    }
+  });
+  const inline_elements = document.querySelectorAll(".mech-inline-equation");
+  inline_elements.forEach(el => {
+    const eq = el.getAttribute("equation");
+    if (eq) {
+      katex.render(eq, el, { throwOnError: false });
+    }
+  });
+});
+
+let lastScrollY = window.scrollY;
+let scrolling_down = true;
+let margin = 10;
+
+function getScrollPercentage() {
+  const scrollTop = window.scrollY || window.pageYOffset;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+  if (docHeight === 0) return 0; // avoid division by zero on short pages
+  return scrollTop / docHeight;
+}
+
+window.addEventListener("scroll", () => {
+  if (scrollLock) {
+    scrollLock = false;
+    return;
+  }
+  
+  const percent = getScrollPercentage();
+  const currentScrollY = window.scrollY;
+  scrolling_down = currentScrollY > lastScrollY;
+
+  if (currentScrollY !== lastScrollY) {
+    lastScrollY = currentScrollY;
+  }
+
+  if (percent 
+          < 0.05) {
+    createObserver("0px 0px -90% 0px", scrolling_down);
+  } else if (percent < 0.2) {
+    createObserver("-0% 0px -90% 0px", scrolling_down);
+  } else if (percent < 0.3) {
+    createObserver("-10% 0px -80% 0px", scrolling_down);
+  } else if (percent < 0.4) {
+    createObserver("-20% 0px -70% 0px", scrolling_down);
+  } else if (percent < 0.5) {
+    createObserver("-30% 0px -60% 0px", scrolling_down);
+  } else if (percent < 0.6) {
+    createObserver("-40% 0px -50% 0px", scrolling_down);
+  } else if (percent < 0.7) {
+    createObserver("-50% 0px -40% 0px", scrolling_down);
+  } else if (percent < 0.8) {
+    createObserver("-60% 0px -30% 0px", scrolling_down);
+  } else if (percent < 0.9) {
+    createObserver("-70% 0px -20% 0px", scrolling_down);
+  } else if (percent <= 0.95) {
+    createObserver("-80% 0px 0% 0px", scrolling_down);
+  }
+});
+
+</script>
+            <script type="module">
+              
+
+
       import init, {WasmMech} from '/pkg/mech_wasm.js';
       let wasm_core;
       async function run() {
         await init();
-        var code = `G2EIAIyUrppvP76b7YUStCQUn2ZiBe9Jlk7ci3k4s98vCYWrNbWJ0HdlF1UjqyvVzdIFGFy+igMkKyNkjSwrIlXbh2xqP4PhZJxF3QqIgKPQLw8KVpmdbhzvA0DQ1gcucPJ/52/WCy/5ZPiyQNIlAlym/DNfCc+KNpdfmrLKaHYjvJUsEKxEczVTQ7YL1rukcWwCkcj9pZ1kg45uIGwjsMuC2Fuwj6QUUP4DOLnfASbZK39uCCs4hOwLWIictwQkeX9fgnU/NMW3XFFEcaNglVUvqOCyOTkPZAHZNTKPtqsdUUi9fnFnAYfakwTInMJxMhm/5xQRZNnJnYxwjgmyQnYQHVAtyD7UZI0vT+CrqUbB6pUGAX/OuYgoi7N7QtIU2wJt0SqcXgtByFA4iNCb0Fsn/xOpTJAGeXOyhz0OWHT04MuaGgl8KvyEPQTQYZrSmISXRqQNSGGzHnoX+rtaUs61/taIEvGiUbeicLsg1H/px/0eJ0dspt/b71M4EuV+0u93cpjt1/oDNhc4+YL7JJgMkG75H62xXG6UOixhOAdhcBFRh4JH1BFggABGAtJjeEyNecf2OmNkTI9pY34SpjMiNbCfmoAJChJAmFZNw0zKKci4oWPdd93Vie73SF3Tg3t6SA8Hq0wpUZBGhItBMcqReLsgMRWKkYNBOCi5CHKRY0jc53I//iUBiRqifiFVIdnHQr1lVXpf1DRkdQKYljawoQyvsdc2iKENzVgdXA02PToA0U+9hbdD2gIvmLbEYQ4+xjfTJjaV6TX3PpnE1KZmhi8v0HJrK4glAUbX6l8SOjHn8m8vwMKVP4IJXOGheH+aq1qG1ZOKsOrWOl53D7vrnnXVY6371uneun9dC6SDWlJPGavi721All420lXjeIptwmYGUTxdo+7ALrhB4S8hw27s430v4IOPoxHsAt3aW7V2iuzFvUfE0tGkGCBf57HPoELmcCp1CIdPiGoKJ9XHTvZZPYEznOJ2wdsaF/jCc/AvB0oNSOPMok1YFghWGARUfDUjZ1mhJVjnFVytIHoKeSJfm/YGvIIsaoYPWzIYqLfwgLTLnZfsrmDcg4cn/EQxD2x5LEgwRP45nI+QWIOhfbqceoGXbUSHFwUTdak+vsrSjS9pZFQein2nsPJsaJRx2TeEpgIEjprkaf1wFarTiIZVONTKqwY04y5hqXHeHT60cZuMjdJOryD1TDOEHLfU2q1G5BqU0pCc/Ifksd5s9UiIBQK/NEGB7Mc/k+pCt4yoWBTs52cmFlg2ox3muTuOA+Fn33MtDOWyjCWTwRDMrv4BvgA=`;
+        var code = `G2EIAIyUrppvf75b3QslBxUSyppkxQre1XTYrKgX83Bmv18SCldrahOh78ouSlVXqpulCzC4fBUHSFZGyBpZVkQqtg/Z1H4Gw8k4i7oVWA05Cv3xMOsW2NnmyQEAdHjegQaq+HfxZj37momGLwtEXSLAZco//ZXwjGhz9bUmq4xmN8JbyQLBSjRXMzVkI+u+SxrHJhCJ3J/fSTbo6AbCNgK7LIi9BftETAHlP4Aqgg4wyXbhc0NYwZ3Iu4CF7ou6gCTvbxRhrQ817gd/D6K4mnULhg4GaB5VLAaygOwamUfb1Y4opN6+uLOAQ+1pAmRJETgajd9zhnCyogofI5wTnKySXUT7VQuyDzVZ9csz+GqsmnV7ZULIn3IuIsri7J6QNMW2QFu0Cqe3OqHTVgTwztnOOVX8iVQmSIO8OdnDHgcsOnrwdU2NBD4VfsIeAugwTWlMwksj0gaksFnvnO/8u1pSvvX+zm6lW0cjuqIILyfUf+nDfZoqEJvu0/sCikC80Ef6gqqAmT6zL+TRQBVp90kwGSDd8j9aY7ncKHVYwnAOwMAyou8VPGYMAwMEMBKQHsWjalQfPWiOklE9ao76SZjOiNTAfmwcxilIAGFaNQXTKR8n44aFrcB13yJW0CMt0+o4sDqtrmCJKSWy0ohwMShGORJvFySmQjFyMAgHJRdBLnIMiftc7sdNIhApIxrk0uCSfcxW6m6x/cWIQ1IngGlpG9vK1u2Dhk1sbZv26sBqsOnRAYh+bA7mBrUFXjBtaRGW4GN8M+1gRzm6c/DJIY52TCd8dYGWW1tBLAkwulb5EtGJOZd/Nw3pa383JnCFh+L9aa5qBdZOK9ytuBt4Qx32N7QNw+NuBDbowUZwwwzEg1pSTxmr4u9tQJZeNtJS42SMbcFWAlE83WDswh7ooIiXkGE3DvCBDvjw02gEu0Cr9lat3Rx7de8RsXQ0KQbI13nsM6iQOZyJHcHRM6KmwknjsZN9Nk7hHKe4l/O2xiW+1A7+lUCpAWmcWbQJywLBCoOAiq9m5AwrtATrvIbrVUTPIE/ka9PegFeQRc3wYUsGA+MOHpF2qXnJ7gvGPXh8xs8U88C2x4IEQ+Sfw/kIiTUY2ucLsVd43UF0aJkzXpHG4+ssXv0SR0ZlINf3cTfDhkYBFwJDaDJA4KhJntYPl6A0hWiXCke6GVWFWtzPLTXO+6PHBm6QsZHfbWelnmmGkOOWWrvViFyDUhqSk/+IPNZr9TYJsUDglyYokPz4V2ItaBUQ5cuc/fzMeJolE9phnrvDOBB+9j1XeiiVZCwaDYZgdvUP8AUA`;
         wasm_core = new WasmMech();
         var xhr = new XMLHttpRequest();
         var codeUrl = `/code${window.location.pathname}`;
@@ -1299,6 +1680,6 @@ h4::before {
       }
       run();
     
-    </script>
-  </body>
-</html>
+            </script>
+          </body>
+        </html>
