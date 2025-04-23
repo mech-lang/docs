@@ -1,17 +1,15 @@
-
 <!DOCTYPE html>
-  <html>
+<html>
     <head>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous">
-      <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous">
-      </script>
-      <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"
-        onload="renderMathInElement(document.body);">
-      </script>
-      <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-      <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-      <style>
-        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+
+
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <style>
                   @import url(https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css);
 
 html {
@@ -491,11 +489,12 @@ code {
 }
 
 .mech-paragraph a {
-    color: #ee6262;
-    text-decoration: none;
+    color: #ffd781;
+    text-decoration: underline;
 }
 
 .mech-paragraph a:hover {
+    color: #ee6262;
     text-decoration: underline;
 }
 
@@ -1119,7 +1118,7 @@ mark {
 }
 
 .mech-citation-link {
-    color: #eedcb4;
+    color: #ffd781;
     text-decoration: none;
     word-break: break-all;
     transition: color 0.2s ease;
@@ -1129,318 +1128,38 @@ mark {
     color: #ee6262;
     text-decoration: underline;
 }
-        
-      </style>
+
+.mech-reference {
+    font-family: 'FiraCodeRegular', monospace;
+    align-items: baseline;
+    color: #ffd781;
+}
+
+.mech-reference a:hover {
+    color: #ee6262;
+}
+
+.mech-reference a {
+    color: #ffd781;
+    text-decoration: none;
+}
+        </style>
     </head>
     <body>
-      <div class="mech-root">
-        <div class="mech-toc">
-          <h1 class="mech-program-title">
-            Build and Run Mech Programs
-          </h1>
-          <section class="mech-toc-sections">
-            <section id="10256256531960684" section="47366548527342352" class="mech-program-section toc">
-            </section>
-            <section id="60729636669089557" section="19828278399897027" class="mech-program-section toc">
-              <h2 id="34855627453754182" section="1.0" class="mech-program-subtitle toc">
-                <a class="mech-program-subtitle-link toc" href="#4727546802116332">
-                  Basic Usage
-                </a>
-              </h2>
-              <h3 id="47209872676978835" section="1.1" class="mech-program-subtitle toc">
-                <a class="mech-program-subtitle-link toc" href="#71262077495680997">
-                  Usage
-                </a>
-              </h3>
-              <h3 id="39661139927023571" section="1.2" class="mech-program-subtitle toc">
-                <a class="mech-program-subtitle-link toc" href="#59753553005414588">
-                  Commands
-                </a>
-              </h3>
-              <h3 id="49679102170491632" section="1.3" class="mech-program-subtitle toc">
-                <a class="mech-program-subtitle-link toc" href="#13499876002385826">
-                  Arguments
-                </a>
-              </h3>
-              <h3 id="55613905542261204" section="1.4" class="mech-program-subtitle toc">
-                <a class="mech-program-subtitle-link toc" href="#45651896486001650">
-                  Options
-                </a>
-              </h3>
-            </section>
-            <section id="62115203941730927" section="34084800487801956" class="mech-program-section toc">
-              <h2 id="69393888157766498" section="2.0" class="mech-program-subtitle toc">
-                <a class="mech-program-subtitle-link toc" href="#58223533528643752">
-                  Running a Mech Program
-                </a>
-              </h2>
-            </section>
-            <section id="18015203367517088" section="71702093152383906" class="mech-program-section toc">
-              <h2 id="31317125182022992" section="3.0" class="mech-program-subtitle toc">
-                <a class="mech-program-subtitle-link toc" href="#61736674734608634">
-                  Subcommands
-                </a>
-              </h2>
-              <h3 id="21460358321530007" section="3.1" class="mech-program-subtitle toc">
-                <a class="mech-program-subtitle-link toc" href="#57362460444726725">
-                  format
-                </a>
-              </h3>
-              <h3 id="3515194389275115" section="3.2" class="mech-program-subtitle toc">
-                <a class="mech-program-subtitle-link toc" href="#12791816625140374">
-                  serve
-                </a>
-              </h3>
-            </section>
-            <section id="41096080108533912" section="9154369083417768" class="mech-program-section toc">
-              <h2 id="51218049831073583" section="4.0" class="mech-program-subtitle toc">
-                <a class="mech-program-subtitle-link toc" href="#67302080908161642">
-                  Additional Help
-                </a>
-              </h2>
-            </section>
-          </section>
-        </div>
-        <div class="mech-program">
-          <h1 class="mech-program-title">
-            Build and Run Mech Programs
-          </h1>
-          <div class="mech-program-body">
-            <section id="47366548527342352" section="47366548527342352" class="mech-program-section ">
-              <p class="mech-paragraph">
-                The 
-                <code class="mech-inline-code">mech</code>
-                 command-line tool provides various functionalities for working with Mech programs, including executing scripts, debugging, formatting code, and serving applications over HTTP. Below are the available options and subcommands.
-              </p>
-            </section>
-            <section id="19828278399897027" section="19828278399897027" class="mech-program-section ">
-              <h2 id="4727546802116332" section="1.0" class="mech-program-subtitle ">
-                <a class="mech-program-subtitle-link " href="#4727546802116332">
-                  Basic Usage
-                </a>
-              </h2>
-              <h3 id="71262077495680997" section="1.1" class="mech-program-subtitle ">
-                <a class="mech-program-subtitle-link " href="#71262077495680997">
-                  Usage
-                </a>
-              </h3>
-              <pre class="mech-code-block">mech [OPTIONS] [mech_paths]... [COMMAND]
-</pre>
-              <h3 id="59753553005414588" section="1.2" class="mech-program-subtitle ">
-                <a class="mech-program-subtitle-link " href="#59753553005414588">
-                  Commands
-                </a>
-              </h3>
-              <ul class="mech-unordered-list">
-                <li class="mech-ul-list-item">
-                  <p class="mech-paragraph">
-                    <em class="mech-em">
-                      format
-                    </em>
-                     - Format Mech source code into standard format.
-                  </p>
-                </li>
-                <li class="mech-ul-list-item">
-                  <p class="mech-paragraph">
-                    <em class="mech-em">
-                      serve
-                    </em>
-                     - Serve Mech program over an HTTP server.
-                  </p>
-                </li>
-                <li class="mech-ul-list-item">
-                  <p class="mech-paragraph">
-                    <em class="mech-em">
-                      help
-                    </em>
-                     - Print this message or the help of the given subcommand(s)
-                  </p>
-                </li>
-              </ul>
-              <h3 id="13499876002385826" section="1.3" class="mech-program-subtitle ">
-                <a class="mech-program-subtitle-link " href="#13499876002385826">
-                  Arguments
-                </a>
-              </h3>
-              <p class="mech-paragraph">
-                Source .mec files and directories. You can specify one or more 
-                <code class="mech-inline-code">.mec</code>
-                 files or directories containing Mech scripts. The command will execute the specified files in the order they are provided, and alpha-numeric sorting is applied to the files.
-              </p>
-              <pre class="mech-code-block">  [mech_paths]... 
-</pre>
-              <h3 id="45651896486001650" section="1.4" class="mech-program-subtitle ">
-                <a class="mech-program-subtitle-link " href="#45651896486001650">
-                  Options
-                </a>
-              </h3>
-              <ul class="mech-unordered-list">
-                <li class="mech-ul-list-item">
-                  <p class="mech-paragraph">
-                    <code class="mech-inline-code">-d</code>
-                    , 
-                    <code class="mech-inline-code">--debug</code>
-                     Prints debug information.
-                  </p>
-                </li>
-                <li class="mech-ul-list-item">
-                  <p class="mech-paragraph">
-                    <code class="mech-inline-code">-e</code>
-                    , 
-                    <code class="mech-inline-code">--tree</code>
-                     Prints the parse tree of the Mech program.
-                  </p>
-                </li>
-                <li class="mech-ul-list-item">
-                  <p class="mech-paragraph">
-                    <code class="mech-inline-code">-t</code>
-                    , 
-                    <code class="mech-inline-code">--time</code>
-                     Measures execution time of the program.
-                  </p>
-                </li>
-                <li class="mech-ul-list-item">
-                  <p class="mech-paragraph">
-                    <code class="mech-inline-code">-r</code>
-                    , 
-                    <code class="mech-inline-code">--repl</code>
-                     Starts the Mech Read-Eval-Print Loop (REPL).
-                  </p>
-                </li>
-              </ul>
-            </section>
-            <section id="34084800487801956" section="34084800487801956" class="mech-program-section ">
-              <h2 id="58223533528643752" section="2.0" class="mech-program-subtitle ">
-                <a class="mech-program-subtitle-link " href="#58223533528643752">
-                  Running a Mech Program
-                </a>
-              </h2>
-              <p class="mech-paragraph">
-                To execute a Mech script, provide the path to one or more 
-                <code class="mech-inline-code">.mec</code>
-                 files or directories containing Mech scripts. The command will execute the specified files in the order they are provided:
-              </p>
-              <pre class="mech-code-block">mech program.mec
+      <div class="mech-root"><div class="mech-toc"><h1 class="mech-program-title">Build and Run Mech Programs</h1><section class="mech-toc-sections"><section id="14595877968988518" section="22298152192868801" class="mech-program-section toc"></section><section id="62148755752455977" section="9438622517866986" class="mech-program-section toc"><h2 id="34855627453754182" section="1.0" class="mech-program-subtitle toc"><a class="mech-program-subtitle-link toc" href="#4727546802116332">Basic Usage</a></h2><h3 id="47209872676978835" section="1.1" class="mech-program-subtitle toc"><a class="mech-program-subtitle-link toc" href="#71262077495680997">Usage</a></h3><h3 id="39661139927023571" section="1.2" class="mech-program-subtitle toc"><a class="mech-program-subtitle-link toc" href="#59753553005414588">Commands</a></h3><h3 id="49679102170491632" section="1.3" class="mech-program-subtitle toc"><a class="mech-program-subtitle-link toc" href="#13499876002385826">Arguments</a></h3><h3 id="55613905542261204" section="1.4" class="mech-program-subtitle toc"><a class="mech-program-subtitle-link toc" href="#45651896486001650">Options</a></h3></section><section id="68428689749586615" section="16885191040256091" class="mech-program-section toc"><h2 id="69393888157766498" section="2.0" class="mech-program-subtitle toc"><a class="mech-program-subtitle-link toc" href="#58223533528643752">Running a Mech Program</a></h2></section><section id="35511651157512414" section="40687567824749606" class="mech-program-section toc"><h2 id="31317125182022992" section="3.0" class="mech-program-subtitle toc"><a class="mech-program-subtitle-link toc" href="#61736674734608634">Subcommands</a></h2><h3 id="21460358321530007" section="3.1" class="mech-program-subtitle toc"><a class="mech-program-subtitle-link toc" href="#57362460444726725">format</a></h3><h3 id="3515194389275115" section="3.2" class="mech-program-subtitle toc"><a class="mech-program-subtitle-link toc" href="#12791816625140374">serve</a></h3></section><section id="6645113166268276" section="21148124512303696" class="mech-program-section toc"><h2 id="51218049831073583" section="4.0" class="mech-program-subtitle toc"><a class="mech-program-subtitle-link toc" href="#67302080908161642">Additional Help</a></h2></section></section></div><div class="mech-program"><h1 class="mech-program-title">Build and Run Mech Programs</h1><div class="mech-program-body"><section id="22298152192868801" section="22298152192868801" class="mech-program-section "><p class="mech-paragraph">The <code class="mech-inline-code">mech</code> command-line tool provides various functionalities for working with Mech programs, including executing scripts, debugging, formatting code, and serving applications over HTTP. Below are the available options and subcommands.</p></section><section id="9438622517866986" section="9438622517866986" class="mech-program-section "><h2 id="4727546802116332" section="1.0" class="mech-program-subtitle "><a class="mech-program-subtitle-link " href="#4727546802116332">Basic Usage</a></h2><h3 id="71262077495680997" section="1.1" class="mech-program-subtitle "><a class="mech-program-subtitle-link " href="#71262077495680997">Usage</a></h3><pre class="mech-code-block">mech [OPTIONS] [mech_paths]... [COMMAND]
+</pre><h3 id="59753553005414588" section="1.2" class="mech-program-subtitle "><a class="mech-program-subtitle-link " href="#59753553005414588">Commands</a></h3><ul class="mech-unordered-list"><li class="mech-ul-list-item"><p class="mech-paragraph"><em class="mech-em">format</em> - Format Mech source code into standard format.</p></li><li class="mech-ul-list-item"><p class="mech-paragraph"><em class="mech-em">serve</em> - Serve Mech program over an HTTP server.</p></li><li class="mech-ul-list-item"><p class="mech-paragraph"><em class="mech-em">help</em> - Print this message or the help of the given subcommand(s)</p></li></ul><h3 id="13499876002385826" section="1.3" class="mech-program-subtitle "><a class="mech-program-subtitle-link " href="#13499876002385826">Arguments</a></h3><p class="mech-paragraph">Source .mec files and directories. You can specify one or more <code class="mech-inline-code">.mec</code> files or directories containing Mech scripts. The command will execute the specified files in the order they are provided, and alpha-numeric sorting is applied to the files.</p><pre class="mech-code-block">  [mech_paths]... 
+</pre><h3 id="45651896486001650" section="1.4" class="mech-program-subtitle "><a class="mech-program-subtitle-link " href="#45651896486001650">Options</a></h3><ul class="mech-unordered-list"><li class="mech-ul-list-item"><p class="mech-paragraph"><code class="mech-inline-code">-d</code>, <code class="mech-inline-code">--debug</code> Prints debug information.</p></li><li class="mech-ul-list-item"><p class="mech-paragraph"><code class="mech-inline-code">-e</code>, <code class="mech-inline-code">--tree</code> Prints the parse tree of the Mech program.</p></li><li class="mech-ul-list-item"><p class="mech-paragraph"><code class="mech-inline-code">-t</code>, <code class="mech-inline-code">--time</code> Measures execution time of the program.</p></li><li class="mech-ul-list-item"><p class="mech-paragraph"><code class="mech-inline-code">-r</code>, <code class="mech-inline-code">--repl</code> Starts the Mech Read-Eval-Print Loop (REPL).</p></li></ul></section><section id="16885191040256091" section="16885191040256091" class="mech-program-section "><h2 id="58223533528643752" section="2.0" class="mech-program-subtitle "><a class="mech-program-subtitle-link " href="#58223533528643752">Running a Mech Program</a></h2><p class="mech-paragraph">To execute a Mech script, provide the path to one or more <code class="mech-inline-code">.mec</code> files or directories containing Mech scripts. The command will execute the specified files in the order they are provided:</p><pre class="mech-code-block">mech program.mec
 mech script1.mec script2.mec dir1
-</pre>
-            </section>
-            <section id="71702093152383906" section="71702093152383906" class="mech-program-section ">
-              <h2 id="61736674734608634" section="3.0" class="mech-program-subtitle ">
-                <a class="mech-program-subtitle-link " href="#61736674734608634">
-                  Subcommands
-                </a>
-              </h2>
-              <h3 id="57362460444726725" section="3.1" class="mech-program-subtitle ">
-                <a class="mech-program-subtitle-link " href="#57362460444726725">
-                  format
-                </a>
-              </h3>
-              <p class="mech-paragraph">
-                Formats Mech source code into a standard format.
-              </p>
-              <pre class="mech-code-block">mech format [OPTIONS] [FILES]
-</pre>
-              <p class="mech-paragraph">
-                <em class="mech-em">
-                  Options:
-                </em>
-              </p>
-              <ul class="mech-unordered-list">
-                <li class="mech-ul-list-item">
-                  <p class="mech-paragraph">
-                    <code class="mech-inline-code">-o</code>
-                    , 
-                    <code class="mech-inline-code">--out <PATH></code>
-                     Specifies the output directory.
-                  </p>
-                </li>
-                <li class="mech-ul-list-item">
-                  <p class="mech-paragraph">
-                    <code class="mech-inline-code">-s</code>
-                    , 
-                    <code class="mech-inline-code">--stylesheet <STYLESHEET></code>
-                     Sets the stylesheet for HTML output.
-                  </p>
-                </li>
-                <li class="mech-ul-list-item">
-                  <p class="mech-paragraph">
-                    <code class="mech-inline-code">-t</code>
-                    , 
-                    <code class="mech-inline-code">--html</code>
-                     Outputs formatted code as HTML.
-                  </p>
-                </li>
-              </ul>
-              <p class="mech-paragraph">
-                <em class="mech-em">
-                  Example:
-                </em>
-              </p>
-              <pre class="mech-code-block">mech format -o formatted/ my_script.mec
-</pre>
-              <h3 id="12791816625140374" section="3.2" class="mech-program-subtitle ">
-                <a class="mech-program-subtitle-link " href="#12791816625140374">
-                  serve
-                </a>
-              </h3>
-              <p class="mech-paragraph">
-                Serves a Mech program over an HTTP server.
-              </p>
-              <pre class="mech-code-block">mech serve [OPTIONS] [FILES]
-</pre>
-              <p class="mech-paragraph">
-                <em class="mech-em">
-                  Options:
-                </em>
-              </p>
-              <ul class="mech-unordered-list">
-                <li class="mech-ul-list-item">
-                  <p class="mech-paragraph">
-                    <code class="mech-inline-code">-p</code>
-                    , 
-                    <code class="mech-inline-code">--port [PORT]</code>
-                     Sets the port for the server (default: 8081).
-                  </p>
-                </li>
-                <li class="mech-ul-list-item">
-                  <p class="mech-paragraph">
-                    <code class="mech-inline-code">-a</code>
-                    , 
-                    <code class="mech-inline-code">--address [ADDRESS]</code>
-                     Sets the server address (default: 127.0.0.1).
-                  </p>
-                </li>
-              </ul>
-              <p class="mech-paragraph">
-                <em class="mech-em">
-                  Example:
-                </em>
-              </p>
-              <pre class="mech-code-block">mech serve -p 3000 -a 0.0.0.0 my_script.mec
-</pre>
-            </section>
-            <section id="9154369083417768" section="9154369083417768" class="mech-program-section ">
-              <h2 id="67302080908161642" section="4.0" class="mech-program-subtitle ">
-                <a class="mech-program-subtitle-link " href="#67302080908161642">
-                  Additional Help
-                </a>
-              </h2>
-              <p class="mech-paragraph">
-                For more information on a specific command, you can use the 
-                <code class="mech-inline-code">--help</code>
-                 option with that command. For example:
-              </p>
-              <pre class="mech-code-block">mech --help
+</pre></section><section id="40687567824749606" section="40687567824749606" class="mech-program-section "><h2 id="61736674734608634" section="3.0" class="mech-program-subtitle "><a class="mech-program-subtitle-link " href="#61736674734608634">Subcommands</a></h2><h3 id="57362460444726725" section="3.1" class="mech-program-subtitle "><a class="mech-program-subtitle-link " href="#57362460444726725">format</a></h3><p class="mech-paragraph">Formats Mech source code into a standard format.</p><pre class="mech-code-block">mech format [OPTIONS] [FILES]
+</pre><p class="mech-paragraph"><em class="mech-em">Options:</em></p><ul class="mech-unordered-list"><li class="mech-ul-list-item"><p class="mech-paragraph"><code class="mech-inline-code">-o</code>, <code class="mech-inline-code">--out <PATH></code> Specifies the output directory.</p></li><li class="mech-ul-list-item"><p class="mech-paragraph"><code class="mech-inline-code">-s</code>, <code class="mech-inline-code">--stylesheet <STYLESHEET></code> Sets the stylesheet for HTML output.</p></li><li class="mech-ul-list-item"><p class="mech-paragraph"><code class="mech-inline-code">-t</code>, <code class="mech-inline-code">--html</code> Outputs formatted code as HTML.</p></li></ul><p class="mech-paragraph"><em class="mech-em">Example:</em></p><pre class="mech-code-block">mech format -o formatted/ my_script.mec
+</pre><h3 id="12791816625140374" section="3.2" class="mech-program-subtitle "><a class="mech-program-subtitle-link " href="#12791816625140374">serve</a></h3><p class="mech-paragraph">Serves a Mech program over an HTTP server.</p><pre class="mech-code-block">mech serve [OPTIONS] [FILES]
+</pre><p class="mech-paragraph"><em class="mech-em">Options:</em></p><ul class="mech-unordered-list"><li class="mech-ul-list-item"><p class="mech-paragraph"><code class="mech-inline-code">-p</code>, <code class="mech-inline-code">--port [PORT]</code> Sets the port for the server (default: 8081).</p></li><li class="mech-ul-list-item"><p class="mech-paragraph"><code class="mech-inline-code">-a</code>, <code class="mech-inline-code">--address [ADDRESS]</code> Sets the server address (default: 127.0.0.1).</p></li></ul><p class="mech-paragraph"><em class="mech-em">Example:</em></p><pre class="mech-code-block">mech serve -p 3000 -a 0.0.0.0 my_script.mec
+</pre></section><section id="21148124512303696" section="21148124512303696" class="mech-program-section "><h2 id="67302080908161642" section="4.0" class="mech-program-subtitle "><a class="mech-program-subtitle-link " href="#67302080908161642">Additional Help</a></h2><p class="mech-paragraph">For more information on a specific command, you can use the <code class="mech-inline-code">--help</code> option with that command. For example:</p><pre class="mech-code-block">mech --help
 mech serve --help
-</pre>
-            </section>
-          </div>
-        </div>
-        <div id = "mech-output">
-        </div>
-      </div>
-      <script>
-        
+</pre></section></div></div>
+      <div id = "mech-output"></div>
+    </div>
+    <script>
 
 let observer = null;
 let userScrolling = false;
@@ -1568,9 +1287,7 @@ entries
               const visibleTop = scrollTop;
               const visibleBottom = scrollTop + tocHeight;
 
-              if (itemOffsetTop 
-        < visibleTop || itemOffsetTop + itemHeight >
-           visibleBottom) {
+              if (itemOffsetTop < visibleTop || itemOffsetTop + itemHeight > visibleBottom) {
                 toc.scrollTo({
                   top: itemOffsetTop - tocHeight / 2 + itemHeight / 2,
                   behavior: "smooth"
@@ -1683,8 +1400,7 @@ window.addEventListener("scroll", () => {
     lastScrollY = currentScrollY;
   }
 
-  if (percent 
-          < 0.05) {
+  if (percent < 0.05) {
     createObserver("0px 0px -90% 0px", scrolling_down);
   } else if (percent < 0.2) {
     createObserver("-0% 0px -90% 0px", scrolling_down);
@@ -1708,15 +1424,14 @@ window.addEventListener("scroll", () => {
 });
 
 </script>
-            <script type="module">
-              
+    <script type="module">
 
 
       import init, {WasmMech} from '/pkg/mech_wasm.js';
       let wasm_core;
       async function run() {
         await init();
-        var code = `GzoKAIyU7jLDEZLMHuZUS7lEzSUOkuVAwa3VpMC2iuh645RdIm/8/O/533/PpQAbr//ffo34bU8fRFcbLdMa9837g4rMoNJMGqGxxJVGaBxCDIBujOPCLGK4DXNl8l0jNkiJ0M11k4XyEnfW4w7n6yPf8c6vIw6XEf9cCSokEkAJ7rXHgUAQJDx459cQAkT5l2OgwkwGppYv5/xsmX0qnTeeD28DRjLdwPOerlv+p1pwAE1CfflVXTU064HuggmNKAfDybBvIPwQhZ8cKCxOlB3ERtMeESP8BTg3QwT+EYIy4qChUVzJQhCK03CUoAxeVxdmDgRowqibZv5p+4XLuof3iuOWi/pdIQTvl/HCropRohIaNT0D/X6Is3g8wJSAQhWUodJtTUISUba5Gd+Z6ko2J5Ua5rDfmFwni0QykpxVaFUG4d+XglQY2yBvmFHjsnYaTx9/qziEpkQKU2NEKgA9fWlI92DPkQcKGolBlFHxusFMxAF6PW7o9wfS4fSKUuba8MC0iSzLJgLgqpIWermwko+s1eZxdXu+iG6tAgac/GmrL8yT/DxIILE0v5BfQfmHEu6k/2kHD1QLvCW7nF1Y3zyUW5kotOgHbiJNaoQp8Ofw4p2k0YD5+PXBbIKwRcJn3DikiOr3RX41/58mMhwykyqWSBkp1Uyb9VdZNcYvQAGQ1LzQQAuhpENcY1oYJDNNBlmqoZZEWWoxGiRiqI0pLaUNKXSCng660JluhaAh+nTUEwQG6VxRcfTIbW1gaVroSX2ObvBLAxrZDdaAqBENbNT0L6igTFndJFA/oUayMR18bUEru8VaNFNOtLBVZcZ8V9nCEMkKcxxslYlZeNAT9jsr+9sDopVs2QpLV+eGQ50+lXoL+qCvROlX74z7BIZTp6jRpzljXSYDlSGDGLP5xpwx/09/v8SbMRaMaWL8ocFKizsqPiRb0bmWLzsjyOrijoomGSby78ShUGzrQCdWTEmq+WNsTA1EyMrXi/ifZ5++LZwgEx2a0DLDVxsClE6yO31XxWkyQyJEQdnDCdGZWTqLXiD4ZIElLGZZUX7SAhVzJ8ydxrbQyqHk/LDeqvx9+1TbjjRs5a1JvAV9G2xhM9sqaodbJ+ZOvTydbaPdQNnihx4AtbBsMAA4uRlhN+0NDsmWILMlkzC2hERZxZ9XeI2v3xq9i49OfurTXCJkUnaUGvEnXcaZWaSLSBMDNXnDfKIxNcwffh43r2z7zhWyKlikghhcZ+vRFqw0Xp/p89PfxZtkc1CilipdvW/TlbRDdsU+3fdo8NkBRzjMsVQcfVV8OgfzL7oOOnmUon4RmQ1XSE9Hdb8Jk3aGT7WnOgPCKTirFR08dcEVLnOtNLtGqj/tkfTnrotuNR0mzXfWk1jXGZkUbdEW85Fbc7fbQLylb0+aNTJmPvPR9lvEzVPeFp97tkPsA/lIyIn4sTMGag99hs9pEXTu3IiCmlPHFrMlx35kn+TQMTm20FXcu38+to+Xq/o6qhA+nnfvAMlVeyXKP145zuUNpqnab6lYPL564IxcEA==`;
+        var code = `GzoKAIyU7jLDEZLMHuZUn3KOGinhAlsOFNxKjQtsq4iuN07ZBd688fO/53//PZcCbLz+f/s14rc9fRBdbbRMa9w37w8qMoNKM2mExhJXGqFxCDEAujGOC7OI4TbMlcl3jdggJUI31w2LXUvcWU87gq9PYje6uIk4XAb+uds0gCe4xvAmEghomhofo4sbTCLj+q/AQIVMBqaWL+f8bJl9Kp23UQxvA0Yy3cDLnq5b/qdacABNQn35dV01POuB7oIJjSgHw8mwbyD8EIWfHCgsTpQdxEbTHhEj/AU4NyPHfwBccwcNjeJKlsRkjqTSwLV5XV2KOpAgeadumsWH7RcuaxzeK05aLho3lFK8X8YLGxmWhgzQqGka6PdDjuZyCWokDGJwnSzd1gIWGNd1IeM7U13J5qRSwxz2G5PrZJEq8MKcQavShH9fEYspbIe8YUaNy9ppPHv6rRIQmlJFVhwnUoHo6SthqQl7njxQ0EgMooyKzxvMRByg1+OGgXiwlCqtGmWuTQ1Mm2ihLfkEuKq0hV6urBQja7V5XN1RrKJbq4ABJ3/a6gvboG3B1Ehiadti2yrXfyjhTvqfdvBAtcBbssvZhfXNQ7mViUKLfuAm0qRGmAJ/Di/eSRoNyKevj2YThC0SPuPWIUVUv6/a1tr+k3yzgMxkhnVCF1KqqTbr76E9WX6BBpqayEsLrSTXZFhY1EqZmkrJIEstZhW47mwxGiRiqI0pq2gNG3SCkY22sKltJaEh+mxm5wkM0bmi4uiR29rA0rSyC/Y83eCXClayK7QCUSMqrFIzsKCCMmV1k0D9hCqFykzwcw1r2TVao5lyosZqVTLmu8oWhkhWyHGwVRKz8KAnHAhWD3YGVa1Q8w2Wrm4dDnX6TOot6Mf+TkK+emfDZzCcOkONPs0Z6zIZqAw54MzlO/POwj/9/RJv1ll0JvmJxwYrLe5k2GOyFe61fNkZRVYXuxkmYQTk34kjodjmohsrqyTV/HE6nklwWPl6kfjz7LO3hZMw6ZK8lRm+2hCgdJLd6RsZNgOzwMHguokTorNzZI55ieCzh57wqGel+UkLVMyfMHca32NeK9dCHNVbVbxvn2rbkYa9Nm8Kb8HYR1/41Lc6tMOtE/OnXp7O95lf4bomjiIAamHZYABwcjPKr/qbHJKtUWdrqmFsCc10lXhe4TWxfmuMLj86xVlMc4nSBe0aNeJPuowzu0SWGMkP1uQN+UxjakQ8/jxpXtn2nauwJlikghjcoBvpFqx0Xp8Zi7PfxVuwNSTfmypdvW/TlbQLe+KAHHgk+BJgIAIaWBkcfVV8OAfzLxoBC9q4VvWLyGy4Qno6qgdMmLSzYro+7Q6qoD1Yq+jgWYihCGloldg1Uv1hj6Q/N0IW9qTDpPnOehLr3NEpVVd1NR+FveFOG4jX5PVJWSNj8kWM1d8iIc9EXX3u2Q6xd/Ae4ETu2BkDtYc+4seSCDp3fkRBzZlji9mSYz+yT3LoBE48dBWPHl5O/JOVqv6OKoSP5907QHLVUYnyT1ZPckWDlKr9VoYVj68eOIdLAA==`;
         wasm_core = new WasmMech();
         var xhr = new XMLHttpRequest();
         var codeUrl = `/code${window.location.pathname}`;
@@ -1741,7 +1456,6 @@ window.addEventListener("scroll", () => {
         xhr.send(null);        
       }
       run();
-    
-            </script>
-          </body>
-        </html>
+    </script>
+  </body>
+</html>
