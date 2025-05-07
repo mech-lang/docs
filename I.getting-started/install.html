@@ -1,0 +1,1290 @@
+
+<html>
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <style>
+      
+                  @import url(https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css);
+
+html {
+    scroll-behavior: smooth;
+}
+
+.mech-program {
+    counter-reset: h2;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 700px;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #2F353B;
+    margin: 0;
+    padding: 0;
+    font-size: 12pt;
+}
+
+.mech-root {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+#mech-output {
+    max-width: 700px;
+    min-width: 250px;
+    background-color: #171D21;
+    color: #f2ead9;
+    border-radius: 10px;
+}
+
+.mech-toc {
+    width: 250px;
+    min-width: 250px;
+    counter-reset: h2;
+    background-color: #171D21;
+    color: #f2ead9;
+    overflow-y: auto;
+    margin-right: 20px;
+    padding-right: 15px;
+    padding-left: 10px;
+    position: sticky; 
+    top: 0; 
+    height: 100vh;
+}
+
+.mech-toc h2 {
+    line-height: 23px;
+}
+
+.mech-toc h3 {
+    line-height: 23px;
+}
+
+.mech-toc::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.mech-toc::-webkit-scrollbar-track {
+    background: transparent; 
+}
+
+.mech-toc::-webkit-scrollbar-thumb {
+    background: rgba(128, 128, 128, 0.7); 
+    border-radius: 10px; 
+}
+
+.mech-toc::-webkit-scrollbar-thumb:hover {
+    background: rgba(128, 128, 128, 0.9); 
+}
+
+/* For Firefox */
+.mech-toc {
+    scrollbar-color: rgba(128, 128, 128, 0.7) transparent;
+    scrollbar-width: thin;
+}
+
+.mech-toc h1 {
+    visibility: hidden;
+    font-size: 12pt;
+}
+
+.mech-toc h2 {
+    font-size: 12pt;
+    padding-left: 15px;
+}
+
+h2.toc::before {
+    padding-right: 5px;
+}
+
+h3.toc::before {
+    font-size: 12pt;
+    padding-right: 5px;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.mech-toc h2 a {
+    color: #f2ead9;
+    text-decoration: none;
+}
+
+.mech-toc h2:hover::before {
+    color: #ee6262;
+}
+
+.mech-toc h2 a:hover {
+    color: #ee6262;
+    text-decoration: none;
+}
+
+.mech-toc h3 {
+    font-size: 12pt;
+    padding-left: 30px;
+}
+
+.mech-toc h3 a {
+    color: #f2ead9;
+    text-decoration: none;
+}
+
+.mech-toc h3:hover::before {
+    color: #ee6262;
+}
+
+.mech-toc h3 a:hover {
+    color: #ee6262;
+    text-decoration: none;
+}
+
+.mech-matrix {
+    display: inline-flex;
+}
+
+.mech-bracket.end {
+    align-self: flex-end;
+    margin-left: -10px;
+}
+
+.mech-slice-ref {
+    display: inline-flex;
+}
+
+.mech-matrix-column {
+    display: flex;
+    flex-direction: column;
+    padding-right: 10px;
+}
+
+.mech-variable-assign-op {
+    padding-left:  6px;
+    padding-right: 6px;
+    color: #ffd139;
+}
+
+.mech-transition-statement {
+    color: #ffd139;
+}
+
+.mech-transition-output {
+    color: #ffd139;
+}
+
+.mech-fsm-arm-last {
+    color: #ffd139;
+}
+
+.mech-term {
+    display: inline-flex;
+}
+
+.mech-formula-operator {
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.mech-program .mech-program-title {
+    width: 900px;
+    font-family: 'FiraCodeRegular', monospace;
+    padding-bottom: 10px;
+    border-bottom: 4px dashed #d19710;
+    color: #f2ead9;
+    letter-spacing: 2px;
+    font-size: 22pt;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 16px;
+    margin-left: -100px;
+}
+
+.mech-program h2 a {
+    color: #f2ead9;
+    text-decoration: none;
+}
+
+.mech-program h2 {
+    width: 850px;
+    font-family: 'FiraCodeRegular', monospace;
+    padding-bottom: 10px;
+    border-bottom: 3px dashed #d19710;
+    color: #f2ead9;
+    font-size: 16pt;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    margin-top: 50px;
+    margin-left: -75px;
+}
+
+.mech-program h3 a {
+    color: #f2ead9;
+    text-decoration: none;
+}
+
+.mech-program h3 {
+    font-family: 'FiraCodeRegular', monospace;
+    color: #f2ead9;
+    font-size: 14pt;
+    font-weight: bold;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    margin-left: -48px;
+}
+
+.mech-program h4 a {
+    color: #f2ead9;
+    text-decoration: none;
+}
+
+.mech-program h4 {
+    font-family: 'FiraCodeRegular', monospace;
+    color: #f2ead9;
+    font-size: 12pt;
+    font-weight: bold;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.mech-program h4 a {
+    color: #f2ead9;
+    text-decoration: none;
+}
+
+.mech-program h4 {
+    font-family: 'FiraCodeRegular', monospace;
+    color: #f2ead9;
+    font-size: 12pt;
+    font-weight: bold;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+h4.toc {
+    display: none;
+}
+
+.mech-variable-mutable {
+    color: #ada594;
+}
+
+.mech-section-element {
+}
+
+.mech-fsm-specification
+
+.mech-fsm-sigil{
+    display: inline-flex;
+}
+
+.mech-code-block {
+    background-color: #171D21;
+    color: #ada594;
+    font-family: 'FiraCodeLight', monospace;
+    font-size: 12pt;
+    line-height: 18px;
+    border-radius: 0px;
+    padding: 30px;
+    border-radius: 10px;
+    overflow-x: auto;
+}
+
+.mech-code-block::-webkit-scrollbar {
+    height: 8px; /* Horizontal scrollbar height */
+}
+
+.mech-code-block::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.mech-code-block::-webkit-scrollbar-thumb {
+    background: rgba(128, 128, 128, 0.7);
+    border-radius: 10px;
+}
+
+.mech-code-block::-webkit-scrollbar-thumb:hover {
+    background: rgba(128, 128, 128, 0.9);
+}
+
+/* Firefox */
+.mech-code-block {
+    scrollbar-color: rgba(128, 128, 128, 0.7) transparent;
+    scrollbar-width: thin;
+}
+
+.mech-grammar {
+    background-color: #171D21;
+    color: #ada594;
+    font-family: 'FiraCodeLight', monospace;
+    font-size: 12pt;
+    line-height: 18px;
+    border-radius: 0px;
+    padding: 30px;
+    border-radius: 10px;
+    overflow-x: auto;
+}
+
+.mech-grammar::-webkit-scrollbar {
+    height: 8px; /* Horizontal scrollbar height */
+}
+
+.mech-grammar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.mech-grammar::-webkit-scrollbar-thumb {
+    background: rgba(128, 128, 128, 0.7);
+    border-radius: 10px;
+}
+
+.mech-grammar::-webkit-scrollbar-thumb:hover {
+    background: rgba(128, 128, 128, 0.9);
+}
+
+/* Firefox */
+.mech-grammar {
+    scrollbar-color: rgba(128, 128, 128, 0.7) transparent;
+    scrollbar-width: thin;
+}
+
+.mech-grammar-identifier {
+    color: #ccbbc2;
+}
+
+.mech-grammar-definition {
+    color: #ccbbc2;
+}
+
+.mech-grammar-definition a {
+    color: #ccbbc2;
+    text-decoration: none;
+}
+
+.mech-grammar-definition a:hover {
+    color: #ccbbc2;
+    text-decoration: underline;
+}
+
+.mech-grammar-choice {
+    margin-left: 20px;
+}
+
+.mech-grammar-sequence {
+    margin-left: 20px;
+}
+
+
+.mech-grammar-terminal {
+    color: #ee6262;
+}
+
+
+.mech-code {
+}
+
+.mech-statement {
+}
+
+.mech-variable-define {
+    display: flex;
+}
+
+.mech-fsm-specification-header {
+    display: inline-flex;
+}
+
+.mech-variable-mutable {
+    color: #ffd139;
+}
+
+.mech-var-name {
+    color: #ccbbc2;
+}
+
+.mech-expression {
+}
+
+.mech-literal {
+}
+
+.mech-number {
+    color: #C7DCAE;
+}
+
+.mech-factor {
+    display: inline-flex;
+}
+
+.mech-term {
+}
+
+code {
+    margin: 0px;
+    padding: 0px;
+}
+
+.mech-inline-code {
+    background-color: #171D21;
+    color: #ada594;
+    font-family: 'FiraCodeLight', monospace;
+    font-size: 12pt;
+    padding: 3px;
+    margin: 0px;
+    border-radius: 5px;
+}
+
+.mech-inline-mech-code {
+    background-color: #171D21;
+    color: #C7DCAE;
+    font-family: 'FiraCodeLight', monospace;
+    font-size: 12pt;
+    padding: 3px;
+    margin: 0px;
+    border-radius: 5px;
+}
+
+
+.mech-formula-operator {
+    color: #ffd139;
+}
+
+.mech-op-assign-op {
+    color: #ffd139;
+}
+
+.mech-paragraph {
+    color: #f2ead9;
+    line-height: 25px;
+}
+
+.mech-paragraph a {
+    color: #ee6262;
+    text-decoration: none;
+}
+
+.mech-paragraph a:hover {
+    text-decoration: underline;
+}
+
+.mech-all {
+    color: #ffd139;
+}
+
+.mech-transpose-op {
+    color: #ffd139;
+}
+
+.mech-negate-op {
+    color: #ffd139;
+}
+
+.mech-record {
+    display: flex;
+}
+
+.mech-binding {
+    display: inline-flex;
+}
+
+.mech-function-call {
+    display: inline-flex;
+}
+
+.mech-slice {
+    display: inline-flex;
+}
+
+.mech-subscript {
+    display: inline-flex;
+}
+
+.mech-bracket {
+    display: inline-flex;
+    color: #A157B5
+}
+
+.mech-start-brace {
+    color: #a157b5
+}
+
+.mech-clickable:hover {
+    background-color: #2a2b34;
+    cursor: pointer;
+}
+
+.mech-end-brace {
+    color: #a157b5
+}
+
+.mech-dot {
+    color: #9cc7f3;
+}
+
+.mech-binding-colon-op {
+    padding-right: 6px;
+}
+
+.mech-right-paren {
+    color: #a157b5
+}
+
+.mech-left-paren {
+    color: #a157b5
+}
+
+.mech-binding-name {
+    color: #9cc7f3;
+    padding-left: 6px;
+}
+
+.mech-parenthetical {
+    color: #a157b5;
+}
+
+.mech-function-name {
+    color: #d8a5e4;
+}
+
+.mech-kind-annotation {
+    display: inline-flex;
+}
+
+.mech-kind {
+    color: #ec8e8e;
+    display: inline-flex;
+}
+
+.mech-fsm-define-op {
+    padding-left: 6px;
+}
+
+.mech-fsm-output { 
+    padding-left: 6px;
+    color: #ffd139;
+}
+
+.mech-fsm-input {
+    color: #ccbbc2;
+    display: inline-flex;
+}
+
+.mech-fsm-name {
+    color: #d8a5e4;
+}
+
+.mech-kind-annotation {
+    color: #ee6262;
+}
+
+.mech-kind .mech-literal .mech-number {
+    color: #ec8e8e;
+}
+
+.mech-fsm-state {
+    display: inline-flex;
+}
+
+.mech-fsm-states {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.mech-state-definition {
+    display: inline-flex;
+}
+
+.mech-fsm-arms {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.mech-fsm-arm {
+    display: inline-flex;
+}
+
+.mech-fsm-implementation-header {
+    display: inline-flex;
+}
+
+.mech-tuple-struct {
+    display: inline-flex;
+    color: #ffd139;
+}
+
+.mech-fsm-sigil {
+    color: #ffd139;
+}
+
+.mech-fsm-state {
+    color: #ffd139;
+}
+
+.mech-tuple-struct-patterns {
+    display: inline-flex;
+}
+
+.mech-fsm-define-op {
+    padding-right: 6px;
+    color: #ffd139;
+}
+
+.mech-matrix.empty .end  {
+    margin-left: 0px;
+}
+
+.mech-fsm-implementation {
+    margin-top: 20px;
+}
+
+.mech-fsm-guards {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.mech-fsm-guard-arm {
+    color: #ffd139;
+    display: inline-flex;
+}
+
+.mech-guard-condition {
+    padding-left: 6px;
+}
+
+.mech-transition-output {
+    padding-left: 0px;
+}
+
+.mech-state-variables {
+    display: inline-flex;
+}
+
+.mech-transition-next {
+    padding-left: 0px;
+    color: #ffd139;
+}
+
+.mech-guard-condition {
+    display: inline-flex;
+    margin: 0px;
+}
+
+.mech-pattern-wildcard {
+    display: inline-flex;
+    color: #ee6262;
+}
+
+.mech-tuple-struct {
+    margin-right: 6px;
+}
+
+.mech-state-name {
+    color: #dbc3a5;
+}
+
+.mech-tuple-struct-name {
+    color: #dbc3a5;
+}
+
+.mech-code-block .mech-code:first-child .mech-comment {
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.mech-comment {
+    color: #ef5f90;;
+    font-style: italic;
+    padding-top: 20px;
+}
+
+.mech-string {
+    color: #ee6262;
+}
+
+
+ul {
+    color: #F3B62D;
+    font-weight: bold;
+}
+
+ol {
+    color: #F3B62D;
+    font-weight: bold;
+}
+
+
+.mech-check-list {
+    list-style: none;
+    padding-left: 9px;
+    margin-top: 0.5em;
+}
+
+.mech-check-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5em;
+    margin: 0;
+    color: #dcd4c9;
+}
+
+.mech-check-list-item input[type="checkbox"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    margin-top: 3px;
+    border: 2px solid #777;
+    border-radius: 3px;
+    background-color: #171D21;
+    cursor: pointer;
+    position: relative;
+}
+
+.mech-check-list-item input[type="checkbox"]:checked {
+    background-color: #171D21;
+    border-color: #F3B62D;
+}
+
+.mech-check-list-item input[type="checkbox"]:checked::after {
+    content: "✓";
+    color: #F3B62D;
+    position: absolute;
+    top: 0px;
+    left: 1px;
+    font-size: 12px;
+    line-height: 1;
+}
+
+.mech-list-item-emoji {
+    list-style-type: none;
+    color: #ee6262;
+}
+
+.mech-list-item-emoji {
+    line-height: 0px;
+    color: #ee6262;
+}
+
+.mech-list-item-emoji::before {
+    content: attr(data-bullet); 
+    position: relative;         
+    font-size: 12pt;          
+    color: #ee6262;;    
+    right: 30px;
+    top: 13px;
+}
+
+.mech-figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px auto;
+}
+
+.mech-image {
+    max-width: 110%;
+}
+
+.mech-figure-label {
+    color: #F3B62D; 
+    font-size: 12pt;
+}
+
+.mech-figure-caption {
+    margin-top: 1em;
+    color: #eadec2;
+    font-size: 12pt;
+    text-align: left;;
+    line-height: 1.4;
+    font-style: italic;
+    padding: 1em;
+}
+
+li {
+    padding-left: 5px;
+}
+
+li p {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-weight: normal;
+}
+
+.mech-table-header {
+    color: #dbc3a5;
+}
+
+.mech-table-rows {
+}
+
+.mech-table-row {
+}
+
+.mech-table {
+    border-collapse: collapse;
+    background-color: #2F353B;
+    color: #f2ead9; 
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.mech-table thead {
+    background-color: #171D21;
+}
+
+.mech-table .mech-table-header-cell {
+    color: #f2ead9; 
+    padding: 10px;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid #333; 
+}
+
+.mech-table .mech-table-row-even {
+    background-color: #232A30; 
+}
+
+.mech-table .mech-table-row-odd {
+    background-color: #171D21; 
+}
+
+.mech-table .mech-table-cell {
+    padding: 10px;
+    border-bottom: 1px solid #333; 
+    text-align: left;
+}
+
+.mech-table tbody tr:hover {
+    background-color: #3A4148; 
+}
+
+.mech-table a {
+    color: #ee6262; 
+    text-decoration: none;
+}
+
+.mech-table a:hover {
+    color: #f2ead9;
+}
+
+.mech-block-quote {
+    width: 80%;
+    background-color: #232A30; 
+    border-left: 4px solid #F3B62D;; 
+    padding: 15px 20px;
+    color: #f2ead9; 
+    font-style: italic; 
+    margin: auto;
+    border-radius: 5px;
+}
+
+.mech-block-quote blockquote {
+    margin: 0;
+    padding: 0;
+    font-size: 1.2em;
+}
+
+.mech-thematic-break {
+    border: 0;
+    border-top: 2px solid #7e8892;
+    margin: 30px 0;
+    width: 100%;
+    opacity: 0.7;
+}
+
+.mech-fenced-mech-block {
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.mech-fenced-mech-block .mech-code-block {
+    background-color: #171D21;
+    border-radius: 10px 10px 0px 0px;  
+    border-bottom: 2px solid rgb(199, 220, 174);
+    margin-bottom: 0px;
+}
+
+.mech-block-output {
+    margin-top: 0px;
+    background-color: #222A30; 
+    color: #f2ead9;
+    font-family: 'FiraCodeLight', monospace;
+    font-size: 12pt;
+    padding: 20px;
+    border-radius: 0px 0px 10px 10px; /* Only bottom corners rounded */
+    overflow-x: auto;
+}
+
+.mech-block-output::-webkit-scrollbar {
+    height: 8px; /* Horizontal scrollbar height */
+}
+
+.mech-block-output::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.mech-block-output::-webkit-scrollbar-thumb {
+    background: rgba(128, 128, 128, 0.7);
+    border-radius: 10px;
+}
+
+.mech-block-output::-webkit-scrollbar-thumb:hover {
+    background: rgba(128, 128, 128, 0.9);
+}
+
+/* Firefox */
+.mech-block-output {
+    scrollbar-color: rgba(128, 128, 128, 0.7) transparent;
+    scrollbar-width: thin;
+}
+
+.mech-footnote {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75em;
+    margin-top: 1em;
+    font-size: 0.9em;
+    color: #ada594;
+}
+
+.mech-footnote-id {
+    color: #ee6262;
+    font-weight: bold;
+    min-width: 2em;
+    text-align: right;
+    font-family: monospace;
+}
+
+.mech-footnote .mech-paragraph {
+    margin: 0;
+    line-height: 1.6;
+    color: #f2ead9;
+}
+
+.mech-footnote-reference {
+    font-size: 0.7em;
+    vertical-align: super;
+    text-decoration: none;
+    margin-left: 0.1em;
+    color: #ee6262;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.mech-footnote-reference:hover {
+    color: #f28b82;
+    text-decoration: underline;
+}
+
+.mech-abstract {
+    background-color: #1f252a;
+    border: 1px solid #F3B62D;
+    padding: 2em 2em;
+    margin: 2em 2em;
+    border-radius: 8px;
+    color: #dcd4c9;
+}
+
+.mech-abstract p {
+    line-height: 25pt;
+    margin: 0px;
+    text-align: justify;
+}
+
+h2 {
+    counter-reset: h3;
+}
+
+h3 {
+    counter-reset: h4;
+}
+
+h2::before {
+    color: #F3B62D;
+    counter-increment: h2;
+    content: counter(h2) ". ";
+}
+
+h3::before {
+    color: #F3B62D;
+    counter-increment: h3;
+    content: counter(h2) "." counter(h3) " ";
+}
+
+h4::before {
+    color: #F3B62D;
+    counter-increment: h4;
+    content: counter(h2) "." counter(h3) "." counter(h4) " ";
+}
+        
+    </style>
+  </head>
+  <body>
+    <div class="mech-root">
+      <div class="mech-toc">
+        <h1 class="mech-program-title">
+          Download and Install Mech
+        </h1>
+        <section class="mech-toc-sections">
+          <section class="mech-program-section">
+            <h2 id="26059173250375018" class="mech-program-subtitle toc">
+              <a href="#21916577150373850">
+                Installing from Binary
+              </a>
+            </h2>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="35851915105211122" class="mech-program-subtitle toc">
+              <a href="#26471559989653374">
+                Installing from Source
+              </a>
+            </h2>
+            <h3 id="42609390091056826" class="mech-program-subtitle toc">
+              <a href="#63108860087647555">
+                Install Rust and Cargo
+              </a>
+            </h3>
+            <h3 id="23851110389026406" class="mech-program-subtitle toc">
+              <a href="#22987866482345505">
+                Download and Build Mech
+              </a>
+            </h3>
+            <h3 id="17019088142363160" class="mech-program-subtitle toc">
+              <a href="#47876336535696702">
+                Build the Wasm Target
+              </a>
+            </h3>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="69130403443588866" class="mech-program-subtitle toc">
+              <a href="#16395534318488341">
+                Installing from Cargo
+              </a>
+            </h2>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="54601290842292428" class="mech-program-subtitle toc">
+              <a href="#3552713662904812">
+                Verifying Installation
+              </a>
+            </h2>
+          </section>
+        </section>
+      </div>
+      <div class="mech-program">
+        <h1 class="mech-program-title">
+          Download and Install Mech
+        </h1>
+        <div class="mech-program-body">
+          <section class="mech-program-section">
+            <h2 id="21916577150373850" class="mech-program-subtitle ">
+              <a href="#21916577150373850">
+                Installing from Binary
+              </a>
+            </h2>
+            <p class="mech-paragraph">
+              Precompiled binaries are available for the following platforms:
+            </p>
+            <ul class="mech-unordered-list">
+              <li class="mech-ul-list-item">
+                <p class="mech-paragraph">
+                  <a href="https://github.com/mech-lang/mech/releases/download/v0.2.36-beta/mech-v0.2.36-beta-win-x86-64.7z" class="mech-hyperlink">
+                    Wndows
+                  </a>
+                </p>
+              </li>
+              <li class="mech-ul-list-item">
+                <p class="mech-paragraph">
+                  <a href="https://github.com/mech-lang/mech/releases/download/v0.2.36-beta/mech-v0.2.36-beta-win-x86-64.7z" class="mech-hyperlink">
+                    Linux
+                  </a>
+                </p>
+              </li>
+              <li class="mech-ul-list-item">
+                <p class="mech-paragraph">
+                  <a href="https://github.com/mech-lang/mech/releases/download/v0.2.36-beta/mech-v0.2.36-beta-mac-aarch64.7z" class="mech-hyperlink">
+                    macOS
+                  </a>
+                </p>
+              </li>
+            </ul>
+            <p class="mech-paragraph">
+              You can find previous releases and release notes at 
+              <a href="https://github.com/mech-lang/mech/releases" class="mech-hyperlink">
+                /mech-lang/mech/releases
+              </a>
+              .
+            </p>
+            <p class="mech-paragraph">
+              To install, simply download the appropriate binary for your operating system and extract it to a directory of your choice. The Mech toolchain is distributed as a solitary executable file and doesn't require an installer.
+            </p>
+            <p class="mech-paragraph">
+              See the toolchain documation for more information on how this file works.
+            </p>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="26471559989653374" class="mech-program-subtitle ">
+              <a href="#26471559989653374">
+                Installing from Source
+              </a>
+            </h2>
+            <p class="mech-paragraph">
+              If mech is not available for your platform, or if you want to build it from source, follow these steps:
+            </p>
+            <h3 id="63108860087647555" class="mech-program-subtitle ">
+              <a href="#63108860087647555">
+                Install Rust and Cargo
+              </a>
+            </h3>
+            <p class="mech-paragraph">
+              First you will need 
+              <a href="https://www.rust-lang.org/learn/get-started" class="mech-hyperlink">
+                Rust
+              </a>
+              . Make sure to install a recent version on the nightly release channel, currently 
+              <code class="mech-inline-code">nightly-2025-01-15</code>
+              .
+            </p>
+            <p class="mech-paragraph">
+              In Bash:
+            </p>
+            <pre class="mech-code-block">curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --profile minimal --default-toolchain nightly-2025-01-15
+</pre>
+            <p class="mech-paragraph">
+              This command will download and install the Rust toolchain, including Cargo, the Rust package manager. Rustup is a tool for managing Rust versions and associated tools.
+            </p>
+            <p class="mech-paragraph">
+              In PowerShell:
+            </p>
+            <pre class="mech-code-block">irm https://win.rustup.rs -OutFile rustup-init.exe; Start-Process -Wait -FilePath .\rustup-init.exe -ArgumentList "-y --default-toolchain nightly-2025-01-15"; Remove-Item .\rustup-init.exe
+</pre>
+            <p class="mech-paragraph">
+              This command will: 
+            </p>
+            <ul class="mech-unordered-list">
+              <li class="mech-ul-list-item">
+                <p class="mech-paragraph">
+                  Download Rustup for Windows (rustup-init.exe)
+                </p>
+              </li>
+              <li class="mech-ul-list-item">
+                <p class="mech-paragraph">
+                  Run the installer with 
+                  <code class="mech-inline-code">-y</code>
+                   ("yes" to all, no prompts) and set the correct nightly toolchain
+                </p>
+              </li>
+              <li class="mech-ul-list-item">
+                <p class="mech-paragraph">
+                  Delete the installer after completion
+                </p>
+              </li>
+            </ul>
+            <p class="mech-paragraph">
+              You may need to allow scripts by running the following before executing the above command:
+            </p>
+            <pre class="mech-code-block">Set-ExecutionPolicy Bypass -Scope Process -Force
+</pre>
+            <h3 id="22987866482345505" class="mech-program-subtitle ">
+              <a href="#22987866482345505">
+                Download and Build Mech
+              </a>
+            </h3>
+            <pre class="mech-code-block">git clone https://gitlab.com/mech-lang/mech
+cd mech
+cargo build --bin mech --release
+</pre>
+            <h3 id="47876336535696702" class="mech-program-subtitle ">
+              <a href="#47876336535696702">
+                Build the Wasm Target
+              </a>
+            </h3>
+            <p class="mech-paragraph">
+              If you want to build the WebAssembly target, you will need to install the 
+              <code class="mech-inline-code">wasm-pack</code>
+               tool. You can do this using Cargo:
+            </p>
+            <pre class="mech-code-block">cargo install wasm-pack
+</pre>
+            <p class="mech-paragraph">
+              Then, navigate to the 
+              <code class="mech-inline-code">wasm</code>
+               directory and build the target:
+            </p>
+            <pre class="mech-code-block">cd mech\src\wasm
+wasm-pack build --target web
+</pre>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="16395534318488341" class="mech-program-subtitle ">
+              <a href="#16395534318488341">
+                Installing from Cargo
+              </a>
+            </h2>
+            <p class="mech-paragraph">
+              If you prefer to install Mech using Rust's Cargo package manager, you can use the following commands, first install Rust as described above. Then run:
+            </p>
+            <pre class="mech-code-block">cargo install mech
+</pre>
+            <p class="mech-paragraph">
+              This will download the lasted version of Mech published to the cargo package manager, found here: 
+              <a href="https://crates.io/crates/mech." class="mech-hyperlink">
+                https://crates.io/crates/mech.
+              </a>
+            </p>
+          </section>
+          <section class="mech-program-section">
+            <h2 id="3552713662904812" class="mech-program-subtitle ">
+              <a href="#3552713662904812">
+                Verifying Installation
+              </a>
+            </h2>
+            <p class="mech-paragraph">
+              After installation, confirm that Mech is installed correctly by running:
+            </p>
+            <pre class="mech-code-block">mech --version
+</pre>
+          </section>
+        </div>
+      </div>
+      <div id = "mech-output">
+      </div>
+    </div>
+    <script type="module">
+      
+      import init, {WasmMech} from '/pkg/mech_wasm.js';
+      let wasm_core;
+      async function run() {
+        await init();
+        var code = `G90MAOT+29KdD+kCKTH5sYnJkI0TE2EJ2SUCeXwi3l4u/u6ih1tPp9b/3C/fV6jqTo1YoWsrTeeenKSTlPFtFVBKlM0WJeEHAgvA1tTKb+S3MWZ7uyA8F2n0bdBTqN9IhZnUecdOAgCXWxUz7z9NrpeoXhzriOtZwZ0sy5ylqKCYg0uBY3F94hxj3MHpriNw/5UIMTppbxI9UYgORSNSBBi82syStxOqrGpwdICowxJumLyKMzowpNDSRsRvZc0yVtbMiqnN1zGj1WjrJClXPjL++iV043p0a3ZSZ7vRda++Vs8jMbsUlbj/XJM19S5fS9XOUi4se3E1VU7916yr6ReWTZYV2Mnr4tQvo88jqqSY7boiUkIYeNHKuqzEwnzle6WD3sE6CtL1AOmd+gI00PFEfUm/V0ww9Af9UYZa/635Z2qDdRHdtx0KrpIxdydTyFbRUp4tpXluiKGPFioZwas6vbci8TJOCHsEwoNt9y0U/rkbxm3WA4BYi9Iviwj2B9ZZHkm+ExjpkP6f0NLpCmMYmV4aAJWfrCNPXN6lxhURYibPs2dC5kzeVGCXmy1n52QniekTZL5QtdfzwxxJDur9g9N+gC5/2IkKkGK/v8IRtbYY6lsw/OjSPMhLaonqwZUrEb5BvXdwQbSgRFJTXlyOziHiEaCT5o3PgecykL3dhudxDo3FQjq4EqEQAe6BrX3NCSckDJvCi/mkYq4Y0yHIpE60+lM1L3lOtGUjwDJyLeoETbOL5Wg+xT/JZpZrSxWKJ1CshVo6+Gf+S3zz+G/+50eVaQ9HLJHsKYZilWW82FfBORItwtCMtf30fLgWicJzcd1itCKJ1ROkslok777n6tIIBD6iSCIJJEIicOYYTS0RYK8gCcqSQE/XygAhae5LcckCWjFcK4tzxwhsMBN0dOgMxhkbh2xQ0+58t0KBiFiVhQttqUv/A/607n/Q/sAktUkFVHxNc3PatDemb1ftiHpJFVSls4y/bnDBr903rnef0OJV2Oeu/mxpmuC0c+v0jv2Xkrqbpa5+S86lC309Y89THZKerXS1n4gKuuN3TUWvJd2WBgbigffoWi3UbY+Cs4f1YAM05JR6bYpJhTA5Cj5qG25jIafUN0lNsUhEKs73oSTaoI30DPwNScRlk9EdFVGJYg5jXcWdIyow9BFiWz0fLSxILkNRv1k4kszqg8kghv5uKqXDSGJLqnUgIxGjNRJMIp1IRl2EdLtT2LReWHdDMWiH8VTYsUoSqxqoehOxlk7QGUI+vrQnBrFdltG66oSkEK90IKtG7ppdjoZwjChAX9rTtTZoB7BanV/xgTI2Ho6xM9pZKrGMrYQbon3uew4WbIWeW326Zh/jL5JliJw9RHHX+18rEoFNj651Q18aXG60oK5r0xIXNpp3D0QHiqVyesOZaTCGjzonrjzO1d8jkBpgIDw9cQiGZmVTvbHEBWVhf2huaF0xK61i0/WBmmO/oKm/Ell/Rs/QxtAdyygkTAdrwvJ0bRTGIME2zzbmYJ0ZAWF8+BMwkS+bsqd5EwUTxYqJuKePIYzEzOqZKJnoZxkxlnbvicDeC6Fe1yI2/FW+9CFAe7o2DbNQIhaYC1K8eXm+kEkvpe8YaxbZIa9MhRfkK9iqqRXeo5DHRTbZ+AsFVzfYsFP9arcwXCtw5n+Y9SaMk0zw2J4lWHrPMnJYTZmavgproDLFjINIJpDz/NKGDSZQY2YGRPbOThG6FcWCsDm4ARs2g1KJd/ak6rWu/xuk/bqNDXvjrTvUT9TssnKXsRuFty1vc8au3dQwZsYcKzS7GgSVuwqfvIjTAwSZ1bMHe9MsIyO7kSFF18khHAE=`;
+        wasm_core = new WasmMech();
+        var xhr = new XMLHttpRequest();
+        var codeUrl = `/code${window.location.pathname}`;
+        xhr.open('GET', codeUrl, true);
+        xhr.onload = function (e) {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              var src = xhr.responseText;
+              wasm_core.run_program(src);
+              wasm_core.init();
+            } else {
+              console.error("Defaulting to included code");
+              wasm_core.run_program(code);
+              wasm_core.init();
+            }
+          }
+        };
+        xhr.onerror = function (e) {
+          console.error("I've been waiting for this error. Look me up in formatter.rs");
+          console.error(xhr.statusText);
+        };
+        xhr.send(null);        
+      }
+      run();
+    
+    </script>
+  </body>
+</html>
