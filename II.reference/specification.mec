@@ -52,26 +52,47 @@ For more information, see the [Whitespace Design Document](#).
 3. Lexical Elements
 -------------------------------------------------------------------------------
 
-(a) Tokens
+(3.1) Tokens
 
 Tokens are the smallest units of meaning in Mech. They include letters, digits, punctuation, and special symbols.
 
-Some Unicode characters are reserved for box drawing, and therefore are excluded from includsion in valid identifiers.
+Some Unicode characters are reserved for box drawing, and therefore are excluded from valid identifiers.
+
+(3.1.1) Character Classes
 
 ```ebnf
 alpha := "a".."z" | "A".."Z";
-digt := "0".."9";
+digit := "0".."9";
 emoji := +emoji-grapheme ;
-word := +alpha ;
-digit1 := +digit ;
-digit0 := *digit ;
 bin-digit := "0" | "1" ;
 hex-digit := digit | "a" .. "f" | "A" .. "F" ;
 oct-digit := "0" .. "7" ;
-number := digit1 ;
 ```
 
-(b) Identifiers
+(3.1.2) Alphanumeric Sequences
+
+```ebnf
+word := +alpha ;
+digit0 := *digit ;
+digit1 := +digit ;
+number := digit1 ;
+alphanumeric := alpha | digit ;
+digit-sequence := digit, *((underscore, digit) | digit) ;
+```
+
+(3.1.4) Whitespace and Separators
+
+```ebnf
+new-line := (carriage-return, new-line) | new-line-char | carriage-return ;
+whitespace := space | new-line | tab ;
+ws0 := *whitespace ;
+ws1 := +whitespace ;
+stb := space | tab ;
+list-separator := ws0, ",", ws0 ;
+enum-separator := ws0, "|", ws0 ;
+```
+
+(3.2) Identifiers
 
 ```ebnf
 identifier := (alpha | emoji), *(alpha | digit | symbol | emoji) ;
@@ -87,7 +108,7 @@ Identifiers start with letters or most UTF-8 encoded emoji characters, and can c
   🤖
   A*
 
-(c) Keywords
+(3.3) Keywords
 
 There are only two keywords in Mech:
 
@@ -98,7 +119,7 @@ false
 
 Combined with Mech's Unicode support, this allows users to write code in their native language without the need to learn English keywords.
 
-(c) Operators and Punctuation
+(3.4) Operators and Punctuation
 
 **Punctutation:**
 ```
@@ -170,22 +191,46 @@ text := alpha
       | grouping-symbol 
       | symbol ;
 space-tab := space | tab ;
-list-separator := *whitespace, ",", *whitespace ;
+list-separator := ws0, ",", ws0 ;
 ```
 
-(d) Comments
+(3.5) Comments
 
 ```ebnf
 comment-sigil := "--" | "//" ;
-comment :=  *whitespace
+comment :=  ws0
       , comment-sigil
       , +text ;
 ```
 
+There are two options for single line comments in Mech:
+
+- `--` for those familiar with languages like Lua, Haskell, and SQL.
+- `//` for those familiar with languages like C, C++, Java, and JavaScript.
+
+There is no difference between the two, and they can be used interchangeably. However, 
+
+Because Mech has a focus on literate programming, comment have less of an emphasis compared to other programming languages. For example, there is no support for block comments in Mech; instead, programmers are encouraged to use Mechdown to express their comments in a more structured way.
+
+Therefore, comments are primarily used for writing notes inline with the code that cannot be broken out into a paragraph. For example, to make a note within a state machine definition.
+
 **Examples:**
 
+Here are some ways to write a comment in Mech:
+
+```
   -- Single line comment.
   // Also a single line comment.
+  x := 1 -- Comment after an expression
+```
+
+When parsed and rendered, these become:
+
+```mech-comment
+  -- Comment prefix with --
+  // Comment prefixed with //
+  x := 1 -- Comment after an expression
+```
 
 4. Literals
 -------------------------------------------------------------------------------
@@ -487,14 +532,14 @@ The kind of a matrix includes the type of its elements and its shape. For exampl
 
 ```ebnf
 set := "{"
-      , *whitespace
+      , ws0
       , ?[expression, list-separator]
-      , *whitespace
+      , ws0
       , "}" ;
 empty-set := table-start
-      , *whitespace
+      , ws0
       , empty
-      , *whitespace
+      , ws0
       , table-end ;
 ```
 
@@ -540,18 +585,18 @@ A Set is defined using curly braces `{}` and contains a comma-separated list of 
 
 ```ebnf
 map := "{"
-      , *whitespace
+      , ws0
       , *mapping
-      , *whitespace
+      , ws0
       , "}" ;
-mapping :=  *whitespace
+mapping :=  ws0
       , expression
-      , *whitespace
+      , ws0
       , ":"
-      , *whitespace
+      , ws0
       , expression
       , ?comma
-      , *whitespace ;
+      , ws0 ;
 ```
 
 A Map is defined using curly braces `{}` and contains a set of key-value mappings. Each key is unique and associated with a corresponding value.
@@ -646,7 +691,7 @@ table := table-start
       , *(box-drawing-char | whitespace)
       , +table-row
       , *box-drawing-char
-      , *whitespace
+      , ws0
       , table-end ;
 binding := identifier
       , ?kind-annotation
@@ -667,10 +712,10 @@ table-row := ?table-separator
 table-header := [field, +space-tab]
       , *(space | tab)
       , (bar| box-vert)
-      , *whitespace ;
+      , ws0 ;
 field := identifier, ?kind-annotation ;
 empty-table := table-start
-      , *whitespace
+      , ws0
       , table-end ;
 ```
 
@@ -766,9 +811,9 @@ A table row is equivalent to a record.
 
 ```ebnf
 record := table-start
-      , *whitespace
+      , ws0
       , +binding
-      , *whitespace
+      , ws0
       , table-end ;
 ```
 A Record is a collection of named fields, where each field consists of a key-value pair. Records provide a structured way to group related data while allowing heterogeneous types.
@@ -1159,7 +1204,7 @@ function-define := identifier
       , "="
       , (function-out-args | function-out-arg)
       , define-operator
-      , [statement, (+whitespace | statement-separator)]
+      , [statement, (ws1 | statement-separator)]
       , "." ;
 function-out-args := "("
       , [function-arg, list-separator]
@@ -1288,12 +1333,12 @@ fsm-implementation := "#"
       , ")"
       , transition-operator
       , fsm-pattern
-      , *whitespace
+      , ws0
       , +fsm-arm
       , "." ;
 fsm-arm := *comment
       , (fsm-transition | fsm-guard-arm)
-      , *whitespace ;
+      , ws0 ;
 fsm-guard-arm := *comment
       , fsm-pattern
       , +fsm-guard ;
@@ -1468,7 +1513,7 @@ title := +text
       , new-line
       , +"="
       , *(space|tab)
-      , *whitespace ;
+      , ws0 ;
 paragraph-element := +(¬define-operator, text) ;
 paragraph := paragraph-starter, *paragraph-element ;
 subtitle := +digit-token
@@ -1480,7 +1525,7 @@ subtitle := +digit-token
       , *(space|tab)
       , new-line
       , *(space|tab)
-      , *whitespace ;
+      , ws0 ;
 number-subtitle := *(space|tab)
       , "("
       , integer-literal
@@ -1488,13 +1533,13 @@ number-subtitle := *(space|tab)
       , +(space|tab)
       , +text
       , *(space|tab)
-      , *whitespace ;
+      , ws0 ;
 alpha-subtitle := *(space|tab)
       , "(", alpha, ")"
       , +(space|tab)
       , +text
       , *(space|tab)
-      , *whitespace ;
+      , ws0 ;
 ```
 
 There are 4 levels of titles: the document title, section titles, and two levels of sub section titles. 
@@ -1544,8 +1589,8 @@ Paragraphs are a block element that can contain a number of inline elements incl
 (b) Lists
 
 ```ebnf
-unordered-list := +list-item, ?new-line, *whitespace ;
-ordered-list := +ordered-list-item, ?new-line, *whitespace ;
+unordered-list := +list-item, ?new-line, ws0 ;
+ordered-list := +ordered-list-item, ?new-line, ws0 ;
 ordered-list-item := integer-literal
       , "."
       , *space
@@ -1632,7 +1677,7 @@ When rendered, they look like this:
 (b) Code Blocks
 
 ```ebnf
-code-block := (grave, grave, grave), new-line, any, (grave, grave, grave), new-line, *whitespace ;
+code-block := (grave, grave, grave), new-line, any, (grave, grave, grave), new-line, ws0 ;
 ```
 
 Mechdown supports code blocks, which are enclosed in triple backticks (graves) and can contain any text. Code blocks are useful for including Mech code snippets or other text that should be displayed verbatim.
@@ -1660,7 +1705,7 @@ Mechdown also supports inline equations, which begin and conclude with a `$$`. T
 (b) Block Quotes
 
 ```ebnf
-block-quote := ">" , *whitespace, +paragraph ;
+block-quote := ">" , ws0, +paragraph ;
 ```
 
 Block quotes are used to indicate quoted text. They are created using the `>` character followed by a space, and can contain any text until a newline.
