@@ -258,7 +258,6 @@ Note: Underscores `_` are not allowed in identifiers, as kebab-case is the prefe
 ```ebnf
 literal := (number | string | atom | boolean | empty), ?kind-annotation ;
 ```
-
 Mech supports several types of literals, which are used to represent values in the code. Each literal type has its own syntax and semantics. Each literal has an associated "kind", which describes the data type of the literal. Mech supports the following literal types:
 
 - **Number** - Represents numeric values, including integers, floating-point numbers, and complex numbers.
@@ -287,134 +286,7 @@ Mech supports several types of literals, which are used to represent values in t
 - **Empty** - Represents an empty value, placeholder, or the absence of a value.
 - **Kind** - A meta-type that categorizes types
 
-(4.1) Integers
-
-```ebnf
-number := real-number, ?"i" | ?("+", real-number, "i") ;
-integer-literal := +digit;
-decimal-literal := "0d", +digit ;
-hexadecimal-literal := "0x", +hex-digit ;
-octal-literal := "0o", +oct-digit ;
-binary-literal := "0b", +bin-digit ;
-```
-
-An integer literal is a sequence of digits representing a whole number. Mech supports decimal, binary, octal, and hexadecimal integer literals, each distinguished by a unique prefix:
-
-- Decimal: A sequence of digits without a prefix (e.g., 42, 123456).
-- Hexadecimal: Prefixed with 0x, containing digits 0-9 and a-f or A-F (e.g., 0x1A3F).
-- Octal: Prefixed with 0o, containing digits 0-7 (e.g., 0o755).
-- Binary: Prefixed with 0b, containing only 0 and 1 (e.g., 0b1010).
-
-**Examples:**
-
-  42                  -- decimal
-  0d42                -- decimal
-  0x1234567890ABCDEF  -- hexadecimal
-  0x1234567890abcdef  
-  0o12345670          -- octal 
-  0b100110101         -- binary
-
-By default, Mech can represent integers in the following data types:
-
-- Signed: i8, i16, i32, i64, i128
-- Unsigned: u8, u16, u32, u64, u128
-- Floats: f32, f64
-
-Unless specified or inferred, the default data type for integer literals is `f64`. This is different from many systems languages but consist with other languages like Python, JavaScript, and Ruby.
-
-(4.2) Floats
-
-```ebnf
-scientific-literal :=  (float-literal | integer-literal)
-      , ("e" | "E")
-      , ?plus
-      , ?dash
-      , (float-literal | integer-literal) ;
-rational-literal := integer-literal
-      , slash
-      , integer-literal ;
-float-literal := ?"."
-      , +digit
-      , ?"."
-      , *digit ;
-```
-
-A floating-point literal represents a real number, potentially with a fractional component. Mech supports several forms of floating-point literals:
-
-- **Decimal floats**: Numbers with a decimal point (e.g., `3.14`, `.123`, `0.0`)
-- **Scientific notation**: A number followed by e or E, then an optional sign and exponent (e.g., `2.5e10`, `1e-3`)
-- **Rational literals**: A fraction of two integers separated by `/` (e.g., `3/4`, `22/7`) — these may be evaluated as exact values or approximated depending on context.
-
-**Examples:**
-
-  3.14         -- decimal float
-  0.001        -- decimal float
-  2.5e10       -- scientific notation
-  -2.5         -- negative float
-  .123         -- leading-dot float
-  3/4          -- rational
-
-By default, floating-point literals are inferred to be of type f64, unless explicitly annotated or inferred from context.
-
-(4.3) Strings
-
-```ebnf
-string := quote, *(¬quote, text), quote ;
-```
-
-Strings are enclosed in double quotes `"` and can contain any character, including whitespace, except for the quote character itself. To include a quote character in a string, it must be escaped with a backslash `\`.
-
-Strings heap-allocate their contents, so they can be of any length. They are encoded in UTF-8, allowing for Unicode characters.
-
-**Examples:**
-
-  "Hello, World!"
-  "characters like \" and \\ are escaped with, \\ e.g. \\\""
-  "This string contains emojis: 🤖, 🐦, and 🐍"
-
-(d) Boolean
-
-```ebnf
-boolean := true-literal | false-literal ;
-true-literal := english-true-literal | true-symbol ;
-false-literal := english-false-literal | false-symbol ;
-true-symbol := "✓" ;
-false-symbol := "✗" ;
-english-true-literal := "true" ;
-english-false-literal := "false" ;
-```
-
-**Examples:**
-
-  true
-  false
-  ✓
-  ✗
-
-(e) Atoms
-
-```ebnf
-atom := "`", identifier ;
-```
-
-**Examples:**
-
-  `A
-  `MyAtom
-  `MyAtom123
-  `🐦
-
-(f) Empty
-
-```ebnf
-empty := +underscore ;
-```
-
-**Examples:**
-
-  _
-
-(g) Kinds
+(4.1) Kinds
 
 ```ebnf
 kind-annotation := "<", kind, ">" ;
@@ -456,6 +328,8 @@ kind-tuple := "("
 kind-scalar := identifier ;
 ```
 
+Kinds are used to specify the type of a literal or expression in Mech. Kinds are specified with a syntax structure called a "kirby" e.g. `<string>`, which indicates a String data type; or `<[u64]:3,1>`, which indicates a 3x1 matrix of 32-bit unsigned integeres.
+
 **Examples:**
 
 ```
@@ -468,6 +342,139 @@ kind-scalar := identifier ;
 <(A,B,C)>
 <A>
 ```
+
+(4.2) Integers
+
+```ebnf
+number := real-number, ?"i" | ?("+", real-number, "i") ;
+integer-literal := +digit;
+decimal-literal := "0d", +digit ;
+hexadecimal-literal := "0x", +hex-digit ;
+octal-literal := "0o", +oct-digit ;
+binary-literal := "0b", +bin-digit ;
+```
+
+An integer literal is a sequence of digits representing a whole number. Mech supports decimal, binary, octal, and hexadecimal integer literals, each distinguished by a unique prefix:
+
+- Decimal: A sequence of digits without a prefix (e.g., 42, 123456).
+- Hexadecimal: Prefixed with 0x, containing digits 0-9 and a-f or A-F (e.g., 0x1A3F).
+- Octal: Prefixed with 0o, containing digits 0-7 (e.g., 0o755).
+- Binary: Prefixed with 0b, containing only 0 and 1 (e.g., 0b1010).
+
+**Examples:**
+
+  42                  -- decimal
+  0d42                -- decimal
+  0x1234567890ABCDEF  -- hexadecimal
+  0x1234567890abcdef  
+  0o12345670          -- octal 
+  0b100110101         -- binary
+
+By default, Mech can represent integers in the following data types:
+
+- Signed: i8, i16, i32, i64, i128
+- Unsigned: u8, u16, u32, u64, u128
+- Floats: f32, f64
+
+Unless specified or inferred, the default data type for integer literals is `f64`. This is different from many systems languages but consist with other languages like Python, JavaScript, and Ruby.
+
+(4.3) Floats
+
+```ebnf
+scientific-literal :=  (float-literal | integer-literal)
+      , ("e" | "E")
+      , ?plus
+      , ?dash
+      , (float-literal | integer-literal) ;
+rational-literal := integer-literal
+      , slash
+      , integer-literal ;
+float-literal := ?"."
+      , +digit
+      , ?"."
+      , *digit ;
+```
+
+A floating-point literal represents a real number, potentially with a fractional component. Mech supports several forms of floating-point literals:
+
+- **Decimal floats**: Numbers with a decimal point (e.g., `3.14`, `.123`, `0.0`)
+- **Scientific notation**: A number followed by e or E, then an optional sign and exponent (e.g., `2.5e10`, `1e-3`)
+- **Rational literals**: A fraction of two integers separated by `/` (e.g., `3/4`, `22/7`) — these may be evaluated as exact values or approximated depending on context.
+
+**Examples:**
+
+  3.14         -- decimal float
+  0.001        -- decimal float
+  2.5e10       -- scientific notation
+  -2.5         -- negative float
+  .123         -- leading-dot float
+  3/4          -- rational
+
+By default, floating-point literals are inferred to be of type f64, unless explicitly annotated or inferred from context.
+
+(4.4) Strings
+
+```ebnf
+string := quote, *(¬quote, text), quote ;
+```
+
+Strings are enclosed in double quotes `"` and can contain any character, including whitespace, except for the quote character itself. To include a quote character in a string, it must be escaped with a backslash `\`.
+
+Strings heap-allocate their contents, so they can be of any length. They are encoded in UTF-8, allowing for Unicode characters.
+
+**Examples:**
+
+  "Hello, World!"
+  "characters like \" and \\ are escaped with, \\ e.g. \\\""
+  "This string contains emojis: 🤖, 🐦, and 🐍"
+
+(4.5) Boolean
+
+```ebnf
+boolean := true-literal | false-literal ;
+true-literal := english-true-literal | true-symbol ;
+false-literal := english-false-literal | false-symbol ;
+true-symbol := "✓" ;
+false-symbol := "✗" ;
+english-true-literal := "true" ;
+english-false-literal := "false" ;
+```
+A boolean literal represents a logical truth value, and can be expressed in either textual or symbolic form. Thre reason Mech supports both is tho allow for code that doesn't contain any English keywords, which is useful for non-English speakers.
+
+**Examples:**
+
+  true
+  false
+  ✓
+  ✗
+
+(4.6) Atoms
+
+```ebnf
+atom := "`", identifier ;
+```
+
+An atom is a symbolic constant used to represent a fixed, named value. Atoms are prefixed with a backtick and followed by an identifier. They are used to represent tags, enums, or other symbolic values in the code.
+
+**Examples:**
+
+  `A
+  `MyAtom
+  `🐦
+  `Δx^2
+
+(4.7) Empty
+
+```ebnf
+empty := +underscore ;
+```
+
+Empty literals are used to represent the absence of a value or a placeholder. They are represented by one or more underscores `_`. Empty literals can be used in various contexts, such as in tables, to indicate missing values.
+
+**Examples:**
+
+  _
+  ___
 
 5. Data Structures
 -------------------------------------------------------------------------------
@@ -593,9 +600,9 @@ The kind of a matrix includes the type of its elements and its shape. For exampl
 | Col Vector     | `<[u8]:2`      |
 | Row Vector     | `<[u8]:1,2`    |
 | 2D Matrix      | `<[u8]:2,3>`   |
-| 4D Matrix      | `<[u8]:2,3,4>` |
+| 3D Matrix      | `<[u8]:2,3,4>` |
 | Dynamic cols   | `<[u8]:2,_>`   |
-| Dynamic rws    | `<[u8]:_,3>`   |
+| Dynamic rows   | `<[u8]:_,3>`   |
 
 
 (b) Set
@@ -1019,14 +1026,14 @@ A formula is an expression that follows operator precedence rules and consists o
 
 Operators in formulas are applied according to the following precedence, from highest to lowest:
 
-- Parentheses - Explicit grouping of expressions.
-- Negation and Logical NOT - Unary operations.
-- Exponentiation - Raising to a power.
-- Multiplication, Division, and Matrix Operations - Elementwise and matrix operations.
-- Addition and Subtraction - Binary arithmetic operations.
-- Comparison Operators - Elementwise comparisons.
-- Logical Operators - and, or, xor.
-- Range Operators - Used in range expressions.
+1. Parentheses - Explicit grouping of expressions.
+2. Negation and Logical NOT - Unary operations.
+3. Exponentiation - Raising to a power.
+4. Multiplication, Division, and Matrix Operations - Elementwise and matrix operations.
+5. Addition and Subtraction - Binary arithmetic operations.
+6. Comparison Operators - Elementwise comparisons.
+7. Logical Operators - and, or, xor.
+8. Range Operators - Used in range expressions.
 
 **Evaluation Order and Associativity:**
 
