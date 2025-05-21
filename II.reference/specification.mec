@@ -168,7 +168,7 @@ grouping-symbol := left-parenthesis
 | Set          | `∪ ∩ ∖ ∁ ⊆ ⊇ ⊊ ⊋ ∈ ∉ ` |
 | Range        | `.. ..=`                 |
 | Condition    | `!= ¬= ≠ == > < >= ≤ ≥`  |
-| Transition   | `=> -> ~>`               | 
+| Transition   | `=> -> ~>`               |
 | Guard        | `| │ ├ └`                |
 
 (3.4.5) Text
@@ -244,8 +244,8 @@ Identifiers start with letters or most UTF-8 encoded emoji characters, and can c
 
 **Examples:**
 
-  Hello-Word
-  io/stdout
+  Hello-World
+  io/print
   Δx^2
   🤖
   A*
@@ -261,30 +261,31 @@ literal := (number | string | atom | boolean | empty), ?kind-annotation ;
 
 Mech supports several types of literals, which are used to represent values in the code. Each literal type has its own syntax and semantics. Each literal has an associated "kind", which describes the data type of the literal. Mech supports the following literal types:
 
-- Number
-  - Real
-    - Integers
-      - Signed
-        - i8
-        - i16
-        - i32
-        - i64
-        - i128
-      - Unsigned
-        - u8
-        - u16
-        - u32
-        - u64
-        - u128
-    - Floats
-        - f32
-        - f64
-  - Imaginary
-- String
-- Boolean
-- Atoms
-- Empty
-- Kind
+- **Number** - Represents numeric values, including integers, floating-point numbers, and complex numbers.
+  - **Real** - Real numbers, including integers and floats.
+    - **Integers** - Whole numbers, which can be positive, negative, or zero.
+      - **Signed** - Can represent both negative and positive values.
+        - `i8` - 8-bit signed integer
+        - `i16` - 16-bit signed integer
+        - `i32` - 32-bit signed integer
+        - `i64` - 64-bit signed integer
+        - `i128` - 128-bit signed integer
+      - **Unsigned** - Can only represent zero and positive values.
+        - `u8` - 8-bit unsigned integer
+        - `u16` - 16-bit unsigned integer
+        - `u32` - 32-bit unsigned integer
+        - `u64` - 64-bit unsigned integer
+        - `u128` - 128-bit unsigned integer
+    - **Floats** - Decimal numbers with fractional components.
+      - `f32` - 32-bit floating-point number
+      - `f64` - 64-bit floating-point number
+  - **Imaginary** - Represent imaginary components of complex numbers.
+- **String** - A sequence of UTF-8 characters representing text.
+      - `string` - A sequence of characters enclosed in double quotes.
+- **Boolean** - Represents logical truth values.
+- **Atom** - A symbolic constant, often used for tags or enums.
+- **Empty** - Represents an empty value, placeholder, or the absence of a value.
+- **Kind** - A meta-type that categorizes types
 
 (4.1) Integers
 
@@ -338,25 +339,38 @@ float-literal := ?"."
       , *digit ;
 ```
 
-**Examples:**
-  
-  1234
-  3.14
-  0.001
-  2.5e10
-  1/3     // Rational literal
-  1 / 3   // NOT a rational literal, but a division operation
+A floating-point literal represents a real number, potentially with a fractional component. Mech supports several forms of floating-point literals:
 
-(c) Strings
+- **Decimal floats**: Numbers with a decimal point (e.g., `3.14`, `.123`, `0.0`)
+- **Scientific notation**: A number followed by e or E, then an optional sign and exponent (e.g., `2.5e10`, `1e-3`)
+- **Rational literals**: A fraction of two integers separated by `/` (e.g., `3/4`, `22/7`) — these may be evaluated as exact values or approximated depending on context.
+
+**Examples:**
+
+  3.14         -- decimal float
+  0.001        -- decimal float
+  2.5e10       -- scientific notation
+  -2.5         -- negative float
+  .123         -- leading-dot float
+  3/4          -- rational
+
+By default, floating-point literals are inferred to be of type f64, unless explicitly annotated or inferred from context.
+
+(4.3) Strings
 
 ```ebnf
 string := quote, *(¬quote, text), quote ;
 ```
 
+Strings are enclosed in double quotes `"` and can contain any character, including whitespace, except for the quote character itself. To include a quote character in a string, it must be escaped with a backslash `\`.
+
+Strings heap-allocate their contents, so they can be of any length. They are encoded in UTF-8, allowing for Unicode characters.
+
 **Examples:**
 
   "Hello, World!"
   "characters like \" and \\ are escaped with, \\ e.g. \\\""
+  "This string contains emojis: 🤖, 🐦, and 🐍"
 
 (d) Boolean
 
