@@ -92,9 +92,24 @@ list-separator := ws0, ",", ws0 ;
 enum-separator := ws0, "|", ws0 ;
 ```
 
-(3.2) Operators and Punctuation
+(3.2) Operators and Text
 
-(3.2.1) Punctutation
+(3.2.1) Operators
+
+| Category     | Operators |
+|--------------|--------------------------|
+| Assign       | `:= = += -= *= /= ^=`    |
+| Arithmetic   | `+ - * / ^ %`            |
+| Split / Merge| `>- -<`                  |
+| Matrix       | `** · ⨯ \ ' `            |
+| Logic        | `| & xor ⊕ ⊻ ! ¬`       |
+| Set          | `∪ ∩ ∖ ∁ ⊆ ⊇ ⊊ ⊋ ∈ ∉ ` |
+| Range        | `.. ..=`                 |
+| Condition    | `!= ¬= ≠ == > < >= ≤ ≥`  |
+| Transition   | `=> -> ~>`               |
+| Guard        | `| │ ├ └`                |
+
+(3.2.2) Punctutation
 
 ```ebnf
 punctuation := period 
@@ -113,7 +128,7 @@ punctuation := period
 . ! ? , : ; ' "
 ```
 
-(3.2.2) Symbols
+(3.2.3) Symbols
 
 ```ebnf
 symbol := ampersand 
@@ -137,7 +152,7 @@ symbol := ampersand
 & | @ / # = \ ~ + - * ^ _
 ```
 
-(3.2.3) Grouping Symbols
+(3.2.4) Grouping Symbols
 
 ```ebnf
 grouping-symbol := left-parenthesis 
@@ -155,21 +170,6 @@ grouping-symbol := left-parenthesis
 ```
 ( ) < > { } [ ]
 ```
-
-(3.2.4) Operators
-
-| Category     | Operators |
-|--------------|--------------------------|
-| Assign       | `:= = += -= *= /= ^=`    |
-| Arithmetic   | `+ - * / ^ %`            |
-| Split / Merge| `>- -<`                  |
-| Matrix       | `** · ⨯ \ ' `            |
-| Logic        | `| & xor ⊕ ⊻ ! ¬`       |
-| Set          | `∪ ∩ ∖ ∁ ⊆ ⊇ ⊊ ⊋ ∈ ∉ ` |
-| Range        | `.. ..=`                 |
-| Condition    | `!= ¬= ≠ == > < >= ≤ ≥`  |
-| Transition   | `=> -> ~>`               |
-| Guard        | `| │ ├ └`                |
 
 (3.4.5) Text
 
