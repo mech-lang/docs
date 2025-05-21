@@ -17,7 +17,7 @@ This document is for:
 2. Source Code Representation
 -------------------------------------------------------------------------------
 
-(a) File Format
+(2.1) File Format
 
 Mech source code can be stored in files with either the `.mec` or `.🤖` extension. 
 
@@ -28,13 +28,13 @@ Source code is ecoded with UTF-8, which allows for Unicode support directly in t
 - Allows for more expressive and intuitive naming conventions
 - Supports mathematical notation that closely resembles standard written forms
 
-(b) Literate Programming and Mechdown
+(2.2) Literate Programming and Mechdown
 
 Literate programming presents programs as structured documents where explanations take precedence over code. In Mech, we support this concept through a format called Mechdown, a superset of Markdown with extensions to support embedded Mech syntax. This document is formatted with Mechdown to demonstrate how it is used.
 
 For more information, see the [Mechdown Section](#58856088105263747).
 
-(c) Whitespace
+(2.3) Whitespace
 
 Whitespace in Mech is used to separate tokens and is generally ignored. This includes spaces, tabs, and newlines. However, whitespace can be significant in certain contexts:
 
@@ -92,64 +92,9 @@ list-separator := ws0, ",", ws0 ;
 enum-separator := ws0, "|", ws0 ;
 ```
 
-(3.2) Identifiers
+(3.2) Operators and Punctuation
 
-```ebnf
-identifier := (alpha | emoji), *(alpha | digit | symbol | emoji) ;
-```
-
-Identifiers start with letters or most UTF-8 encoded emoji characters, and can contain alphanumeric, most emojis, /, \*, +, -, and ^ characters.
-
-**Examples:**
-
-  Hello-Word
-  io/stdout
-  Δx^2
-  🤖
-  A*
-
-(3.3) Keywords
-
-There are only two keywords in Mech:
-
-```
-true
-false
-```
-
-Combined with Mech's Unicode support, this allows users to write code in their native language without the need to learn English keywords.
-
-(3.4) Operators and Punctuation
-
-**Punctutation:**
-```
-. ! ? , : ; ' "
-```
-
-**Symbols:**
-```
-& | @ / # = \ ~ + - * ^ _
-```
-
-**Grouping Symbols:**
-```
-( ) < > { } [ ]
-```
-
-**Operators:**
-
-| Category   | Operators |
-|------------|-----------|
-| Assign       | `:= = += -= *= /= ^=` |
-| Arithmetic   | `+ - * / ^ %` |
-| Split / Merge| `>- -<` |
-| Matrix       | `** · ⨯ \ ' ` |
-| Logic        | `| & xor ⊕ ⊻ ! ¬` |
-| Set          | `∪ ∩ ∖ ∁ ⊆ ⊇ ⊊ ⊋ ∈ ∉ ` |
-| Range        | `.. ..=` |
-| Condition    | `!= ¬= ≠ == > < >= ≤ ≥` |
-| Transition   | `=> -> ~>` |
-| Guard        | `| │ ├ └` |
+(3.2.1) Punctutation
 
 ```ebnf
 punctuation := period 
@@ -160,6 +105,17 @@ punctuation := period
       | semicolon 
       | quote 
       | apostrophe ;
+```
+
+**Examples:**
+
+```
+. ! ? , : ; ' "
+```
+
+(3.2.2) Symbols
+
+```ebnf
 symbol := ampersand 
       | bar 
       | at 
@@ -173,6 +129,17 @@ symbol := ampersand
       | asterisk 
       | caret 
       | underscore ;
+```
+
+**Examples:**
+
+```
+& | @ / # = \ ~ + - * ^ _
+```
+
+(3.2.3) Grouping Symbols
+
+```ebnf
 grouping-symbol := left-parenthesis 
       | right-parenthesis 
       | left-angle 
@@ -181,6 +148,32 @@ grouping-symbol := left-parenthesis
       | right-brace 
       | left-bracket 
       | right-bracket ;
+```
+
+**Examples:**      
+
+```
+( ) < > { } [ ]
+```
+
+(3.2.4) Operators
+
+| Category     | Operators |
+|--------------|--------------------------|
+| Assign       | `:= = += -= *= /= ^=`    |
+| Arithmetic   | `+ - * / ^ %`            |
+| Split / Merge| `>- -<`                  |
+| Matrix       | `** · ⨯ \ ' `            |
+| Logic        | `| & xor ⊕ ⊻ ! ¬`       |
+| Set          | `∪ ∩ ∖ ∁ ⊆ ⊇ ⊊ ⊋ ∈ ∉ ` |
+| Range        | `.. ..=`                 |
+| Condition    | `!= ¬= ≠ == > < >= ≤ ≥`  |
+| Transition   | `=> -> ~>`               | 
+| Guard        | `| │ ├ └`                |
+
+(3.4.5) Text
+
+```ebnf
 escaped-char := backslash,  symbol | punctuation ;
 text := alpha 
       | digit 
@@ -190,11 +183,9 @@ text := alpha
       | punctuation 
       | grouping-symbol 
       | symbol ;
-space-tab := space | tab ;
-list-separator := ws0, ",", ws0 ;
 ```
 
-(3.5) Comments
+(3.3) Comments
 
 ```ebnf
 comment-sigil := "--" | "//" ;
@@ -232,6 +223,35 @@ When parsed and rendered, these become:
   x := 1 -- Comment after an expression
 ```
 
+(3.4) Keywords
+
+There are only two keywords in Mech:
+
+```
+true
+false
+```
+
+Combined with Mech's Unicode support, this allows users to write code in their native language without the need to learn English keywords.
+
+(3.5) Identifiers
+
+```ebnf
+identifier := (alpha | emoji), *(alpha | digit | symbol | emoji) ;
+```
+
+Identifiers start with letters or most UTF-8 encoded emoji characters, and can contain alphanumeric, most emojis, `/`, `*`, `+`, `-`, and `^` characters.
+
+**Examples:**
+
+  Hello-Word
+  io/stdout
+  Δx^2
+  🤖
+  A*
+
+Note: Underscores `_` are not allowed in identifiers, as kebab-case is the preferred style in Mech. Underscores will be reported as syntax errors.
+
 4. Literals
 -------------------------------------------------------------------------------
 
@@ -239,7 +259,34 @@ When parsed and rendered, these become:
 literal := (number | string | atom | boolean | empty), ?kind-annotation ;
 ```
 
-(a) Integers
+Mech supports several types of literals, which are used to represent values in the code. Each literal type has its own syntax and semantics. Each literal has an associated "kind", which describes the data type of the literal. Mech supports the following literal types:
+
+- Number
+  - Real
+    - Integers
+      - Signed
+        - i8
+        - i16
+        - i32
+        - i64
+        - i128
+      - Unsigned
+        - u8
+        - u16
+        - u32
+        - u64
+        - u128
+    - Floats
+        - f32
+        - f64
+  - Imaginary
+- String
+- Boolean
+- Atoms
+- Empty
+- Kind
+
+(4.1) Integers
 
 ```ebnf
 number := real-number, ?"i" | ?("+", real-number, "i") ;
@@ -259,13 +306,22 @@ An integer literal is a sequence of digits representing a whole number. Mech sup
 
 **Examples:**
 
+  42                  -- decimal
   0d42                -- decimal
   0x1234567890ABCDEF  -- hexadecimal
   0x1234567890abcdef  
   0o12345670          -- octal 
   0b100110101         -- binary
 
-(b) Floats
+By default, Mech can represent integers in the following data types:
+
+- Signed: i8, i16, i32, i64, i128
+- Unsigned: u8, u16, u32, u64, u128
+- Floats: f32, f64
+
+Unless specified or inferred, the default data type for integer literals is `f64`. This is different from many systems languages but consist with other languages like Python, JavaScript, and Ruby.
+
+(4.2) Floats
 
 ```ebnf
 scientific-literal :=  (float-literal | integer-literal)
