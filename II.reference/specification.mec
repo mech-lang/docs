@@ -1,10 +1,10 @@
-Mech Language Specification 
+Mech Platform Specification 
 ===============================================================================
 
 1. Introduction
 -------------------------------------------------------------------------------
 
-This document specifies the default syntax of the Mech programming system, which is designed for developing reactive systems like robots, games, and user interfaces. The syntax specified herein is one of many possible syntaxes and interfaces for Mech, but it may be thought of as the default texual representation of Mech.
+This document specifies the default syntax and semantics of the Mech programming platform, which is designed for developing reactive systems like robots, games, and user interfaces. The syntax specified herein is one of many possible syntaxes and interfaces for Mech, but it may be thought of as the default texual representation of Mech.
 
 This specification starts by defining the most atomic elements of the language, and then builds up to more complex structures.
 
@@ -30,16 +30,16 @@ Source code is ecoded with UTF-8, which allows for Unicode support directly in t
 
 (2.2) Literate Programming and Mechdown
 
-Literate programming presents programs as structured documents where explanations take precedence over code. In Mech, we support this concept through a format called Mechdown, a superset of Markdown with extensions to support embedded Mech syntax. This document is formatted with Mechdown to demonstrate how it is used.
+Literate programming presents programs as structured documents where explanations take precedence over code. Mech supports this concept through a format called Mechdown, a Markdown varient with extensions to support embedded Mech syntax. This document is formatted with Mechdown to demonstrate how it is used.
 
-For more information, see the [Mechdown Section](#58856088105263747).
+For more information, see the [Mechdown Section](#45036232896389885).
 
 (2.3) Whitespace
 
 Whitespace in Mech is used to separate tokens and is generally ignored. This includes spaces, tabs, and newlines. However, whitespace can be significant in certain contexts:
 
-- In lists, whitespace is used to separate items.
-- In matrix and table definitions, whitespace deliniates columns and rows.
+- In lists, whitespace can be used to separate items.
+- In matrix and table definitions, whitespace can deliniate columns and rows.
 - In formulas, whitespace is required around operators.
 
 Semicolons and commas are treated as whitespace in most cases. Except in these contexts:
@@ -275,12 +275,12 @@ Mech supports several types of literals, which are used to represent values in t
         - `u32` - 32-bit unsigned integer
         - `u64` - 64-bit unsigned integer
         - `u128` - 128-bit unsigned integer
-    - **Floats** - Decimal numbers with fractional components.
+    - **Fractional** - Decimal numbers with fractional components.
       - `f32` - 32-bit floating-point number
       - `f64` - 64-bit floating-point number
   - **Imaginary** - Represent imaginary components of complex numbers.
 - **String** - A sequence of UTF-8 characters representing text.
-      - `string` - A sequence of characters enclosed in double quotes.
+  - `string` - A sequence of characters enclosed in double quotes.
 - **Boolean** - Represents logical truth values.
 - **Atom** - A symbolic constant, often used for tags or enums.
 - **Empty** - Represents an empty value, placeholder, or the absence of a value.
@@ -343,7 +343,7 @@ Kinds are used to specify the type of a literal or expression in Mech. Kinds are
 <A>
 ```
 
-(4.2) Integers
+(4.2) Integer Numbers
 
 ```ebnf
 number := real-number, ?"i" | ?("+", real-number, "i") ;
@@ -372,13 +372,13 @@ An integer literal is a sequence of digits representing a whole number. Mech sup
 
 By default, Mech can represent integers in the following data types:
 
-- Signed: i8, i16, i32, i64, i128
-- Unsigned: u8, u16, u32, u64, u128
-- Floats: f32, f64
+- Signed: `i8`, `i16`, `i32`, `i64`, `i128`
+- Unsigned: `u8`, `u16`, `u32`, `u64`, `u128`
+- Float: `f32`, `f64`
 
 Unless specified or inferred, the default data type for integer literals is `f64`. This is different from many systems languages but consist with other languages like Python, JavaScript, and Ruby.
 
-(4.3) Floats
+(4.3) Fractional Numbers
 
 ```ebnf
 scientific-literal :=  (float-literal | integer-literal)
