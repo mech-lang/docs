@@ -108,11 +108,11 @@ h2.toc::before {
 }
 
 .mech-toc h2:hover::before {
-    color: #ee6262;
+    color: #f18181;
 }
 
 .mech-toc h2 a:hover {
-    color: #ee6262;
+    color: #f18181;
     text-decoration: none;
 }
 
@@ -136,11 +136,11 @@ h3.toc::before {
 }
 
 .mech-toc h3:hover::before {
-    color: #ee6262;
+    color: #f18181;
 }
 
 .mech-toc h3 a:hover {
-    color: #ee6262;
+    color: #f18181;
     text-decoration: none;
 }
 
@@ -150,9 +150,10 @@ h4.toc::before {
     color: rgba(255, 255, 255, 0.55);
 }
 .mech-toc h4 {
-    line-height: 15px;
+    line-height: 23px;
     font-size: 12pt;
     padding-left: 60px;
+    margin: 10px;
 }
 
 .mech-toc h4 a {
@@ -161,11 +162,11 @@ h4.toc::before {
 }
 
 .mech-toc h4:hover::before {
-    color: #ee6262;
+    color: #f18181;
 }
 
 .mech-toc h4 a:hover {
-    color: #ee6262;
+    color: #f18181;
     text-decoration: none;
 }
 
@@ -489,12 +490,12 @@ code {
 }
 
 .mech-paragraph a {
-    color: #ffd781;
+    color: #F8D07A;
     text-decoration: underline;
 }
 
 .mech-paragraph a:hover {
-    color: #ee6262;
+    color: #f18181;
     text-decoration: underline;
 }
 
@@ -811,7 +812,7 @@ ol {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 40px auto;
+    margin: 20px auto;
 }
 
 .mech-image {
@@ -821,6 +822,16 @@ ol {
 .mech-figure-label {
     color: #F3B62D; 
     font-size: 12pt;
+    min-width: 60px;
+    text-align: right;
+}
+
+.mech-figure-caption {
+    width: 110%;
+}
+
+.mech-float .mech-figure-caption {
+    width: 350px;
 }
 
 .mech-figure-caption {
@@ -830,7 +841,18 @@ ol {
     text-align: left;;
     line-height: 1.4;
     font-style: italic;
-    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+}
+
+.mech-float .mech-figure {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.mech-figure-caption p {
+    margin: 0;
 }
 
 li {
@@ -892,12 +914,12 @@ li p {
 }
 
 .mech-table a {
-    color: #ee6262; 
-    text-decoration: none;
+    color: #F8D07A;
+    text-decoration: underline;
 }
 
 .mech-table a:hover {
-    color: #f2ead9;
+    color: #f18181;
 }
 
 .mech-block-quote {
@@ -981,7 +1003,7 @@ li p {
 }
 
 .mech-footnote-id {
-    color: #ee6262;
+    color: #F3B62D;
     font-weight: bold;
     min-width: 2em;
     text-align: right;
@@ -994,18 +1016,22 @@ li p {
     color: #f2ead9;
 }
 
-.mech-footnote-reference {
+a.mech-footnote-reference {
+    text-decoration: none;
     font-size: 0.7em;
     vertical-align: super;
-    text-decoration: none;
     margin-left: 0.1em;
-    color: #ee6262;
+    color: #F8D07A;
+    font-weight: bold;
+    min-width: 2em;
+    text-align: right;
     cursor: pointer;
+    font-family: monospace;
     transition: color 0.2s;
 }
 
 .mech-footnote-reference:hover {
-    color: #f28b82;
+    color: #f18181;
     text-decoration: underline;
 }
 
@@ -1051,10 +1077,10 @@ h4::before {
 }
 
 .mech-program-subtitle.toc.active::before{
-    color: #ee6262;
+    color: #d65858;
 }
 
-.mech-program-subtitle.toc.active a{
+.mech-program-subtitle.toc.active a {
     color: #ee6262;
 }
 
@@ -1065,15 +1091,15 @@ h4::before {
 }
 
 h2:hover a {
-    color: #ee6262;
+    color: #f18181;
 }
 
 h3:hover a {
-    color: #ee6262;
+    color: #f18181;
 }
 
 h4:hover a {
-    color: #ee6262;
+    color: #f18181;
 }
 
 .mech-program-section {
@@ -1104,10 +1130,19 @@ mark {
     margin: 0px 7px 0px 3px;
 }
 
+.mech-works-cited {
+    width: 100%;
+}
+
 .mech-citation {
     display: flex;
     align-items: baseline;
     color: #f2ead9;
+}
+
+.mech-citation p {
+    margin-top: 0px;
+    margin-bottom: 10px;
 }
 
 .mech-citation-id {
@@ -1118,31 +1153,44 @@ mark {
 }
 
 .mech-citation-link {
-    color: #ffd781;
+    color: #F8D07A;
     text-decoration: none;
     word-break: break-all;
     transition: color 0.2s ease;
 }
 
 .mech-citation-link:hover {
-    color: #ee6262;
+    color: #f18181;
     text-decoration: underline;
 }
 
 .mech-reference {
     font-family: 'FiraCodeRegular', monospace;
     align-items: baseline;
-    color: #ffd781;
+    color: #F8D07A;
 }
 
 .mech-reference a:hover {
-    color: #ee6262;
+    color: #f18181;
 }
 
 .mech-reference a {
-    color: #ffd781;
+    color: #F8D07A;
     text-decoration: none;
 }
+
+.mech-float.left {
+    float: left;
+    margin-right: 20px;
+    margin-left: -75px;
+}
+
+.mech-float.right {
+    float: right;
+    margin-left: 20px;
+    margin-right: -75px;
+}
+
         </style>
     </head>
     <body>
@@ -1166,6 +1214,15 @@ let userScrolling = false;
 let scrollTimeout = null;
 let scrollLock = false;
 
+function isFullyVisible(el) {
+  const rect = el.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+}
 
 document.querySelectorAll('.mech-program-subtitle.toc').forEach(entry => {
   entry.addEventListener('click', () => {
@@ -1186,7 +1243,9 @@ document.querySelectorAll('.mech-program-subtitle.toc').forEach(entry => {
     const section = entry.closest("section");
 
     if (section) {
-      section.scrollIntoView();
+      if (!isFullyVisible(section)) {
+        section.scrollIntoView();
+      }
       const matchingTocSection = Array.from(sections).find(item => item.id === section.id);
       if (matchingTocSection) {
         matchingTocSection.classList.add("active");
@@ -1431,7 +1490,7 @@ window.addEventListener("scroll", () => {
       let wasm_core;
       async function run() {
         await init();
-        var code = `GzoKAIyU7jLDEZLMHuZUn3KOGinhAlsOFNxKjQtsq4iuN07ZBd688fO/53//PZcCbLz+f/s14rc9fRBdbbRMa9w37w8qMoNKM2mExhJXGqFxCDEAujGOC7OI4TbMlcl3jdggJUI31w2LXUvcWU87gq9PYje6uIk4XAb+uds0gCe4xvAmEghomhofo4sbTCLj+q/AQIVMBqaWL+f8bJl9Kp23UQxvA0Yy3cDLnq5b/qdacABNQn35dV01POuB7oIJjSgHw8mwbyD8EIWfHCgsTpQdxEbTHhEj/AU4NyPHfwBccwcNjeJKlsRkjqTSwLV5XV2KOpAgeadumsWH7RcuaxzeK05aLho3lFK8X8YLGxmWhgzQqGka6PdDjuZyCWokDGJwnSzd1gIWGNd1IeM7U13J5qRSwxz2G5PrZJEq8MKcQavShH9fEYspbIe8YUaNy9ppPHv6rRIQmlJFVhwnUoHo6SthqQl7njxQ0EgMooyKzxvMRByg1+OGgXiwlCqtGmWuTQ1Mm2ihLfkEuKq0hV6urBQja7V5XN1RrKJbq4ABJ3/a6gvboG3B1Ehiadti2yrXfyjhTvqfdvBAtcBbssvZhfXNQ7mViUKLfuAm0qRGmAJ/Di/eSRoNyKevj2YThC0SPuPWIUVUv6/a1tr+k3yzgMxkhnVCF1KqqTbr76E9WX6BBpqayEsLrSTXZFhY1EqZmkrJIEstZhW47mwxGiRiqI0pq2gNG3SCkY22sKltJaEh+mxm5wkM0bmi4uiR29rA0rSyC/Y83eCXClayK7QCUSMqrFIzsKCCMmV1k0D9hCqFykzwcw1r2TVao5lyosZqVTLmu8oWhkhWyHGwVRKz8KAnHAhWD3YGVa1Q8w2Wrm4dDnX6TOot6Mf+TkK+emfDZzCcOkONPs0Z6zIZqAw54MzlO/POwj/9/RJv1ll0JvmJxwYrLe5k2GOyFe61fNkZRVYXuxkmYQTk34kjodjmohsrqyTV/HE6nklwWPl6kfjz7LO3hZMw6ZK8lRm+2hCgdJLd6RsZNgOzwMHguokTorNzZI55ieCzh57wqGel+UkLVMyfMHca32NeK9dCHNVbVbxvn2rbkYa9Nm8Kb8HYR1/41Lc6tMOtE/OnXp7O95lf4bomjiIAamHZYABwcjPKr/qbHJKtUWdrqmFsCc10lXhe4TWxfmuMLj86xVlMc4nSBe0aNeJPuowzu0SWGMkP1uQN+UxjakQ8/jxpXtn2nauwJlikghjcoBvpFqx0Xp8Zi7PfxVuwNSTfmypdvW/TlbQLe+KAHHgk+BJgIAIaWBkcfVV8OAfzLxoBC9q4VvWLyGy4Qno6qgdMmLSzYro+7Q6qoD1Yq+jgWYihCGloldg1Uv1hj6Q/N0IW9qTDpPnOehLr3NEpVVd1NR+FveFOG4jX5PVJWSNj8kWM1d8iIc9EXX3u2Q6xd/Ae4ETu2BkDtYc+4seSCDp3fkRBzZlji9mSYz+yT3LoBE48dBWPHl5O/JOVqv6OKoSP5907QHLVUYnyT1ZPckWDlKr9VoYVj68eOIdLAA==`;
+        var code = `GzoKAIyU7jLDEZJ0HrVpLEyyzSREK84SqdDuNlQc6FaFUtHUqBl3/vzf83//e14OsPH6X0uHvLsk45dSUx1O4xzv77+llrJLLa4Vh3AEmeKoGiEVSQTQoptM9MVSi1EL69rJXFsXd9brBv/rK9sIr+8tDv+aENIeU4iuoYTgPmRAIAYSXrabD3FAlH+bgJRwZ6BquXzO9ZZZptL6EEbobaCRdNf3vmXWLf+pFmxAk7C++G5xWX+rB9oEDRoRDkYnQ78B84MVfspAYXai9CBWmrawGOF2wLkakvCPEJTJDBqqxRUvDvGMmkgTlLFlKxI0kdK0rBU39exk+IVbztjJpaSWcuHoTAjB42U880zHFNEJjIq6in4fZGgmoyUVTVEVlPHQrc1BDlFWGbfvTHElk5NCDXXYTUyOk1kil8xNKbBKY+jflYd8gm1RbpgR4zJ2ai9fP2UMhcZEHvPDQEoAe7oKUKhjT1MOFCQSI1FKyecAMxEF6PG4oifqLSQKC0qYKxMV00YaaENWQ64yT0MvFu9SVrNWa8fVHkbCurUyGHDwp64+s4k0zYAEEHObZNMCyj+QsJH+1Q4eKBZ4SHbZu9C+uSq3UlGo0w+sIklqmClw2/DiRtyoh79+fVGbwGzh8BEPGVIE9f2iabHpv5atZygzqmMracOUcirNujtoR/r+B1AApMpvDDDiKNV+ZlAjAZJyTiBzDTRyKFtTjCqJGGJjzMgb/Qocf2iCKUxqWnFIiC4TzSxfH50rKo4eOa0NXBoXZs6chuv/UoJSeomWwGpECUsVPR0qKFVWVwnUO1DKlSb8nxWopFdohVrKiQpWyrjNd+UtVJEs4fVgyzjOIgc9Zo+/sL3eKyq5iquQdHljdajDl1xvRjd0t6rqs3MyeEOGQ5dYozdzRr9MBlYGLGJNZVvT1sw//T1Fm7SktZYdeUmwwgVXdHxxtsReyvPOILw629aRkwHC/w7sMsUmG+ystOJU04fpsK7p5CMvJ4keR19eZ46SUVvLGp7hxQYDpZPsTn6m4wSZJDpRUNZRQnhySp1Cr+Z/c8ARDnWsFP9ogZLpE+ZO4jroNKJkbDfeyqJx+1TDjtTvNDlj+OaPXHCFS12rRTvcOjB96uXJXBfdEsoK2w0RUDPLBgWAnZsQbtldoZB0D7x0j3pQtoSHXhn7XeEVkXyrDW/urewygjlHeDnPVmLEbXQZZXJWnUUt2xuTF/gbjLEB9vKzlrwy7VsXyCJjkQKid5kup1Kw1LrcM2KXn9mrZLVPttNVWrxt0hW0QTbFtrrtVf3vPvjCp76l4+ir5OQczN8489FvQiniF5bZsEDmdJT3qDBJJ9l4ddzuFX6zvxjR/ssAAhHQwCpw1kj5yRhJvz4LMOhwh0HzxroTy+zBMVEVVXF7KegM1tNA7Kv7B3mMDPF3NlTdLMYvWVU8tkyHyBE5JuRA5tgZFbX7TuG0wIKOna5RUHGZscVkybYfOU+yr0ZqDnblD5/fa25tvqy7oArm43n0DuBceRii7NpCLQ+r4Vy0X9IxeLy454rcEA==`;
         wasm_core = new WasmMech();
         var xhr = new XMLHttpRequest();
         var codeUrl = `/code${window.location.pathname}`;

@@ -108,11 +108,11 @@ h2.toc::before {
 }
 
 .mech-toc h2:hover::before {
-    color: #ee6262;
+    color: #f18181;
 }
 
 .mech-toc h2 a:hover {
-    color: #ee6262;
+    color: #f18181;
     text-decoration: none;
 }
 
@@ -136,11 +136,11 @@ h3.toc::before {
 }
 
 .mech-toc h3:hover::before {
-    color: #ee6262;
+    color: #f18181;
 }
 
 .mech-toc h3 a:hover {
-    color: #ee6262;
+    color: #f18181;
     text-decoration: none;
 }
 
@@ -150,9 +150,10 @@ h4.toc::before {
     color: rgba(255, 255, 255, 0.55);
 }
 .mech-toc h4 {
-    line-height: 15px;
+    line-height: 23px;
     font-size: 12pt;
     padding-left: 60px;
+    margin: 10px;
 }
 
 .mech-toc h4 a {
@@ -161,11 +162,11 @@ h4.toc::before {
 }
 
 .mech-toc h4:hover::before {
-    color: #ee6262;
+    color: #f18181;
 }
 
 .mech-toc h4 a:hover {
-    color: #ee6262;
+    color: #f18181;
     text-decoration: none;
 }
 
@@ -489,12 +490,12 @@ code {
 }
 
 .mech-paragraph a {
-    color: #ffd781;
+    color: #F8D07A;
     text-decoration: underline;
 }
 
 .mech-paragraph a:hover {
-    color: #ee6262;
+    color: #f18181;
     text-decoration: underline;
 }
 
@@ -811,7 +812,7 @@ ol {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 40px auto;
+    margin: 20px auto;
 }
 
 .mech-image {
@@ -821,6 +822,16 @@ ol {
 .mech-figure-label {
     color: #F3B62D; 
     font-size: 12pt;
+    min-width: 60px;
+    text-align: right;
+}
+
+.mech-figure-caption {
+    width: 110%;
+}
+
+.mech-float .mech-figure-caption {
+    width: 350px;
 }
 
 .mech-figure-caption {
@@ -830,7 +841,18 @@ ol {
     text-align: left;;
     line-height: 1.4;
     font-style: italic;
-    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+}
+
+.mech-float .mech-figure {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.mech-figure-caption p {
+    margin: 0;
 }
 
 li {
@@ -892,12 +914,12 @@ li p {
 }
 
 .mech-table a {
-    color: #ee6262; 
-    text-decoration: none;
+    color: #F8D07A;
+    text-decoration: underline;
 }
 
 .mech-table a:hover {
-    color: #f2ead9;
+    color: #f18181;
 }
 
 .mech-block-quote {
@@ -981,7 +1003,7 @@ li p {
 }
 
 .mech-footnote-id {
-    color: #ee6262;
+    color: #F3B62D;
     font-weight: bold;
     min-width: 2em;
     text-align: right;
@@ -994,18 +1016,22 @@ li p {
     color: #f2ead9;
 }
 
-.mech-footnote-reference {
+a.mech-footnote-reference {
+    text-decoration: none;
     font-size: 0.7em;
     vertical-align: super;
-    text-decoration: none;
     margin-left: 0.1em;
-    color: #ee6262;
+    color: #F8D07A;
+    font-weight: bold;
+    min-width: 2em;
+    text-align: right;
     cursor: pointer;
+    font-family: monospace;
     transition: color 0.2s;
 }
 
 .mech-footnote-reference:hover {
-    color: #f28b82;
+    color: #f18181;
     text-decoration: underline;
 }
 
@@ -1051,10 +1077,10 @@ h4::before {
 }
 
 .mech-program-subtitle.toc.active::before{
-    color: #ee6262;
+    color: #d65858;
 }
 
-.mech-program-subtitle.toc.active a{
+.mech-program-subtitle.toc.active a {
     color: #ee6262;
 }
 
@@ -1065,15 +1091,15 @@ h4::before {
 }
 
 h2:hover a {
-    color: #ee6262;
+    color: #f18181;
 }
 
 h3:hover a {
-    color: #ee6262;
+    color: #f18181;
 }
 
 h4:hover a {
-    color: #ee6262;
+    color: #f18181;
 }
 
 .mech-program-section {
@@ -1104,10 +1130,19 @@ mark {
     margin: 0px 7px 0px 3px;
 }
 
+.mech-works-cited {
+    width: 100%;
+}
+
 .mech-citation {
     display: flex;
     align-items: baseline;
     color: #f2ead9;
+}
+
+.mech-citation p {
+    margin-top: 0px;
+    margin-bottom: 10px;
 }
 
 .mech-citation-id {
@@ -1118,31 +1153,44 @@ mark {
 }
 
 .mech-citation-link {
-    color: #ffd781;
+    color: #F8D07A;
     text-decoration: none;
     word-break: break-all;
     transition: color 0.2s ease;
 }
 
 .mech-citation-link:hover {
-    color: #ee6262;
+    color: #f18181;
     text-decoration: underline;
 }
 
 .mech-reference {
     font-family: 'FiraCodeRegular', monospace;
     align-items: baseline;
-    color: #ffd781;
+    color: #F8D07A;
 }
 
 .mech-reference a:hover {
-    color: #ee6262;
+    color: #f18181;
 }
 
 .mech-reference a {
-    color: #ffd781;
+    color: #F8D07A;
     text-decoration: none;
 }
+
+.mech-float.left {
+    float: left;
+    margin-right: 20px;
+    margin-left: -75px;
+}
+
+.mech-float.right {
+    float: right;
+    margin-left: 20px;
+    margin-right: -75px;
+}
+
         </style>
     </head>
     <body>
@@ -1178,6 +1226,15 @@ let userScrolling = false;
 let scrollTimeout = null;
 let scrollLock = false;
 
+function isFullyVisible(el) {
+  const rect = el.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+}
 
 document.querySelectorAll('.mech-program-subtitle.toc').forEach(entry => {
   entry.addEventListener('click', () => {
@@ -1198,7 +1255,9 @@ document.querySelectorAll('.mech-program-subtitle.toc').forEach(entry => {
     const section = entry.closest("section");
 
     if (section) {
-      section.scrollIntoView();
+      if (!isFullyVisible(section)) {
+        section.scrollIntoView();
+      }
       const matchingTocSection = Array.from(sections).find(item => item.id === section.id);
       if (matchingTocSection) {
         matchingTocSection.classList.add("active");
@@ -1443,7 +1502,7 @@ window.addEventListener("scroll", () => {
       let wasm_core;
       async function run() {
         await init();
-        var code = `G2EIAIyUrppv//ub/m5WMgk0KTPLxGidaThdJuqUjYqmz+z3S0Lh/79XNQF+L0mHhahcpHfuzFiLfuz/0s5YWAxgBUultSigfcim9WyGE1j07cNKm6fQHw881+enG8f7ANDe2AAEiPx3/uHIe8lE45eloz4R4DOVmvpJbtpqc/+lZFeZLW6E15IFgpVkrm47VhXP/ZQ0jjkQiTz1vpdi0NEPhF0EOi+IvYJ9IhaAwH8AIkMeMJW6/z0fDuAOpM1gu+u8bEGSzw+K8NqHkmiBlm7EcNFzfUMHA0gjkQuRLKC4RpbRutgRherrF38W8Kj9HgW6qEkcjda8SoEKukxkMyecS4Ku0B3E+lTL8C9NePHLE/hBrOi5ozGhLZXyLiLK4uKekDTFtUBrtAq3b3VAh61JEB0zHbNE/klUJkiDfXNxgD1OWHX0zMuSmol8KvKEAwTQY5rymIS3ZmwbkMPmqGOu4+9iqTavjf/SFejS0bAe0KQmfK9Q6cW9hEjEp3r13qAmkfB7aW+ISJjuNXvbGgkQmfafBM4A2y3/ozUq5WapQwkj2A/9S4g1KXjBGAIOCGAiIDuCR8yIPnJaHaEjdsQcSdE4nXmlgV5sDMYYSADhejMJU9VmQcZjC1vB24lFrVBcWabVfmp1WJ2ZnFAqe4pFuBoUsxKJ1wsSU6GwHEwiQclHkKscQ9Z9rvfjIRGI5BELCWUIxT96hbKbrX8x4pDUCRBa1sa2sXX7tGJT29qmvdu/GDQ/OgDhxWZhdkBb4A3XdxdgET6mN7MOdoyjO6efHOpYx3Ryl1foudcGYkmE0b3Cl4hOrDn/R2lIX6W6MIEbPJXgT3czy7B6NSDcgruO11unk3WybsTd9eA6O10PrZvpeFRLGqlgVTRv06r2svmaGpdjfBM2E4jh7SPGDuyCDpp8CwX2eB/v64DPPCpPwmxg9Q2KO29HkuXiKp3NigHKdZ77Dirkjtdih3D4hJipcMV4HuSfjRM4w6mkCdk2vsAX5JhajpSaVuzMVpucqhCsCAho+GpdTYtCJdjgFVytIHYKeaFcW/YBvIMiaoUvKxlMjVt4QDrU2lL8rmLc04cn/MQwT28FLEg0RDYO1yMk1mDon/djL/CyjdjgkuCioIznD3m8+CWOjMnAm9cs3Ayfxj72g1N2IkLgLCcvG/05yE0i1qnCuW7GFKFUahGOmuDd4UMFV+hm/L5T92w9y5iQ05aq22rGXoO2NCSn1CF57JfKdRJiC0FKcVA6+fWvxGpQ8xETS4L//MxFmicT2uFeh8M4EX76WSjtSyU5j0ajIbj96AN8AQ==`;
+        var code = `G2EIAIyUrppvP76b3SMlB6Uhofg0Eyt4p+ksE7XSrRMNZ/b7JaHw/9+rmgK/320hKhfpnTsz9rD/SztjYTGAFSyV1qKA9iGb2s9gOBlnUbcO03FHoT+ueq7Pt2Y3VgAggd4BAV3+23mz5V3WCuHLwgWXCHCZCvV+JdYn2ty/fJJVJrMb4a1kgWAlmqud2urFc98ljWMTiEQeutlJNujoBsI2Al0WxF7BPlHUQPsPoMuYA0ym7n/OhTWcDAQXsJzeeRaQ5P2d8vztw5MIQziDGH70XJ8YQIAgXQ4HsoDsGplH62pHFLJXX9xZwKH2KgU6oklcKMTvuUYFndRliBPOJUElXUSsUbUI/1CHP345Bx8svjMmJsRRCFWdi4iyOLsnJE2xLdAWrcLprSQkbU2CSPYnB3T5J1KZIA3y5mwPexyw6OiRyzU1EfhU+Al7CKDDNKUxCS9NSBuQwmYrOZj8u1qyoen+X9Ja2gi0RTVNBoXvPbw04IaILgO8t8FoiGoyIPwG2hDTJfQ1mA1xRECXY+6TYDJAuuV/tEa53CR1KGF4m6BpHLH3Cl4grcABAYwE5LTjdtNutJ++ttN2p91sD9EwnXGlgaNiJ3QykADCtqYHerMhQcZtC1vR64lFrZhfWaaVOLWSVipyx5TSnjIiXAyKSY7E2wWJqVCMHAzCQclFkIscQ+I+l/txlzzk7xGLCUWE4h+9h2f3tv6FlKCiE8C0HBvbxjbs0xeb2o5t2ptNq0HTowMQo+IADDRrC7xg2+owjMDH+GaOgx3jGM7pJ4c6jmM6sb0LtNxqBbEkwOjWw5e8Tiy5/EdjMLYfSmMCV3go3p/2aiZh6qom3Ad3Bs/ow8lMZIb43ZnoDDudic2Y4VJQS+opY1X8vQ2r0svG39S4XORzMFdGDE+PkEVYgiho8iVk2O0VvGIAPns2GcEu/FZ7q+7iNb907xGxdDIpBsjXeeozqJA9XCuuwdo5YqbCGfLYyz+TTdjGKRUUvK29i3cjh9BkoNSwMs4s2sRUgWCFQUDFV/OqjxUqwXr3YV8itgV5Jl+b9wa8gixqgQ8rGYzJEZwi7dNLih8XjHt8eo7PGebheY8FCYbIP4fLERJrMLTP+8VLuFxArGVccPGgyOOHvPT4pYSMqcH1KCTcGh/aPvajQ7Q7QOCkSZ7Xu+/grgexlArnujXzCE+psLDUeI/XTl/wCx3bN4t1T+qZZwg5bqnarSbkGpTSkJxCa+Sx/fRcJyEWCELKBIUrH/9K8Q3efMTEuOA/P3Mxxitl7bDP93I4EH76nm/MVa1wXigEQ7C71gf4Ag==`;
         wasm_core = new WasmMech();
         var xhr = new XMLHttpRequest();
         var codeUrl = `/code${window.location.pathname}`;
