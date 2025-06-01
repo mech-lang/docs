@@ -96,18 +96,18 @@ enum-separator := ws0, "|", ws0 ;
 
 (3.2.1) Operators
 
-| Category     | Operators |
-|--------------|--------------------------|
-| Assign       | `:= = += -= *= /= ^=`    |
-| Arithmetic   | `+ - * / ^ %`            |
-| Split / Merge| `>- -<`                  |
-| Matrix       | `** · ⨯ \ ' `            |
-| Logic        | `| & xor ⊕ ⊻ ! ¬`       |
-| Set          | `∪ ∩ ∖ ∁ ⊆ ⊇ ⊊ ⊋ ∈ ∉ ` |
-| Range        | `.. ..=`                 |
-| Condition    | `!= ¬= ≠ == > < >= ≤ ≥`  |
-| Transition   | `=> -> ~>`               |
-| Guard        | `| │ ├ └`                |
+| Category     | Operators                                 |
+|--------------|-------------------------------------------|
+| Assign       | `:=` `=` `+=` `-=` `*=` `/=` `^=`         |
+| Arithmetic   | `+` `-` `*` `/` `^` `%`                   |
+| Split / Merge| `>-` `-<`                                 |
+| Matrix       | `**` `·` `⨯` `\` `'`                      |
+| Logic        | `|` `&` `xor` `⊕` `⊻` `!` `¬`            |
+| Set          | `∪` `∩` `∖` `∁` `⊆` `⊇` `⊊` `⊋` `∈` `∉` |
+| Range        | `..` `..=`                                |
+| Condition    | `!=` `¬=` `≠` `==` `>` `<` `>=` `≤` `≥`   |
+| Transition   | `=>` `->` `~>`                            |
+| Guard        | `|` `│` `├` `└`                           |
 
 (3.2.2) Punctutation
 
@@ -125,14 +125,16 @@ punctuation := period
 **Examples:**
 
 ```
-. ! ? , : ; ' "
+. ! ? , : ; " ' 
 ```
 
 (3.2.3) Symbols
 
 ```ebnf
 symbol := ampersand 
+      | dollar
       | bar 
+      | percent
       | at 
       | slash 
       | hashtag 
@@ -149,7 +151,7 @@ symbol := ampersand
 **Examples:**
 
 ```
-& | @ / # = \ ~ + - * ^ _
+& $ | % @ / # = \ ~ + - * ^ _
 ```
 
 (3.2.4) Grouping Symbols
