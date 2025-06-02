@@ -227,17 +227,14 @@ When parsed and rendered, these become:
 
 (3.4) Keywords
 
-There are only three keywords in Mech: `true`, `false`, and `xor`. These keywords are used to represent boolean values and the `logic/xor()` function as an infix operator. Because Mech is designed to be a language that can be used by non-English speakers, the syntax allows for an alternative representation, which can be used in place of the English keywords.
+There are only three keywords in Mech: `true`, `false`. Because Mech is designed to be used by non-English speakers, the syntax allows for an alternative representation, which can be used in place of the English keywords.
 
 | Keyword | Alternative |
 |---------|-------------|
 | true    | ✓           |
 | false   | ✗           |
-| xor     | ⊕, ⊻       |
 
-Combined with Mech's Unicode support, this allows users to write code in their native language without the need to learn English keywords.
-
-**Note:** technically "xor" is not a keyword, because it is a valid name identifier, but these three words do represent the only natural words used throught the Mech grammar.
+This allows users to write code in their native language without the need to learn English keywords.
 
 (3.5) Identifiers
 
@@ -553,7 +550,7 @@ Matrix elements can be accessed using either 1D or 2D indexing:
 
 See the Indexing section for more details and examples.
 
-**Examples:**
+(4.1.3) Examples
 
   -- Empty Matrix
   []
@@ -596,7 +593,7 @@ The elements of a matrix are indexed in the following ways:
 
 Negative indices indicate counting from the end of the matrix. For example, `-1` is the last element, `-2` is the second to last element, and so on.
 
-**Kind**
+(4.1.4) Kind
 
 The kind of a matrix includes the type of its elements and its shape. For example, a matrix of unsigned 8-bit integers with 2 rows and 3 columns has the kind `<[u8]:2,3>`.
 
