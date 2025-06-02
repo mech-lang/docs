@@ -227,14 +227,17 @@ When parsed and rendered, these become:
 
 (3.4) Keywords
 
-There are only two keywords in Mech:
+There are only three keywords in Mech: `true`, `false`, and `xor`. These keywords are used to represent boolean values and the `logic/xor()` function as an infix operator. Because Mech is designed to be a language that can be used by non-English speakers, the syntax allows for an alternative representation, which can be used in place of the English keywords.
 
-```
-true
-false
-```
+| Keyword | Alternative |
+|---------|-------------|
+| true    | ✓           |
+| false   | ✗           |
+| xor     | ⊕, ⊻       |
 
 Combined with Mech's Unicode support, this allows users to write code in their native language without the need to learn English keywords.
+
+**Note:** technically "xor" is not a keyword, because it is a valid name identifier, but these three words do represent the only natural words used throught the Mech grammar.
 
 (3.5) Identifiers
 
@@ -335,14 +338,13 @@ Kinds are used to specify the type of a literal or expression in Mech. Kinds are
 **Examples:**
 
 ```
-<_>
-<`A>
-<{A:B}>
-<(A,B)=(C,D)>
-<{A,B,C}>
-<[A,B,C]>
-<(A,B,C)>
-<A>
+<_>             -- Empty         
+<`A>            -- Atom         
+<{A:B}>         -- Map          
+<(A,B)=(C,D)>   -- Function                    
+<{A}>           -- Set              
+<[A]>           -- Matrix              
+<(A,B,C)>       -- Tuple              
 ```
 
 (4.2) Integer Numbers
