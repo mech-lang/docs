@@ -347,7 +347,9 @@ Kinds are used to specify the type of a literal or expression in Mech. Kinds are
 <(A,B,C)>       -- Tuple              
 ```
 
-(4.2) Integer Numbers
+(4.2) Numbers
+
+(4.2.1) Integer Numbers
 
 ```ebnf
 number := real-number, ?"i" | ?("+", real-number, "i") ;
@@ -382,7 +384,7 @@ By default, Mech can represent integers in the following data types:
 
 Unless specified or inferred, the default data type for integer literals is `f64`. This is different from many systems languages but consist with other languages like Python, JavaScript, and Ruby.
 
-(4.3) Fractional Numbers
+(4.2.2) Fractional Numbers
 
 ```ebnf
 scientific-literal :=  (float-literal | integer-literal)
@@ -416,7 +418,7 @@ A floating-point literal represents a real number, potentially with a fractional
 
 By default, floating-point literals are inferred to be of type f64, unless explicitly annotated or inferred from context.
 
-(4.4) Strings
+(4.3) Strings
 
 ```ebnf
 string := quote, *(¬quote, text), quote ;
@@ -432,7 +434,7 @@ Strings heap-allocate their contents, so they can be of any length. They are enc
   "characters like \" and \\ are escaped with, \\ e.g. \\\""
   "This string contains emojis: 🤖, 🐦, and 🐍"
 
-(4.5) Boolean
+(4.4) Boolean
 
 ```ebnf
 boolean := true-literal | false-literal ;
@@ -452,7 +454,7 @@ A boolean literal represents a logical truth value, and can be expressed in eith
   ✓
   ✗
 
-(4.6) Atoms
+(4.5) Atoms
 
 ```ebnf
 atom := "`", identifier ;
@@ -467,7 +469,7 @@ An atom is a symbolic constant used to represent a fixed, named value. Atoms are
   `🐦
   `Δx^2
 
-(4.7) Empty
+(4.6) Empty
 
 ```ebnf
 empty := +underscore ;
