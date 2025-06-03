@@ -176,7 +176,7 @@ grouping-symbol := left-parenthesis
 (3.4.5) Text
 
 ```ebnf
-escaped-char := backslash,  symbol | punctuation ;
+escaped-char := backslash,  symbol | punctuation | alpha ;
 text := alpha 
       | digit 
       | space 
@@ -227,7 +227,7 @@ When parsed and rendered, these become:
 
 (3.4) Keywords
 
-There are only three keywords in Mech: `true`, `false`. Because Mech is designed to be used by non-English speakers, the syntax allows for an alternative representation, which can be used in place of the English keywords.
+There are only two keywords in Mech: `true` and `false`. Because Mech is designed to be used by non-English speakers, the syntax allows for an alternative representation, which can be used in place of the English keywords.
 
 | Keyword | Alternative |
 |---------|-------------|
