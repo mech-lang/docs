@@ -1,14 +1,19 @@
-
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <style>
-      
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+
+
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <style>
                   @import url(https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css);
 
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
 }
 
 .mech-program {
@@ -49,18 +54,14 @@ body {
     color: #f2ead9;
     overflow-y: auto;
     margin-right: 20px;
-    padding-right: 15px;
-    padding-left: 10px;
+    padding-right: 0px;
+    padding-left: 0px;
     position: sticky; 
     top: 0; 
     height: 100vh;
 }
 
 .mech-toc h2 {
-    line-height: 23px;
-}
-
-.mech-toc h3 {
     line-height: 23px;
 }
 
@@ -101,24 +102,27 @@ h2.toc::before {
     padding-right: 5px;
 }
 
-h3.toc::before {
-    font-size: 12pt;
-    padding-right: 5px;
-    color: rgba(255, 255, 255, 0.55);
-}
-
 .mech-toc h2 a {
     color: #f2ead9;
     text-decoration: none;
 }
 
 .mech-toc h2:hover::before {
-    color: #ee6262;
+    color: #f18181;
 }
 
 .mech-toc h2 a:hover {
-    color: #ee6262;
+    color: #f18181;
     text-decoration: none;
+}
+
+h3.toc::before {
+    font-size: 12pt;
+    padding-right: 5px;
+    color: rgba(255, 255, 255, 0.55);
+}
+.mech-toc h3 {
+    line-height: 23px;
 }
 
 .mech-toc h3 {
@@ -132,11 +136,37 @@ h3.toc::before {
 }
 
 .mech-toc h3:hover::before {
-    color: #ee6262;
+    color: #f18181;
 }
 
 .mech-toc h3 a:hover {
-    color: #ee6262;
+    color: #f18181;
+    text-decoration: none;
+}
+
+h4.toc::before {
+    font-size: 12pt;
+    padding-right: 5px;
+    color: rgba(255, 255, 255, 0.55);
+}
+.mech-toc h4 {
+    line-height: 23px;
+    font-size: 12pt;
+    padding-left: 60px;
+    margin: 10px;
+}
+
+.mech-toc h4 a {
+    color: #f2ead9;
+    text-decoration: none;
+}
+
+.mech-toc h4:hover::before {
+    color: #f18181;
+}
+
+.mech-toc h4 a:hover {
+    color: #f18181;
     text-decoration: none;
 }
 
@@ -460,11 +490,12 @@ code {
 }
 
 .mech-paragraph a {
-    color: #ee6262;
-    text-decoration: none;
+    color: #F8D07A;
+    text-decoration: underline;
 }
 
 .mech-paragraph a:hover {
+    color: #f18181;
     text-decoration: underline;
 }
 
@@ -781,7 +812,7 @@ ol {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 40px auto;
+    margin: 20px auto;
 }
 
 .mech-image {
@@ -791,6 +822,16 @@ ol {
 .mech-figure-label {
     color: #F3B62D; 
     font-size: 12pt;
+    min-width: 60px;
+    text-align: right;
+}
+
+.mech-figure-caption {
+    width: 110%;
+}
+
+.mech-float .mech-figure-caption {
+    width: 350px;
 }
 
 .mech-figure-caption {
@@ -800,7 +841,18 @@ ol {
     text-align: left;;
     line-height: 1.4;
     font-style: italic;
-    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+}
+
+.mech-float .mech-figure {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.mech-figure-caption p {
+    margin: 0;
 }
 
 li {
@@ -862,12 +914,12 @@ li p {
 }
 
 .mech-table a {
-    color: #ee6262; 
-    text-decoration: none;
+    color: #F8D07A;
+    text-decoration: underline;
 }
 
 .mech-table a:hover {
-    color: #f2ead9;
+    color: #f18181;
 }
 
 .mech-block-quote {
@@ -951,7 +1003,7 @@ li p {
 }
 
 .mech-footnote-id {
-    color: #ee6262;
+    color: #F3B62D;
     font-weight: bold;
     min-width: 2em;
     text-align: right;
@@ -964,18 +1016,22 @@ li p {
     color: #f2ead9;
 }
 
-.mech-footnote-reference {
+a.mech-footnote-reference {
+    text-decoration: none;
     font-size: 0.7em;
     vertical-align: super;
-    text-decoration: none;
     margin-left: 0.1em;
-    color: #ee6262;
+    color: #F8D07A;
+    font-weight: bold;
+    min-width: 2em;
+    text-align: right;
     cursor: pointer;
+    font-family: monospace;
     transition: color 0.2s;
 }
 
 .mech-footnote-reference:hover {
-    color: #f28b82;
+    color: #f18181;
     text-decoration: underline;
 }
 
@@ -1019,247 +1075,423 @@ h4::before {
     counter-increment: h4;
     content: counter(h2) "." counter(h3) "." counter(h4) " ";
 }
-        
-    </style>
-  </head>
-  <body>
-    <div class="mech-root">
-      <div class="mech-toc">
-        <h1 class="mech-program-title">
-          Download and Install Mech
-        </h1>
-        <section class="mech-toc-sections">
-          <section class="mech-program-section">
-            <h2 id="26059173250375018" class="mech-program-subtitle toc">
-              <a href="#21916577150373850">
-                Installing from Binary
-              </a>
-            </h2>
-          </section>
-          <section class="mech-program-section">
-            <h2 id="35851915105211122" class="mech-program-subtitle toc">
-              <a href="#26471559989653374">
-                Installing from Source
-              </a>
-            </h2>
-            <h3 id="42609390091056826" class="mech-program-subtitle toc">
-              <a href="#63108860087647555">
-                Install Rust and Cargo
-              </a>
-            </h3>
-            <h3 id="23851110389026406" class="mech-program-subtitle toc">
-              <a href="#22987866482345505">
-                Download and Build Mech
-              </a>
-            </h3>
-            <h3 id="17019088142363160" class="mech-program-subtitle toc">
-              <a href="#47876336535696702">
-                Build the Wasm Target
-              </a>
-            </h3>
-          </section>
-          <section class="mech-program-section">
-            <h2 id="69130403443588866" class="mech-program-subtitle toc">
-              <a href="#16395534318488341">
-                Installing from Cargo
-              </a>
-            </h2>
-          </section>
-          <section class="mech-program-section">
-            <h2 id="54601290842292428" class="mech-program-subtitle toc">
-              <a href="#3552713662904812">
-                Verifying Installation
-              </a>
-            </h2>
-          </section>
-        </section>
-      </div>
-      <div class="mech-program">
-        <h1 class="mech-program-title">
-          Download and Install Mech
-        </h1>
-        <div class="mech-program-body">
-          <section class="mech-program-section">
-            <h2 id="21916577150373850" class="mech-program-subtitle ">
-              <a href="#21916577150373850">
-                Installing from Binary
-              </a>
-            </h2>
-            <p class="mech-paragraph">
-              Precompiled binaries are available for the following platforms:
-            </p>
-            <ul class="mech-unordered-list">
-              <li class="mech-ul-list-item">
-                <p class="mech-paragraph">
-                  <a href="https://github.com/mech-lang/mech/releases/download/v0.2.36-beta/mech-v0.2.36-beta-win-x86-64.7z" class="mech-hyperlink">
-                    Wndows
-                  </a>
-                </p>
-              </li>
-              <li class="mech-ul-list-item">
-                <p class="mech-paragraph">
-                  <a href="https://github.com/mech-lang/mech/releases/download/v0.2.36-beta/mech-v0.2.36-beta-win-x86-64.7z" class="mech-hyperlink">
-                    Linux
-                  </a>
-                </p>
-              </li>
-              <li class="mech-ul-list-item">
-                <p class="mech-paragraph">
-                  <a href="https://github.com/mech-lang/mech/releases/download/v0.2.36-beta/mech-v0.2.36-beta-mac-aarch64.7z" class="mech-hyperlink">
-                    macOS
-                  </a>
-                </p>
-              </li>
-            </ul>
-            <p class="mech-paragraph">
-              You can find previous releases and release notes at 
-              <a href="https://github.com/mech-lang/mech/releases" class="mech-hyperlink">
-                /mech-lang/mech/releases
-              </a>
-              .
-            </p>
-            <p class="mech-paragraph">
-              To install, simply download the appropriate binary for your operating system and extract it to a directory of your choice. The Mech toolchain is distributed as a solitary executable file and doesn't require an installer.
-            </p>
-            <p class="mech-paragraph">
-              See the toolchain documation for more information on how this file works.
-            </p>
-          </section>
-          <section class="mech-program-section">
-            <h2 id="26471559989653374" class="mech-program-subtitle ">
-              <a href="#26471559989653374">
-                Installing from Source
-              </a>
-            </h2>
-            <p class="mech-paragraph">
-              If mech is not available for your platform, or if you want to build it from source, follow these steps:
-            </p>
-            <h3 id="63108860087647555" class="mech-program-subtitle ">
-              <a href="#63108860087647555">
-                Install Rust and Cargo
-              </a>
-            </h3>
-            <p class="mech-paragraph">
-              First you will need 
-              <a href="https://www.rust-lang.org/learn/get-started" class="mech-hyperlink">
-                Rust
-              </a>
-              . Make sure to install a recent version on the nightly release channel, currently 
-              <code class="mech-inline-code">nightly-2025-01-15</code>
-              .
-            </p>
-            <p class="mech-paragraph">
-              In Bash:
-            </p>
-            <pre class="mech-code-block">curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --profile minimal --default-toolchain nightly-2025-01-15
-</pre>
-            <p class="mech-paragraph">
-              This command will download and install the Rust toolchain, including Cargo, the Rust package manager. Rustup is a tool for managing Rust versions and associated tools.
-            </p>
-            <p class="mech-paragraph">
-              In PowerShell:
-            </p>
-            <pre class="mech-code-block">irm https://win.rustup.rs -OutFile rustup-init.exe; Start-Process -Wait -FilePath .\rustup-init.exe -ArgumentList "-y --default-toolchain nightly-2025-01-15"; Remove-Item .\rustup-init.exe
-</pre>
-            <p class="mech-paragraph">
-              This command will: 
-            </p>
-            <ul class="mech-unordered-list">
-              <li class="mech-ul-list-item">
-                <p class="mech-paragraph">
-                  Download Rustup for Windows (rustup-init.exe)
-                </p>
-              </li>
-              <li class="mech-ul-list-item">
-                <p class="mech-paragraph">
-                  Run the installer with 
-                  <code class="mech-inline-code">-y</code>
-                   ("yes" to all, no prompts) and set the correct nightly toolchain
-                </p>
-              </li>
-              <li class="mech-ul-list-item">
-                <p class="mech-paragraph">
-                  Delete the installer after completion
-                </p>
-              </li>
-            </ul>
-            <p class="mech-paragraph">
-              You may need to allow scripts by running the following before executing the above command:
-            </p>
-            <pre class="mech-code-block">Set-ExecutionPolicy Bypass -Scope Process -Force
-</pre>
-            <h3 id="22987866482345505" class="mech-program-subtitle ">
-              <a href="#22987866482345505">
-                Download and Build Mech
-              </a>
-            </h3>
-            <pre class="mech-code-block">git clone https://gitlab.com/mech-lang/mech
+
+.mech-program-subtitle.toc.active::before{
+    color: #d65858;
+}
+
+.mech-program-subtitle.toc.active a {
+    color: #ee6262;
+}
+
+.mech-program-section.toc.active{
+    background-color: #0d1013;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+h2:hover a {
+    color: #f18181;
+}
+
+h3:hover a {
+    color: #f18181;
+}
+
+h4:hover a {
+    color: #f18181;
+}
+
+.mech-program-section {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.mech-program-subtitle.toc.visible {
+    display: block;
+    visibility: visible;
+}
+
+.mech-equation {
+    text-align: center;
+    color: #f2ead9;
+}
+
+.mech-inline-equation {
+    font-size: 10pt;
+    color: #efe4cd;
+}
+
+mark {
+    background-color: #F3B62D;
+    color: #2F353B;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    margin: 0px 7px 0px 3px;
+}
+
+.mech-works-cited {
+    width: 100%;
+}
+
+.mech-citation {
+    display: flex;
+    align-items: baseline;
+    color: #f2ead9;
+}
+
+.mech-citation p {
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.mech-citation-id {
+    color: #F3B62D;
+    font-family: 'FiraCodeRegular', monospace;
+    flex-shrink: 0;
+    padding: 5px 10px 5px 10px;
+}
+
+.mech-citation-link {
+    color: #F8D07A;
+    text-decoration: none;
+    word-break: break-all;
+    transition: color 0.2s ease;
+}
+
+.mech-citation-link:hover {
+    color: #f18181;
+    text-decoration: underline;
+}
+
+.mech-reference {
+    font-family: 'FiraCodeRegular', monospace;
+    align-items: baseline;
+    color: #F8D07A;
+}
+
+.mech-reference a:hover {
+    color: #f18181;
+}
+
+.mech-reference a {
+    color: #F8D07A;
+    text-decoration: none;
+}
+
+.mech-float.left {
+    float: left;
+    margin-right: 20px;
+    margin-left: -75px;
+}
+
+.mech-float.right {
+    float: right;
+    margin-left: 20px;
+    margin-right: -75px;
+}
+
+        </style>
+    </head>
+    <body>
+      <div class="mech-root"><div class="mech-toc"><h1 class="mech-program-title">Download and Install Mech</h1><section class="mech-toc-sections"><section id="62148755752455977" section="9438622517866986" class="mech-program-section toc"><h2 id="57849574893042302" section="1.0" class="mech-program-subtitle toc"><a class="mech-program-subtitle-link toc" href="#27939215888310487">Installing from Binary</a></h2></section><section id="68428689749586615" section="16885191040256091" class="mech-program-section toc"><h2 id="45358222969040473" section="2.0" class="mech-program-subtitle toc"><a class="mech-program-subtitle-link toc" href="#41185595120492871">Installing from Source</a></h2><h3 id="39479193167611819" section="2.1" class="mech-program-subtitle toc"><a class="mech-program-subtitle-link toc" href="#41988931170089606">Install Rust and Cargo</a></h3><h3 id="28313014644703505" section="2.2" class="mech-program-subtitle toc"><a class="mech-program-subtitle-link toc" href="#54370861878409459">Download and Build Mech</a></h3><h3 id="54602011187332400" section="2.3" class="mech-program-subtitle toc"><a class="mech-program-subtitle-link toc" href="#35644304362713965">Build the Wasm Target</a></h3></section><section id="35511651157512414" section="40687567824749606" class="mech-program-section toc"><h2 id="33283402257741389" section="3.0" class="mech-program-subtitle toc"><a class="mech-program-subtitle-link toc" href="#70601683292392214">Installing from Cargo</a></h2></section><section id="6645113166268276" section="21148124512303696" class="mech-program-section toc"><h2 id="65054839109467459" section="4.0" class="mech-program-subtitle toc"><a class="mech-program-subtitle-link toc" href="#45785235896456201">Verifying Installation</a></h2></section></section></div><div class="mech-program"><h1 class="mech-program-title">Download and Install Mech</h1><div class="mech-program-body"><section id="9438622517866986" section="9438622517866986" class="mech-program-section "><h2 id="27939215888310487" section="1.0" class="mech-program-subtitle "><a class="mech-program-subtitle-link " href="#27939215888310487">Installing from Binary</a></h2><p class="mech-paragraph">Precompiled binaries are available for the following platforms:</p><ul class="mech-unordered-list"><li class="mech-ul-list-item"><p class="mech-paragraph"><a href="https://github.com/mech-lang/mech/releases/download/v0.2.40-beta/mech-v0.2.40-beta-win-x86-64.7z" class="mech-hyperlink">Wndows</a></p></li><li class="mech-ul-list-item"><p class="mech-paragraph"><a href="https://github.com/mech-lang/mech/releases/download/v0.2.40-beta/mech-v0.2.40-beta-win-x86-64.7z" class="mech-hyperlink">Linux</a></p></li><li class="mech-ul-list-item"><p class="mech-paragraph"><a href="https://github.com/mech-lang/mech/releases/download/v0.2.40-beta/mech-v0.2.40-beta-mac-aarch64.7z" class="mech-hyperlink">macOS</a></p></li></ul><p class="mech-paragraph">You can find previous releases and release notes at <a href="https://github.com/mech-lang/mech/releases" class="mech-hyperlink">/mech-lang/mech/releases</a>.</p><p class="mech-paragraph">To install, download the appropriate binary for your operating system and extract it to a directory of your choice. The Mech toolchain is distributed as a singular executable file and doesn't require an installer.</p><p class="mech-paragraph">See the toolchain documation for more information on how this program works.</p></section><section id="16885191040256091" section="16885191040256091" class="mech-program-section "><h2 id="41185595120492871" section="2.0" class="mech-program-subtitle "><a class="mech-program-subtitle-link " href="#41185595120492871">Installing from Source</a></h2><p class="mech-paragraph">If mech is not available for your platform, or if you want to build it from source, follow these steps:</p><h3 id="41988931170089606" section="2.1" class="mech-program-subtitle "><a class="mech-program-subtitle-link " href="#41988931170089606">Install Rust and Cargo</a></h3><p class="mech-paragraph">First you will need <a href="https://www.rust-lang.org/learn/get-started" class="mech-hyperlink">Rust</a>. Make sure to install a recent version on the nightly release channel, currently <code class="mech-inline-code">nightly-2025-01-15</code>.</p><p class="mech-paragraph">In Bash:</p><pre class="mech-code-block">curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --profile minimal --default-toolchain nightly-2025-01-15
+</pre><p class="mech-paragraph">This command will download and install the Rust toolchain, including Cargo, the Rust package manager. Rustup is a tool for managing Rust versions and associated tools.</p><p class="mech-paragraph">In PowerShell:</p><pre class="mech-code-block">irm https://win.rustup.rs -OutFile rustup-init.exe; Start-Process -Wait -FilePath .\rustup-init.exe -ArgumentList "-y --default-toolchain nightly-2025-01-15"; Remove-Item .\rustup-init.exe
+</pre><p class="mech-paragraph">This command will: </p><ul class="mech-unordered-list"><li class="mech-ul-list-item"><p class="mech-paragraph">Download Rustup for Windows (rustup-init.exe)</p></li><li class="mech-ul-list-item"><p class="mech-paragraph">Run the installer with <code class="mech-inline-code">-y</code> ("yes" to all, no prompts) and set the correct nightly toolchain</p></li><li class="mech-ul-list-item"><p class="mech-paragraph">Delete the installer after completion</p></li></ul><p class="mech-paragraph">You may need to allow scripts by running the following before executing the above command:</p><pre class="mech-code-block">Set-ExecutionPolicy Bypass -Scope Process -Force
+</pre><h3 id="54370861878409459" section="2.2" class="mech-program-subtitle "><a class="mech-program-subtitle-link " href="#54370861878409459">Download and Build Mech</a></h3><pre class="mech-code-block">git clone https://gitlab.com/mech-lang/mech
 cd mech
 cargo build --bin mech --release
-</pre>
-            <h3 id="47876336535696702" class="mech-program-subtitle ">
-              <a href="#47876336535696702">
-                Build the Wasm Target
-              </a>
-            </h3>
-            <p class="mech-paragraph">
-              If you want to build the WebAssembly target, you will need to install the 
-              <code class="mech-inline-code">wasm-pack</code>
-               tool. You can do this using Cargo:
-            </p>
-            <pre class="mech-code-block">cargo install wasm-pack
-</pre>
-            <p class="mech-paragraph">
-              Then, navigate to the 
-              <code class="mech-inline-code">wasm</code>
-               directory and build the target:
-            </p>
-            <pre class="mech-code-block">cd mech\src\wasm
+</pre><h3 id="35644304362713965" section="2.3" class="mech-program-subtitle "><a class="mech-program-subtitle-link " href="#35644304362713965">Build the Wasm Target</a></h3><p class="mech-paragraph">If you want to build the WebAssembly target, you will need to install the <code class="mech-inline-code">wasm-pack</code> tool. You can do this using Cargo:</p><pre class="mech-code-block">cargo install wasm-pack
+</pre><p class="mech-paragraph">Then, navigate to the <code class="mech-inline-code">wasm</code> directory and build the target:</p><pre class="mech-code-block">cd mech\src\wasm
 wasm-pack build --target web
-</pre>
-          </section>
-          <section class="mech-program-section">
-            <h2 id="16395534318488341" class="mech-program-subtitle ">
-              <a href="#16395534318488341">
-                Installing from Cargo
-              </a>
-            </h2>
-            <p class="mech-paragraph">
-              If you prefer to install Mech using Rust's Cargo package manager, you can use the following commands, first install Rust as described above. Then run:
-            </p>
-            <pre class="mech-code-block">cargo install mech
-</pre>
-            <p class="mech-paragraph">
-              This will download the lasted version of Mech published to the cargo package manager, found here: 
-              <a href="https://crates.io/crates/mech." class="mech-hyperlink">
-                https://crates.io/crates/mech.
-              </a>
-            </p>
-          </section>
-          <section class="mech-program-section">
-            <h2 id="3552713662904812" class="mech-program-subtitle ">
-              <a href="#3552713662904812">
-                Verifying Installation
-              </a>
-            </h2>
-            <p class="mech-paragraph">
-              After installation, confirm that Mech is installed correctly by running:
-            </p>
-            <pre class="mech-code-block">mech --version
-</pre>
-          </section>
-        </div>
-      </div>
-      <div id = "mech-output">
-      </div>
+</pre></section><section id="40687567824749606" section="40687567824749606" class="mech-program-section "><h2 id="70601683292392214" section="3.0" class="mech-program-subtitle "><a class="mech-program-subtitle-link " href="#70601683292392214">Installing from Cargo</a></h2><p class="mech-paragraph">If you prefer to install Mech using Rust's Cargo package manager, you can use the following commands, first install Rust as described above. Then run:</p><pre class="mech-code-block">cargo install mech
+</pre><p class="mech-paragraph">This will download the lasted version of Mech published to the cargo package manager, found here: <a href="https://crates.io/crates/mech." class="mech-hyperlink">https://crates.io/crates/mech.</a></p></section><section id="21148124512303696" section="21148124512303696" class="mech-program-section "><h2 id="45785235896456201" section="4.0" class="mech-program-subtitle "><a class="mech-program-subtitle-link " href="#45785235896456201">Verifying Installation</a></h2><p class="mech-paragraph">After installation, confirm that Mech is installed correctly by running:</p><pre class="mech-code-block">mech --version
+</pre></section></div></div>
+      <div id = "mech-output"></div>
     </div>
+    <script>
+
+let observer = null;
+let userScrolling = false;
+let scrollTimeout = null;
+let scrollLock = false;
+
+function isFullyVisible(el) {
+  const rect = el.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+}
+
+document.querySelectorAll('.mech-program-subtitle.toc').forEach(entry => {
+  entry.addEventListener('click', () => {
+    scrollLock = true;
+    if (observer) observer.disconnect();
+    const id = entry.id;
+    const tag = entry.tagName; // H1, H2, H3, etc.
+
+
+    const headings = document.querySelectorAll(".mech-program-subtitle:not(.toc)");
+    const navItems = document.querySelectorAll(".mech-program-subtitle.toc");
+    const sections = document.querySelectorAll(".mech-program-section.toc");
+    const all_the_headers = Array.from(document.querySelectorAll('[section]'));
+
+    navItems.forEach(item => item.classList.remove("active"));
+    sections.forEach(item => item.classList.remove("active"));
+
+    const section = entry.closest("section");
+
+    if (section) {
+      if (!isFullyVisible(section)) {
+        section.scrollIntoView();
+      }
+      const matchingTocSection = Array.from(sections).find(item => item.id === section.id);
+      if (matchingTocSection) {
+        matchingTocSection.classList.add("active");
+      }
+
+      // Now grab the h2, h3, and h4 elements within that section
+      const h3s = Array.from(section.querySelectorAll('h3'));
+
+      if (tag === "H4") {
+        const closestH3 = h3s.reverse().find(h3 => h3.compareDocumentPosition(entry) & Node.DOCUMENT_POSITION_FOLLOWING);
+        const H3Nav = Array.from(navItems).find(item => {
+            const link = item.querySelector("a[href]");
+            return link && link.getAttribute("href") === `#${closestH3.id}`;
+        });
+        closestH3.classList.add("active");
+      }
+
+      // if tag is h3 then we want to add a "visible" class to all of the headings with the same section
+      if (tag === "H3") {
+        const h3_id = entry.getAttribute("section");
+        all_the_headers.forEach(item => {
+          const item_id = item.getAttribute("section");
+          if (item_id === h3_id) {
+            item.classList.add("visible");
+          } else {
+            item.classList.remove("visible");
+          }
+        });
+      }
+
+      const topLevelHeading = section.querySelector("h2");
+      topLevelHeading.classList.add("active");
+
+    }
+    entry.classList.add("active");
+    currentActiveTag = tag;
+    const link = entry.querySelector('a[href]');
+    if (link) {
+      window.location.hash = link.getAttribute('href');
+    }
+  });
+});
+
+function createObserver(rootMarginValue,scrolling_down) {
+  if (observer) observer.disconnect(); // Clean up old observer
+  const headings = document.querySelectorAll(".mech-program-subtitle:not(.toc)");
+  const navItems = document.querySelectorAll(".mech-program-subtitle.toc");
+  const sections = document.querySelectorAll(".mech-program-section.toc");
+  const all_the_headers = Array.from(document.querySelectorAll('[section]'));
+  observer = new IntersectionObserver((entries) => {
+
+
+entries
+  .slice() // Create a shallow copy to avoid mutating the original entries array
+  .sort((a, b) => {
+    // Sort entries based on scroll direction
+    return scrolling_down
+      ? a.boundingClientRect.top - b.boundingClientRect.top // Ascending for scrolling down
+      : b.boundingClientRect.top - a.boundingClientRect.top; // Descending for scrolling up
+  })
+  .forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        const tag = entry.target.tagName; // H1, H2, H3, etc.
+
+        const activeNav = Array.from(navItems).find(item => {
+          const link = item.querySelector("a[href]");
+          return link && link.getAttribute("href") === `#${id}`;
+        });
+
+        if (!activeNav) return;
+
+        // Deactivate all TOC items
+        navItems.forEach(item => item.classList.remove("active"));
+        sections.forEach(item => item.classList.remove("active"));
+
+        // Activate the current section's top-level H2
+        const section = entry.target.closest("section");
+        if (section) {
+          const matchingTocSection = Array.from(sections).find(item => {
+            const toc_section_id = item.getAttribute("section");
+            const section_id = section.getAttribute("section");
+            if (toc_section_id && section_id) {
+              return toc_section_id === section_id;
+            }
+          });
+          if (matchingTocSection) {
+            matchingTocSection.classList.add("active");
+            const toc = document.querySelector(".mech-toc");
+
+            if (toc && matchingTocSection) {
+              const itemOffsetTop = matchingTocSection.offsetTop;
+              const itemHeight = matchingTocSection.offsetHeight;
+              const tocHeight = toc.clientHeight;
+              const scrollTop = toc.scrollTop;
+
+              // Center the item manually if it's out of view
+              const visibleTop = scrollTop;
+              const visibleBottom = scrollTop + tocHeight;
+
+              if (itemOffsetTop < visibleTop || itemOffsetTop + itemHeight > visibleBottom) {
+                toc.scrollTo({
+                  top: itemOffsetTop - tocHeight / 2 + itemHeight / 2,
+                  behavior: "smooth"
+                });
+              }
+            }
+          }
+
+          // Now grab the h2, h3, and h4 elements within that section
+          const h3s = Array.from(section.querySelectorAll('h3'));
+
+          if (tag === "H4") {
+            const closestH3 = h3s.reverse().find(h3 => h3.compareDocumentPosition(entry.target) & Node.DOCUMENT_POSITION_FOLLOWING);
+            const H3Nav = Array.from(navItems).find(item => {
+              const link = item.querySelector("a[href]");
+              return link && link.getAttribute("href") === `#${closestH3.id}`;
+            });
+            if (H3Nav) {
+              H3Nav.classList.add("active");
+              const h3_id = H3Nav.getAttribute("section");
+              all_the_headers.forEach(item => {
+                const item_id = item.getAttribute("section");
+                if (item_id === h3_id) {
+                  item.classList.add("visible");
+                } else {
+                  item.classList.remove("visible");
+                }
+              });
+            }
+          }
+
+          // if tag is h3 then we want to add a "visible" class to all of the headings with the same section
+          if (tag === "H3") {
+            const h3_id = entry.target.getAttribute("section");
+            all_the_headers.forEach(item => {
+              const item_id = item.getAttribute("section");
+              if (item_id === h3_id) {
+                item.classList.add("visible");
+              } else {
+                item.classList.remove("visible");
+              }
+            });
+          }
+
+          const topLevelHeading = section.querySelector("h2");
+          if (topLevelHeading) {
+            const topLevelNav = Array.from(navItems).find(item => {
+              const link = item.querySelector("a[href]");
+              return link && link.getAttribute("href") === `#${topLevelHeading.id}`;
+            });
+            if (topLevelNav) {
+              topLevelNav.classList.add("active");
+            }
+          }
+        }
+        activeNav.classList.add("active");
+        currentActiveTag = tag;
+      }
+    });
+  }, {
+    root: null,
+    rootMargin: rootMarginValue,
+    threshold: 0
+  });
+  headings.forEach(heading => observer.observe(heading));
+}
+
+
+window.addEventListener("DOMContentLoaded", () => {
+  createObserver("0px 0px 0px 0px");
+  const elements = document.querySelectorAll(".mech-equation");
+  elements.forEach(el => {
+    const eq = el.getAttribute("equation");
+    if (eq) {
+      katex.render(eq, el, { throwOnError: false });
+    }
+  });
+  const inline_elements = document.querySelectorAll(".mech-inline-equation");
+  inline_elements.forEach(el => {
+    const eq = el.getAttribute("equation");
+    if (eq) {
+      katex.render(eq, el, { throwOnError: false });
+    }
+  });
+});
+
+let lastScrollY = window.scrollY;
+let scrolling_down = true;
+let margin = 10;
+
+function getScrollPercentage() {
+  const scrollTop = window.scrollY || window.pageYOffset;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+  if (docHeight === 0) return 0; // avoid division by zero on short pages
+  return scrollTop / docHeight;
+}
+
+window.addEventListener("scroll", () => {
+  if (scrollLock) {
+    scrollLock = false;
+    return;
+  }
+  
+  const percent = getScrollPercentage();
+  const currentScrollY = window.scrollY;
+  scrolling_down = currentScrollY > lastScrollY;
+
+  if (currentScrollY !== lastScrollY) {
+    lastScrollY = currentScrollY;
+  }
+
+  if (percent < 0.05) {
+    createObserver("0px 0px -90% 0px", scrolling_down);
+  } else if (percent < 0.2) {
+    createObserver("-0% 0px -90% 0px", scrolling_down);
+  } else if (percent < 0.3) {
+    createObserver("-10% 0px -80% 0px", scrolling_down);
+  } else if (percent < 0.4) {
+    createObserver("-20% 0px -70% 0px", scrolling_down);
+  } else if (percent < 0.5) {
+    createObserver("-30% 0px -60% 0px", scrolling_down);
+  } else if (percent < 0.6) {
+    createObserver("-40% 0px -50% 0px", scrolling_down);
+  } else if (percent < 0.7) {
+    createObserver("-50% 0px -40% 0px", scrolling_down);
+  } else if (percent < 0.8) {
+    createObserver("-60% 0px -30% 0px", scrolling_down);
+  } else if (percent < 0.9) {
+    createObserver("-70% 0px -20% 0px", scrolling_down);
+  } else if (percent <= 0.95) {
+    createObserver("-80% 0px 0% 0px", scrolling_down);
+  }
+});
+
+</script>
     <script type="module">
-      
+
+
       import init, {WasmMech} from '/pkg/mech_wasm.js';
       let wasm_core;
       async function run() {
         await init();
-        var code = `G90MAOT+29KdD+kCKTH5sYnJkI0TE2EJ2SUCeXwi3l4u/u6ih1tPp9b/3C/fV6jqTo1YoWsrTeeenKSTlPFtFVBKlM0WJeEHAgvA1tTKb+S3MWZ7uyA8F2n0bdBTqN9IhZnUecdOAgCXWxUz7z9NrpeoXhzriOtZwZ0sy5ylqKCYg0uBY3F94hxj3MHpriNw/5UIMTppbxI9UYgORSNSBBi82syStxOqrGpwdICowxJumLyKMzowpNDSRsRvZc0yVtbMiqnN1zGj1WjrJClXPjL++iV043p0a3ZSZ7vRda++Vs8jMbsUlbj/XJM19S5fS9XOUi4se3E1VU7916yr6ReWTZYV2Mnr4tQvo88jqqSY7boiUkIYeNHKuqzEwnzle6WD3sE6CtL1AOmd+gI00PFEfUm/V0ww9Af9UYZa/635Z2qDdRHdtx0KrpIxdydTyFbRUp4tpXluiKGPFioZwas6vbci8TJOCHsEwoNt9y0U/rkbxm3WA4BYi9Iviwj2B9ZZHkm+ExjpkP6f0NLpCmMYmV4aAJWfrCNPXN6lxhURYibPs2dC5kzeVGCXmy1n52QniekTZL5QtdfzwxxJDur9g9N+gC5/2IkKkGK/v8IRtbYY6lsw/OjSPMhLaonqwZUrEb5BvXdwQbSgRFJTXlyOziHiEaCT5o3PgecykL3dhudxDo3FQjq4EqEQAe6BrX3NCSckDJvCi/mkYq4Y0yHIpE60+lM1L3lOtGUjwDJyLeoETbOL5Wg+xT/JZpZrSxWKJ1CshVo6+Gf+S3zz+G/+50eVaQ9HLJHsKYZilWW82FfBORItwtCMtf30fLgWicJzcd1itCKJ1ROkslok777n6tIIBD6iSCIJJEIicOYYTS0RYK8gCcqSQE/XygAhae5LcckCWjFcK4tzxwhsMBN0dOgMxhkbh2xQ0+58t0KBiFiVhQttqUv/A/607n/Q/sAktUkFVHxNc3PatDemb1ftiHpJFVSls4y/bnDBr903rnef0OJV2Oeu/mxpmuC0c+v0jv2Xkrqbpa5+S86lC309Y89THZKerXS1n4gKuuN3TUWvJd2WBgbigffoWi3UbY+Cs4f1YAM05JR6bYpJhTA5Cj5qG25jIafUN0lNsUhEKs73oSTaoI30DPwNScRlk9EdFVGJYg5jXcWdIyow9BFiWz0fLSxILkNRv1k4kszqg8kghv5uKqXDSGJLqnUgIxGjNRJMIp1IRl2EdLtT2LReWHdDMWiH8VTYsUoSqxqoehOxlk7QGUI+vrQnBrFdltG66oSkEK90IKtG7ppdjoZwjChAX9rTtTZoB7BanV/xgTI2Ho6xM9pZKrGMrYQbon3uew4WbIWeW326Zh/jL5JliJw9RHHX+18rEoFNj651Q18aXG60oK5r0xIXNpp3D0QHiqVyesOZaTCGjzonrjzO1d8jkBpgIDw9cQiGZmVTvbHEBWVhf2huaF0xK61i0/WBmmO/oKm/Ell/Rs/QxtAdyygkTAdrwvJ0bRTGIME2zzbmYJ0ZAWF8+BMwkS+bsqd5EwUTxYqJuKePIYzEzOqZKJnoZxkxlnbvicDeC6Fe1yI2/FW+9CFAe7o2DbNQIhaYC1K8eXm+kEkvpe8YaxbZIa9MhRfkK9iqqRXeo5DHRTbZ+AsFVzfYsFP9arcwXCtw5n+Y9SaMk0zw2J4lWHrPMnJYTZmavgproDLFjINIJpDz/NKGDSZQY2YGRPbOThG6FcWCsDm4ARs2g1KJd/ak6rWu/xuk/bqNDXvjrTvUT9TssnKXsRuFty1vc8au3dQwZsYcKzS7GgSVuwqfvIjTAwSZ1bMHe9MsIyO7kSFF18khHAE=`;
+        var code = `G9kMAORKp3l9Cp3/QnChDcEqiAoQy4piKyBldArBNw1PD1h033T//udY5itUdadGrNC1labzX15SIFJAKVE2W5QEaPkYrKmVZ+R9jPL/+zihUs1WDKMF9o00mAmct604AEitiBu5/8l33Jh68aIjjmv6d5qmyXCCAG4MLfm2x/Xl9jFGA6x2bIXzVzzA6KK9SfUmQdJwJMRCwCBxs0qeplK0FA5HJxC1ScwJ4ldRRDuOFMbTQcRvyU00ltyEis5N1816q97eTFSuYgT99UvoxnHptruTOtv1rvuUNynnoZwTEkzi/nOu8ZS7SB7hZwEXprW4GtEi/5p51fXCtMg0fSt+HRv50vI8JBg32m1FREIY9qKNdanEwn3lixIgOlh/frmukOgUC1APx51iSdxzA3TxIB5pqOjfmndObehObZdiFXEl3BET6pNXvLOJ1McJMPDQROsiRFXn662QugwQwhEB91S2P2eictzY1bnp40YAoGex9qVsYEdgtunCYtu+ngZp/yFMmtMU3cz0ngDQekIOOXFflyRnpi9W8Vw/AzLm66VidOFZWlZYVnls+gQRL4DNdr2gNhKJem5wheejgyJ2oIJBsc9f8RC1rxh0LTh9tDMXcuOpharGlSsVvMG0t2F+Un4xEwkvCdn2hshHmJw0bWwJMoeBFu0UmSslNIiEOP8/ICCwevDV2qaYHRD/6iSL5CQ3VvSlEGRBJ3r8qUQLu0M9W7zAK3JN5mSYZnplSzklP2lGZuh4UibuoOYWaumQn+Uv0o2Qv+WfH02ednHEVPHeIihKYekv1pV/jkQbMBRgzQA8H65BouBcXbforUhq9QShzFDxu3deXeq+wkdUcSSFRGmAyNhBk0XErIcREYUooCV4KSAULeGLqKRwVgjXhuKcFIEDZpL2DpvBMWMTkI1p+pyfsAKBkFi6iZtsqUv+A/G03b/T9sACteXlUP61zAWp0+54fvyqD1HPVEJlGkv/6/gX+Jp547j35bR4FfS3qz/H0xLBFfat3Tfun0SmbvHUzR9PwaX7fCx9L1I2ko2tdLMvRTnd4TuzvM+L7ngaFPAnXi14DdQej6izmvRiPdRnS7xibpAAJkaBR+2/rS/lgLpG1tgcCrHCvJUrijYMR3oF/oYYSc0I0x0VUjE3DKwtv7NVOQYestd01+Mo1ReXgao7LGxGcuSA0DpEUUUldBgqbGKV/aMnY7REnAWky5leGwI9fkfQFF2Yd8MwaIPxbLCjOuJTC5TORHbLIOgIIR6f7W2G5l2W3rpqB2QMr+wf00fumlwJNHxjSAG20pbgbdAOzGpkntIDQ2w8vGBnUmcJY+lbMSdA69xzbRRq0Z6btYJbx/iLVBlyzmqiqOP+rwiJmE214D3QX4aEnGwBXeWmqS78M68aTBosYjJ63JlpZowY2XbUcJw7v3tYqsMDEenOYRie1YyUG1NdUBW2h+eG17lR4RGb1gUyjz1Zk3Olqn633uGN4TuWXgCYTtakZQk+CmNQ4Phcv5idPWaECePDnoCJPM3QIvWZyJ8o4gbiLB8DGIHp0TtRPDHA0ptRWrWnfGsvhRzBMzb4VbH0yX+2BJ+GWZCIUeYAFGtemy8Is5ekd4g1G+wQV0bZBfiKbWXWqOhelscNNtnwcwlXN9YwoX6kIwxHK1z1Hy69CeKkEtzauwRL71l6NqpJU11XYQ1EmBtRJhLMyHne0rqNJUBjVgVE9Q4NEboUxXuwXrgBGxaDEopPsBZUz3K830Dth9Y3rI234aCfqJVl5S5oCoW1rW3LcPg6YWoIM2h9FbpcDYBSHGNPXrzpDgfp0bsHe9MsPb26ESEx1+WHcAQ=`;
         wasm_core = new WasmMech();
         var xhr = new XMLHttpRequest();
         var codeUrl = `/code${window.location.pathname}`;
@@ -1284,7 +1516,6 @@ wasm-pack build --target web
         xhr.send(null);        
       }
       run();
-    
     </script>
   </body>
 </html>
