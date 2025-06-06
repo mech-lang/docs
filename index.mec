@@ -6,16 +6,23 @@ Mech Programming Language Documentation
 
 1. [Introduction](I.getting-started/introduction.html)
 2. [Installing Mech](I.getting-started/install.html)
-3. Running your first Mech Program
-4. Tutorial
+3. [Buikding and Running Mech Programs](I.getting-started/build-and-run.html)
+4. [Mech REPL](I.getting-started/repl.html) 
 
 2. Reference
 -------------------------------------------------------------------------------
 
 1. Data Model
-    - Identifiers
-    - Values and Kinds
-    - Operators
+    - Variables and Values
+    - Data Structures
+        - Matrix - a ND array of values
+        - Map - a key-value store
+        - Set - a collection of unique values
+        - Tuple - an ordered collection of values
+        - Record - a collection of named values
+        - Table - a collection of Records
+    - Operators and Expressions
+        - Broadcasting
     - Indexing
 2. Programming Model
     - State Machines
