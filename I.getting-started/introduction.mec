@@ -11,11 +11,11 @@ Hello and welcome to the documentation for Mech, a programming language and syst
 FizzBuzz is a classic programming exercise that can be expressed very concisely in Mech:
 
 ```mech
-  x := 1..=19               -- Create a row vector of numbers from 1 to 10
+  x := 1..=10               -- Create a row vector of numbers from 1 to 10
   ~out<[string]> := x       -- Create a mutable row vector strings from x
   
-  ix2 := x %== 2           -- Create indices for multiples of 2
-  ix3 := x %== 3           -- Create indices for multiples of 3
+  ix2 := (x % 2) == 0       -- Create indices for multiples of 2
+  ix3 := (x % 3) == 0       -- Create indices for multiples of 3
   
   out[ix2] = "🐝"           -- Replace multiples of 2 with "🐝"
   out[ix3] = "✨"           -- Replace multiples of 3 with "✨"
