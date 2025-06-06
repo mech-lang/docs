@@ -11,7 +11,7 @@ Hello and welcome to the documentation for Mech, a programming language and syst
 FizzBuzz is a classic programming exercise that can be expressed very concisely in Mech:
 
 ```mech
-  x := 1..=10               -- Create a row vector of numbers from 1 to 10
+  x := 1..10                -- Create a row vector of numbers from 1 to 10
   ~out<[string]> := x       -- Create a mutable row vector strings from x
   
   ix2 := (x % 2) == 0       -- Create indices for multiples of 2
@@ -21,7 +21,7 @@ FizzBuzz is a classic programming exercise that can be expressed very concisely 
   out[ix3] = "✨"           -- Replace multiples of 3 with "✨"
   out[ix2 & ix3] = "✨🐝"  -- Replace multiples of both with "✨🐝"
   
-  io/println(out)           -- Print the results
+  out                       -- Print the results
 ```
 
 This short example demonstrates several key features of the language:
