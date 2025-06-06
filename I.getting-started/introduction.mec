@@ -1,0 +1,87 @@
+Introduction
+==============================================================================
+
+1. Welcome to Mech!
+------------------------------------------------------------------------------
+
+Hello and welcome to the documentation for Mech, a programming language and platform for developing data-driven, reactive systems. The focus of the language is on making composing, transforming, and distributing data easy. Mech authors build programs by defining data dependencies and transformations, rather than using control flow statements like loops and conditionals. This makes Mech particularly well-suited for applications that require real-time data processing, such as simulations, visualizations, and real-time interactive systems.
+
+(1.1) Design Goals
+
+Some design goals of Mech include:
+
+- Working with data should feel like a clay that Mech programmers can shape and mold via the rich set of default operators that are included.
+- The language must be fast, efficient, and scalable. Mech programs should be able to run on a wide range of hardware, from embedded devices to high-performance computing clusters.
+- The development cycles should be as short as possible to support live programming and rapid prototyping.
+- Battries should be included for common tasks, such as data visualization, machine learning, and simulation, to make it easy to get started with Mech.
+- The platform should be extensible and support a wide variety of interfaces beyond text, including graphical interfaces, audio, and VR, pen, and touch.
+- Programs should be safe and secure, with a focus on preventing common programming errors
+- The language should be learnable by a wide range of people, from beginners to experienced programmers, from students to professionals, and from artists to scientists.
+
+(1.2) Programming Platform
+
+The Mech programming platform consists of three parts:
+
+1. **A data description language**, which allows you to define the structure of your data and how it can be transformed.
+2. **A reactive programming model**, based on state machines, which allows authors to write systems that can take advantage of asynchrouns and parallel program execution.
+3. **A distributed execution engine**, which allows you to run Mech programs across multiple machines in a variety of environments, including CPUs, GPUs, embedded devices, and the web.
+
+Mech authors specify data dependencies and transformations. The job of a Mech programmer is to select sources of data, mold those data into new shapes, and then do something useful with them -- whether that be to produce a visualization, drive an external device, or run a simulation.
+
+2. An Quick Example: Fizz Buzz
+------------------------------------------------------------------------------
+
+The traditional Fizz Buzz program gives us a quick taste of how Mech works. The Fizz Buzz problem is a simple programming exercise that involves printing numbers from 1 to 100, excpet those that are multiples of 3 and/or 5. Most imperative programming languages use control flow statements like `if` and `for` to solve this problem, but in Mech we can achieve this in a more concise way:
+
+```mech
+  x := 1..=100                              -- Create a row vector of numbers from 1 to 100
+  ~out<[string]> := x                       -- Create a mutable row vector strings from x
+  ix3 := (x % 3) == 0; ix5 := (x % 5) == 0  -- Create indices for multiples of 3 and 5
+  out[ix3] = "✨"                           -- Replace multiples of 3 with "✨"
+  out[ix5] = "🐝"                           -- Replace multiples of 5 with "🐝"
+  out[ix3 & ix5] = "✨🐝"                  -- Replace multiples of both with "✨🐝"
+  io/println(out)                           -- Print the results
+```
+
+This short example demonstrates several key features of Mech:
+
+- The syntax is concise and expressive and flexible, without the need for keywords and semicolons.
+- Creating a vector of numbers and converting it to a vector of strings is straightforward and declarative.
+- Logical indexing allows us to manipulate elements of vectors based on conditions, which is declarative and lends itself to parallel execution.
+- Broadcasting allows us to apply operations across vectors without needing to write loops, which allows for more efficient execution and automatic vectorization or operations.
+
+3. Platform Overview
+-------------------------------------------------------------------------------
+
+The mech platform consists of the following components:
+
+- `mech` - the Mech programming language toolchain, which includes:
+    - a parser and compiler for the text-based Mech syntax
+    - a runtime for executing Mech programs
+    - a REPL (Read-Eval-Print Loop) for interactive programming
+    - a formatter for formatting Mech code into canonical style or HTML documentation.
+    - a server for serving Mech programs to a wasm client
+    - a Language Server Protocol (LSP) implementation
+- `mech-wasm` - a wasm-based client for running Mech programs in the browser or other wasm environments.
+- `mech-notebook` - a notebook editor for Mech that runs natively on Windows, macOS, and Linux, and also supports running in the browser via `mech-wasm`.
+
+4. About this Documentation
+-------------------------------------------------------------------------------
+
+This documentation is designed to help you get started with Mech, understand its core concepts, and provide guidance on how to use the language effectively. It is structured as follows:
+
+1. **Getting Started**: an introduction to Mech, how to install it, and how to build and run Mech programs. It also covers the Mech REPL (Read-Eval-Print Loop) for interactive programming.
+2. **Reference**: a detailed reference for the Mech language, including its data model, programming model, system model, standard library, and Mechdown reference.
+3. **Guides**: provides practical guides and tutorials for using Mech, including a quick introduction to the language, tutorials for specific use cases, and guides for developers coming from other programming languages.
+4. **Design Documents**: information on the design principles behind Mech, including the language specification, design principles, syntax design notes, and the roadmap for future development, as well as the history of the language.
+
+5. Getting Involved
+-------------------------------------------------------------------------------
+
+The Mech community stays active at a few places around the Internet:
+
+-(👾) [Discord](https://discord.gg/asqP25NNTH) - for live chat
+-(🐙) [GitHub](https://github.com/mech-lang) - for code and issues
+-(📺) [YouTube](https://www.youtube.com/@MechLang) - for video tutorials
+-(🛸) [Reddit](https://www.reddit.com/r/mechlang/) - for help and general discussion
+-(📧) [Mailing List](https://groups.google.com/g/mechtalk) - for dev discussion
