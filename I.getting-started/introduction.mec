@@ -6,9 +6,9 @@ Introduction
 
 Hello and welcome to the documentation for Mech, a programming language and system for developing data-driven, reactive systems. Mech authors build programs by defining data dependencies, transformations, and state machines. This makes Mech particularly well-suited for applications that require real-time data processing, such as simulations, visualizations, and interactive systems.
 
-(1.1) A quick example: FizzBuzz
+(1.1) An Example: FizzBuzz
 
-FizzBuzz is a classic programming exercise that can be expressed very concisely in Mech:
+Let's get right to it, here's some code:
 
 ```mech
   x := 1..10                -- Create a row vector of numbers from 1 to 10
@@ -30,17 +30,18 @@ This short example demonstrates several key features of the language:
 - Logical indexing manipulates elements of vectors based on conditions, a declarative way to express iteration and choice, which lends to parallel execution.
 - Operations are broadcast elementwise across vectors without needing to write loops, which allows for more efficient execution and automatic vectorization resulting code.
 - Type inference is used to determine the types of variables and expressions, so you don't have to specify types explicitly.
-- Variable updates are expressed declaratively and without side effects, they can be scheduled to run in parallel.
 
 (1.2) Why Mech?
 
-As computer systems move into the 21st century, we are witnessesing an explosion of computational power and data availability. With the proliferation of multicore processors, GPUs, robots, sensors, and actuators, computer systems are not just becoming more interconnected, but they are also interacting with and respoding to the physical world in real-time. 
+> "To invent the future, instead of innovating out from the present, what you want to do is invent the future **from** the future, and bring it back." - Alan Kay
 
-Languages of the past (like C, C++, and Python) were designed for a different era of computing, where the focus was on writing imperative code that ran from start to finish on a single core, on a single machine, with limited memory, and batch input and output. Today's machines are multi-core, multi-processor, with GPUs; a variety of asynchronous input devices like keyboards, touch, and pen; a variety of sensors ranging from cameras, to gyroscopes, to LIDAR; and a variety of actuators ranging from servos, to speakers, to displays, to robot arms and legs. 
+The world of computing has changed dramatically in the last few decades. We have moved from simple, single-core machines to complex, heterogeneous systems that can process vast amounts of data in real-time. These systems are no longer just about executing instructions sequentially, but about managing and processing data from a variety of sources, often in parallel and asynchronously and in large quantities. Not only that, but they are also expected to be interactive, responsive, and even move and manipulate the physical world.
 
-These machines are not just running programs, they're interacting with the world in real time and continuously processing vast amounts of data. Traditionally, programming languages have handled this complexity by layering on libraries, frameworks, and middleware. This approach often results in adding significant incidental complexity to your project[^1]. 
+Despite the evolution of hardware and the increasing complexity of applications, our programming languages have largely remained rooted in the past. Languages that are popular today, like Python, Java, and C++, languages were shaped around these assumptions: linear control flow, centralized memory, and a deterministic, step-by-step execution model. These abstractions, while effective for their time, struggle to cleanly model the kinds of computation we expect from heterogeneous, distributed, and interactive systems of the future.
 
-Mech takes a different approach. Rather than bolting asynchronous behavior onto an imperative core, Mech is built around a reactive, declarative model where data and events are first-class. Relationships are expressed directly, so the flow of information is clear and automatic. This reduces the need for manual state management or explicit coordination between components, letting you describe what your system should do, not how to orchestrate it step by step.
+Yet our programming models remain predominantly rooted in sequential imperative thinking. Traditionally, programming languages have tried to work around this limitation by layering on libraries, frameworks, and middleware. This approach often results in significant *incidental complexity*[^1], because it doesn't address the impedence mismatch between the data-driven nature of modern applications and the imperative programming model that most languages use. This mismatch usually manifests as extra marshalling data between different representations, managing state and side effects, and dealing with concurrency and parallelism through managed locks and queues, all of which make reasoning about concurrent, distrubted systems difficult and error-prone.
+
+This is where Mech comes in. Mech is designed to be a programming language that embraces the complexity of modern systems, rather than trying to work around or paper over it. It provides a data-driven, reactive programming model that allows you to define how your system should behave in response to changes in data or user input. This makes it easy to build interactive applications that can process and respond to real-time data.
 
 (1.3) Is Mech for you?
 
@@ -54,7 +55,7 @@ Mech is for you if:
 -(🧑‍🔬) You're a researcher and you want to build a simulation or model of a complex system, and you'd like to distribute it on the web, the desktop, or embed it inside of your journal paper.
 -(🧑‍💻) You're a developer who wants to build GPU accelerated applications that work natively across windows, mac, linux, and the web.
 
-3. Programming Systems
+3. Programming System
 -------------------------------------------------------------------------------
 
 Whereas traditional languages provide only syntax and a runtime, Mech comes with integrated tools for data transformation, distribution, monitoring, and optimization. As a result, you can focus on defining system behavior rather than managing infrastructure, enabling faster, more reliable development of complex, interconnected systems.

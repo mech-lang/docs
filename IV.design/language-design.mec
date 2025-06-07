@@ -1,11 +1,16 @@
 Language Design
 ===============================================================================
 
+
 Sometimes it feels like there are already too many programming languages out there, but still, the amount of unexplored territory in the programming language design space remains vast. What's more, many of the existing and popular languages out there are clustered around well-explored and researched paradigms, such as imperative programming, object-oriented programming, and functional programming [^1]. New langauges in this space often focus on incremental imprements -- taking what has worked and advancing it one delta. This is a perfectly valid approach, but it often leads to languages that are more of the same, and potentially a local maximum in the design space [^2]. 
 
 
 Mech is not a language looking to make incremental improvements; we are not trying to make a better C++, Python, or Rust. Instead, we looking back at some of the best ideas from the past that have been overlooked or underexplored, and combining them with modern programming techniques to create a new language that exists orthogonally to many existing langauges.
 
+
+Today's machines have variety of computational cores ranging from massively-multi-core CPUs, to Graphhical Processing Units (GPUs), to Neural Processing Units (NPUs); asynchronous input devices ranging from keyboards and mice, to touch, pen, and audio; sensors ranging from cameras, to gyroscopes, to LIDAR; form factors ranging from a phone that can fit in your pocket, to a cloud cluster that takes up an entire warehouse; actuators ranging from simple servos, to motors, lights, and even robot arms and legs.
+
+They consume and process vast amounts of data from all kinds of sources, from users themselves, or the myraid sensors equipped to most devices. And with AI, the sum of the entire world's digital knowledge - art, books, movies, music, games is the scope of what these machines aim to process and analyze.
 
 1. Introduction
 -------------------------------------------------------------------------------
@@ -36,12 +41,25 @@ Mech subscribes to a simple philosophy:
 
 This means that Mech should be easy to use for simple tasks, but also powerful enough to handle complex problems. The language is designed to be expressive and flexible, allowing programmers to work with data in a way that feels natural and intuitive.
 
+Why can't it just be a library? Or a framework? Or a DSL? You are building not just a language but a whole system??? What's next, an Operating System... oh wait, you've done that too.... Holy Temple OS batman!
+ 
+Solves and HCI problem, not just a semantics problem.
 
 
 
 ideas that need implementing and problems that need solving, we could still use more. Ineed, there was a period of time in the mid 70s when the world of programming seemed to be complete unexplored. No one had done programming before, and so there wasn't any expectation or idea of what programming was or could be. 
 
+(1.1.1) Languages are fossilized theories of computation
 
+The theory of computation is changing, and old languages can't keep up.
+
+(1.1.2) AI
+
+How does mech work well with AI?
+
+Local scope, don't need to look globally to fiture out things.
+Typed so that the AI can understand the data and how to manipulate it.
+Simple data model that is easy to understand and manipulate.
 
 (2.1) Design Goals
 
