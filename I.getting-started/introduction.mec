@@ -43,6 +43,8 @@ Yet our programming models remain predominantly rooted in sequential imperative 
 
 This is where Mech comes in. Mech is designed to be a programming language that embraces the complexity of modern systems, rather than trying to work around or paper over it. It provides a data-driven, reactive programming model that allows you to define how your system should behave in response to changes in data or user input. This makes it easy to build interactive applications that can process and respond to real-time data.
 
+How does Mech do this? That's what this documentation is about. 
+
 (1.3) Is Mech for you?
 
 Mech is for you if:
@@ -50,10 +52,12 @@ Mech is for you if:
 -(📊) You'd like to make an interactive visualization of your data and host it on the internet or in a native desktop application.
 -(🎮) You're a game designer who wants to build a game that requires networking and real-time data processing for multiplayer interactions.
 -(🧑‍🎨) You're an artist who is not a programmer, but would like to create interactive installations or generative art.
--(🤖) You're an engineer who want to build a device or robot that interacts with the real-world via embedded microcontrollers, sensors, and actuators.
--(🧑‍🏫) You're an educator who doesn't really program, but you'd like to use animations and visualizations to teach concepts in math, science, or art.
+-(🤖) You're an engineer who wants to build a device or robot that interacts with the real-world via embedded microcontrollers, sensors, and actuators.
+-(🧑‍🏫) You're an educator who'd like to use animations and visualizations to teach concepts in math, science, or art.
 -(🧑‍🔬) You're a researcher and you want to build a simulation or model of a complex system, and you'd like to distribute it on the web, the desktop, or embed it inside of your journal paper.
 -(🧑‍💻) You're a developer who wants to build GPU accelerated applications that work natively across windows, mac, linux, and the web.
+-(🕴️) You're a business owner who wants to go beyond spreadsheets for your business management system, to something that can scale to automate business processes as well.
+-(🧙) You're a programming language enthusiast who wants to get involved in a project that is researching new directions in language design and tooling.
 
 3. Programming System
 -------------------------------------------------------------------------------
