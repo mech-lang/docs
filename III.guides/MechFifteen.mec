@@ -20,14 +20,14 @@ Table of Contents:
 
 // Also a single line comment.
 
-/* Multi line comments are supported 
-   but...*/
-
-Instead, Mech encourages literate programming through a Markdown-esque syntax
+Mech does not support multiline comments. Instead, Mech encourages literate programming through a Markdown-esque syntax
 called Mechdown, exemplified by this document.
 
 Comments are therefore to be used primarily inside of code blocks.
 
+Comments support formatting, such as bold, underline, links, etc. For example:
+
+ -- **bold** and __underline__ and [links](https://mech-lang.org) are supported in comments.
 
 2. Identifiers
 -------------------------------------------------------------------------------
@@ -69,7 +69,7 @@ Builtin kinds:
 - atom
 - empty
 
-(a) Kind Annotations ----------------------------------------------------------
+(3.1) Kind Annotations
 
 Kinds are indicated with a kind annotation, which is the kind identifier 
 encolsed in `<>` e.g.:
@@ -85,7 +85,7 @@ So can identifiers
  
 - Cast `a` to unsigned 64 bit datatype: `a<u64>`
 
-(b) Collections ---------------------------------------------------------------
+(3.2) Collections
 
 Multidimensional data can be expressed with teh foloowing collection data 
 structures representing collections of values:
@@ -100,7 +100,7 @@ structures representing collections of values:
 - 2x3 matrix of 32-bit floats: <[f32]:2,3>
 - Nx3 matrix of 32-bit floats: <[f32]:_,3>
 
-(c) Custom Kinds --------------------------------------------------------------
+(3.3) Custom Kinds
 
 Create a kind that is an alias for `(u8,bool)`:
 
@@ -125,7 +125,7 @@ Supported literals include:
 - (d) Atoms
 - (e) Empty
 
-(a) Numbers -------------------------------------------------------------------
+(4.1) Numbers
 
 - Integers: `1234`
 - Floats: `123.456`
@@ -143,7 +143,7 @@ Kind:
 <number> is a generic, unsized number type. Mech also supports fixed sized 
 numbers e.g.: <u8>, <f32>, <i64> etc.
 
-(b) Strings -------------------------------------------------------------------
+(4.2) Strings
 
 Strings are encoded with UTF-8 and support linebreaks.
 
@@ -158,7 +158,7 @@ Kind:
 
 <string>
 
-(c) Boolean -------------------------------------------------------------------
+(4.3) Boolean
 
 - True: `true` or `✓`
 - False: `false` or `✗`
@@ -169,7 +169,7 @@ Kind:
 
 <bool>
 
-(d) Atoms ---------------------------------------------------------------------
+(4.4) Atoms
 
 Atoms are used as enum variants and unique keys. They are identifiers prefixed 
 with a grave. An atom evaluates to iteself and its kind is its identifier.
@@ -180,7 +180,7 @@ Kind:
 
 <`A>
 
-(e) Empty ---------------------------------------------------------------------
+(4.5) Empty
 
 Empty is a hole, it represents a value that has not been initialized yet, or a 
 collection that is empty. Empty's expressed as any number of underscore 
@@ -234,7 +234,7 @@ d<[i64]:1,3> := [1 2 3]     -- a 1x3 row vector of i64 numbers
     - (f) Set
     - (g) Map
 
-(a) Vector --------------------------------------------------------------------
+(6.1) Vector
 
 A matrix is a N-D collection of homogenous datatypes.
 
@@ -257,7 +257,7 @@ Kind:
 
 Note: Vectors have at least 1 scalar dimension.
 
-(b) Matrix --------------------------------------------------------------------
+(6.2) Matrix
 
 - Matrix                [1 2; 3 4]       (2x2)
 - Also Matrix           [1 2             (2x2)
@@ -281,7 +281,7 @@ Kind:
 - 2D Matrix             <[u8]:2,3>
 - 3D Matrix             <[u8]:2,3,4>
 
-(c) Tuple ---------------------------------------------------------------------
+(6.3) Tuple
 
 A tuple is a collection of values of different data types stored in a single 
 entity, allowing for the storage and manipulation of multiple values together.
@@ -297,7 +297,7 @@ Kind:
 - Two-tuple of u8 and string    <(u8,string)>
 - Three-tuple of u8s            <(u8,u8,u8)>
 
-(d) Record --------------------------------------------------------------------
+(6.4) Record
 
 A set of heterogeneously typed fields and their associated data.
 
@@ -322,7 +322,7 @@ Kind:
 
 <{u8,string}:1,2>
 
-(e) Table ---------------------------------------------------------------------
+(6.5) Table ---------------------------------------------------------------------
 
 A table is set of records.
 
@@ -368,7 +368,7 @@ Kind:
 
 Note: Tables are more flexible and expressive than matricies, but are slower.
 
-(f) Set -----------------------------------------------------------------------
+(6.6) Set
 
 An unordered collection of unique, homogenous elements.
 
@@ -381,7 +381,7 @@ Kind:
 
 <{u8}:3>
 
-(g) Map -----------------------------------------------------------------------
+(6.7) Map
 
 An unordered collection of unique keys associated with a corresponding value.
 
